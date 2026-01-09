@@ -22,7 +22,8 @@ function extractMeta(data: Record<string, unknown>): DataMeta | null {
 }
 
 function getDataWithoutMeta(data: Record<string, unknown>): Record<string, unknown> {
-  const { _meta, ...rest } = data
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id, title, description, ...rest } = data
   return rest
 }
 
@@ -115,9 +116,8 @@ export function DataCard({ data }: DataCardProps) {
         <Collapsible open={isJsonOpen} onOpenChange={setIsJsonOpen}>
           <CollapsibleTrigger className="flex items-center gap-2 text-left group">
             <ChevronDown
-              className={`w-4 h-4 text-stone-400 dark:text-stone-500 transition-transform ${
-                isJsonOpen ? 'rotate-180' : ''
-              }`}
+              className={`w-4 h-4 text-stone-400 dark:text-stone-500 transition-transform ${isJsonOpen ? 'rotate-180' : ''
+                }`}
               strokeWidth={1.5}
             />
             <span className="text-xs text-stone-500 dark:text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-300 transition-colors">

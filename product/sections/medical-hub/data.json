@@ -1,0 +1,105 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/7736712626269",
+      "title": "Faja Etapa 2 Media Pierna - Post Lipo y Tummy Tuck (Alta Compresión)",
+      "price": 125,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/fajas-02-stage-2-media-pierna_015f7334-9368-4793-b6b4-f65c7f4cce0f.webp?v=1727368628",
+      "tags": [
+        "BBL",
+        "Faja Colombiana",
+        "High Compression",
+        "Lipo 360",
+        "Mid Thigh",
+        "Post operatoria",
+        "Post Surgery",
+        "Powernet",
+        "Reloj de arena",
+        "Stage 2"
+      ],
+      "isBestSeller": false,
+      "stage": "Stage 2",
+      "compression": "Alta",
+      "features": [
+        "BBL",
+        "Faja Colombiana",
+        "High Compression"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7736639520861",
+      "title": "Faja Reloj de Arena Etapa 3 Tira Gruesa - Media Pierna y Alta Compresión",
+      "price": 120,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/03-stage-3-tira-gruesa-media-pierna-2_4bdf7912-4981-40f1-9356-7cbb75a90eab.webp?v=1753145479",
+      "tags": [
+        "Back Support",
+        "BBL",
+        "Guitar Shape",
+        "High Compression",
+        "Media pierna",
+        "Mid Thigh",
+        "Post Lipo",
+        "Post operatoria",
+        "Post parto",
+        "Reloj de arena",
+        "Stage 3",
+        "Thick Strap",
+        "Tira Gruesa"
+      ],
+      "isBestSeller": false,
+      "stage": "Stage 2",
+      "compression": "Alta",
+      "features": [
+        "Back Support",
+        "BBL",
+        "Guitar Shape"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7736624873565",
+      "title": "Faja Reloj de Arena Pierna Larga - Tira Gruesa y Alta Compresión (Stage 3)",
+      "price": 125,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/03-stage-3-pierna-larga-tira-gruesa_07d47941-1f52-4843-8102-2e9260b3230f.webp?v=1727365088",
+      "tags": [
+        "Back Support",
+        "BBL",
+        "High Compression",
+        "Long Leg Girdle",
+        "Moldeadoras",
+        "Pierna larga",
+        "Post Lipo",
+        "Post operatoria",
+        "Reloj de arena",
+        "Stage 3",
+        "Thick Strap",
+        "Thigh Shaper",
+        "Tira Gruesa"
+      ],
+      "isBestSeller": false,
+      "stage": "Stage 2",
+      "compression": "Alta",
+      "features": [
+        "Back Support",
+        "BBL",
+        "High Compression"
+      ]
+    }
+  ],
+  "recoveryTimeline": [
+    {
+      "stage": "Stage 1",
+      "weeks": "Weeks 1-2",
+      "description": "Low compression to manage fluids and inflammation."
+    },
+    {
+      "stage": "Stage 2",
+      "weeks": "Weeks 3-8",
+      "description": "High compression to sculpt the waist and adhere skin."
+    },
+    {
+      "stage": "Stage 3",
+      "weeks": "Month 3+",
+      "description": "Maintenance to keep the hourglass shape long-term."
+    }
+  ]
+}

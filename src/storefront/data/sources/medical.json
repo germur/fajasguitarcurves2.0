@@ -1,0 +1,160 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/stage1-1",
+      "title": "Comfort Recovery Stage 1 Faja - Knee Length",
+      "price": 85,
+      "image": "https://images.unsplash.com/photo-1596451990171-85577f480351?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Stage 1",
+        "Low Compression",
+        "Post-Op",
+        "Drainage Access"
+      ],
+      "isBestSeller": false,
+      "stage": "Stage 1",
+      "compression": "Low",
+      "features": [
+        "Soft Lycra",
+        "Drainage Access",
+        "Low Compression"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/stage1-2",
+      "title": "Seamless Post-Op Bra",
+      "price": 55,
+      "image": "https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Stage 1",
+        "Bra",
+        "Post-Op"
+      ],
+      "isBestSeller": true,
+      "stage": "Stage 1",
+      "compression": "Medium",
+      "features": [
+        "Seamless",
+        "Front Closure",
+        "Breathable"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7736712626269",
+      "title": "Faja Etapa 2 Media Pierna - Post Lipo y Tummy Tuck (Alta Compresión)",
+      "price": 125,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/fajas-02-stage-2-media-pierna_015f7334-9368-4793-b6b4-f65c7f4cce0f.webp?v=1727368628",
+      "tags": [
+        "Stage 2",
+        "High Compression",
+        "BBL Safe",
+        "Mid Thigh"
+      ],
+      "isBestSeller": true,
+      "stage": "Stage 2",
+      "compression": "High",
+      "features": [
+        "3-Layer Powernet",
+        "Open Butt",
+        "High Compression"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/7736624873565",
+      "title": "Faja Reloj de Arena Pierna Larga - Etapa 2",
+      "price": 125,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/03-stage-3-pierna-larga-tira-gruesa_07d47941-1f52-4843-8102-2e9260b3230f.webp?v=1727365088",
+      "tags": [
+        "Stage 2",
+        "High Compression",
+        "Long Leg",
+        "BBL Safe"
+      ],
+      "isBestSeller": false,
+      "stage": "Stage 2",
+      "compression": "High",
+      "features": [
+        "Thigh Slimming",
+        "Butt Lift",
+        "High Compression"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/supply-1",
+      "title": "360° Lipo Foam Board",
+      "price": 35,
+      "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Supplies",
+        "Foam",
+        "Recovery"
+      ],
+      "isBestSeller": true,
+      "stage": "Supplies",
+      "compression": "N/A",
+      "features": [
+        "Prevents Fibrosis",
+        "Soft Material",
+        "360 Coverage"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/supply-2",
+      "title": "Butterfly Abdominal Board",
+      "price": 28,
+      "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Supplies",
+        "Board",
+        "Recovery"
+      ],
+      "isBestSeller": false,
+      "stage": "Supplies",
+      "compression": "High",
+      "features": [
+        "Flattening Effect",
+        "Rigid Support",
+        "Ergonomic"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/supply-3",
+      "title": "Arnica Tea for Inflammation",
+      "price": 22,
+      "image": "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Supplies",
+        "Tea",
+        "Recovery"
+      ],
+      "isBestSeller": false,
+      "stage": "Supplies",
+      "compression": "N/A",
+      "features": [
+        "Anti-inflammatory",
+        "Natural",
+        "30 Bags"
+      ]
+    }
+  ],
+  "recoveryTimeline": [
+    {
+      "stage": "Stage 1",
+      "weeks": "Weeks 1-2",
+      "description": "Low compression to manage fluids and inflammation.",
+      "icon": "Feather"
+    },
+    {
+      "stage": "Stage 2",
+      "weeks": "Weeks 3-8",
+      "description": "High compression to sculpt the waist and adhere skin.",
+      "icon": "Hourglass"
+    },
+    {
+      "stage": "Supplies",
+      "weeks": "Essential",
+      "description": "Medical add-ons to prevent fibrosis and marks.",
+      "icon": "Plus"
+    }
+  ]
+}

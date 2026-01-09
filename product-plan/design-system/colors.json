@@ -1,0 +1,12 @@
+{
+    "primary": "amber",
+    "secondary": "stone",
+    "accent": "amber",
+    "neutral": "stone",
+    "custom": {
+        "text-primary": "#A35944",
+        "text-body": "#2C2420",
+        "background-soft": "#F5EDDF",
+        "brand-gold": "#D1AB66"
+    }
+}

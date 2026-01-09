@@ -1,0 +1,63 @@
+{
+    "articles": [
+        {
+            "id": "stage-2-truth",
+            "title": "The Truth About Stage 2: Why Higher Compression Isn't Always Better",
+            "author": "Dr. Sarah Miller, Board Certified Plastic Surgeon",
+            "category": "Medical Recovery",
+            "readTime": "6 min read",
+            "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "excerpt": "Understanding the delicate balance between lymphatic drainage and skin adhesion during the critical weeks 3-8 post-op."
+        },
+        {
+            "id": "faja-hygiene",
+            "title": "Daily Hygiene: How to Clean Your Faja Without Destroying the Powernet",
+            "author": "Maria Gonzalez, Recovery Specialist",
+            "category": "Lifestyle",
+            "readTime": "4 min read",
+            "image": "https://images.unsplash.com/photo-1584634731339-252c581abfc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "excerpt": "Medical-grade compression fabrics require specific care. Here is the definitive protocol for washing and drying."
+        },
+        {
+            "id": "fibrosis-guide",
+            "title": "Fibrosis 101: Identifying and Treating Hard Spots Early",
+            "author": "Editorial Team",
+            "category": "Medical Recovery",
+            "readTime": "8 min read",
+            "image": "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "excerpt": "Hard lumps aren't just 'swelling'. Learn the difference between fluid retention and scar tissue formation."
+        }
+    ],
+    "providers": [
+        {
+            "id": "miami-lymph",
+            "name": "Miami Lymphatic Center",
+            "city": "Miami, FL",
+            "type": "Certified Clinic",
+            "rating": 4.9,
+            "reviewCount": 128,
+            "image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "recommendedProduct": "Faja Etapa 2 Media Pierna"
+        },
+        {
+            "id": "la-sculpt",
+            "name": "LA Body Sculpting Post-Op",
+            "city": "Los Angeles, CA",
+            "type": "Mobile Nurse",
+            "rating": 5.0,
+            "reviewCount": 84,
+            "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "recommendedProduct": "Faja Reloj de Arena Stage 3"
+        },
+        {
+            "id": "nyc-recovery",
+            "name": "NYC Post-Surgical Recovery",
+            "city": "New York, NY",
+            "type": "Massage Therapist",
+            "rating": 4.8,
+            "reviewCount": 215,
+            "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db48c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "recommendedProduct": "Tabla Abdominal Mopllet"
+        }
+    ]
+}

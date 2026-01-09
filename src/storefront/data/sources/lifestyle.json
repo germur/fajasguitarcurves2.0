@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "id": "gid://shopify/Product/daily-1",
+      "title": "Invisible Strapless Daily Shaper",
+      "price": 68,
+      "image": "https://images.unsplash.com/photo-1605763240004-7e93b172d754?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Daily Use",
+        "Strapless",
+        "Invisible"
+      ],
+      "isBestSeller": true,
+      "occasion": "Wedding Guest",
+      "comfortLevel": "High",
+      "invisibilityScore": 10
+    },
+    {
+      "id": "gid://shopify/Product/daily-2",
+      "title": "Low-Back Plunge Bodysuit",
+      "price": 72,
+      "image": "https://images.unsplash.com/photo-1596451990171-85577f480351?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Daily Use",
+        "Low Back",
+        "Evening Wear"
+      ],
+      "isBestSeller": false,
+      "occasion": "Date Night",
+      "comfortLevel": "Medium",
+      "invisibilityScore": 9
+    },
+    {
+      "id": "gid://shopify/Product/daily-3",
+      "title": "High-Waist Shaping Short (Seamless)",
+      "price": 45,
+      "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Daily Use",
+        "Shorts",
+        "Under Jeans"
+      ],
+      "isBestSeller": true,
+      "occasion": "Office",
+      "comfortLevel": "Max",
+      "invisibilityScore": 10
+    },
+    {
+      "id": "gid://shopify/Product/daily-4",
+      "title": "Everyday Tank Top Shaper",
+      "price": 38,
+      "image": "https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=800&auto=format&fit=crop",
+      "tags": [
+        "Daily Use",
+        "Top",
+        "Layering"
+      ],
+      "isBestSeller": false,
+      "occasion": "Casual",
+      "comfortLevel": "Max",
+      "invisibilityScore": 8
+    }
+  ],
+  "occasions": [
+    {
+      "id": "wedding",
+      "label": "Wedding Guest",
+      "description": "Invisible under silk & satin.",
+      "image": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "office",
+      "label": "9-to-5 Comfort",
+      "description": "Sitting-proof control.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "gym",
+      "label": "Active Recovery",
+      "description": "Sweat-wicking support.",
+      "image": "https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop"
+    }
+  ]
+}

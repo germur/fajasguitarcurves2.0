@@ -1,0 +1,241 @@
+
+> calvo-creativo-os@0.0.0 lint
+> eslint .
+
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/product-plan/sections/lifestyle/LifestyleView.tsx
+   2:20  error  'Briefcase' is defined but never used     @typescript-eslint/no-unused-vars
+   2:31  error  'Heart' is defined but never used         @typescript-eslint/no-unused-vars
+  29:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/product-plan/sections/lifestyle/components/ComfortMeter.tsx
+  1:10  error  'Battery' is defined but never used        @typescript-eslint/no-unused-vars
+  1:19  error  'BatteryMedium' is defined but never used  @typescript-eslint/no-unused-vars
+  1:34  error  'BatteryLow' is defined but never used     @typescript-eslint/no-unused-vars
+  1:46  error  'Zap' is defined but never used            @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/DataCard.tsx
+  25:11  error  '_meta' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/PhaseNav.tsx
+  155:10  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/PhaseWarningBanner.tsx
+  33:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/PhaseWarningBanner.tsx:33:5
+  31 |   useEffect(() => {
+  32 |     const dismissed = localStorage.getItem(storageKey) === 'true'
+> 33 |     setIsDismissed(dismissed)
+     |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |   }, [storageKey])
+  35 |
+  36 |   const handleDismiss = () => {  react-hooks/set-state-in-effect
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx
+  351:10  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:351:10
+  349 |         }
+  350 |       >
+> 351 |         <AppShellComponent>
+      |          ^^^^^^^^^^^^^^^^^ This component is created during render
+  352 |           <ScreenDesignComponent />
+  353 |         </AppShellComponent>
+  354 |       </Suspense>
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:240:12
+  238 |
+  239 |     // Wrap the loader to provide default props to the shell
+> 240 |     return React.lazy(async () => {
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^
+> 241 |       try {
+      | ^^^^^^^^^^^
+> 242 |         const module = await loader() as Record<string, unknown>
+      …
+      | ^^^^^^^^^^^
+> 295 |       }
+      | ^^^^^^^^^^^
+> 296 |     })
+      | ^^^^^^^ The component is created during render here
+  297 |   }, [sectionId]) // Depends on sectionId to check section-specific shell config
+  298 |
+  299 |   // Sync theme with parent window  react-hooks/static-components
+  352:12  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:352:12
+  350 |       >
+  351 |         <AppShellComponent>
+> 352 |           <ScreenDesignComponent />
+      |            ^^^^^^^^^^^^^^^^^^^^^ This component is created during render
+  353 |         </AppShellComponent>
+  354 |       </Suspense>
+  355 |     )
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:204:12
+  202 |     if (!loader) return null
+  203 |     // Wrap the loader to handle potential export issues
+> 204 |     return React.lazy(async () => {
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^
+> 205 |       try {
+      | ^^^^^^^^^^^
+> 206 |         const module = await loader()
+      …
+      | ^^^^^^^^^^^
+> 215 |       }
+      | ^^^^^^^^^^^
+> 216 |     })
+      | ^^^^^^^ The component is created during render here
+  217 |   }, [sectionId, screenDesignName])
+  218 |
+  219 |   // Load AppShell component if it exists AND this section uses the shell        react-hooks/static-components
+  367:8   error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:367:8
+  365 |       }
+  366 |     >
+> 367 |       <ScreenDesignComponent />
+      |        ^^^^^^^^^^^^^^^^^^^^^ This component is created during render
+  368 |     </Suspense>
+  369 |   )
+  370 | }
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ScreenDesignPage.tsx:204:12
+  202 |     if (!loader) return null
+  203 |     // Wrap the loader to handle potential export issues
+> 204 |     return React.lazy(async () => {
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^
+> 205 |       try {
+      | ^^^^^^^^^^^
+> 206 |         const module = await loader()
+      …
+      | ^^^^^^^^^^^
+> 215 |       }
+      | ^^^^^^^^^^^
+> 216 |     })
+      | ^^^^^^^ The component is created during render here
+  217 |   }, [sectionId, screenDesignName])
+  218 |
+  219 |   // Load AppShell component if it exists AND this section uses the shell                                                                      react-hooks/static-components
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/SectionsPage.tsx
+  38:9  warning  The 'sections' logical expression could make the dependencies of useMemo Hook (at line 47) change on every render. To fix this, wrap the initialization of 'sections' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ShellDesignPage.tsx
+  239:8  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ShellDesignPage.tsx:239:8
+  237 |       }
+  238 |     >
+> 239 |       <ShellPreviewComponent />
+      |        ^^^^^^^^^^^^^^^^^^^^^ This component is created during render
+  240 |     </Suspense>
+  241 |   )
+  242 | }
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ShellDesignPage.tsx:186:12
+  184 |   const ShellPreviewComponent = useMemo(() => {
+  185 |     if (!shellPreviewLoader) return null
+> 186 |     return React.lazy(shellPreviewLoader)
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The component is created during render here
+  187 |   }, [shellPreviewLoader])
+  188 |
+  189 |   // Sync theme with parent window  react-hooks/static-components
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ui/badge.tsx
+  46:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/components/ui/button.tsx
+  60:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/academia/AcademiaView.tsx
+  11:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/guitar-curves/GuitarCurvesView.tsx
+   4:32  error  'AlertCircle' is defined but never used   @typescript-eslint/no-unused-vars
+  18:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/guitar-curves/components/VisualizerSlider.tsx
+  1:28  error  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/lifestyle/LifestyleView.tsx
+   2:20  error  'Briefcase' is defined but never used     @typescript-eslint/no-unused-vars
+   2:31  error  'Heart' is defined but never used         @typescript-eslint/no-unused-vars
+  30:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  31:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/lifestyle/components/ComfortMeter.tsx
+  1:10  error  'Battery' is defined but never used        @typescript-eslint/no-unused-vars
+  1:19  error  'BatteryMedium' is defined but never used  @typescript-eslint/no-unused-vars
+  1:34  error  'BatteryLow' is defined but never used     @typescript-eslint/no-unused-vars
+  1:46  error  'Zap' is defined but never used            @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/pain-points/PainPointsView.tsx
+   2:10  error  'Sparkles' is defined but never used      @typescript-eslint/no-unused-vars
+  13:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/sections/pain-points/components/PrescriptionCard.tsx
+  1:22  error  'Check' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/ProductDetailView.tsx
+  18:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/ProductDetailView.tsx:18:13
+  16 |             // Find by ID or by simple ID if it's a long Shopify ID
+  17 |             const found = products.find(p => p.id === id || p.id.split('/').pop() === id);
+> 18 |             setProduct(found || null);
+     |             ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  19 |         }
+  20 |     }, [id, products]);
+  21 |  react-hooks/set-state-in-effect
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/StorefrontLayout.tsx
+  12:10  error  'NavLink' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/data/store-data.ts
+  23:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/hooks/useStoreContext.tsx
+  27:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rogermurillo/.gemini/antigravity/scratch/Calvo Creativo OS/src/storefront/hooks/useStoreContext.tsx:27:9
+  25 |     useEffect(() => {
+  26 |         // Load products on mount
+> 27 |         setProducts(getAllProducts());
+     |         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  28 |     }, []);
+  29 |
+  30 |     const addToCart = (product: StoreProduct, size: string) => {  react-hooks/set-state-in-effect
+  61:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-refresh/only-export-components
+
+✖ 40 problems (39 errors, 1 warning)
+

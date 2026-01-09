@@ -97,33 +97,30 @@ export function ScreenDesignPage() {
             <div className="flex items-center gap-1 border-r border-stone-200 dark:border-stone-700 pr-4">
               <button
                 onClick={() => setWidthPercent(30)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent <= 40
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent <= 40
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Mobile (30%)"
               >
                 <Smartphone className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(60)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 40 && widthPercent <= 60
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent > 40 && widthPercent <= 60
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Tablet (60%)"
               >
                 <Tablet className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(100)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 60
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent > 60
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Desktop (100%)"
               >
                 <Monitor className="w-4 h-4" strokeWidth={1.5} />
@@ -201,6 +198,7 @@ export function ScreenDesignFullscreen() {
     const loader = loadScreenDesignComponent(sectionId, screenDesignName)
     if (!loader) return null
     // Wrap the loader to handle potential export issues
+    // eslint-disable-next-line react/display-name
     return React.lazy(async () => {
       try {
         const module = await loader()
@@ -236,65 +234,50 @@ export function ScreenDesignFullscreen() {
       return null
     }
 
-    // Wrap the loader to provide default props to the shell
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return React.lazy(async () => {
       try {
         const module = await loader() as Record<string, unknown>
-        const ShellComponent = (module?.default || module?.AppShell) as React.ComponentType<Record<string, unknown>>
-
-        if (typeof ShellComponent !== 'function') {
-          console.warn('[ScreenDesignFullscreen] AppShell does not have a valid export')
-          return { default: ({ children }: { children?: React.ReactNode }) => <>{children}</> }
-        }
-
-        // Create a wrapper that provides default props to the shell
-        const ShellWrapper = ({ children }: { children?: React.ReactNode }) => {
-          // Try to get navigation items from shell spec
-          const shellInfo = loadShellInfo()
-          const specNavItems = shellInfo?.spec?.navigationItems || []
-
-          // Parse navigation items from spec (format: "**Label** → Description")
-          const navigationItems = specNavItems.length > 0
-            ? specNavItems.map((item, index) => {
-                // Extract label from **Label** format
-                const labelMatch = item.match(/\*\*([^*]+)\*\*/)
-                const label = labelMatch ? labelMatch[1] : item.split('→')[0]?.trim() || `Item ${index + 1}`
-                return {
-                  label,
-                  href: `/${label.toLowerCase().replace(/\s+/g, '-')}`,
-                  isActive: index === 0,
-                }
-              })
-            : [
-                { label: 'Dashboard', href: '/', isActive: true },
-                { label: 'Items', href: '/items' },
-                { label: 'Settings', href: '/settings' },
-              ]
-
-          const defaultUser = {
-            name: 'Demo User',
-          }
-
-          // Pass props dynamically - the shell component decides what it needs
-          return (
-            <ShellComponent
-              navigationItems={navigationItems}
-              user={defaultUser}
-              onNavigate={() => {}}
-              onLogout={() => {}}
-            >
-              {children}
-            </ShellComponent>
-          )
-        }
-
-        return { default: ShellWrapper }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return module as { default: React.ComponentType<any> }
       } catch (e) {
         console.error('[ScreenDesignFullscreen] Failed to load AppShell:', e)
         return { default: ({ children }: { children?: React.ReactNode }) => <>{children}</> }
       }
     })
   }, [sectionId]) // Depends on sectionId to check section-specific shell config
+
+  // Calculate props for AppShell
+  const shellProps = useMemo(() => {
+    if (!AppShellComponent) return {}
+
+    const shellInfo = loadShellInfo()
+    const specNavItems = shellInfo?.spec?.navigationItems || []
+
+    // Parse navigation items
+    const navigationItems = specNavItems.length > 0
+      ? specNavItems.map((item, index) => {
+        const labelMatch = item.match(/\*\*([^*]+)\*\*/)
+        const label = labelMatch ? labelMatch[1] : item.split('→')[0]?.trim() || `Item ${index + 1}`
+        return {
+          label,
+          href: `/${label.toLowerCase().replace(/\s+/g, '-')}`,
+          isActive: index === 0,
+        }
+      })
+      : [
+        { label: 'Dashboard', href: '/', isActive: true },
+        { label: 'Items', href: '/items' },
+        { label: 'Settings', href: '/settings' },
+      ]
+
+    return {
+      navigationItems,
+      user: { name: 'Demo User' },
+      onNavigate: () => { },
+      onLogout: () => { }
+    }
+  }, [AppShellComponent])
 
   // Sync theme with parent window
   useEffect(() => {
@@ -348,7 +331,7 @@ export function ScreenDesignFullscreen() {
           </div>
         }
       >
-        <AppShellComponent>
+        <AppShellComponent {...shellProps}>
           <ScreenDesignComponent />
         </AppShellComponent>
       </Suspense>

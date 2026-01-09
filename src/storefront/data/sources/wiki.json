@@ -1,0 +1,67 @@
+{
+    "articles": [
+        {
+            "id": "fibrosis-101",
+            "slug": "what-is-fibrosis",
+            "title": "Understanding Post-Lipo Fibrosis",
+            "category": "Complications",
+            "summary": "Everything you need to know about the hardening of tissue after liposuction and how to prevent it.",
+            "readTime": "5 min",
+            "content": "Fibrosis is the formation of excess fibrous connective tissue in an organ or tissue in a reparative or reactive process...",
+            "toc": [
+                "What is Fibrosis?",
+                "Causes",
+                "Prevention",
+                "Treatment"
+            ]
+        },
+        {
+            "id": "compression-grades",
+            "slug": "compression-levels-explained",
+            "title": "Stage 1 vs. Stage 2 vs. Stage 3",
+            "category": "Faja 101",
+            "summary": "Why timing matters: The definitive guide to switching your faja at the right time.",
+            "readTime": "7 min",
+            "content": "Medical compression is graded in mmHg. Stage 1 is low compression designed for fluid management...",
+            "toc": [
+                "The 3 Stages",
+                "When to Switch",
+                "Signs of Too Tight",
+                "Sizing Up"
+            ]
+        },
+        {
+            "id": "seroma-guide",
+            "slug": "managing-seromas",
+            "title": "Fluid Collection (Seromas): Signs & Solutions",
+            "category": "Recovery",
+            "summary": "How to identify fluid buildup and why you shouldn't ignore it.",
+            "readTime": "4 min",
+            "content": "A seroma is a collection of fluid that builds up under the surface of your skin...",
+            "toc": [
+                "Identification",
+                "Draining",
+                "Compression Role",
+                "When to Call Doctor"
+            ]
+        }
+    ],
+    "glossary": [
+        {
+            "term": "Fibrosis",
+            "definition": "The thickening and scarring of connective tissue, usually as a result of injury or surgery. In lipo, it feels like hard lumps under the skin."
+        },
+        {
+            "term": "Seroma",
+            "definition": "A pocket of clear serous fluid that sometimes develops in the body after surgery."
+        },
+        {
+            "term": "Powernet",
+            "definition": "A strong, hex-mesh fabric used in medical compression garments for maximum durability and breathability."
+        },
+        {
+            "term": "Lympathic Drainage",
+            "definition": "A gentle massage technique used to move waste fluids from the damaged area."
+        }
+    ]
+}

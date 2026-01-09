@@ -1,0 +1,48 @@
+{
+    "brand": {
+        "name": "Guitar Curves",
+        "theme": "Golden Sculpt & Medical Luxury"
+    },
+    "colors": {
+        "background": {
+            "main": "#FFFFFF",
+            "soft": "#F5EDDF",
+            "contrast": "#2C2420"
+        },
+        "text": {
+            "primary": "#A35944",
+            "body": "#2C2420",
+            "light": "#FFFFFF"
+        },
+        "accent": {
+            "gold_primary": "#D1AB66",
+            "gold_hover": "#DABB87",
+            "gold_pale": "#E7D4B3"
+        },
+        "functional": {
+            "success": "#7A9CA3",
+            "error": "#B00020",
+            "medical_trust": "#8FA3A1"
+        }
+    },
+    "typography": {
+        "headings": {
+            "family": "Playfair Display, serif",
+            "weight": "700"
+        },
+        "body": {
+            "family": "Inter, sans-serif",
+            "weight": "400"
+        }
+    },
+    "components": {
+        "buttons": {
+            "primary": {
+                "background": "#A35944",
+                "text": "#FFFFFF",
+                "border_radius": "6px",
+                "hover_border": "#D1AB66"
+            }
+        }
+    }
+}

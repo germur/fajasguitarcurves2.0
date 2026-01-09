@@ -1,0 +1,142 @@
+{
+  "occasions": [
+    {
+      "id": "wedding",
+      "title": "Bridal & Gala",
+      "subtitle": "Invisible under Silk & Lace",
+      "palette": "bg-[#F5EDDF]",
+      "textColor": "text-[#2C2420]",
+      "icon": "💍"
+    },
+    {
+      "id": "office",
+      "title": "Work & Daily",
+      "subtitle": "8+ Hours of Comfort",
+      "palette": "bg-stone-100",
+      "textColor": "text-stone-800",
+      "icon": "💼"
+    },
+    {
+      "id": "date_night",
+      "title": "Date Night",
+      "subtitle": "Snatched & Sexy",
+      "palette": "bg-[#2C2420]",
+      "textColor": "text-[#F5EDDF]",
+      "icon": "🥂"
+    }
+  ],
+  "products": [
+    {
+      "id": "gid://shopify/Product/7736781897821",
+      "title": "Faja Etapa 3 Media Pierna con Brasier - 7 Varillas de Soporte",
+      "price": 135,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-303-con-brasier-media-pierna-7varillas2.jpg?v=1727379365",
+      "tags": [
+        "7 Varillas",
+        "Built-in Bra",
+        "Daily Use",
+        "High Compression",
+        "Mid Thigh",
+        "Post Surgery",
+        "Posture Corrector",
+        "Stage 3",
+        "Uso diario"
+      ],
+      "isBestSeller": false,
+      "occasion": "office",
+      "usageDuration": "8-12 Hours (Office)",
+      "comfortLevel": 90,
+      "invisibility": "High"
+    },
+    {
+      "id": "gid://shopify/Product/7736761679965",
+      "title": "Faja Short Levanta Cola Talle Alto - Broches y Ultra Realce",
+      "price": 73,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-201-short-alto-broches-ultrarealce_7e70baa1-853b-4aaf-abf1-dc36bd3deb88.webp?v=1727367647",
+      "tags": [
+        "Broches",
+        "Butt Lifter",
+        "High Waist",
+        "Levanta Cola",
+        "Moldeadora",
+        "Moldeadoras",
+        "Shorts",
+        "Tummy Control",
+        "Ultra Realce",
+        "Uso diario"
+      ],
+      "isBestSeller": false,
+      "occasion": "office",
+      "usageDuration": "8-12 Hours (Office)",
+      "comfortLevel": 90,
+      "invisibility": "High"
+    },
+    {
+      "id": "gid://shopify/Product/7736608850013",
+      "title": "Faja Strapless Reloj de Arena Media Pierna - Alta Compresión (Ideal para Vestidos)",
+      "price": 120,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-05-strapless-media-pierna.webp?v=1727283519",
+      "tags": [
+        "Anti-Roll",
+        "BBL",
+        "Dress Shapewear",
+        "Faja para Vestidos",
+        "Moldeadoras",
+        "Post Surgery",
+        "Powernet",
+        "Reloj de arena",
+        "Removable Straps",
+        "Stage 2",
+        "Strapless",
+        "Tummy Control",
+        "Uso diario"
+      ],
+      "isBestSeller": false,
+      "occasion": "office",
+      "usageDuration": "8-12 Hours (Office)",
+      "comfortLevel": 90,
+      "invisibility": "High"
+    },
+    {
+      "id": "gid://shopify/Product/7759405318237",
+      "title": "Leggins Deportivos con Faja Interna y Control de Abdomen (Neopreno)",
+      "price": 23,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/leggins.jpg?v=1729177204",
+      "tags": [
+        "Activewear",
+        "Daily Use",
+        "Gym",
+        "Leggings",
+        "Neoprene",
+        "Tummy Control",
+        "Uso diario"
+      ],
+      "isBestSeller": false,
+      "occasion": "office",
+      "usageDuration": "8-12 Hours (Office)",
+      "comfortLevel": 90,
+      "invisibility": "High"
+    },
+    {
+      "id": "gid://shopify/Product/7736470634589",
+      "title": "Short BBL ultra realce piernas largas + cremallera lateral",
+      "price": 73,
+      "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-012-short-Bbl-ultra-realce-piernas-largas-cremallera-en-el-lateral-2.webp?v=1727280697",
+      "tags": [
+        "Complementos",
+        "Moldeadoras",
+        "Post parto",
+        "Uso diario"
+      ],
+      "isBestSeller": false,
+      "occasion": "office",
+      "usageDuration": "8-12 Hours (Office)",
+      "comfortLevel": 90,
+      "invisibility": "High"
+    }
+  ],
+  "dressTest": {
+    "videoUrl": "/videos/silk-dress-walk.mp4",
+    "caption": "Silk never lies. Neither do we."
+  }
+}

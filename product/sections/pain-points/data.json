@@ -1,0 +1,93 @@
+{
+    "painPoints": [
+        {
+            "id": "fupa",
+            "title": "FUPA Control",
+            "icon": "🛡️",
+            "description": "El temido bulto bajo. Lo atacamos con paneles reforzados en X.",
+            "solutionHeadline": "Prescripción: Panel Reforzado en X",
+            "solutionSub": "Aplana el vientre bajo sin cortar la circulación inguinal.",
+            "products": [
+                {
+                    "id": "gid://shopify/Product/7736712626269",
+                    "title": "Faja Etapa 2 Media Pierna - Post Lipo y Tummy Tuck",
+                    "price": 125,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/fajas-02-stage-2-media-pierna_015f7334-9368-4793-b6b4-f65c7f4cce0f.webp?v=1727368628",
+                    "mechanism": "Doble refuerzo abdominal"
+                },
+                {
+                    "id": "gid://shopify/Product/7759405318237",
+                    "title": "Leggins Deportivos con Faja Interna - Neopreno",
+                    "price": 23,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/leggins.jpg?v=1729177204",
+                    "mechanism": "Compresión térmica activa"
+                }
+            ]
+        },
+        {
+            "id": "hip_dips",
+            "title": "Hip Dips",
+            "icon": "⏳",
+            "description": "Depresiones laterales que rompen la curva. Rellénalas al instante.",
+            "solutionHeadline": "Prescripción: Relleno Lateral Invisible",
+            "solutionSub": "Tecnología de malla que proyecta volumen solo donde falta.",
+            "products": [
+                {
+                    "id": "gid://shopify/Product/7736639520861",
+                    "title": "Faja Reloj de Arena Etapa 3 - Tira Gruesa",
+                    "price": 120,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/03-stage-3-tira-gruesa-media-pierna-2_4bdf7912-4981-40f1-9356-7cbb75a90eab.webp?v=1753145479",
+                    "mechanism": "Moldeado 360° en caderas"
+                },
+                {
+                    "id": "gid://shopify/Product/7736761679965",
+                    "title": "Faja Short Levanta Cola - Ultra Realce",
+                    "price": 73,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-201-short-alto-broches-ultrarealce_7e70baa1-853b-4aaf-abf1-dc36bd3deb88.webp?v=1727367647",
+                    "mechanism": "Bandas de elevación glútea"
+                }
+            ]
+        },
+        {
+            "id": "back_rolls",
+            "title": "Back Rolls",
+            "icon": "🔙",
+            "description": "El 'Bra Bulge' arruina cualquier vestido. Alísalo hasta el hombro.",
+            "solutionHeadline": "Prescripción: Cobertura Alta Sisa",
+            "solutionSub": "Sube más arriba que el brasier para eliminar el corte.",
+            "products": [
+                {
+                    "id": "gid://shopify/Product/7736624873565",
+                    "title": "Faja Reloj de Arena Pierna Larga - Espalda Alta",
+                    "price": 125,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/03-stage-3-pierna-larga-tira-gruesa_07d47941-1f52-4843-8102-2e9260b3230f.webp?v=1727365088",
+                    "mechanism": "Espalda alta correctiva"
+                },
+                {
+                    "id": "gid://shopify/Product/7736781897821",
+                    "title": "Faja Etapa 3 con Brasier - 7 Varillas",
+                    "price": 135,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-303-con-brasier-media-pierna-7varillas2.jpg?v=1727379365",
+                    "mechanism": "Soporte total de espalda"
+                }
+            ]
+        },
+        {
+            "id": "thighs",
+            "title": "Thigh Rub",
+            "icon": "🦵",
+            "description": "El roce entre piernas duele. Sepáralas con suavidad.",
+            "solutionHeadline": "Prescripción: Cool-Touch Fabric",
+            "solutionSub": "Tela fría que desliza, no atrapa calor.",
+            "products": [
+                {
+                    "id": "gid://shopify/Product/7736470634589",
+                    "title": "Short BBL Ultra Realce - Piernas Largas",
+                    "price": 73,
+                    "image": "https://cdn.shopify.com/s/files/1/0651/0641/1613/files/faja-012-short-Bbl-ultra-realce-piernas-largas-cremallera-en-el-lateral-2.webp?v=1727280697",
+                    "mechanism": "Encaje siliconado suave"
+                }
+            ]
+        }
+    ]
+}

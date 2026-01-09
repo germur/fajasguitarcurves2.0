@@ -1,0 +1,91 @@
+{
+    "products": [
+        {
+            "id": "prod_stage2_hourglass",
+            "title": "Stage 2 Hourglass Faja with Bra",
+            "price": 120.00,
+            "image": "/images/stage2_faja.jpg",
+            "stage": "Stage 2",
+            "compression": "Ultra-Alta",
+            "bestFor": [
+                "BBL",
+                "Lipo 360",
+                "Guitar Shape"
+            ],
+            "features": [
+                "Viveltex Technology",
+                "Side Zipper",
+                "Perineal Zipper"
+            ],
+            "isBestSeller": true
+        },
+        {
+            "id": "prod_stage1_knee",
+            "title": "Stage 1 Knee-Length Faja",
+            "price": 85.00,
+            "image": "/images/stage1_faja.jpg",
+            "stage": "Stage 1",
+            "compression": "Media",
+            "bestFor": [
+                "Immediate Post-Op",
+                "Comfort"
+            ],
+            "features": [
+                "Cool Touch Fabric",
+                "Front Hooks"
+            ],
+            "isBestSeller": false
+        },
+        {
+            "id": "prod_stage3_short",
+            "title": "Stage 3 Sculpting Short",
+            "price": 65.00,
+            "image": "/images/stage3_short.jpg",
+            "stage": "Stage 3",
+            "compression": "Alta",
+            "bestFor": [
+                "Maintenance",
+                "Daily Use"
+            ],
+            "features": [
+                "Butt Lifter",
+                "Silicon Lace"
+            ],
+            "isBestSeller": false
+        },
+        {
+            "id": "prod_board_360",
+            "title": "360 Lipo Foam Board",
+            "price": 45.00,
+            "image": "/images/board.jpg",
+            "stage": "Stage 1",
+            "compression": "Media",
+            "bestFor": [
+                "Inflammation",
+                "Fibrosis Prevention"
+            ],
+            "features": [
+                "Medical Grade Foam",
+                "Anatomic Fit"
+            ],
+            "isBestSeller": true
+        }
+    ],
+    "recoveryTimeline": [
+        {
+            "stage": "Stage 1",
+            "weeks": "Weeks 1-2",
+            "description": "Low compression to manage fluids and inflammation."
+        },
+        {
+            "stage": "Stage 2",
+            "weeks": "Weeks 3-8",
+            "description": "High compression to sculpt the waist and adhere skin."
+        },
+        {
+            "stage": "Stage 3",
+            "weeks": "Month 3+",
+            "description": "Maintenance to keep the hourglass shape long-term."
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
+import { Suspense, useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, PanelLeft, Maximize2, GripVertical, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -84,33 +84,30 @@ export function ShellDesignPage() {
             <div className="flex items-center gap-1 border-r border-stone-200 dark:border-stone-700 pr-4">
               <button
                 onClick={() => setWidthPercent(30)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent <= 40
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent <= 40
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Mobile (30%)"
               >
                 <Smartphone className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(60)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 40 && widthPercent <= 60
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent > 40 && widthPercent <= 60
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Tablet (60%)"
               >
                 <Tablet className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(100)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 60
-                    ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
-                    : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                className={`p-1.5 rounded transition-colors ${widthPercent > 60
+                  ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
+                  : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                  }`}
                 title="Desktop (100%)"
               >
                 <Monitor className="w-4 h-4" strokeWidth={1.5} />
@@ -174,17 +171,22 @@ export function ShellDesignPage() {
   )
 }
 
-/**
- * Fullscreen version of the shell preview (for screenshots)
- * Syncs theme with parent window via localStorage
- */
-export function ShellDesignFullscreen() {
-  const shellPreviewLoader = loadShellPreview()
+// Move lazy loading to module scope
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ShellPreviewComponent: React.LazyExoticComponent<React.ComponentType<any>> | null = null
 
-  const ShellPreviewComponent = useMemo(() => {
-    if (!shellPreviewLoader) return null
-    return React.lazy(shellPreviewLoader)
-  }, [shellPreviewLoader])
+try {
+  const loader = loadShellPreview()
+  if (loader) {
+    ShellPreviewComponent = React.lazy(loader)
+  }
+} catch (e) {
+  console.error('Failed to init shell preview loader', e)
+}
+
+export function ShellDesignFullscreen() {
+  // const shellPreviewLoader = loadShellPreview() // Moved up
+
 
   // Sync theme with parent window
   useEffect(() => {

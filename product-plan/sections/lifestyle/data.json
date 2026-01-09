@@ -1,0 +1,102 @@
+{
+    "occasions": [
+        {
+            "id": "wedding",
+            "title": "Bridal & Gala",
+            "subtitle": "Invisible under Silk & Lace",
+            "palette": "bg-[#F5EDDF]",
+            "textColor": "text-[#2C2420]",
+            "icon": "💍"
+        },
+        {
+            "id": "office",
+            "title": "Work & Daily",
+            "subtitle": "8+ Hours of Comfort",
+            "palette": "bg-stone-100",
+            "textColor": "text-stone-800",
+            "icon": "💼"
+        },
+        {
+            "id": "date_night",
+            "title": "Date Night",
+            "subtitle": "Snatched & Sexy",
+            "palette": "bg-[#2C2420]",
+            "textColor": "text-[#F5EDDF]",
+            "icon": "🥂"
+        }
+    ],
+    "products": [
+        {
+            "id": "ls_seamless_short",
+            "title": "Second Skin Seamless Short",
+            "price": 58.00,
+            "occasion": "office",
+            "compression": "Media",
+            "usageDuration": "8-12 Hours (Office)",
+            "comfortLevel": 90,
+            "invisibility": "High",
+            "image": "/images/ls_seamless.jpg",
+            "tags": [
+                "No VPL",
+                "Laser Cut"
+            ],
+            "isBestSeller": true
+        },
+        {
+            "id": "ls_strapless_lowback",
+            "title": "Low-Back Bridal Bodysuit",
+            "price": 85.00,
+            "occasion": "wedding",
+            "compression": "High",
+            "usageDuration": "4-6 Hours (Event)",
+            "comfortLevel": 60,
+            "invisibility": "Ultra",
+            "image": "/images/ls_strapless.jpg",
+            "tags": [
+                "Strapless",
+                "Low Back"
+            ],
+            "relatedProducts": [
+                "Boob Tape",
+                "Silicone Nipple Covers"
+            ],
+            "isBestSeller": false
+        },
+        {
+            "id": "ls_lace_cincher",
+            "title": "Midnight Lace Waist Cincher",
+            "price": 62.00,
+            "occasion": "date_night",
+            "compression": "Ultra",
+            "usageDuration": "2-4 Hours (Gala)",
+            "comfortLevel": 40,
+            "invisibility": "Medium",
+            "image": "/images/ls_lace.jpg",
+            "tags": [
+                "Lace Detail",
+                "Extreme Curve"
+            ],
+            "isBestSeller": true
+        },
+        {
+            "id": "ls_posture_bra",
+            "title": "Posture Corrector Bra",
+            "price": 42.00,
+            "occasion": "office",
+            "compression": "High",
+            "usageDuration": "8-12 Hours (Office)",
+            "comfortLevel": 85,
+            "invisibility": "High",
+            "image": "/images/ls_bra.jpg",
+            "tags": [
+                "Back Support",
+                "Wide Straps"
+            ],
+            "isBestSeller": false
+        }
+    ],
+    "dressTest": {
+        "videoUrl": "/videos/silk-dress-walk.mp4",
+        "caption": "Silk never lies. Neither do we."
+    }
+}

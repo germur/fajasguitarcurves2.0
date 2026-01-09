@@ -1,0 +1,82 @@
+{
+    "symptoms": [
+        {
+            "id": "roll-down",
+            "label": "Rolling Down",
+            "description": "Faja sliding down at the waist causing discomfort.",
+            "icon": "ArrowDownToLine",
+            "painPoint": "Does your faja refuse to stay put?",
+            "techSolution": {
+                "title": "Anti-Roll Silicone & Steel Bones",
+                "description": "Our garments use medical-grade silicone lace that grips skin without irritation, reinforced by flexible spiral steel bones that act like a second spine.",
+                "productId": "gid://shopify/Product/guitar-1"
+            }
+        },
+        {
+            "id": "back-fat",
+            "label": "Back Bulge (The Gap)",
+            "description": "Fat spilling over the top edge creating a visible line.",
+            "icon": "Minimize2",
+            "painPoint": "Dreaded back fat spilling over?",
+            "techSolution": {
+                "title": "High-Back Coverage",
+                "description": "Extended back zones smoothing perfectly into the bra line, eliminating the 'muffin top' effect completely.",
+                "productId": "gid://shopify/Product/stage1-2"
+            }
+        },
+        {
+            "id": "burns",
+            "label": "Friction Burns",
+            "description": "Red marks and itching from fabric rubbing against skin.",
+            "icon": "Flame",
+            "painPoint": "Red marks and itchy skin?",
+            "techSolution": {
+                "title": "Viveltex™ Micro-Capsules",
+                "description": "Patented lining infused with Vitamin E, Seaweed, and Aloe Vera that soothes skin and reduces friction upon contact.",
+                "productId": "gid://shopify/Product/stage1-1"
+            }
+        },
+        {
+            "id": "flattened",
+            "label": "Flattened Glutes",
+            "description": "Compression crushing the butt instead of lifting it.",
+            "icon": "CircleOff",
+            "painPoint": "Looking flat instead of snatched?",
+            "techSolution": {
+                "title": "Zero-Compression Mesh",
+                "description": "Our 'Green Zone' technology releases all pressure on the hips and glutes, allowing fat cells to survive and thrive.",
+                "productId": "gid://shopify/Product/guitar-extreme"
+            }
+        },
+        {
+            "id": "square-hips",
+            "label": "Square Hips (Hip Dips)",
+            "description": "Lack of waist-to-hip transition curve.",
+            "icon": "BoxSelect",
+            "painPoint": "Straight up and down shape?",
+            "techSolution": {
+                "title": "Guitar Hourglass Engineering",
+                "description": "Targeted 'Red Zone' waist compression combined with open hips creates an instant 10-inch difference ratio.",
+                "productId": "gid://shopify/Product/lifestyle-short"
+            }
+        }
+    ],
+    "faq": [
+        {
+            "question": "Why does my faja burn my skin?",
+            "answer": "Friction burns occur when fabric moves against skin or lacks breathability. Look for fajas lined with Viveltex (Vitamin E & Algae) to soothe skin and reduce friction. Cheap materials trap heat; our Cool-Touch nylon prevents this."
+        },
+        {
+            "question": "How do I stop my faja from rolling down?",
+            "answer": "Rolling happens when the garment structure is too weak for your movement. You need 'Spiral Steel Bones'—flexible supports that keep the faja upright. Also, ensure you have a silicone lace edge that grips the skin."
+        },
+        {
+            "question": "Will a high compression faja flatten my BBL?",
+            "answer": "Yes, if it's the wrong kind. Standard fajas compress everywhere. BBL-safe fajas must have a 'Zero Compression' zone made of thin mesh over the buttock area to protect the fat graft."
+        },
+        {
+            "question": "How do I hide my FUPA?",
+            "answer": "You need localized lower-abdominal compression. Our Tri-Layer Panel targets the lower belly specifically without compressing the hips, flattening the 'pooch' while lifting the rest."
+        }
+    ]
+}
