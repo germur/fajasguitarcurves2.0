@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Ruler, Info, ArrowRight, RotateCcw, Heart, AlertCircle, ChevronLeft, Check, Sparkles } from 'lucide-react';
+import { Ruler, Info, ArrowRight, RotateCcw, AlertCircle, ChevronLeft } from 'lucide-react';
 import type { Unit, Recommendation, Measurements } from './types';
 import { SIZE_DATA } from './constants';
 import ProgressBar from './ProgressBar';
