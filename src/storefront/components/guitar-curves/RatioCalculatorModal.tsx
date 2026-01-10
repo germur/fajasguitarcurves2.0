@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Ruler, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Ruler, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 

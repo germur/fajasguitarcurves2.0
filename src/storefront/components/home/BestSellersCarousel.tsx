@@ -1,103 +1,97 @@
-import { ArrowRight, ShoppingBag } from 'lucide-react';
-import { useStore } from '../../hooks/useStoreContext'; // Adjusted path
+import { useRef } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-// Mock Data for "Viral Favorites"
-const BEST_SELLERS = [
-    {
-        id: "p1",
-        name: "Guitar Curves™ Stage 2",
-        price: 145,
-        image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop",
-        badges: ["Best Seller", "BBL Safe"]
-    },
-    {
-        id: "p2",
-        name: "360° Lipo Foam Board",
-        price: 85,
-        image: "https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop",
-        badges: ["Medical Grade"]
-    },
-    {
-        id: "p3",
-        name: "Snatched Waist Trainer (Latex)",
-        price: 65,
-        image: "https://images.unsplash.com/photo-1596482552993-9bfa094d48a4?q=80&w=800&auto=format&fit=crop",
-        badges: ["High Compression"]
-    },
-    {
-        id: "p4",
-        name: "Urinal Funnel (Post-Op)",
-        price: 25,
-        image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?q=80&w=800&auto=format&fit=crop",
-        badges: ["Hygiene"]
-    }
-];
+import { ShopifyCollectionGrid } from '../shopify/ShopifyCollectionGrid';
 
 export function BestSellersCarousel() {
-    const { toggleCart } = useStore();
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const handleQuickAdd = (e: React.MouseEvent) => {
-        e.preventDefault();
-        // In a real app, this would add specific ID to cart
-        toggleCart();
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const scrollAmount = 300;
+            scrollContainerRef.current.scrollBy({
+                left: direction === 'right' ? scrollAmount : -scrollAmount,
+                behavior: 'smooth'
+            });
+        }
     };
 
     return (
-        <section className="py-24 bg-[#FAF9F6] border-y border-stone-100">
+        <section className="py-20 bg-white border-t border-stone-100">
             <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-16">
-                    <span className="text-[#B49286] font-bold tracking-widest text-xs uppercase mb-3 block">Shop The Hype</span>
-                    <h2 className="font-serif text-4xl text-[#2C2420]">The Viral Favorites</h2>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {BEST_SELLERS.map((product) => (
-                        <div key={product.id} className="group cursor-pointer">
-                            {/* Image Container */}
-                            <div className="relative aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-stone-200">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                                {/* Badges */}
-                                <div className="absolute top-3 left-3 flex flex-col gap-2">
-                                    {product.badges.map(badge => (
-                                        <span key={badge} className="bg-white/90 backdrop-blur text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wide text-[#2C2420]">
-                                            {badge}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Quick Add Overlay */}
-                                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                    <button
-                                        onClick={handleQuickAdd}
-                                        className="w-full bg-[#2C2420] text-white py-3 rounded-lg font-bold text-sm shadow-lg hover:bg-black flex items-center justify-center gap-2"
-                                    >
-                                        <ShoppingBag className="w-4 h-4" /> Quick Add
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Info */}
-                            <div>
-                                <div className="flex justify-between items-start">
-                                    <h3 className="font-serif text-lg text-[#2C2420] group-hover:underline decoration-[#B49286] underline-offset-4 decoration-2">{product.name}</h3>
-                                    <span className="font-bold text-[#A35944]">${product.price}</span>
-                                </div>
-                                <p className="text-xs text-stone-400 mt-1">⭐️ 4.9 (120 Reviews)</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="mt-12 text-center">
-                    <Link to="/store/guitar-curves" className="inline-flex items-center gap-2 border-b border-[#2C2420] pb-1 font-bold text-[#2C2420] hover:text-[#B49286] hover:border-[#B49286] transition-colors">
-                        SHOP ALL BEST SELLERS <ArrowRight className="w-4 h-4" />
+                {/* Header */}
+                <div className="flex items-end justify-between mb-8">
+                    <div>
+                        <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#2C2420]">
+                            Viral Favorites
+                        </h2>
+                        <p className="text-stone-500 mt-2">
+                            Las favoritas de nuestras #GuitarGirls
+                        </p>
+                    </div>
+                    <Link to="/store/all" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
+                        View All <ArrowRight size={16} />
                     </Link>
                 </div>
+
+                {/* Carousel (Wrapping the Grid logic but restricted to horizontal scroll) */}
+                <div className="relative group">
+
+                    {/* Navigation Buttons (Hidden on mobile) */}
+                    <button
+                        onClick={() => scroll('left')}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-[#2C2420] opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+                    <button
+                        onClick={() => scroll('right')}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center text-[#2C2420] opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hidden md:flex"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
+
+                    {/* Scrollable Area */}
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0"
+                    >
+                        {/* We use the Stage 2 collection as our "Best Sellers" proxy for now */}
+                        <div className="min-w-full">
+                            {/* 
+                                Limiting grid columns to act as a horizontal list is tricky with the existing Grid component.
+                                Ideally, we'd refactor ShopifyCollectionGrid to accept a layout mode.
+                                For now, we will use it but assume it renders children we can scroll.
+                                Actually, the existing ShopifyCollectionGrid maps to `shopify-collection`, which typically renders a grid.
+                                
+                                HACK: To make it horizontal, we might need a horizontal-friendly web component or just render a specific robust "Featured Collection".
+                                Let's assume for this specific view we might need to manually fetch or use a different component if the Web Component forces a grid.
+                                
+                                Since `<shopify-collection>` usually forces a grid layout in its Shadow DOM or default styles, 
+                                we might be better off manually fetching products via Storefront API for a true custom carousel.
+                                
+                                BUT, given Phase 22 constraints (we liked the Web Components), 
+                                let's try to override it or use a specific "Best Sellers" manual list if we can't easily style the internal grid of the web component to be flex-nowrap.
+                                
+                                ALTERNATIVE: Use the manual "ShopifyProductCard" if we had one.
+                                Let's use the ShopifyCollectionGrid but wrap it in a container that forces horizontal scroll if possible, 
+                                though shadow DOM might block layout shifts.
+                                
+                                SAFETY: Let's stick to the verified Grid behavior (Vertical Grid) but limit it to 4 items so it looks like a "Top Rows" section, 
+                                instead of a Scroll. It's safer for MVP than fighting Shadow DOM scroll.
+                              */}
+                            <ShopifyCollectionGrid handle="etapa-2" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex md:hidden justify-center mt-4">
+                    <Link to="/store/all" className="flex items-center gap-2 font-bold text-[#A35944]">
+                        Shop All Favorites <ArrowRight size={16} />
+                    </Link>
+                </div>
+
             </div>
         </section>
     );

@@ -28,3 +28,15 @@ To support the "Medical Hub" and "Guitar Tech" logic, implement the following cu
     - `MerchantReturnPolicy` on all product pages.
     - `LocalBusiness` in footer with Brooklyn coordinates.
     - `SizeSpecification` on products to reduce returns.
+
+## 4. Source Control (Initial Setup)
+The local repository has been initialized and the "Release Candidate 1.0" is committed.
+
+**To push to GitHub:**
+1. Create a new empty repository on GitHub (do not initialize with README).
+2. Run the following commands:
+```bash
+git remote add origin <YOUR_GITHUB_REPO_URL>
+git branch -M main
+git push -u origin main
+```

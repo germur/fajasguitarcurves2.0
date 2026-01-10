@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Sparkles, ShoppingBag } from 'lucide-react'
 import { OutfitSilo } from '../../storefront/components/lifestyle/OutfitSilo'
 import { ComfortMeter } from '../../storefront/components/lifestyle/ComfortMeter'
+import { ShopifyCollectionGrid } from '../../storefront/components/shopify/ShopifyCollectionGrid'
 import data from '../../storefront/data/sources/lifestyle.json'
 import { useStore } from '../../storefront/hooks/useStoreContext'
 
@@ -118,57 +119,63 @@ export default function LifestyleView() {
                         </div>
 
                         <div className="grid sm:grid-cols-2 gap-x-8 gap-y-12">
-                            {filteredProducts.map(product => (
-                                <div key={product.id} className="group flex flex-col h-full">
-                                    <div className="relative aspect-[3/4] bg-stone-100 rounded-xl overflow-hidden mb-6">
-                                        <img
-                                            src={product.image}
-                                            alt={product.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
-
-                                        {product.isBestSeller && (
-                                            <span className="absolute top-3 left-3 bg-[#2C2420] text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded tracking-wider shadow-lg">
-                                                Best Seller
-                                            </span>
-                                        )}
-
-                                        <span className="absolute top-3 right-3 bg-white/90 backdrop-blur text-[#2C2420] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
-                                            {product.invisibilityScore}/10 Invisible
-                                        </span>
-
-                                        {/* Quick Add Overlay */}
-                                        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                            <button
-                                                onClick={() => handleAddToCart(product)}
-                                                className="w-full bg-white/95 backdrop-blur text-[#2C2420] py-3 rounded-lg font-bold text-sm shadow-xl hover:bg-[#2C2420] hover:text-white transition-colors flex items-center justify-center gap-2"
-                                            >
-                                                <ShoppingBag className="w-4 h-4" /> Quick Add
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex-1">
-                                        <h3 className="font-serif text-xl text-[#2C2420] font-bold mb-1 group-hover:text-[#A35944] transition-colors">
-                                            {product.title}
-                                        </h3>
-                                        <p className="text-stone-500 font-medium mb-4">${product.price}</p>
-
-                                        <div className="flex flex-wrap gap-2 mb-4">
-                                            {product.tags.slice(0, 3).map(tag => (
-                                                <span key={tag} className="text-[10px] bg-stone-50 text-stone-500 px-2 py-1 rounded uppercase tracking-wide font-bold">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* The Comfort Meter */}
-                                    <div className="mt-auto pt-4 border-t border-stone-100">
-                                        <ComfortMeter />
-                                    </div>
+                            {activeOccasion === 'all' ? (
+                                <div className="col-span-2">
+                                    <ShopifyCollectionGrid handle="uso-diario" productCount={8} />
                                 </div>
-                            ))}
+                            ) : (
+                                filteredProducts.map(product => (
+                                    <div key={product.id} className="group flex flex-col h-full">
+                                        <div className="relative aspect-[3/4] bg-stone-100 rounded-xl overflow-hidden mb-6">
+                                            <img
+                                                src={product.image}
+                                                alt={product.title}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            />
+
+                                            {product.isBestSeller && (
+                                                <span className="absolute top-3 left-3 bg-[#2C2420] text-white text-[10px] uppercase font-bold px-3 py-1.5 rounded tracking-wider shadow-lg">
+                                                    Best Seller
+                                                </span>
+                                            )}
+
+                                            <span className="absolute top-3 right-3 bg-white/90 backdrop-blur text-[#2C2420] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                                {product.invisibilityScore}/10 Invisible
+                                            </span>
+
+                                            {/* Quick Add Overlay */}
+                                            <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                                <button
+                                                    onClick={() => handleAddToCart(product)}
+                                                    className="w-full bg-white/95 backdrop-blur text-[#2C2420] py-3 rounded-lg font-bold text-sm shadow-xl hover:bg-[#2C2420] hover:text-white transition-colors flex items-center justify-center gap-2"
+                                                >
+                                                    <ShoppingBag className="w-4 h-4" /> Quick Add
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1">
+                                            <h3 className="font-serif text-xl text-[#2C2420] font-bold mb-1 group-hover:text-[#A35944] transition-colors">
+                                                {product.title}
+                                            </h3>
+                                            <p className="text-stone-500 font-medium mb-4">${product.price}</p>
+
+                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                {product.tags.slice(0, 3).map(tag => (
+                                                    <span key={tag} className="text-[10px] bg-stone-50 text-stone-500 px-2 py-1 rounded uppercase tracking-wide font-bold">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* The Comfort Meter */}
+                                        <div className="mt-auto pt-4 border-t border-stone-100">
+                                            <ComfortMeter />
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </section>
                 </div>

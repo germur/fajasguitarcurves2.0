@@ -13,6 +13,14 @@ import { CheckoutPage } from '@/storefront/CheckoutPage'
 import AboutPage from '@/storefront/AboutPage'
 import ContactPage from '@/storefront/ContactPage'
 import { UserDashboard } from '@/storefront/UserDashboard'
+import { LabPage } from '@/storefront/LabPage'
+import { CollectionPage } from '@/storefront/CollectionPage'
+import { ReturnsPage } from '@/storefront/ReturnsPage'
+import { ShippingPage } from '@/storefront/ShippingPage'
+import { PrivacyPage } from '@/storefront/PrivacyPage'
+import { TermsPage } from '@/storefront/TermsPage'
+import { NotFoundPage } from '@/storefront/NotFoundPage'
+import { FitFinderPage } from '@/storefront/FitFinderPage'
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +31,10 @@ export const router = createBrowserRouter([
     path: '/store',
     element: <StorefrontLayout />,
     children: [
+      {
+        path: 'lab',
+        element: <LabPage />,
+      },
       {
         index: true,
         element: <HomePage />,
@@ -38,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: 'medical',
         element: <MedicalHubView />,
+      },
+      {
+        path: 'fit-finder',
+        element: <FitFinderPage />,
       },
       {
         path: 'guitar-curves',
@@ -60,6 +76,14 @@ export const router = createBrowserRouter([
         element: <ProductDetailView />,
       },
       {
+        path: 'cinturillas',
+        element: <CollectionPage title="Cinturillas" handle="cinturillas" description="Premium waist trainers designed for maximum compression and comfort." />,
+      },
+      {
+        path: 'shorts',
+        element: <CollectionPage title="Shorts" handle="shorts" description="Sculpting shorts for the perfect lift and control." />,
+      },
+      {
         path: 'about',
         element: <AboutPage />,
       },
@@ -68,9 +92,41 @@ export const router = createBrowserRouter([
         element: <ContactPage />,
       },
       {
+        path: 'returns',
+        element: <ReturnsPage />,
+      },
+      {
+        path: 'shipping',
+        element: <ShippingPage />,
+      },
+      {
+        path: 'privacy',
+        element: <PrivacyPage />,
+      },
+      {
+        path: 'terms',
+        element: <TermsPage />,
+      },
+      {
+        path: 'post-quirurgica',
+        element: <CollectionPage title="Post-Quirúrgica (Stage 1)" handle="post-quirurgica" description="Medical-grade compression for the immediate post-op recovery phase." />,
+      },
+      {
+        path: 'accesorios',
+        element: <CollectionPage title="Medical Accessories" handle="accesorios" description="Professional foams, boards, and urinals for optimal recovery." />,
+      },
+      {
         path: 'account',
         element: <UserDashboard />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       }
     ]
   },
+  {
+    path: '*',
+    element: <NotFoundPage />, // Catch-all for non/store routes too if desired, or let generic error boundary handle it
+  }
 ])

@@ -30,9 +30,7 @@ export default function AcademiaView() {
     // Helper to highlight glossary terms in text
     // In a real app, this would be more robust. Here we do simple replacement for demo.
     const renderContentWithTooltips = (content: string) => {
-        // This is a simplified split. For complex text, we'd need a parser.
-        // We will just render raw text for now, but show how tooltips work in a static example below.
-        return <p className="mb-4">{content}</p>;
+        return <div className="mb-4 prose prose-stone max-w-none" dangerouslySetInnerHTML={{ __html: content }} />;
     };
 
     if (selectedArticle) {

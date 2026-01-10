@@ -3,13 +3,6 @@ import { useStore } from '../hooks/useStoreContext';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const UPSELL_PRODUCT = {
-    id: 'mock-foam-1',
-    title: '360° Lipo Foam Board',
-    price: 35,
-    image: 'https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=200&auto=format&fit=crop',
-    category: 'Medical Hub'
-};
 
 export function CartDrawer() {
     const {
@@ -66,7 +59,7 @@ export function CartDrawer() {
             >
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-stone-100">
-                    <h2 className="font-serif text-2xl font-bold text-[#2C2420]">Your Cart</h2>
+                    <h2 className="font-serif text-2xl font-bold text-[#2C2420]">Tu Carrito</h2>
                     <button
                         onClick={toggleCart}
                         className="p-2 -mr-2 text-stone-400 hover:text-[#2C2420] transition-colors rounded-full hover:bg-stone-100"
@@ -79,7 +72,7 @@ export function CartDrawer() {
                 <div className="px-6 py-3 bg-[#F5EDDF]/50 border-b border-[#F5EDDF]">
                     <div className="flex items-center gap-2 text-sm text-[#A35944] font-medium mb-2">
                         <Check className="w-4 h-4" />
-                        <span>Free Shipping available on orders over $200</span>
+                        <span>Envío Gratis disponible en órdenes mayores a $200</span>
                     </div>
                     <div className="h-1.5 w-full bg-stone-200 rounded-full overflow-hidden">
                         <div
@@ -114,12 +107,12 @@ export function CartDrawer() {
                             <div className="w-16 h-16 rounded-full bg-stone-100 mb-4 flex items-center justify-center">
                                 <Lock className="w-8 h-8 text-stone-300" />
                             </div>
-                            <p className="text-lg font-medium mb-1">Your cart is empty</p>
+                            <p className="text-lg font-medium mb-1">Tu carrito está vacío</p>
                             <button
                                 onClick={toggleCart}
                                 className="mt-6 text-[#B49286] font-bold hover:underline"
                             >
-                                Continue Shopping
+                                Continuar Comprando
                             </button>
                         </div>
                     ) : (
@@ -217,14 +210,14 @@ export function CartDrawer() {
                             <span>${cartTotal.toFixed(2)}</span>
                         </div>
                         <p className="text-xs text-stone-500 mb-6 text-center">
-                            Shipping and taxes calculated at checkout.
+                            Envío e impuestos calculados al finalizar compra.
                         </p>
                         <button
                             onClick={handleCheckout}
                             className="w-full bg-[#A35944] text-white py-4 rounded-full font-bold text-lg tracking-wide hover:bg-[#D1AB66] transition-colors shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 group"
                         >
                             <Lock className="w-4 h-4" />
-                            CHECKOUT SECURELY <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            PAGAR DE FORMA SEGURA <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
                 )}

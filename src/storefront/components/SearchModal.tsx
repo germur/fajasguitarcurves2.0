@@ -67,7 +67,7 @@ export function SearchModal() {
 
         return products.filter(product => {
             const title = product.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const category = product.category.toLowerCase();
+            const category = product.category?.toLowerCase() || '';
             // Assuming tags might be available in raw data, but if not, title/category match is robust
 
             return searchTerms.some(term =>
@@ -109,7 +109,7 @@ export function SearchModal() {
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search for 'Stage 2', 'BBL', or 'Shorts'..."
+                        placeholder="Busca 'Etapa 2', 'BBL', o 'Shorts'..."
                         className="w-full bg-transparent border-b-2 border-stone-600 text-3xl font-serif text-[#F5EDDF] placeholder:text-stone-600 py-4 pl-14 pr-12 focus:outline-none focus:border-[#D1AB66] transition-colors"
                     />
                     <button
@@ -127,10 +127,10 @@ export function SearchModal() {
                         <div className="text-stone-400">
                             <div className="flex items-center gap-2 mb-4 text-[#D1AB66] text-sm font-bold uppercase tracking-wider">
                                 <TrendingUp className="w-4 h-4" />
-                                <span>Trending Now</span>
+                                <span>Tendencias</span>
                             </div>
                             <div className="flex flex-wrap gap-3">
-                                {['Stage 2 Faja', 'BBL Pillow', 'Chin Strap', 'Ab Board'].map(term => (
+                                {['Faja Etapa 2', 'Almohada BBL', 'Mentonera', 'Tabla Abdominal'].map(term => (
                                     <button
                                         key={term}
                                         onClick={() => setQuery(term)}
@@ -182,8 +182,8 @@ export function SearchModal() {
                     ) : (
                         // No Results
                         <div className="text-center pt-12 text-stone-500">
-                            <p className="text-lg">No matches found for "{query}"</p>
-                            <p className="text-sm mt-2">Try checking your spelling or use a broader term.</p>
+                            <p className="text-lg">No se encontraron resultados para "{query}"</p>
+                            <p className="text-sm mt-2">Intenta verificar tu ortografía o usa un término más general.</p>
                         </div>
                     )}
                 </div>

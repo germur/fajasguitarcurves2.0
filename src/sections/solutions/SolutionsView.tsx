@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Play, ArrowRight, ShieldAlert } from 'lucide-react';
+import { Play, ShieldAlert } from 'lucide-react';
 import { SymptomGrid } from '../../storefront/components/solutions/SymptomGrid';
 import { SolutionDeepDive } from '../../storefront/components/solutions/SolutionDeepDive';
 import { ExpertFAQ } from '../../storefront/components/solutions/ExpertFAQ';

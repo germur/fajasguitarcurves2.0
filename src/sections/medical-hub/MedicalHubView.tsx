@@ -1,41 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ShieldCheck, ArrowRight, UserCheck } from 'lucide-react'
+import { ShieldCheck, UserCheck } from 'lucide-react'
 import { RecoveryTimeline, type Stage } from '../../storefront/components/medical/RecoveryTimeline'
 import { EducationModule } from '../../storefront/components/medical/EducationModule'
-import data from '../../storefront/data/sources/medical.json'
-import { useStore } from '../../storefront/hooks/useStoreContext'
-
-// Types for local data usage
-interface MedicalProduct {
-    id: string;
-    title: string;
-    price: number;
-    image: string;
-    stage: string;
-    tags: string[];
-    features: string[];
-    isBestSeller?: boolean;
-}
+import { ShopifyCollectionGrid } from '../../storefront/components/shopify/ShopifyCollectionGrid'
 
 export default function MedicalHubView() {
     const [selectedStage, setSelectedStage] = useState<Stage>('Stage 2')
-    const { addToCart } = useStore()
-
-    // Filter products based on selected stage
-    const products = data.products as MedicalProduct[]
-    const filteredProducts = products.filter(p => p.stage === selectedStage)
-
-    const handleAddToCart = (product: MedicalProduct) => {
-        // Adapt to StoreProduct type
-        const storeProduct = {
-            ...product,
-            images: [product.image],
-            category: 'Medical Hub',
-            description: product.features.join(', ')
-        }
-        addToCart(storeProduct, 'Medium') // Default size for quick add
-    }
 
     return (
         <div className="bg-white min-h-screen pb-20 animate-fade-in">
@@ -92,50 +63,40 @@ export default function MedicalHubView() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                        {filteredProducts.map((product) => (
-                            <div key={product.id} className="group">
-                                <div className="relative aspect-[3/4] bg-stone-50 rounded-2xl overflow-hidden mb-4 border border-stone-100">
-                                    <img
-                                        src={product.image}
-                                        alt={product.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-
-                                    {product.features.includes('BBL Safe') && (
-                                        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[#A35944] text-[10px] font-bold px-2 py-1 rounded shadow-sm flex items-center gap-1">
-                                            <ShieldCheck className="w-3 h-3" /> BBL SAFE
-                                        </span>
-                                    )}
-
-                                    {/* Quick Add Overlay */}
-                                    <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                        <button
-                                            onClick={() => handleAddToCart(product)}
-                                            className="w-full bg-[#2C2420] text-white py-3 rounded-xl font-bold text-sm shadow-xl hover:bg-black transition-colors"
-                                        >
-                                            ADD TO RECOVERY KIT
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className="flex flex-wrap gap-2 mb-2">
-                                        {product.tags.slice(0, 2).map(tag => (
-                                            <span key={tag} className="text-[10px] uppercase font-bold text-stone-400 bg-stone-100 px-2 py-1 rounded">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <h3 className="font-bold text-[#2C2420] leading-snug mb-1 group-hover:text-[#B49286] transition-colors">
-                                        {product.title}
-                                    </h3>
-                                    <p className="text-[#2C2420] font-medium">${product.price}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    {/* Shopify Data Integration */}
+                    {selectedStage === 'Stage 2' || selectedStage === 'Stage 1' || selectedStage === 'Supplies' ? (
+                        <ShopifyCollectionGrid
+                            handle={
+                                selectedStage === 'Supplies'
+                                    ? 'accesorios'
+                                    : 'post-quirurgica'
+                            }
+                        />
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+                            {/* Fallback / Loading State could go here */}
+                        </div>
+                    )}
                 </div>
+
+                {/* Stage Transition CTA (SEO & UX Journey) */}
+                {selectedStage === 'Stage 1' && (
+                    <div className="bg-[#F5EDDF] p-8 md:p-12 rounded-3xl mb-24 flex flex-col md:flex-row items-center justify-between gap-8 border border-[#D1AB66]/20 shadow-sm">
+                        <div className="md:w-2/3">
+                            <span className="text-[#A35944] font-bold tracking-widest text-xs uppercase mb-2 block">Next Step in Recovery</span>
+                            <h3 className="font-serif text-3xl text-[#2C2420] font-bold mb-3">Ready to Sculpt?</h3>
+                            <p className="text-stone-600 text-lg">
+                                Once your drains are out (typically 4 weeks post-op), it's time to switch to high compression to contour your waist and protect your results.
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => setSelectedStage('Stage 2')}
+                            className="w-full md:w-auto bg-[#2C2420] text-[#D1AB66] px-8 py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-[#D1AB66] hover:text-[#2C2420] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                        >
+                            Shop Stage 2 Fajas
+                        </button>
+                    </div>
+                )}
 
                 {/* Education Module */}
                 <div className="mb-24">

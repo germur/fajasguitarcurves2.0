@@ -5,7 +5,7 @@ interface Product {
     title: string
     price: number
     image: string
-    mechanism: string
+    mechanism?: string
 }
 
 interface PrescriptionCardProps {

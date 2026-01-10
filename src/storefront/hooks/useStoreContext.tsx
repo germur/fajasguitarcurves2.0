@@ -1,6 +1,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { getAllProducts, type StoreProduct } from '../data/store-data';
+import { shopifyClient } from '../../lib/shopify-client';
 
 interface User {
     name: string;
@@ -43,108 +44,166 @@ interface StoreContextType {
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'fajas-gc-cart';
-
 export function StoreProvider({ children }: { children: ReactNode }) {
     // Initialize products directly
     const [products] = useState<StoreProduct[]>(getAllProducts());
 
-    // Initialize cart from localStorage
-    const [cart, setCart] = useState<CartItem[]>(() => {
-        if (typeof window === 'undefined') return [];
-        try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            return saved ? JSON.parse(saved) : [];
-        } catch (e) {
-            console.error('Failed to load cart', e);
-            return [];
-        }
+    // Initialize cart from localStorage or Shopify
+    const [cart, setCart] = useState<CartItem[]>([]);
+    const [shopifyCartId, setShopifyCartId] = useState<string | null>(() => {
+        if (typeof window === 'undefined') return null;
+        return localStorage.getItem('shopify_cart_id');
     });
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-    // Initialize user from localStorage
-    const [user, setUser] = useState<User | null>(() => {
-        if (typeof window === 'undefined') return null;
-        try {
-            const saved = localStorage.getItem('fajas-gc-user');
-            return saved ? JSON.parse(saved) : null;
-        } catch (e) {
-            console.error('Failed to load user', e);
-            return null;
-        }
-    });
-
-    // Persist cart changes
+    // Initialize Shopify Cart
     useEffect(() => {
+        const initCart = async () => {
+            if (shopifyCartId) {
+                try {
+                    const existingCart = await shopifyClient.checkout.fetch(shopifyCartId);
+                    if (!existingCart || existingCart.completedAt) {
+                        createNewCart();
+                    } else {
+                        updateLocalCartState(existingCart);
+                    }
+                } catch (e) {
+                    console.error('Error fetching Shopify cart:', e);
+                    createNewCart();
+                }
+            } else {
+                createNewCart();
+            }
+        };
+
+        initCart();
+    }, [shopifyCartId]);
+
+    const createNewCart = async () => {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+            const newCart = await shopifyClient.checkout.create();
+            setShopifyCartId(newCart.id as string);
+            localStorage.setItem('shopify_cart_id', newCart.id as string);
+            updateLocalCartState(newCart);
         } catch (e) {
-            console.error('Failed to save cart', e);
+            console.error('Error creating Shopify cart:', e);
         }
-    }, [cart]);
-
-    const addToCart = (product: StoreProduct, size: string) => {
-        setCart(prev => {
-            const existing = prev.find(item => item.product.id === product.id && item.selectedSize === size);
-            if (existing) {
-                return prev.map(item =>
-                    (item.product.id === product.id && item.selectedSize === size)
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                );
-            }
-            return [...prev, { product, quantity: 1, selectedSize: size }];
-        });
-        setIsCartOpen(true); // Open drawer on add
     };
 
-    const removeFromCart = (productId: string, size: string) => {
-        setCart(prev => prev.filter(item => !(item.product.id === productId && item.selectedSize === size)));
-    };
-
-    const updateQuantity = (productId: string, size: string, delta: number) => {
-        setCart(prev => prev.map(item => {
-            if (item.product.id === productId && item.selectedSize === size) {
-                const newQty = Math.max(1, item.quantity + delta);
-                return { ...item, quantity: newQty };
-            }
-            return item;
+    const updateLocalCartState = (shopifyCart: any) => {
+        const items = shopifyCart.lineItems.map((item: any) => ({
+            product: {
+                id: item.variableValues?.lineItems?.[0]?.variantId || item.id, // Storefront API mapping might vary
+                title: item.title,
+                price: parseFloat(item.variant.price.amount),
+                image: item.variant.image?.src || '',
+                category: 'Shopify Product'
+            } as StoreProduct,
+            quantity: item.quantity,
+            selectedSize: item.variant.title,
+            lineId: item.id // Important for updates/removes
         }));
+        setCart(items);
     };
 
+    const addToCart = async (product: StoreProduct, size: string) => {
+        if (!shopifyCartId) return;
+
+        // Note: In a real implementation we need the Variant ID, not just product ID.
+        // For now, we assume product.id IS the variant ID or we have logic to find it.
+        // This is a crucial gap in Phase 22.
+
+        setIsCartOpen(true);
+
+        try {
+            // Mocking variant ID fetch logic for demo
+            const variantId = product.id; // Assuming ID passed IS variant ID for now
+
+            const lineItemsToAdd = [
+                {
+                    variantId: variantId,
+                    quantity: 1,
+                    customAttributes: [{ key: "Size", value: size }]
+                }
+            ];
+
+            const updatedCart = await shopifyClient.checkout.addLineItems(shopifyCartId, lineItemsToAdd);
+            updateLocalCartState(updatedCart);
+        } catch (e) {
+            console.error('Error adding to Shopify cart:', e);
+            alert('Could not add to cart. Check console.');
+        }
+    };
+
+    // UI State Helpers
     const toggleCart = () => setIsCartOpen(prev => !prev);
     const toggleSearch = () => setIsSearchOpen(prev => !prev);
     const toggleLogin = () => setIsLoginOpen(prev => !prev);
 
+    // Mock User Logic (Placeholder)
+    const [user, setUser] = useState<User | null>(null);
     const login = () => {
-        // Mock User
-        const mockUser: User = {
-            name: "Isabella",
-            email: "isabella@example.com",
-            measurements: {
-                waist: 28,
-                hips: 42,
-                torso: 'Short'
-            },
-            recoveryStage: 2
-        };
-        setUser(mockUser);
-        localStorage.setItem('fajas-gc-user', JSON.stringify(mockUser));
+        setUser({
+            name: "Sofia Rodriguez",
+            email: "sofia@example.com",
+            measurements: { waist: 28, hips: 42, torso: 'Short' },
+            recoveryStage: 1
+        });
         setIsLoginOpen(false);
     };
-
     const logout = () => {
         setUser(null);
-        localStorage.removeItem('fajas-gc-user');
+    };
+
+    const removeFromCart = async (productId: string, size: string) => {
+        // We need the lineItemId, stored in our local cart state mapping
+        const item = cart.find(i => i.product.id === productId && i.selectedSize === size);
+        if (!item || !('lineId' in item)) return;
+
+        try {
+            // @ts-ignore
+            const updatedCart = await shopifyClient.checkout.removeLineItems(shopifyCartId, [item.lineId]);
+            updateLocalCartState(updatedCart);
+        } catch (e) {
+            console.error('Error removing from Shopify cart:', e);
+        }
+    };
+
+    const updateQuantity = async (productId: string, size: string, delta: number) => {
+        const item = cart.find(i => i.product.id === productId && i.selectedSize === size);
+        if (!item || !('lineId' in item)) return;
+
+        const newQty = item.quantity + delta;
+        if (newQty < 0) return;
+
+        try {
+            const lineItemsToUpdate = [
+                {
+                    // @ts-ignore
+                    id: item.lineId,
+                    quantity: newQty
+                }
+            ];
+            const updatedCart = await shopifyClient.checkout.updateLineItems(shopifyCartId, lineItemsToUpdate);
+            updateLocalCartState(updatedCart);
+        } catch (e) {
+            console.error('Error updating quantity:', e);
+        }
     };
 
     const checkout = async () => {
-        console.log('Proceeding to checkout with items:', cart);
-        // TODO: Implement Shopify Storefront API checkout mutation here
-        alert('Checkout functionality coming soon! (Shopify Integration)');
+        if (!shopifyCartId) return;
+        try {
+            const currentCart = await shopifyClient.checkout.fetch(shopifyCartId);
+            if (currentCart && currentCart.webUrl) {
+                window.location.href = currentCart.webUrl;
+            }
+        } catch (e) {
+            console.error('Error diverting to checkout:', e);
+        }
     };
 
     const cartTotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);

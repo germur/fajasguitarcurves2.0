@@ -20,6 +20,7 @@ interface Symptom {
     techSolution: {
         title: string;
         description: string;
+        productId: string;
     }
 }
 

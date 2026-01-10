@@ -1,4 +1,4 @@
-import { MessageSquare, Mail, Phone, Clock, ArrowRight } from 'lucide-react';
+import { MessageSquare, Mail, Clock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function ContactPage() {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Activity, AlertCircle } from 'lucide-react'
 import data from '../../../product/sections/pain-points/data.json'
 import { PrescriptionCard } from './components/PrescriptionCard'
+import type { StoreProduct } from '../../storefront/data/store-data';
 
 interface PainPoint {
     id: string
@@ -10,7 +11,7 @@ interface PainPoint {
     description: string
     solutionHeadline: string
     solutionSub: string
-    products: unknown[]
+    products: StoreProduct[]
 }
 
 const painPoints: PainPoint[] = (data as unknown as { painPoints: PainPoint[] }).painPoints

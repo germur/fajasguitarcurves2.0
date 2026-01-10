@@ -1,4 +1,3 @@
-import React from 'react';
 import { RatioCalculatorModal } from './RatioCalculatorModal';
 
 export function CollectionHero() {
