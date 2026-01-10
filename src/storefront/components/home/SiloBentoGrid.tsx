@@ -14,7 +14,7 @@ export function SiloBentoGrid() {
                 <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[1200px] md:h-[600px]">
 
                     {/* 1. Recovery (Large - 2x2) */}
-                    <Link to="/store/medical" className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <Link to="/medical" className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                         <img
                             src="https://images.unsplash.com/photo-1605289982774-9a6fef564df8?q=80&w=800&auto=format&fit=crop" // Placeholder: Clinical/Clean look
                             alt="Medical Recovery"
@@ -30,7 +30,7 @@ export function SiloBentoGrid() {
                     </Link>
 
                     {/* 2. Waist Training (Medium - 1x2 Tall) */}
-                    <Link to="/store/cinturillas" className="group relative md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <Link to="/cinturillas" className="group relative md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                         <img
                             src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=600&auto=format&fit=crop" // Placeholder: Sporty/Waist focus
                             alt="Waist Training"
@@ -45,7 +45,7 @@ export function SiloBentoGrid() {
                     </Link>
 
                     {/* 3. Shorts/Levanta Cola (Small - 1x1) */}
-                    <Link to="/store/shorts" className="group relative md:col-span-1 md:row-span-1 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <Link to="/shorts" className="group relative md:col-span-1 md:row-span-1 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                         <img
                             src="https://images.unsplash.com/photo-1542272617-08f08637533d?q=80&w=600&auto=format&fit=crop" // Placeholder: Jeans fit
                             alt="Levanta Cola Shorts"
@@ -58,7 +58,7 @@ export function SiloBentoGrid() {
                     </Link>
 
                     {/* 4. Lifestyle / Invisible (Small - 1x1) */}
-                    <Link to="/store/lifestyle" className="group relative md:col-span-1 md:row-span-1 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <Link to="/lifestyle" className="group relative md:col-span-1 md:row-span-1 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                         <img
                             src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" // Placeholder: Elegant dress
                             alt="Invisible Collection"

@@ -53,7 +53,7 @@ export function HomeHero() {
 
                     {/* Path 1: Medical / Post-Op */}
                     <Link
-                        to="/store/medical"
+                        to="/medical"
                         className="group bg-[#2C2420] border border-[#D1AB66] text-[#F5EDDF] px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-[#D1AB66] hover:text-[#2C2420] transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-xl"
                     >
                         <Activity size={18} className="text-[#D1AB66] group-hover:text-[#2C2420]" />
@@ -63,7 +63,7 @@ export function HomeHero() {
 
                     {/* Path 2: Aesthetic / Daily Use */}
                     <Link
-                        to="/store/guitar-curves"
+                        to="/guitar-curves"
                         className="group bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-white hover:text-[#2C2420] transition-all flex items-center justify-center gap-3"
                     >
                         <Sparkles size={18} />

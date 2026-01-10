@@ -9,7 +9,7 @@ export function SizingKiller() {
                 <p className="text-stone-500 mb-10 text-lg">Most brands force you to choose between your waist and your hips. We measure both using our proprietary Ratio Calculator.</p>
 
                 <Link
-                    to="/store/solutions"
+                    to="/solutions"
                     className="inline-block bg-[#2C2420] text-[#F5EDDF] px-10 py-4 rounded-full font-bold text-sm tracking-widest hover:bg-black transition-all shadow-xl"
                 >
                     TAKE THE 30-SEC FIT QUIZ

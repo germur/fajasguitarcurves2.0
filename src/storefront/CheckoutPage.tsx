@@ -27,7 +27,7 @@ export function CheckoutPage() {
             {/* Header */}
             <header className="bg-white border-b border-stone-100 py-6">
                 <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-                    <Link to="/store" className="flex items-center gap-2">
+                    <Link to="/" className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-[#2C2420] text-[#F5EDDF] flex items-center justify-center font-bold font-serif text-lg">G</div>
                         <span className="font-serif text-xl font-bold text-[#2C2420]">Checkout</span>
                     </Link>

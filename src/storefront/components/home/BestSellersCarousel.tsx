@@ -30,7 +30,7 @@ export function BestSellersCarousel() {
                             Las favoritas de nuestras #GuitarGirls
                         </p>
                     </div>
-                    <Link to="/store/all" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
+                    <Link to="/solutions" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
                         View All <ArrowRight size={16} />
                     </Link>
                 </div>
@@ -87,7 +87,7 @@ export function BestSellersCarousel() {
                 </div>
 
                 <div className="flex md:hidden justify-center mt-4">
-                    <Link to="/store/all" className="flex items-center gap-2 font-bold text-[#A35944]">
+                    <Link to="/solutions" className="flex items-center gap-2 font-bold text-[#A35944]">
                         Shop All Favorites <ArrowRight size={16} />
                     </Link>
                 </div>

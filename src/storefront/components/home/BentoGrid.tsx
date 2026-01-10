@@ -7,7 +7,7 @@ const GRID_ITEMS = [
         title: 'Post-Surgery',
         subtitle: 'Stage 1 & 2 Essentials',
         img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop',
-        link: '/store/medical',
+        link: '/medical',
         colSpan: 'md:col-span-2',
         rowSpan: 'md:row-span-2',
         theme: 'medical'
@@ -17,7 +17,7 @@ const GRID_ITEMS = [
         title: 'Guitar Curves',
         subtitle: 'Signature Silhouette',
         img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop',
-        link: '/store/guitar-curves',
+        link: '/guitar-curves',
         colSpan: 'md:col-span-1',
         rowSpan: 'md:row-span-1',
         theme: 'signature'
@@ -27,7 +27,7 @@ const GRID_ITEMS = [
         title: 'Mommy Makeover',
         subtitle: 'C-Section Safe',
         img: 'https://images.unsplash.com/photo-1584634731339-252c581abfc5?q=80&w=800&auto=format&fit=crop',
-        link: '/store/lifestyle',
+        link: '/lifestyle',
         colSpan: 'md:col-span-3',
         rowSpan: 'md:row-span-1',
         theme: 'lifestyle'
@@ -42,7 +42,7 @@ export function BentoGrid() {
                     <h2 className="font-serif text-4xl text-[#2C2420] mb-2">Shop by Goal</h2>
                     <p className="text-stone-500 max-w-md">Find the perfect compression engineering for your specific recovery stage or aesthetic goal.</p>
                 </div>
-                <Link to="/store/solutions" className="text-[#B49286] font-bold text-sm tracking-wide hover:text-[#A35944] flex items-center gap-2">
+                <Link to="/solutions" className="text-[#B49286] font-bold text-sm tracking-wide hover:text-[#A35944] flex items-center gap-2">
                     VIEW ALL COLLECTIONS <ArrowRight className="w-4 h-4" />
                 </Link>
             </div>

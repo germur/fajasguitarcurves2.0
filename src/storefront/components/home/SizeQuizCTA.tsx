@@ -20,13 +20,13 @@ export function SizeQuizCTA() {
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                     <Link
-                        to="/store/fit-finder"
+                        to="/fit-finder"
                         className="bg-[#D1AB66] text-[#2C2420] px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors flex items-center justify-center gap-2"
                     >
                         Find My Size Now <ArrowRight size={20} />
                     </Link>
                     <Link
-                        to="/store/about"
+                        to="/about"
                         className="bg-transparent border border-[#F5EDDF]/30 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors"
                     >
                         How We Measure

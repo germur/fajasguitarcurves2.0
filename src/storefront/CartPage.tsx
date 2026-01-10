@@ -35,7 +35,7 @@ export function CartPage() {
                             Looks like you haven't found your perfect fit yet. Explore our collections to find your signature curve.
                         </p>
                         <Link
-                            to="/store"
+                            to="/"
                             className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full font-bold hover:bg-[#A35944] transition-colors"
                         >
                             Return to Store

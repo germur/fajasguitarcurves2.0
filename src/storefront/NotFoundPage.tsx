@@ -21,13 +21,13 @@ export function NotFoundPage() {
 
             <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                    to="/store"
+                    to="/"
                     className="flex items-center justify-center gap-2 bg-[#2C2420] text-white px-8 py-3 rounded-full font-bold hover:bg-[#D1AB66] hover:text-[#2C2420] transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" /> Volver a la Tienda
                 </Link>
                 <Link
-                    to="/store/solutions"
+                    to="/solutions"
                     className="flex items-center justify-center gap-2 bg-stone-200 text-[#2C2420] px-8 py-3 rounded-full font-bold hover:bg-stone-300 transition-colors"
                 >
                     <Search className="w-4 h-4" /> Buscar Solución
