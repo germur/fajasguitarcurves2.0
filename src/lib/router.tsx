@@ -25,19 +25,15 @@ import { FitFinderPage } from '@/storefront/FitFinderPage'
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <ProductPage />,
-  },
-  {
-    path: '/store',
     element: <StorefrontLayout />,
     children: [
       {
-        path: 'lab',
-        element: <LabPage />,
-      },
-      {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: 'lab',
+        element: <LabPage />,
       },
       {
         path: 'cart',
@@ -126,7 +122,7 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: '*',
-    element: <NotFoundPage />, // Catch-all for non/store routes too if desired, or let generic error boundary handle it
+    path: '/design-os',
+    element: <ProductPage />,
   }
 ])
