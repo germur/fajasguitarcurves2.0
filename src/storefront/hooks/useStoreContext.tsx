@@ -62,6 +62,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // Initialize Shopify Cart
     useEffect(() => {
         const initCart = async () => {
+            // If no token is present, we can't use Shopify features.
+            // In a real production app, we might fallback to a purely local cart.
+            // For this demo, we'll just log a warning and avoid crashing.
+            if (!shopifyClient.checkout) {
+                console.warn("Shopify Client not initialized correctly (missing token?). Cart will not function.");
+                return;
+            }
+
             if (shopifyCartId) {
                 try {
                     const existingCart = await shopifyClient.checkout.fetch(shopifyCartId);
@@ -72,6 +80,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                     }
                 } catch (e) {
                     console.error('Error fetching Shopify cart:', e);
+                    // If fetch fails (e.g. invalid ID), create a new one
                     createNewCart();
                 }
             } else {
@@ -79,10 +88,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             }
         };
 
-        initCart();
+        if (typeof window !== 'undefined') {
+            initCart();
+        }
     }, [shopifyCartId]);
 
     const createNewCart = async () => {
+        if (!shopifyClient.checkout) return;
         try {
             const newCart = await shopifyClient.checkout.create();
             setShopifyCartId(newCart.id as string);
@@ -94,6 +106,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
 
     const updateLocalCartState = (shopifyCart: any) => {
+        if (!shopifyCart) return;
         const items = shopifyCart.lineItems.map((item: any) => ({
             product: {
                 id: item.variableValues?.lineItems?.[0]?.variantId || item.id, // Storefront API mapping might vary
@@ -110,17 +123,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
 
     const addToCart = async (product: StoreProduct, size: string) => {
-        if (!shopifyCartId) return;
-
-        // Note: In a real implementation we need the Variant ID, not just product ID.
-        // For now, we assume product.id IS the variant ID or we have logic to find it.
-        // This is a crucial gap in Phase 22.
+        if (!shopifyCartId) {
+            console.error("No active Shopify Cart ID. Cannot add item.");
+            // Try to recreate cart if missing?
+            if (shopifyClient.checkout) createNewCart().then(() => addToCart(product, size));
+            return;
+        }
 
         setIsCartOpen(true);
 
         try {
             // Mocking variant ID fetch logic for demo
-            const variantId = product.id; // Assuming ID passed IS variant ID for now
+            // In Phase 22, we noted this gap. For now, we still assume product.id IS the variant ID or we pass it through.
+            const variantId = product.id;
 
             const lineItemsToAdd = [
                 {
@@ -134,7 +149,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             updateLocalCartState(updatedCart);
         } catch (e) {
             console.error('Error adding to Shopify cart:', e);
-            alert('Could not add to cart. Check console.');
+            // Fallback for demo purposes if API fails (e.g. bad variant ID)
+            // We could optimistically add to local state here if we wanted a "faked" success,
+            // but it is better to show an error or nothing.
+            alert('Note: Setup currently uses mock product IDs. In a real deployment, these must match Shopify Variant IDs exactly.');
         }
     };
 

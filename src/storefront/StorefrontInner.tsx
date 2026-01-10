@@ -38,7 +38,7 @@ export function StorefrontInner() {
 
             {/* TOP BAR: Conversion Driver */}
             <div className="fixed top-0 left-0 right-0 z-50 bg-[#2C2420] text-[#F5EDDF] text-[10px] md:text-xs py-2 text-center font-bold tracking-widest uppercase">
-                <span>Envíos y Cambios Gratis en USA 🇺🇸 | Habla con una Experta 👩‍⚕️</span>
+                <span>🇺🇸 Envíos Rápidos desde USA | Cambios de Talla GRATIS 🛡️</span>
             </div>
 
             {/* Mobile Menu Drawer */}
@@ -60,11 +60,11 @@ export function StorefrontInner() {
                         </button>
                     </div>
                     <nav className="flex flex-col space-y-4 text-lg font-medium text-stone-600">
-                        <Link to="/medical" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Línea Médica</Link>
-                        <Link to="/guitar-curves" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Signature</Link>
-                        <Link to="/lifestyle" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Uso Diario</Link>
-                        <Link to="/solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Soluciones</Link>
-                        <Link to="/institute" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">El Instituto</Link>
+                        <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Inicio</Link>
+                        <Link to="/medical" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Post-Quirúrgicas</Link>
+                        <Link to="/guitar-curves" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Guitar Curves Signature</Link>
+                        <Link to="/cinturillas" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Cinturillas / Waist Training</Link>
+                        <Link to="/maternity" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#A35944]">Maternidad</Link>
                     </nav>
                 </div>
             </div>
@@ -129,11 +129,11 @@ export function StorefrontInner() {
                 {/* Desktop Navigation (Mega Menu Strip) */}
                 <div className={`hidden md:flex justify-center border-t border-stone-100 transition-all duration-300 overflow-hidden ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100'}`}>
                     <nav className="flex items-center space-x-8 h-full">
-                        <NavLink to="/medical" label="Línea Médica" active={location.pathname.includes('/medical')} />
-                        <NavLink to="/guitar-curves" label="Signature" active={location.pathname.includes('/guitar-curves')} />
-                        <NavLink to="/lifestyle" label="Uso Diario" active={location.pathname.includes('/lifestyle')} />
-                        <NavLink to="/solutions" label="Soluciones" active={location.pathname.includes('/solutions')} />
-                        <NavLink to="/institute" label="El Instituto" active={location.pathname.includes('/institute')} />
+                        <NavLink to="/" label="Inicio" active={location.pathname === '/'} />
+                        <NavLink to="/medical" label="Post-Quirúrgicas" active={location.pathname.includes('/medical')} />
+                        <NavLink to="/guitar-curves" label="Guitar Curves Signature" active={location.pathname.includes('/guitar-curves')} />
+                        <NavLink to="/cinturillas" label="Cinturillas" active={location.pathname.includes('/cinturillas')} />
+                        <NavLink to="/maternity" label="Maternidad" active={location.pathname.includes('/maternity')} />
                     </nav>
                 </div>
             </header>
@@ -154,27 +154,19 @@ export function StorefrontInner() {
                             </p>
                         </div>
                         <div>
-                            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-[#B49286]">Tienda</h4>
+                            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-[#B49286]">Colecciones</h4>
                             <ul className="space-y-2 text-sm text-stone-400">
-                                <li><Link to="/medical" className="hover:text-white transition-colors">Grado Médico</Link></li>
-                                <li><Link to="/guitar-curves" className="hover:text-white transition-colors">Guitar Curves</Link></li>
-                                <li><Link to="/lifestyle" className="hover:text-white transition-colors">Uso Diario</Link></li>
-                                <li><Link to="/solutions" className="hover:text-white transition-colors">Soluciones</Link></li>
+                                <li><Link to="/shorts" className="hover:text-white transition-colors">Shorts & Levanta Cola</Link></li>
+                                <li><Link to="/bras" className="hover:text-white transition-colors">Brasieres Post-Op</Link></li>
+                                <li><Link to="/tablas" className="hover:text-white transition-colors">Tablas & Espumas</Link></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-[#B49286]">Info Médica</h4>
+                            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-[#B49286]">Ayuda</h4>
                             <ul className="space-y-2 text-sm text-stone-400">
-                                <li><Link to="/institute" className="hover:text-white transition-colors">Guía de Etapas</Link></li>
-                                <li><Link to="/institute" className="hover:text-white transition-colors">Aprobación Médica</Link></li>
-                                <li><Link to="/medical" className="hover:text-white transition-colors">Encuentra tu Talla</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm uppercase tracking-wider mb-4 text-[#B49286]">Soporte</h4>
-                            <ul className="space-y-2 text-sm text-stone-400">
-                                <li><Link to="/shipping" className="hover:text-white transition-colors cursor-pointer">Rastear Orden</Link></li>
-                                <li><Link to="/returns" className="hover:text-white transition-colors cursor-pointer">Portal de Retornos</Link></li>
+                                <li><Link to="/fit-finder" className="hover:text-white transition-colors">Calculadora de Talla</Link></li>
+                                <li><Link to="/shipping" className="hover:text-white transition-colors">Envíos</Link></li>
+                                <li><Link to="/returns" className="hover:text-white transition-colors">Devoluciones</Link></li>
                                 <li><Link to="/about" className="hover:text-white transition-colors">Contáctanos</Link></li>
                             </ul>
                         </div>
@@ -207,13 +199,13 @@ export function StorefrontInner() {
     );
 }
 
-function NavLink({ to, label, active }: { to: string; label: string; active: boolean }) {
+function NavLink({ to, label, active, isSale }: { to: string; label: string; active: boolean; isSale?: boolean }) {
     return (
         <Link
             to={to}
             className={`
         text-sm font-medium transition-colors
-        ${active ? 'text-[#B49286]' : 'text-stone-500 hover:text-stone-900'}
+        ${active ? 'text-[#B49286]' : isSale ? 'text-[#D32F2F] hover:text-[#9A0007] font-bold' : 'text-stone-500 hover:text-stone-900'}
       `}
         >
             {label}

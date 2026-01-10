@@ -1,57 +1,48 @@
 import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
-import { TrustBar } from './components/home/TrustBar';
-import { PainSolutionSlider } from './components/home/PainSolutionSlider';
 import { SiloBentoGrid } from './components/home/SiloBentoGrid';
 import { BestSellersCarousel } from './components/home/BestSellersCarousel';
-import { SizeQuizCTA } from './components/home/SizeQuizCTA';
-import { SeoAccordion } from './components/home/SeoAccordion';
-import { SocialProofCarousel } from './components/home/SocialProofCarousel'; // Reuse existing
+import { TrustSection } from './components/home/TrustSection';
+// import { TrustBar } from './components/home/TrustBar';
+// import { PainSolutionSlider } from './components/home/PainSolutionSlider';
+// import { SizeQuizCTA } from './components/home/SizeQuizCTA';
+// import { SeoAccordion } from './components/home/SeoAccordion';
+// import { SocialProofCarousel } from './components/home/SocialProofCarousel';
 
 export function HomePage() {
     return (
         <div className="animate-fade-in font-sans">
-            {/* Schema for Organization */}
+            {/* 1. SEO METADATA */}
             <SeoHead
-                title="Fajas Guitar Curves | Post-Surgery & Waist Training"
-                description="Medical-grade fajas aligned with your recovery stage. Designed for the 0.7 waist-to-hip ratio. Doctor recommended in USA."
+                title="Fajas Colombianas Guitar Curves: #1 para BBL & Cintura Avispa"
+                description="¿Cintura pequeña y cadera grande? Nuestras Fajas Colombianas eliminan el hueco en la espalda. Ideales para BBL, Lipo y Uso Diario. Envíos desde USA."
                 schema={{
                     "@context": "https://schema.org",
                     "@type": "Organization",
                     "name": "Fajas Guitar Curves",
-                    "url": "https://fajasguitarcurves.com",
-                    "logo": "https://fajasguitarcurves.com/logo.png", // Mock
+                    "url": "https://guitarcurves.com",
+                    "logo": "https://guitarcurves.com/logo.png",
                     "contactPoint": {
                         "@type": "ContactPoint",
                         "telephone": "+1-800-555-5555",
-                        "contactType": "Customer Service"
+                        "contactType": "Customer Service",
+                        "areaServed": "US",
+                        "availableLanguage": "Spanish"
                     }
                 }}
             />
 
-            {/* 1. HERO: The Promise (Video) */}
+            {/* 2. SECTION 1: HERO (Above the Fold) */}
             <HomeHero />
 
-            {/* 2. TRUST: Immediate Authority */}
-            <TrustBar />
-
-            {/* 3. PAIN/SOLUTION: The Gap vs Snatch Story */}
-            <PainSolutionSlider />
-
-            {/* 4. NAVIGATION: Access to Silos (Bento) */}
+            {/* 3. SECTION 2: DISTRIBUIDOR DE TRÁFICO (Silo Architecture) */}
             <SiloBentoGrid />
 
-            {/* 5. COMMERCE: Viral Favorites (Top Products) */}
+            {/* 4. SECTION 3: LOS MANGOS BAJITOS (Best Sellers) */}
             <BestSellersCarousel />
 
-            {/* 6. CONVERSION TOOL: Fit Quiz */}
-            <SizeQuizCTA />
-
-            {/* 7. SOCIAL PROOF (Real Results) */}
-            <SocialProofCarousel />
-
-            {/* 8. SEO LEGACY: Collapsible Content */}
-            <SeoAccordion />
+            {/* 5. SECTION 4: EDUCACIÓN & CONFIANZA (E-E-A-T) */}
+            <TrustSection />
 
         </div>
     );

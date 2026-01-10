@@ -65,3 +65,30 @@ export function getRelatedProducts(category: string, currentId: string, limit = 
         .filter(p => p.category === category && p.id !== currentId)
         .slice(0, limit);
 }
+
+// --- Silo Getters ---
+
+export function getPostSurgicalProducts(): StoreProduct[] {
+    // Medical Hub / Post-Quirurgica
+    return RAW_CATALOG.filter(p => p.category === "Medical Hub" || p.tags?.includes("Post Surgery"));
+}
+
+export function getDailyUseProducts(): StoreProduct[] {
+    // Lifestyle / Uso Diario
+    return RAW_CATALOG.filter(p => p.category === "Lifestyle" || p.tags?.includes("Daily Use"));
+}
+
+export function getGuitarCurvesProducts(): StoreProduct[] {
+    // Guitar Curves / Levanta Cola / BBL
+    return RAW_CATALOG.filter(p => p.category === "Guitar Curves");
+}
+
+export function getAccessoriesProducts(): StoreProduct[] {
+    // Supplies / Accessories
+    return RAW_CATALOG.filter(p => p.tags?.includes("Supplies") || p.category === "Supplies");
+}
+
+export function getMaternityProducts(): StoreProduct[] {
+    // Maternity - Currently empty or placeholder
+    return RAW_CATALOG.filter(p => p.tags?.includes("Maternity"));
+}

@@ -24,14 +24,14 @@ export function BestSellersCarousel() {
                 <div className="flex items-end justify-between mb-8">
                     <div>
                         <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#2C2420]">
-                            Viral Favorites
+                            Las Favoritas de nuestras Guitar Girls
                         </h2>
                         <p className="text-stone-500 mt-2">
-                            Las favoritas de nuestras #GuitarGirls
+                            Los productos que han moldeado más de 10k figuras de reloj de arena.
                         </p>
                     </div>
                     <Link to="/solutions" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
-                        View All <ArrowRight size={16} />
+                        Ver Todo <ArrowRight size={16} />
                     </Link>
                 </div>
 

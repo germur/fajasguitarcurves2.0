@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity, Sparkles } from 'lucide-react';
+import { ArrowRight, Activity } from 'lucide-react';
 
 const HERO_VIDEO_MOCK = "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop";
 // Note: In production we'd use a real Cloudinaire or S3 URL for the poster and video
@@ -30,44 +30,43 @@ export function HomeHero() {
                 {/* Badge */}
                 <div className="mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                     <span className="inline-block px-3 py-1 border border-[#F5EDDF]/30 rounded-full text-xs font-bold tracking-[0.2em] uppercase backdrop-blur-md">
-                        Engineered for Curves
+                        CALIDAD MÉDICA Y CONFORT SUPERIOR
                     </span>
                 </div>
 
                 {/* H1 SEO Optimized */}
-                <h1 className="font-serif text-4xl md:text-7xl lg:text-8xl font-bold mb-6 max-w-5xl leading-[0.95] opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                    Fajas Colombianas <br />
-                    <span className="text-[#D1AB66] italic font-light">for Guitar Shapes</span> <br />
-                    & Post-Surgery.
+                <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 max-w-5xl leading-[0.95] opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                    Fajas Colombianas Guitar Curves: <br />
+                    La Solución para Cintura Pequeña y Cadera Grande
                 </h1>
 
                 {/* Subtitle BLUF (Bottom Line Up Front) */}
-                <p className="text-lg md:text-2xl text-stone-200 mb-10 max-w-2xl font-light leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                    Diseñadas para curvas extremas. Máxima compresión en la cintura,
-                    cero aplastamiento en los glúteos.
-                    <strong className="block mt-2 font-normal text-white">La faja que tu cuerpo y tu cirujano aprobarían.</strong>
+                <p className="text-lg md:text-xl text-stone-200 mb-10 max-w-2xl font-light leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                    Olvídate de las fajas que te aplastan los glúteos. Nuestra tecnología se adapta a tus curvas extremas y recuperación BBL.
                 </p>
 
                 {/* Dual Path CTA */}
                 <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
 
-                    {/* Path 1: Medical / Post-Op */}
-                    <Link
-                        to="/medical"
-                        className="group bg-[#2C2420] border border-[#D1AB66] text-[#F5EDDF] px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-[#D1AB66] hover:text-[#2C2420] transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-xl"
-                    >
-                        <Activity size={18} className="text-[#D1AB66] group-hover:text-[#2C2420]" />
-                        <span>MEDICAL RECOVERY</span>
-                        <ArrowRight size={16} />
-                    </Link>
-
-                    {/* Path 2: Aesthetic / Daily Use */}
+                    {/* Path 1: Shop Body Type (Primary) - Pulse Effect */}
                     <Link
                         to="/guitar-curves"
+                        className="group relative bg-[#D32F2F] text-white px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-[#B71C1C] transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-xl overflow-hidden"
+                    >
+                        {/* Pulse Ring */}
+                        <span className="absolute inset-0 rounded-full animate-ping bg-[#D32F2F] opacity-20 group-hover:opacity-0"></span>
+
+                        <ArrowRight size={18} />
+                        <span>COMPRAR POR TIPO DE CUERPO</span>
+                    </Link>
+
+                    {/* Path 2: Fit Finder (Secondary) */}
+                    <Link
+                        to="/fit-finder"
                         className="group bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-white hover:text-[#2C2420] transition-all flex items-center justify-center gap-3"
                     >
-                        <Sparkles size={18} />
-                        <span>SHOP GUITAR FIT</span>
+                        <span>CALCULAR MI TALLA</span>
+                        <Activity size={16} />
                     </Link>
                 </div>
 
