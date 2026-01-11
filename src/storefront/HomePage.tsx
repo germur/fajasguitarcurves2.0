@@ -1,21 +1,17 @@
+import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
-import { SiloBentoGrid } from './components/home/SiloBentoGrid';
 
-import { InfiniteMarquee } from './components/home/InfiniteMarquee';
-import { BeforeAfterSlider } from './components/home/BeforeAfterSlider';
-
-import { SocialProofWall } from './components/home/SocialProofWall';
-// import { PainSolutionSlider } from './components/home/PainSolutionSlider';
-// import { SizeQuizCTA } from './components/home/SizeQuizCTA';
-// import { SeoAccordion } from './components/home/SeoAccordion';
-// import { SocialProofCarousel } from './components/home/SocialProofCarousel';
+// Lazy Load Below-the-fold components
+const SiloBentoGrid = lazy(() => import('./components/home/SiloBentoGrid').then(module => ({ default: module.SiloBentoGrid })));
+const InfiniteMarquee = lazy(() => import('./components/home/InfiniteMarquee').then(module => ({ default: module.InfiniteMarquee })));
+const BeforeAfterSlider = lazy(() => import('./components/home/BeforeAfterSlider').then(module => ({ default: module.BeforeAfterSlider })));
+const SocialProofWall = lazy(() => import('./components/home/SocialProofWall').then(module => ({ default: module.SocialProofWall })));
 
 export function HomePage() {
     return (
         <div className="animate-fade-in font-sans">
-            {/* 1. SEO METADATA */}
             {/* 1. SEO METADATA */}
             <SeoHead
                 title="Fajas Colombianas Guitar Curves | Cintura de Avispa & Post-Op"
@@ -53,22 +49,19 @@ export function HomePage() {
                 </div>
             </div>
 
-            {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
-            <InfiniteMarquee />
+            <Suspense fallback={<div className="h-96 flex items-center justify-center text-[#D4AF37]">Cargando experiencia...</div>}>
+                {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
+                <InfiniteMarquee />
 
-            {/* 4. SECTION 3: VISUAL NAVIGATION (Bento Grid) */}
-            <SiloBentoGrid />
+                {/* 4. SECTION 3: VISUAL NAVIGATION (Bento Grid) */}
+                <SiloBentoGrid />
 
-            {/* 5. SECTION 4: PROBLEM/SOLUTION (Interactive Slider) */}
-            <BeforeAfterSlider />
+                {/* 5. SECTION 4: PROBLEM/SOLUTION (Interactive Slider) */}
+                <BeforeAfterSlider />
 
-
-
-
-            {/* 7. SECTION 6: SOCIAL PROOF (Wall of Curves) */}
-            <SocialProofWall />
-
-
+                {/* 7. SECTION 6: SOCIAL PROOF (Wall of Curves) */}
+                <SocialProofWall />
+            </Suspense>
 
         </div>
     );

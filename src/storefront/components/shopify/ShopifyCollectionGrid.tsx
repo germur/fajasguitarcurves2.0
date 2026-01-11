@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../hooks/useStoreContext';
+import { useShopifyWebComponents } from '../../hooks/useShopifyWebComponents';
 
 interface ShopifyCollectionGridProps {
     handle: string;
@@ -12,6 +13,7 @@ export function ShopifyCollectionGrid({ handle, productCount = 4 }: ShopifyColle
     const containerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const { addToCart } = useStore();
+    useShopifyWebComponents();
 
     useEffect(() => {
         const container = containerRef.current;

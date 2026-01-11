@@ -16,6 +16,7 @@ export function SiloBentoGrid() {
                             src="/assets/smart-size-guide.jpg"
                             alt="Scan Biométrico de Cintura"
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
 
@@ -39,24 +40,28 @@ export function SiloBentoGrid() {
 
                     {/* 2. Fajas Stage 2 (Medium - Right Top - 2 Rows) */}
                     <Link to="/collections/recovery" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
-                        <img
-                            src="/assets/stage2-faja-bra.jpg"
-                            alt="Colección Fajas Stage 2"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent"></div>
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover opacity-90 transition-opacity duration-700"
+                        >
+                            <source src="/assets/gc-animation.mp4" type="video/mp4" />
+                        </video>
+                        <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent z-10"></div>
 
-                        <div className="absolute top-6 right-6">
+                        <div className="absolute top-6 right-6 z-20">
                             <span className="bg-[#D32F2F] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase animate-pulse">
                                 Best Seller
                             </span>
                         </div>
 
-                        <div className="absolute bottom-6 left-6 text-white">
+                        <div className="absolute bottom-6 left-6 text-white z-20">
                             <h3 className="font-serif text-2xl font-bold mb-1">Fajas Stage 2</h3>
                             <p className="text-xs text-stone-200">Alta compresión post-quirúrgica.</p>
                         </div>
-                        <div className="absolute bottom-6 right-6">
+                        <div className="absolute bottom-6 right-6 z-20">
                             <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-white group-hover:text-[#2C2420] transition-colors text-white">
                                 <ArrowUpRight size={20} />
                             </div>
@@ -65,14 +70,24 @@ export function SiloBentoGrid() {
 
                     {/* 3. Brasieres & Accesorios (Medium - Right Bottom - 2 Rows - Expanded) */}
                     <Link to="/collections/bras" className="group relative h-[250px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#EAE6E3] p-6 flex flex-col justify-between">
-                        <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-700"
+                        >
+                            <source src="/assets/gc-animation.mp4" type="video/mp4" />
+                        </video>
+
+                        <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity relative z-10">
                             <Shirt size={48} strokeWidth={1} className="text-[#2C2420]" />
                         </div>
-                        <div>
+                        <div className="relative z-10">
                             <h3 className="font-serif text-xl font-bold text-[#2C2420] leading-tight mb-2">Brasieres <br />Post-Op</h3>
-                            <p className="text-[10px] text-stone-500 uppercase tracking-widest font-bold">Soporte & Comfort</p>
+                            <p className="text-[10px] text-stone-600 uppercase tracking-widest font-bold">Soporte & Comfort</p>
                         </div>
-                        <div className="self-end">
+                        <div className="self-end relative z-10">
                             <ArrowRight size={16} className="text-[#2C2420] group-hover:translate-x-1 transition-transform" />
                         </div>
                     </Link>

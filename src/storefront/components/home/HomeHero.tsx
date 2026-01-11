@@ -13,12 +13,12 @@ export function HomeHero() {
                 <div className={`absolute inset-0 bg-[#E8EAEB] transition-opacity duration-700 ${mode === 'recover' ? 'opacity-100' : 'opacity-0'}`}>
                     <video
                         autoPlay
-                        muted
                         loop
+                        muted
                         playsInline
+                        poster="/assets/hourglass-hero-bg.jpg"
                         className="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale"
                     >
-                        {/* Placeholder Video - Medical Vibe */}
                         <source src="/assets/gc-animation.mp4" type="video/mp4" />
                     </video>
                     {/* Clinical Blue/White Overlay - Lighter for Contrast */}
@@ -29,12 +29,12 @@ export function HomeHero() {
                 <div className={`absolute inset-0 bg-[#B49286] transition-opacity duration-700 ${mode === 'sculpt' ? 'opacity-100' : 'opacity-0'}`}>
                     <video
                         autoPlay
-                        muted
                         loop
+                        muted
                         playsInline
+                        poster="/assets/hourglass-hero-bg.jpg"
                         className="w-full h-full object-cover opacity-60 mix-blend-multiply"
                     >
-                        {/* Placeholder Video - Aesthetic Vibe */}
                         <source src="/assets/gc-animation.mp4" type="video/mp4" />
                     </video>
                     {/* Warm Gold/Cacao Overlay */}
