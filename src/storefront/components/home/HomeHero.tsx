@@ -21,8 +21,8 @@ export function HomeHero() {
                         {/* Placeholder Video - Medical Vibe */}
                         <source src="/assets/gc-animation.mp4" type="video/mp4" />
                     </video>
-                    {/* Clinical Blue Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#D6D9DD]/90 via-[#D6D9DD]/50 to-transparent mix-blend-multiply" />
+                    {/* Clinical Blue/White Overlay - Lighter for Contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#F5F7FA]/95 via-[#F5F7FA]/70 to-transparent" />
                 </div>
 
                 {/* Layer 2: Warm/Sculpt (Sculpt) */}
@@ -85,7 +85,7 @@ export function HomeHero() {
                         )}
                     </h1>
 
-                    <p className={`text-lg md:text-xl font-medium mb-10 max-w-lg leading-relaxed ${mode === 'recover' ? 'text-stone-600' : 'text-[#F5EDDF]'}`}>
+                    <p className={`text-lg md:text-xl font-medium mb-10 max-w-lg leading-relaxed ${mode === 'recover' ? 'text-[#2C2420]' : 'text-[#F5EDDF]'}`}>
                         {mode === 'recover'
                             ? "Ingeniería textil diseñada para proteger tu inversión quirúrgica (BBL & Lipo). Compresión segura Stage 2."
                             : "Esculpe tu cintura y realza tus curvas naturales con tecnología invisible de alta compresión."
