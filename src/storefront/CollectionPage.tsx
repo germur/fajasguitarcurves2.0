@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGrid';
 
 interface CollectionPageProps {
@@ -19,15 +20,15 @@ export function CollectionPage({ title, handle, description }: CollectionPagePro
 
                 {/* Sub-Collection Navigation (SEO & UX) */}
                 <div className="flex justify-center gap-4 mb-12 flex-wrap">
-                    <a href="/store/medical" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'post-quirurgica' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
+                    <Link to="/post-quirurgica" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'post-quirurgica' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
                         Stage 1
-                    </a>
-                    <a href="/store/cinturillas" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'cinturillas' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
+                    </Link>
+                    <Link to="/cinturillas" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'cinturillas' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
                         Stage 2
-                    </a>
-                    <a href="/store/shorts" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'shorts' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
+                    </Link>
+                    <Link to="/shorts" className={`px-6 py-2 rounded-full border text-sm font-bold transition-colors ${handle === 'shorts' ? 'bg-[#2C2420] text-white border-[#2C2420]' : 'border-stone-200 text-stone-600 hover:border-[#D1AB66] hover:text-[#D1AB66]'}`}>
                         Shorts
-                    </a>
+                    </Link>
                 </div>
 
                 {/* 🚨 BREAK BANNER (Pattern Interrupt) */}
@@ -41,9 +42,9 @@ export function CollectionPage({ title, handle, description }: CollectionPagePro
                             <p className="text-sm text-stone-500">Respondemos tus dudas post-quirúrgicas en 1 minuto.</p>
                         </div>
                     </div>
-                    <a href="/tools/calculator" className="whitespace-nowrap px-6 py-3 bg-[#2C2420] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#D4AF37] transition-colors shadow-lg">
+                    <Link to="/tools/calculator" className="whitespace-nowrap px-6 py-3 bg-[#2C2420] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#D4AF37] transition-colors shadow-lg">
                         Usar Calculadora
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="mb-20">

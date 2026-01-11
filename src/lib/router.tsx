@@ -206,6 +206,15 @@ export const router = createBrowserRouter([
         path: 'maternity',
         element: <CollectionPage title="Maternidad" handle="maternity" description="Support and recovery for your post-partum journey." />,
       },
+      // FAILSAFE ALIASES (User reported dead links)
+      {
+        path: 'bras',
+        element: <EssentialsPage />,
+      },
+      {
+        path: 'collections/accesorios',
+        element: <CollectionPage title="Medical Accessories" handle="accesorios" description="Professional foams, boards, and urinals for optimal recovery." />,
+      },
       {
         path: 'account',
         element: <UserDashboard />,

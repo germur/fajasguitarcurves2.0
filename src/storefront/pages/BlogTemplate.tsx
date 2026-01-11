@@ -52,7 +52,7 @@ export default function BlogTemplate() {
                             <div className="text-center md:text-left flex-1">
                                 <h4 className="font-bold text-lg text-[#3E322C] mb-1">¿Aún no tienes tu Tabla Abdominal?</h4>
                                 <p className="text-sm text-stone-600 mb-4">Es el enemigo #1 de la fibrosis. Diseñada para aplanar el abdomen bajo.</p>
-                                <Link to="/collections/accesorios" className="inline-flex items-center gap-2 text-xs bg-[#3E322C] text-white px-5 py-2.5 rounded-lg uppercase font-bold tracking-widest hover:bg-black transition-all">
+                                <Link to="/accesorios" className="inline-flex items-center gap-2 text-xs bg-[#3E322C] text-white px-5 py-2.5 rounded-lg uppercase font-bold tracking-widest hover:bg-black transition-all">
                                     Ver Precio <ArrowRight size={14} />
                                 </Link>
                             </div>
@@ -117,7 +117,7 @@ export default function BlogTemplate() {
                                     </div>
                                 </Link>
                                 {/* Product 2 */}
-                                <Link to="/collections/accesorios" className="flex gap-4 items-center group">
+                                <Link to="/accesorios" className="flex gap-4 items-center group">
                                     <div className="w-16 h-20 bg-stone-100 rounded-lg overflow-hidden">
                                         <img src="/api/placeholder/100/120" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
                                     </div>
