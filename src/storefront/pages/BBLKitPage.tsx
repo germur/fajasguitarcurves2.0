@@ -1,6 +1,6 @@
 
 import { BBLSurvivalKit } from '../components/BBLSurvivalKit';
-import { Check, Layers } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export default function BBLKitPage() {
     return (

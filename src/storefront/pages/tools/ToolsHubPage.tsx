@@ -1,5 +1,5 @@
 
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, Activity, Calculator, Ruler, Layers } from 'lucide-react';
 import { SeoHead } from '../../components/SeoHead';
@@ -61,7 +61,7 @@ export default function ToolsHubPage() {
             {/* Grid */}
             <div className="max-w-7xl mx-auto px-6 pb-32">
                 <div className="grid md:grid-cols-3 gap-8">
-                    {TOOLS.map((tool, idx) => (
+                    {TOOLS.map((tool) => (
                         <Link
                             key={tool.id}
                             to={tool.link}

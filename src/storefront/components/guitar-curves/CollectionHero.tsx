@@ -2,7 +2,7 @@ import { RatioCalculatorModal } from './RatioCalculatorModal';
 
 export function CollectionHero() {
     // Placeholder video 
-    const VIDEO_URL = "https://videos.pexels.com/video-files/6989931/6989931-hd_1080_1920_25fps.mp4"; // Fashion/Curve video
+    // VIDEO_URL removed as it was unused // Fashion/Curve video
 
     return (
         <div className="relative h-[80vh] w-full overflow-hidden">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Lock, CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
 
 // --- TYPES & LOGIC ---
 

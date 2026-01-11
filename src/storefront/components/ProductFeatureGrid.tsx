@@ -1,4 +1,4 @@
-import { Droplets, Scissors, Clock, Zap, Hourglass, Wind } from 'lucide-react';
+import { Droplets, Clock, Zap, Hourglass } from 'lucide-react';
 
 export function ProductFeatureGrid() {
     const features = [

@@ -1,6 +1,6 @@
 import { useEssentialsProducts } from '../hooks/useEssentialsProducts';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Box, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Box, Shield } from 'lucide-react';
 import { useMemo } from 'react';
 import { BraCard } from '../components/silo-essentials/BraCard';
 import { EssentialsFAQ } from '../components/silo-essentials/EssentialsFAQ';
