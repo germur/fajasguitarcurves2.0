@@ -56,57 +56,7 @@ export function GlassNavbar() {
         "💬 Asesoría de Talla por Expertas en WhatsApp"
     ];
 
-    // Mobile Menu Data (Reused for consistency)
-    const mobileRecoverMenu: MenuData = {
-        categories: [
-            { label: "Stage 2 (Alta Compresión)", href: "/collections/recovery?tag=Stage+2", highlight: true },
-            { label: "Stage 3 (Mantenimiento)", href: "/collections/recovery?tag=Stage+3" },
-            { label: "Recién Operada (Stage 1)", href: "/collections/recovery?tag=Stage+1" },
-        ],
-        concerns: [
-            { label: "BBL & Lipo 360", href: "/collections/recovery?tag=BBL" },
-            { label: "Post-Parto", href: "/collections/recovery?tag=Post-Partum" },
-        ],
-        visual: {
-            image: "/assets/recovery-hands.png",
-            title: "BBL Survival Kit",
-            link: "/pages/bbl-recovery-kit"
-        }
-    };
 
-    // --- SILO 2: SCULPT STUDIO (Shapewear) ---
-    const mobileSculptMenu: MenuData = {
-        categories: [
-            { label: "Cintura de Avispa", href: "/collections/sculpt?tag=Waist+Trainer", highlight: true },
-            { label: "Levanta Cola (Butt Lifter)", href: "/collections/sculpt?tag=Butt+Lifter" },
-            { label: "Uso Diario Invisible", href: "/collections/sculpt?tag=Daily+Use" },
-        ],
-        concerns: [
-            { label: "Strapless (Sin Tiras)", href: "/collections/sculpt?tag=Strapless" },
-            { label: "Shorts & Leggings", href: "/collections/sculpt?tag=Short" },
-        ],
-        visual: {
-            image: "https://images.unsplash.com/photo-1605763240004-741b7f72e529?q=80&w=400&auto=format&fit=crop",
-            title: "Hourglass Shapes",
-            link: "/collections/sculpt"
-        }
-    };
-
-    // --- SILO 3: ESSENTIALS (Bras & Accesorios) ---
-    const mobileBrasMenu: MenuData = {
-        categories: [
-            { label: "Brasieres Post-Op", href: "/collections/bras?tag=Post-Op+Bra", highlight: true },
-            { label: "Correctores de Postura", href: "/collections/bras?tag=Posture" },
-        ],
-        concerns: [
-            { label: "Tablas y Espumas (Próximamente)", href: "#" },
-        ],
-        visual: {
-            image: "/assets/essentials-flatlay.jpg",
-            title: "Support Systems",
-            link: "/collections/bras"
-        }
-    };
 
 
     return (
