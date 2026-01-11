@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowRight, Table, Shirt } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Shirt } from 'lucide-react';
 
 export function SiloBentoGrid() {
     return (
