@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { MoveHorizontal } from "lucide-react";
 
 export function BeforeAfterSlider() {
@@ -60,9 +61,9 @@ export function BeforeAfterSlider() {
                                 </li>
                             ))}
                         </ul>
-                        <button className="px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
+                        <Link to="/lab" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
                             Ver Tecnología Powernet
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Slider Component */}
