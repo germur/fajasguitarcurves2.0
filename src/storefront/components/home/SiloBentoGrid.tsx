@@ -38,7 +38,7 @@ export function SiloBentoGrid() {
                     </div>
 
                     {/* 2. Fajas Stage 2 (Medium - Right Top - 2 Rows) */}
-                    <Link to="/medical" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
+                    <Link to="/collections/recovery" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
                         <img
                             src="/assets/stage2-faja-bra.jpg"
                             alt="Colección Fajas Stage 2"
@@ -63,28 +63,14 @@ export function SiloBentoGrid() {
                         </div>
                     </Link>
 
-                    {/* 3. Tablas & Espumas (Small - Right Bottom Left - 2 Rows) */}
-                    <Link to="/accesorios" className="group relative h-[250px] md:h-auto md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#F5EDDF] p-6 flex flex-col justify-between">
-                        <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
-                            <Table size={48} strokeWidth={1} className="text-[#2C2420]" />
-                        </div>
-                        <div>
-                            <h3 className="font-serif text-xl font-bold text-[#2C2420] leading-tight mb-2">Tablas & <br />Espumas</h3>
-                            <p className="text-[10px] text-stone-500 uppercase tracking-widest font-bold">Accesorios</p>
-                        </div>
-                        <div className="self-end">
-                            <ArrowRight size={16} className="text-[#2C2420] group-hover:translate-x-1 transition-transform" />
-                        </div>
-                    </Link>
-
-                    {/* 4. Brasieres (Small - Right Bottom Right - 2 Rows) */}
-                    <Link to="/bras" className="group relative h-[250px] md:h-auto md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#EAE6E3] p-6 flex flex-col justify-between">
+                    {/* 3. Brasieres & Accesorios (Medium - Right Bottom - 2 Rows - Expanded) */}
+                    <Link to="/collections/bras" className="group relative h-[250px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#EAE6E3] p-6 flex flex-col justify-between">
                         <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
                             <Shirt size={48} strokeWidth={1} className="text-[#2C2420]" />
                         </div>
                         <div>
                             <h3 className="font-serif text-xl font-bold text-[#2C2420] leading-tight mb-2">Brasieres <br />Post-Op</h3>
-                            <p className="text-[10px] text-stone-500 uppercase tracking-widest font-bold">Soporte</p>
+                            <p className="text-[10px] text-stone-500 uppercase tracking-widest font-bold">Soporte & Comfort</p>
                         </div>
                         <div className="self-end">
                             <ArrowRight size={16} className="text-[#2C2420] group-hover:translate-x-1 transition-transform" />
