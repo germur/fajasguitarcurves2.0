@@ -112,7 +112,7 @@ export default function MedicalHubView() {
                             Post-op swelling changes your size daily. Our Fit Specialists can help you predict your Stage 2 size based on your surgery date.
                         </p>
                         <div className="flex justify-center gap-4">
-                            <Link to="/store/guitar-curves" className="bg-[#D1AB66] text-[#2C2420] px-8 py-3 rounded-full font-bold hover:bg-[#F5EDDF] transition-colors">
+                            <Link to="/tools/calculator" className="bg-[#D1AB66] text-[#2C2420] px-8 py-3 rounded-full font-bold hover:bg-[#F5EDDF] transition-colors">
                                 Use Ratio Calculator
                             </Link>
                             <button className="px-8 py-3 rounded-full border border-stone-600 font-bold hover:border-[#D1AB66] hover:text-[#D1AB66] transition-colors">

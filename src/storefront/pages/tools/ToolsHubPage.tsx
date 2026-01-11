@@ -11,7 +11,7 @@ const TOOLS = [
         description: "Descubre exactamente en qué etapa de recuperación estás y qué faja necesitas usar hoy.",
         icon: <Activity className="w-8 h-8 text-white" />,
         link: "/tools/recovery-timeline",
-        bgImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
+        bgImage: "/assets/tool-recovery.png",
         status: "Active",
         cta: "Calcular Etapa"
     },
@@ -21,7 +21,7 @@ const TOOLS = [
         description: "¿Eres una 'Falsa S' o una 'Verdadera Guitarra'? Analiza tus medidas con nuestro algoritmo.",
         icon: <Calculator className="w-8 h-8 text-white" />,
         link: "/tools/guitar-ratio",
-        bgImage: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=800&auto=format&fit=crop",
+        bgImage: "/assets/tool-ratio.jpg",
         status: "Active",
         cta: "Iniciar Test"
     },
@@ -31,7 +31,7 @@ const TOOLS = [
         description: "La guía visual definitiva para saber cuándo y por qué cambiar de etapa.",
         icon: <Layers className="w-8 h-8 text-white" />,
         link: "/tools/stage1-vs-stage2",
-        bgImage: "https://images.unsplash.com/photo-1599045118108-a6a094705024?q=80&w=800&auto=format&fit=crop",
+        bgImage: "/assets/tool-comparator.jpg",
         status: "Active",
         cta: "Ver Comparativa"
     }

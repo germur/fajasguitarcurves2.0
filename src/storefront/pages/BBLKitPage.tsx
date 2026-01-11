@@ -1,13 +1,34 @@
 
 import { BBLSurvivalKit } from '../components/BBLSurvivalKit';
 import { Check } from 'lucide-react';
+import { SeoHead } from '../../lib/seo/SeoHead';
 
 export default function BBLKitPage() {
     return (
         <div className="bg-[#FAF9F6] min-h-screen font-sans selection:bg-[#3E322C] selection:text-white">
 
-            {/* SEO HIDDEN */}
-            <h1 className="sr-only">BBL Recovery Kit & Supplies | Lista de Suministros Post Lipo y BBL</h1>
+            {/* SEO METADATA */}
+            <SeoHead
+                title="BBL Recovery Survival Kit | Faja Stage 2 + Brasier Bundle"
+                description="El dúo esencial para tu cirugía: Faja reloj de arena y brasier post-operatorio. Compra el bundle y ahorra 15%."
+                path="/pages/bbl-recovery-kit"
+                image="/assets/bbl-kit-hero.jpg"
+                schema={{
+                    type: 'product',
+                    data: {
+                        title: "BBL Recovery Survival Kit",
+                        description: "Faja Stage 2 + Brasier Post-Quirúrgico Bundle",
+                        images: [{ src: "https://guitarcurves.com/assets/bbl-kit-hero.jpg" }],
+                        priceRange: { minVariantPrice: { amount: "150.00", currencyCode: "USD" } },
+                        availableForSale: true
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'BBL Kit', item: '/pages/bbl-recovery-kit' }
+                    ]
+                }}
+            />
+
 
             {/* BLOCK 1: HERO "THE PERFECT PAIR" */}
             <div className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto">
@@ -15,8 +36,8 @@ export default function BBLKitPage() {
                     {/* Visual: Faja + Bra */}
                     <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
                         <img
-                            src="https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=1200&auto=format&fit=crop"
-                            alt="The Perfect Pair: Faja + Bra"
+                            src="/assets/bbl-kit-hero.jpg"
+                            alt="The Perfect Pair: Faja Stage 2 + Brasier Post-Quirúrgico BBL"
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-black/10"></div>

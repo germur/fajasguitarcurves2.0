@@ -9,6 +9,8 @@ import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGri
 import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 // Tools imports for Smart Modal
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
+import { SeoHead } from '../lib/seo/SeoHead';
+import { generateMetaTags } from '../lib/seo/generators';
 
 export function ProductDetailView() {
     const { id } = useParams<{ id: string }>();
@@ -66,6 +68,9 @@ export function ProductDetailView() {
 
     const { title, price, image, description, category, badge, benefit } = product;
 
+    // --- SEO GENERATION (MAES Formula) ---
+    const { title: seoTitle, description: seoDescription } = generateMetaTags(product);
+
     // ---------------------------------------------------------
     // LOGIC: EXTRACTION & CHECKING
     // ---------------------------------------------------------
@@ -119,6 +124,23 @@ export function ProductDetailView() {
 
     return (
         <div className="bg-[#FAF9F6] min-h-screen pb-24 animate-fade-in relative selection:bg-[#D4AF37] selection:text-white">
+            {/* NEW SEO SYSTEM IMPLEMENTATION */}
+            <SeoHead
+                title={seoTitle}
+                description={seoDescription}
+                type="product"
+                image={image}
+                path={`/products/${id}`}
+                schema={{
+                    type: 'product',
+                    data: product,
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: category || 'Colección', item: '/collections/sculpt' },
+                        { name: title, item: `/products/${id}` }
+                    ]
+                }}
+            />
 
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">

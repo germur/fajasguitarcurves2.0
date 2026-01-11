@@ -74,8 +74,8 @@ export function BeforeAfterSlider() {
                     >
                         {/* Image: After (Full Width) */}
                         <img
-                            src="https://images.unsplash.com/photo-1544359283-7c98b64e08cf?q=80&w=1200&auto=format&fit=crop"
-                            alt="Despues - Guitar Curves"
+                            src="/assets/slider-after-final.png"
+                            alt="Resultado BBL con Faja Guitar Curves Stage 2 y cintura de avispa"
                             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                         />
                         <div className="absolute top-6 right-6 bg-[#2C2420] text-[#F5EDDF] px-3 py-1 text-xs font-bold rounded uppercase">
@@ -89,9 +89,9 @@ export function BeforeAfterSlider() {
                         >
                             {/* Use a slightly less flattering pose or plain clothing for 'Before' contrast */}
                             <img
-                                src="https://images.unsplash.com/photo-1616892550183-b2308c10924b?q=80&w=1200&auto=format&fit=crop"
-                                alt="Antes - Sin Faja"
-                                className="absolute inset-0 w-full h-full object-cover object-center filter grayscale-[30%] contrast-75"
+                                src="/assets/slider-before.png"
+                                alt="Cuerpo en recuperación sin compresión post-quirúrgica"
+                                className="absolute inset-0 w-full h-full object-cover object-center"
                             />
                             <div className="absolute top-6 left-6 bg-white/80 text-stone-600 px-3 py-1 text-xs font-bold rounded uppercase backdrop-blur-sm">
                                 Sin Faja

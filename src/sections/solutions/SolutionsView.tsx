@@ -55,7 +55,7 @@ export default function SolutionsView() {
             <div className="grid md:grid-cols-2 min-h-[80vh]">
                 {/* Left: The Pain (Grayscale) */}
                 <div className="bg-stone-100 flex items-center justify-center p-12 relative overflow-hidden grayscale">
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1605763240004-7e93b172d754?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20" />
+                    <div className="absolute inset-0 bg-[url('/assets/texture-fibrosis.jpg')] bg-cover bg-center opacity-20" />
                     <div className="relative z-10 max-w-md">
                         <span className="inline-block px-3 py-1 bg-stone-800 text-white text-[10px] uppercase font-bold tracking-widest rounded-full mb-6">
                             The Problem
@@ -76,7 +76,7 @@ export default function SolutionsView() {
                 {/* Right: The Solution (Gold) */}
                 <div className="bg-[#2C2420] flex items-center justify-center p-12 relative overflow-hidden text-[#F5EDDF]">
                     {/* Video Placeholder */}
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-[url('/assets/texture-inflammation.png')] bg-cover bg-center opacity-30 mix-blend-overlay" />
 
                     <div className="relative z-10 max-w-md pl-8 border-l-2 border-[#D1AB66]">
                         <span className="inline-block px-3 py-1 bg-[#D1AB66] text-[#2C2420] text-[10px] uppercase font-bold tracking-widest rounded-full mb-6">

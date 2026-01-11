@@ -1,10 +1,27 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { SeoHead } from '../../lib/seo/SeoHead';
 
 export default function OurStoryPage() {
     return (
         <div className="bg-[#FAF9F6] font-sans text-[#3E322C]">
+            <SeoHead
+                title="Nuestra Historia: Ingeniería Textil de Medellín | Guitar Curves"
+                description="Conoce el origen de Guitar Curves. No es Fast Fashion, es artesanía colombiana diseñada por Nelly Perez para curvas reales."
+                path="/pages/our-story"
+                schema={{
+                    type: 'article', // Using article as a proxy for AboutPage content for now
+                    data: {
+                        name: "Nuestra Historia - Guitar Curves",
+                        description: "La historia de ingeniería textil detrás de Guitar Curves."
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'Nuestra Historia', item: '/pages/our-story' }
+                    ]
+                }}
+            />
 
             {/* 1. HERO CINEMÁTICO */}
             <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">

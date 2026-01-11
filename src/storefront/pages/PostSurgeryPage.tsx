@@ -7,6 +7,8 @@ import { BundleBuilder } from '../components/silo-recovery/BundleBuilder';
 import { MedicalAccordions } from '../components/silo-recovery/MedicalAccordions';
 import { ShieldCheck, Activity, ArrowDown } from 'lucide-react';
 
+import { SeoHead } from '../../lib/seo/SeoHead';
+
 export default function PostSurgeryPage() {
     const { products: shopifyProducts } = useRecoveryProducts();
     const [searchParams] = useSearchParams(); // Added
@@ -89,7 +91,23 @@ export default function PostSurgeryPage() {
 
     return (
         <div className="bg-[#F9F8F6] min-h-screen font-sans selection:bg-[#3E322C] selection:text-white">
-            {/* Navbar handled by Layout */}
+            <SeoHead
+                title="Recovery Room: Fajas Post-Quirúrgicas Stage 1 & 2 | Guitar Curves"
+                description="Colección especializada para BBL y Lipo. Compresión médica certificada, foams, y tablas para una recuperación segura y sin fibrosis."
+                path="/collections/recovery"
+                image="/assets/recovery-hands.png"
+                schema={{
+                    type: 'collection',
+                    data: {
+                        name: 'Recovery Room Collection',
+                        description: 'Fajas médicas para post-operatorio Stage 1 y Stage 2.'
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'Recovery Room', item: '/collections/recovery' }
+                    ]
+                }}
+            />
 
             {/* 1. HERO SECTION: SANCTUARY ASYMMETRIC */}
             <div className="relative pt-24 pb-12 lg:min-h-[85vh] flex items-center overflow-hidden">

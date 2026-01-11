@@ -56,6 +56,7 @@ const GuitarFitFinder: React.FC = () => {
             badgeText: 'Ajuste Estándar',
             badgeColor: 'bg-stone-200 text-stone-700',
             borderColor: 'border-stone-300',
+            image: '/assets/shape-pear.png'
         };
 
         if (isGuitar) {
@@ -67,6 +68,11 @@ const GuitarFitFinder: React.FC = () => {
             result.badgeColor = 'bg-[#D1AB66]/10 text-[#A35944] border-[#D1AB66]/30';
             result.borderColor = 'border-[#D1AB66]';
             result.isGuitar = true;
+            result.image = '/assets/shape-hourglass.png';
+        } else if ((h - w) <= 6) {
+            // Apple Shape Detected (Less than 6 inch difference)
+            result.image = '/assets/shape-apple.png';
+            result.description = `Tu silueta tiende a ser recta (Manzana). El ajuste estándar te proporcionará máximo soporte abdominal y definirá tu cintura.`;
         }
 
         return result;
@@ -135,7 +141,7 @@ const GuitarFitFinder: React.FC = () => {
 
     return (
         <div className="font-sans text-[#2C2420] max-w-md mx-auto my-6 px-4">
-            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-100 overflow-hidden relative min-h-[600px] flex flex-col transition-all duration-500">
+            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-100 overflow-hidden relative min-h-[600px] flex flex-col transition-all duration-500 text-center">
 
                 {/* Header Branding */}
                 <div className="bg-[#2C2420] p-4 text-center">
@@ -143,14 +149,14 @@ const GuitarFitFinder: React.FC = () => {
                     <p className="text-[#D1AB66] text-[9px] font-bold uppercase tracking-widest mt-0.5">Calculadora de Talla</p>
                 </div>
 
-                <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <div className="p-6 md:p-8 flex-1 flex flex-col items-center">
                     {step > 0 && step < 3 && <ProgressBar step={step} totalSteps={3} />}
 
-                    <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                    <div className={`flex-1 flex flex-col w-full transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
 
                         {/* STEP 0: INTRO */}
                         {step === 0 && (
-                            <div className="text-center space-y-6 flex-1 flex flex-col justify-center">
+                            <div className="text-center space-y-6 flex-1 flex flex-col justify-center items-center">
                                 <div className="w-24 h-24 bg-[#FAF9F6] rounded-full mx-auto flex items-center justify-center shadow-inner mb-2 border border-stone-100">
                                     <Ruler size={40} className="text-[#D1AB66]" />
                                 </div>
@@ -196,12 +202,19 @@ const GuitarFitFinder: React.FC = () => {
 
                         {/* STEP 3: RESULTS */}
                         {step === 3 && recommendation && !recommendation.type && (
-                            <div className="text-center animate-fade-in flex-1 flex flex-col pt-4">
+                            <div className="text-center animate-fade-in flex-1 flex flex-col pt-4 items-center">
                                 <div className="mb-2">
                                     <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 border ${recommendation.badgeColor} ${recommendation.borderColor}`}>
                                         {recommendation.badgeText}
                                     </span>
                                 </div>
+
+                                {recommendation.image && (
+                                    <div className="w-32 h-44 mx-auto mb-6 relative">
+                                        <div className="absolute inset-0 bg-[#D1AB66]/10 rounded-full blur-xl scale-75"></div>
+                                        <img src={recommendation.image} alt="Body Shape" className="w-full h-full object-contain relative z-10 drop-shadow-lg" />
+                                    </div>
+                                )}
 
                                 <h3 className="text-stone-400 text-xs font-bold uppercase tracking-widest mb-2">Tu Talla Recomendada</h3>
                                 <div className="text-6xl font-black text-[#2C2420] mb-2 tracking-tighter">

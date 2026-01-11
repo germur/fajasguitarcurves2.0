@@ -43,8 +43,8 @@ export function WaistTrainingLab() {
                 {/* Interactive Image Side */}
                 <div className="relative h-[500px] lg:h-auto bg-stone-200 order-1 lg:order-2">
                     <img
-                        src="https://images.unsplash.com/photo-1559599238-308793637427?q=80&w=1200&auto=format&fit=crop"
-                        alt="Waist Trainer Detail"
+                        src="/assets/sewing-detail.png"
+                        alt="Ingeniería Textil en Detalle"
                         className="w-full h-full object-cover opacity-90"
                     />
 

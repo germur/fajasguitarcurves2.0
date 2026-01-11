@@ -62,7 +62,7 @@ export function HomeHero() {
                     <button
                         onClick={() => setMode('sculpt')}
                         className={`relative z-10 px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-colors duration-300 flex items-center gap-2
-                         ${mode === 'sculpt' ? 'text-[#2C2420]' : 'text-white/70 hover:text-white'}`}
+                         ${mode === 'sculpt' ? 'text-[#2C2420]' : 'text-stone-400 hover:text-[#2C2420]'}`}
                     >
                         <Sparkles className="w-3 h-3" />
                         Sculpt
@@ -95,7 +95,7 @@ export function HomeHero() {
                     {/* Dynamic CTA */}
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link
-                            to={mode === 'recover' ? "/medical" : "/guitar-curves"}
+                            to={mode === 'recover' ? "/collections/recovery" : "/collections/sculpt"}
                             className={`group px-8 py-4 rounded-full flex items-center justify-center gap-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-xl
                             ${mode === 'recover'
                                     ? 'bg-[#2C2420] text-white hover:bg-stone-800'

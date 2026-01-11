@@ -11,7 +11,7 @@ export default function GuitarCurvesView() {
                 {/* Background Video/Image with Technical Overlay */}
                 <div className="absolute inset-0 z-0 opacity-40">
                     <img
-                        src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1600&auto=format&fit=crop"
+                        src="/assets/guitar-curves-featured.jpg"
                         alt="Guitar Curves Tech"
                         className="w-full h-full object-cover grayscale brightness-50"
                     />

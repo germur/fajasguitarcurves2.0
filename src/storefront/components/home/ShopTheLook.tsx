@@ -17,19 +17,19 @@ const HOTSPOTS: ProductHotspot[] = [
         id: 1,
         x: 45,
         y: 40,
-        productName: "Faja Reloj de Arena",
-        price: "$85.00",
-        link: "/guitar-curves",
-        image: "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?q=80&w=300&auto=format&fit=crop"
+        productName: "Faja Etapa 2 Media Pierna",
+        price: "$120.00",
+        link: "/products/faja-etapa-2-media-pierna",
+        image: "/assets/faja-popup-final.jpg"
     },
     {
         id: 2,
         x: 60,
         y: 65,
-        productName: "Tabla Abdominal 360",
-        price: "$25.00",
-        link: "/tablas",
-        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=300&auto=format&fit=crop"
+        productName: "Brasier Post-Op",
+        price: "$50.00",
+        link: "/products/brasier-post-operatorio-postura",
+        image: "/assets/brasier-post-op.jpg"
     }
 ];
 
@@ -45,8 +45,8 @@ export function ShopTheLook() {
                     <div className="w-full md:w-1/2 relative group">
                         <div className="relative rounded-xl overflow-hidden shadow-2xl">
                             <img
-                                src="https://images.unsplash.com/photo-1559582798-678dfc71ccd8?q=80&w=1200&auto=format&fit=crop"
-                                alt="Shop The Look"
+                                src="/assets/stage2-faja-bra.jpg"
+                                alt="Kit Guitarra Completo - Faja y Brasier"
                                 className="w-full h-[600px] object-cover"
                             />
 
@@ -100,7 +100,7 @@ export function ShopTheLook() {
                             El "Kit Guitarra" <br />Completo.
                         </h2>
                         <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-                            No es solo una faja, es un sistema de escultura corporal. Combina tu <strong>Faja Stage 2</strong> con la <strong>Tabla 360</strong> y las <strong>Espumas Laterales</strong> para maximizar la definición de tu cintura.
+                            No es solo una faja, es un sistema de escultura corporal. Combina tu <strong>Faja Stage 2</strong> con el <strong>Brasier Post-Operatorio</strong> para un soporte completo de espalda y máxima definición.
                         </p>
                         <div className="flex gap-4">
                             <button className="px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">

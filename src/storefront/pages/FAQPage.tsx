@@ -1,10 +1,26 @@
 import { Search, Package, Ruler, Stethoscope, Shirt, ArrowRight } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { Link } from 'react-router-dom';
+import { SeoHead } from '../../lib/seo/SeoHead';
 
 export default function FAQPage() {
     return (
         <div className="bg-[#F9F8F6] min-h-screen font-sans">
+            <SeoHead
+                title="Centro de Ayuda y Preguntas Frecuentes | Guitar Curves"
+                description="Resuelve tus dudas sobre tallas, envíos y cuidados de tu faja. Asesoría experta para tu compra segura."
+                path="/pages/faq"
+                schema={{
+                    type: 'website',
+                    data: {
+                        name: "Help Center - Guitar Curves",
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'Help Center', item: '/pages/faq' }
+                    ]
+                }}
+            />
 
             {/* BLOCK 1: SEARCH HERO */}
             <div className="bg-[#2C2420] text-white pt-12 pb-24 px-4 text-center relative overflow-hidden">

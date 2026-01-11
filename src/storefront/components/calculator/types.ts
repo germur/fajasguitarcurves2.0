@@ -21,6 +21,7 @@ export interface Recommendation {
     isStage2?: boolean;
     type?: 'success' | 'underflow' | 'overflow';
     msg?: string;
+    image?: string;
 }
 
 export interface Measurements {

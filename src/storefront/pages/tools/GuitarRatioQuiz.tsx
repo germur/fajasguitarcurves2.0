@@ -45,7 +45,7 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
             description: `Tu cintura es significativamente más pequeña que tus caderas (Ratio de Oro). Según tu cintura de ${waist}", tu talla ideal es ${size}, pero necesitas el corte 'Signature Guitar' para acomodar tus caderas de ${hips}".`,
             recommendedProductId: "cinturilla-extrema-con-cremallera-y-clips-14-varillas",
             recommendationTitle: "Faja Reloj de Arena Stage 3",
-            productImage: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop"
+            productImage: "/assets/quiz-result-guitar.jpg"
         };
     } else if (ratio >= 0.65 && ratio <= 0.75) {
         return {

@@ -26,7 +26,7 @@ export function FitFinderPage() {
             {/* 1. HERO SECTION: The Promise */}
             <header className="bg-[#2C2420] text-[#F5EDDF] pt-12 pb-24 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000" className="w-full h-full object-cover" alt="Background" />
+                    <img src="/assets/atelier-workshop.png" className="w-full h-full object-cover" alt="Background" />
                 </div>
 
                 <div className="max-w-xl mx-auto px-6 relative z-10 text-center">
@@ -45,18 +45,7 @@ export function FitFinderPage() {
                         Olvida las tablas genéricas. Nuestra tecnológía analiza la diferencia entre tu cintura y tus caderas para recomendarte la faja exacta.
                     </p>
 
-                    {/* Video Placeholder (Looping) */}
-                    <div className="relative w-24 h-24 mx-auto rounded-full border-4 border-[#D1AB66]/30 overflow-hidden shadow-2xl animate-fade-in group cursor-pointer">
-                        <img
-                            src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=200&fit=crop"
-                            alt="Video Tutorial"
-                            className="w-full h-full object-cover opacity-80"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
-                            <PlayCircle size={32} className="text-white drop-shadow-lg" />
-                        </div>
-                    </div>
-                    <p className="text-[10px] text-stone-500 mt-2 uppercase tracking-widest">Ver Tutorial (15s)</p>
+
                 </div>
             </header>
 

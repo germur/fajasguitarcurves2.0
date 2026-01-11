@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Instagram, Facebook, Globe, CreditCard, ChevronDown } from 'lucide-react';
+import { ArrowRight, Instagram, Globe, CreditCard, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
 export function DarkFooter() {
@@ -24,11 +24,14 @@ export function DarkFooter() {
                             Ingeniería textil colombiana diseñada para la recuperación post-quirúrgica y el moldeo diario de alto nivel.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all duration-300">
+                            <a href="https://www.instagram.com/fajasguitarrascurves/?igsh=bDJ6ZGx4YTgyNXV4#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all duration-300">
                                 <Instagram size={16} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all duration-300">
-                                <Facebook size={16} />
+                            <a href="https://www.tiktok.com/@guitarcurvesfajas" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all duration-300">
+                                {/* Custom TikTok Icon (Lucide doesn't have it) */}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                                </svg>
                             </a>
                         </div>
                     </div>
@@ -63,10 +66,11 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <a href="#" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Gift Cards
-                                </a>
+                                <Link to="/institute" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    Journal (Education)
+                                </Link>
                             </li>
+
                         </ul>
                     </div>
 
@@ -74,18 +78,14 @@ export function DarkFooter() {
                     <div>
                         <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">Soporte</h3>
                         <ul className="space-y-4 text-sm font-medium">
-                            <li>
-                                <Link to="/pages/tracking" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Rastrear Pedido 🚚
-                                </Link>
-                            </li>
+
                             <li>
                                 <Link to="/pages/fit-guarantee" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Cambios y Devoluciones
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/pages/fit-finder" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/fit-finder" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Guía de Tallas (AI)
                                 </Link>
                             </li>

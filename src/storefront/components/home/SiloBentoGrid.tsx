@@ -13,8 +13,8 @@ export function SiloBentoGrid() {
                     {/* 1. Guía de Tallas Inteligente (Large - Left Col - Full Height) */}
                     <div className="group relative md:col-span-2 md:row-span-4 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#E8EAEB] cursor-pointer">
                         <img
-                            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
-                            alt="Mujer midiéndose la cintura"
+                            src="/assets/smart-size-guide.jpg"
+                            alt="Scan Biométrico de Cintura"
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
@@ -40,8 +40,8 @@ export function SiloBentoGrid() {
                     {/* 2. Fajas Stage 2 (Medium - Right Top - 2 Rows) */}
                     <Link to="/medical" className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
                         <img
-                            src="https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=600&auto=format&fit=crop"
-                            alt="Detalle de Broches Fajas"
+                            src="/assets/stage2-faja-bra.jpg"
+                            alt="Colección Fajas Stage 2"
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
                         />
                         <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent"></div>

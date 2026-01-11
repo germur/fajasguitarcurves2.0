@@ -50,8 +50,21 @@ export function SymptomGrid({ symptoms, onSelect }: SymptomGridProps) {
                         `}
                         whileHover={{ scale: 1.02 }}
                     >
-                        {/* Background Gradient for Hover */}
-                        <div className={`absolute inset-0 bg-gradient-to-br from-[#D1AB66]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                        <div className="absolute inset-0 bg-stone-100 mix-blend-multiply opacity-0 group-hover:opacity-10 transition-opacity" />
+                        {/* Dynamic Background Texture */}
+                        {symptom.id === 'burns' && (
+                            // Pain/Burns -> Blue/Cool Filter on Fibrosis Texture
+                            <div className="absolute inset-0 bg-[url('/assets/texture-fibrosis.jpg')] bg-cover opacity-0 group-hover:opacity-15 grayscale hue-rotate-180 transition-opacity duration-700 mixture-blend-overlay" />
+                        )}
+                        {symptom.id === 'back-fat' && (
+                            // Inflammation -> Red/Pink Texture
+                            <div className="absolute inset-0 bg-[url('/assets/texture-inflammation.png')] bg-cover opacity-0 group-hover:opacity-20 mix-blend-multiply transition-opacity duration-700" />
+                        )}
+                        {symptom.id === 'roll-down' && (
+                            // Fibrosis -> Beige/Silk Texture
+                            <div className="absolute inset-0 bg-[url('/assets/texture-fibrosis.jpg')] bg-cover opacity-0 group-hover:opacity-20 mix-blend-multiply transition-opacity duration-700" />
+                        )}
+
 
                         <div className="relative z-10 h-full flex flex-col justify-between">
                             <div>

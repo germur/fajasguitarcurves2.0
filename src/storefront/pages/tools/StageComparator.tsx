@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SeoHead } from '../../../lib/seo/SeoHead';
 import {
     CheckCircle2,
     Info,
@@ -115,7 +116,7 @@ export default function StageComparator() {
                 >
                     {/* Image Layer: Stage 2 (Background) */}
                     <div className="absolute inset-0 flex items-center justify-center bg-[#F5F2EB]">
-                        <img src="/assets/comparator/stage2-slider.png" alt="Stage 2 Result" className="w-full h-full object-cover object-top pointer-events-none select-none" draggable="false" />
+                        <img src="/assets/comparator/stage2-slider.png" alt="Resultado final Faja Stage 2 Cintura de Avispa" className="w-full h-full object-cover object-top pointer-events-none select-none" draggable="false" />
                         <span className="absolute top-8 right-8 bg-[#D4AF37] text-white px-4 py-2 rounded-lg font-bold shadow-lg pointer-events-none z-10">STAGE 2</span>
                     </div>
 
@@ -126,7 +127,7 @@ export default function StageComparator() {
                     >
                         {/* Stage 1 Image - positioned absolutely to maintain aspect ratio */}
                         <div className="absolute inset-0 w-full h-full bg-[#E8E6E1]">
-                            <img src="/assets/comparator/stage1-slider.png" alt="Stage 1 Result" className="w-full h-full object-cover object-top pointer-events-none select-none" draggable="false" />
+                            <img src="/assets/comparator/stage1-slider.png" alt="Resultado inicial Faja Stage 1 Post-Quirúrgica" className="w-full h-full object-cover object-top pointer-events-none select-none" draggable="false" />
                         </div>
                         <span className="absolute top-8 left-8 bg-white/90 text-[#2C2420] px-4 py-2 rounded-lg font-bold shadow-lg pointer-events-none z-10">STAGE 1</span>
                     </div>
@@ -347,7 +348,7 @@ export default function StageComparator() {
                     {/* Product Card Placeholder */}
                     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all">
                         <div className="aspect-[4/5] bg-stone-200 relative">
-                            <img src="https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop" alt="Stage 1" className="w-full h-full object-cover" />
+                            <img src="/assets/stage1-card-thumb.jpg" alt="Faja Post-Quirúrgica Stage 1" className="w-full h-full object-cover" />
                             <span className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-xs font-bold uppercase rounded">Post-Quirúrgica</span>
                         </div>
                         <div className="p-6">
@@ -373,7 +374,7 @@ export default function StageComparator() {
                     {/* Product Card Placeholder */}
                     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all">
                         <div className="aspect-[4/5] bg-stone-200 relative">
-                            <img src="/assets/essentials-flatlay.jpg" alt="Stage 2" className="w-full h-full object-cover" />
+                            <img src="/assets/essentials-flatlay.jpg" alt="Faja Reloj de Arena Stage 2 Best Seller" className="w-full h-full object-cover" />
                             <span className="absolute top-4 left-4 bg-[#D4AF37] text-white px-3 py-1 text-xs font-bold uppercase rounded">Best Seller</span>
                         </div>
                         <div className="p-6">
@@ -392,6 +393,25 @@ export default function StageComparator() {
 
     return (
         <div className="min-h-screen bg-[#FAF9F6]">
+            <SeoHead
+                title="Stage 1 vs Stage 2: Comparador Visual | Guitar Curves"
+                description="Descubre visualmente la diferencia entre Fajas Stage 1 (Inflamación) y Stage 2 (Moldeo). Herramienta interactiva para saber cuándo cambiar de etapa."
+                image="/assets/comparator/stage1-vs-stage2-social.jpg"
+                path="/tools/stage1-vs-stage2"
+                type="article"
+                schema={{
+                    type: 'tool',
+                    data: {
+                        name: 'Comparador Visual Stage 1 vs Stage 2',
+                        description: 'Herramienta interactiva para comparar la compresión y materiales de fajas post-quirúrgicas.'
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'Tools', item: '/tools' },
+                        { name: 'Stage Comparator', item: '/tools/stage1-vs-stage2' }
+                    ]
+                }}
+            />
             {renderHero()}
             <div className="px-4 md:px-8">
                 {renderSlider()}

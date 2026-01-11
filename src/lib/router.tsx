@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ProductPage } from '@/components/ProductPage'
 import AcademiaView from '@/sections/academia/AcademiaView'
-import MedicalHubView from '@/sections/medical-hub/MedicalHubView'
+
 import LifestyleView from '@/sections/lifestyle/LifestyleView'
 import PainPointsView from '@/sections/pain-points/PainPointsView'
 import { StorefrontLayout } from '@/storefront/StorefrontLayout'
@@ -110,10 +110,7 @@ export const router = createBrowserRouter([
         path: 'checkout',
         element: <CheckoutPage />,
       },
-      {
-        path: 'medical',
-        element: <MedicalHubView />,
-      },
+
       {
         path: 'fit-finder',
         element: <FitFinderPage />,

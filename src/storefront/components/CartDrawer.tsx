@@ -5,30 +5,7 @@ import { useStore } from '../hooks/useStoreContext';
 import { Trash2, Lock, ArrowRight, Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-// Mock Upsells for the "Smart Cart" strategy
-const UPSELLS = [
-    {
-        id: 'upsell-soap',
-        name: "Jabón Neutro Fajas",
-        price: 12,
-        image: "https://images.unsplash.com/photo-1600857062241-98e5dba7f214?q=80&w=200&auto=format&fit=crop",
-        desc: "Cuida las fibras elásticas."
-    },
-    {
-        id: 'upsell-extender',
-        name: "Extensor de 3 Hileras",
-        price: 8,
-        image: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=200&auto=format&fit=crop",
-        desc: "Ajuste gradual sin presión."
-    },
-    {
-        id: 'upsell-foam',
-        name: "Lipo Foam 360",
-        price: 30,
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=200&auto=format&fit=crop",
-        desc: "Evita marcas en la piel."
-    }
-];
+
 
 export function CartDrawer() {
     const {
@@ -37,7 +14,7 @@ export function CartDrawer() {
         toggleCart,
         removeFromCart,
         updateQuantity,
-        addToCart,
+
         cartTotal,
         checkout
     } = useStore();
@@ -60,18 +37,6 @@ export function CartDrawer() {
             return () => clearTimeout(timer);
         }
     }, [isCartOpen]);
-
-    const handleAddUpsell = (item: typeof UPSELLS[0]) => {
-        // Construct a StoreProduct object compatible with our context
-        addToCart({
-            id: item.id,
-            title: item.name,
-            price: item.price,
-            image: item.image,
-            category: 'Accessories',
-            description: item.desc
-        }, 'Universal');
-    };
 
     if (!isAnimating && !isCartOpen) return null;
 
@@ -203,46 +168,7 @@ export function CartDrawer() {
                                     </div>
                                 )}
 
-                                {/* BLOCK 3: THE "ONE-CLICK" UPSELL */}
-                                {cart.length > 0 && (
-                                    <div className="mt-8 pt-8 border-t border-dashed border-gray-200">
-                                        <div className="flex items-center justify-between mb-4">
-                                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                                                Olvidados frecuentemente
-                                            </p>
-                                            <span className="text-[10px] bg-[#D4AF37] text-white px-2 py-0.5 rounded-full font-bold">
-                                                Completa tu Kit
-                                            </span>
-                                        </div>
 
-                                        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
-                                            {UPSELLS.map((up) => {
-                                                // Don't show if already in cart
-                                                if (cart.some(c => c.product.title === up.name)) return null;
-
-                                                return (
-                                                    <div key={up.id} className="min-w-[140px] border border-gray-100 rounded-xl p-3 bg-white hover:border-[#D4AF37] transition-all cursor-pointer group shadow-sm">
-                                                        <div className="h-20 bg-gray-50 rounded-lg mb-2 overflow-hidden relative">
-                                                            <img src={up.image} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
-                                                            <div className="absolute top-1 right-1 bg-white/80 backdrop-blur rounded px-1.5 py-0.5 text-[8px] font-bold">
-                                                                +${up.price}
-                                                            </div>
-                                                        </div>
-                                                        <p className="text-xs font-bold truncate text-[#3E322C]">{up.name}</p>
-                                                        <p className="text-[10px] text-gray-400 truncate mb-2">{up.desc}</p>
-
-                                                        <button
-                                                            onClick={() => handleAddUpsell(up)}
-                                                            className="w-full bg-gray-50 text-gray-600 text-[10px] font-bold py-1.5 rounded hover:bg-[#3E322C] hover:text-white transition-colors flex items-center justify-center gap-1"
-                                                        >
-                                                            AÑADIR +
-                                                        </button>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                )}
                             </div>
 
                             {/* BLOCK 4: FOOTER & CHECKOUT */}

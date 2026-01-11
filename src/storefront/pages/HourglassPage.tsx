@@ -9,6 +9,8 @@ import { Loader2 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useSculptProducts } from '../hooks/useSculptProducts';
 
+import { SeoHead } from '../../lib/seo/SeoHead';
+
 export default function HourglassPage() {
     const { products, loading, error } = useSculptProducts();
     const [searchParams] = useSearchParams();
@@ -64,6 +66,23 @@ export default function HourglassPage() {
 
     return (
         <div className="bg-white min-h-screen font-sans selection:bg-[#D4AF37] selection:text-white">
+            <SeoHead
+                title="The Sculpt Collection | Fajas Reloj de Arena & Cinturillas"
+                description="Ingeniería invisible para realzar tus curvas. Explora nuestra línea de fajas de uso diario, waist trainers y shorts levanta cola."
+                path="/collections/sculpt"
+                image="/assets/hourglass-hero-bg.jpg"
+                schema={{
+                    type: 'collection',
+                    data: {
+                        name: 'The Sculpt Collection',
+                        description: 'Colección de fajas moldeadoras y waist trainers.'
+                    },
+                    breadcrumbs: [
+                        { name: 'Home', item: '/' },
+                        { name: 'Sculpt Studio', item: '/collections/sculpt' }
+                    ]
+                }}
+            />
 
             {/* Navbar handled by Layout */}
 
@@ -72,8 +91,8 @@ export default function HourglassPage() {
                 {/* Background Image - Clean & Bright */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1600&auto=format&fit=crop"
-                        alt="Daylight Studio Model"
+                        src="/assets/hourglass-hero-bg.jpg"
+                        alt="Modelo usando Fajas Colombianas Guitar Curves efecto reloj de arena"
                         className="w-full h-full object-cover"
                     />
                     {/* Soft White Gradient for Text Readability */}

@@ -21,9 +21,9 @@ export default function AboutPage() {
                 <div className="relative">
                     <div className="absolute -inset-4 bg-red-50 rounded-3xl transform -rotate-2" />
                     <img
-                        src="https://images.unsplash.com/photo-1596451990171-85577f480351?q=80&w=800&auto=format&fit=crop"
-                        alt="Generic Faja Problem"
-                        className="relative rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500 grayscale hover:grayscale-0"
+                        src="/assets/about-problem-gap.jpg"
+                        alt="The Waist Gap Problem"
+                        className="relative rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-500"
                     />
                     <div className="absolute top-8 right-8 bg-red-600 text-white p-4 rounded-lg shadow-lg rotate-3">
                         <span className="block text-2xl font-bold">The Gap.</span>

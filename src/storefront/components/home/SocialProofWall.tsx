@@ -1,38 +1,9 @@
-import { Star } from 'lucide-react';
+import { TikTokEmbed } from 'react-social-media-embed';
 
-const REVIEWS = [
-    {
-        id: 1,
-        user: "Maria G.",
-        type: "BBL Recovery",
-        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
-        text: "Literalmente me salvó la vida después de mi cirugía. La compresión es perfecta y no marca las piernas.",
-        rating: 5
-    },
-    {
-        id: 2,
-        user: "Carolina R.",
-        type: "Uso Diario",
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop",
-        text: "Increíble cómo me hace ver la cintura. La uso debajo de mis vestidos y nadie nota que la tengo puesta.",
-        rating: 5
-    },
-    {
-        id: 3,
-        user: "Sofia L.",
-        type: "Post-Parto",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop",
-        text: "La calidad de la tela es superior a cualquier otra marca que he probado. Vale cada centavo.",
-        rating: 5
-    },
-    {
-        id: 4,
-        user: "Valentina M.",
-        type: "Guitar Curves",
-        image: "https://images.unsplash.com/photo-1529139574466-a302d2d3f524?q=80&w=400&auto=format&fit=crop",
-        text: "Me siento súper segura con ella. Define mis curvas exactamente como quería.",
-        rating: 5
-    }
+const TIKTOK_VIDEOS = [
+    "https://www.tiktok.com/@guitarcurvesfajas/video/7575416353687915790",
+    "https://www.tiktok.com/@guitarcurvesfajas/video/7118737786706005294",
+    "https://www.tiktok.com/@guitarcurvesfajas/video/7582782758284545294"
 ];
 
 export function SocialProofWall() {
@@ -47,47 +18,27 @@ export function SocialProofWall() {
                         Wall of Curves
                     </h2>
                     <p className="text-stone-500 max-w-2xl mx-auto">
-                        Únete a miles de mujeres que han transformado su silueta con nuestra ingeniería de compresión.
+                        Únete a miles de mujeres mostrando sus resultados en TikTok.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {REVIEWS.map((review) => (
-                        <div key={review.id} className="group relative break-inside-avoid">
-                            <div className="relative rounded-2xl overflow-hidden mb-4 shadow-md bg-[#FAF9F6]">
-                                <img
-                                    src={review.image}
-                                    alt={review.user}
-                                    className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                    <div className="flex gap-1 text-[#D1AB66] mb-2">
-                                        {[...Array(review.rating)].map((_, i) => (
-                                            <Star key={i} size={14} fill="currentColor" />
-                                        ))}
-                                    </div>
-                                    <p className="text-white text-sm font-medium leading-snug drop-shadow-md">
-                                        "{review.text}"
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="px-2">
-                                <h4 className="font-bold text-[#2C2420] text-sm">{review.user}</h4>
-                                <p className="text-xs text-[#B49286] uppercase tracking-wide">{review.type}</p>
-                            </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {TIKTOK_VIDEOS.map((url, i) => (
+                        <div key={i} className="flex justify-center" style={{ minHeight: '580px' }}>
+                            <TikTokEmbed url={url} width={325} />
                         </div>
                     ))}
                 </div>
 
                 <div className="mt-12 text-center">
-                    <div className="inline-flex items-center gap-2 bg-[#FAF9F6] px-6 py-3 rounded-full border border-stone-200">
-                        <div className="flex -space-x-3">
-                            <div className="w-8 h-8 rounded-full bg-stone-300 border-2 border-white"></div>
-                            <div className="w-8 h-8 rounded-full bg-stone-400 border-2 border-white"></div>
-                            <div className="w-8 h-8 rounded-full bg-stone-500 border-2 border-white"></div>
-                        </div>
-                        <span className="text-xs font-bold text-[#2C2420] ml-2">4.9/5 basado en +2,500 reseñas</span>
-                    </div>
+                    <a
+                        href="https://www.tiktok.com/@fajasguitarcurves"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 bg-[#2C2420] text-white px-8 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all"
+                    >
+                        Ver más en TikTok
+                    </a>
                 </div>
 
             </div>

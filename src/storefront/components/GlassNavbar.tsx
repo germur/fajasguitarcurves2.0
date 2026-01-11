@@ -147,18 +147,36 @@ export function GlassNavbar() {
                                 </span>
                             </div>
 
-                            {/* CALCULATOR LINK (NEW) */}
-                            <Link to="/tools/calculator" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
-                                Calculadora
-                            </Link>
+
 
                             {/* OTHER LINKS */}
                             <Link to="/pages/our-story" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
                                 Our Story
                             </Link>
-                            <Link to="/institute" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                Journal
-                            </Link>
+                            <div
+                                className="h-full flex items-center cursor-pointer group relative"
+                                onMouseEnter={() => setActiveDropdown('tools')}
+                            >
+                                <span className="flex items-center gap-1 font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
+                                    TOOLS <ChevronDown size={14} />
+                                </span>
+                                {/* Tools Dropdown (Mini) */}
+                                <div className={`
+                                    absolute top-full left-0 w-64 bg-white border border-stone-100 shadow-xl py-4
+                                    transform transition-all duration-300 origin-top
+                                    ${activeDropdown === 'tools' ? 'opacity-100 visible scale-y-100' : 'opacity-0 invisible scale-y-95'}
+                                `}>
+                                    <Link to="/tools/recovery-timeline" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        Recovery Calculator
+                                    </Link>
+                                    <Link to="/tools/guitar-ratio" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        Guitar Ratio Test
+                                    </Link>
+                                    <Link to="/tools/stage1-vs-stage2" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        Stage 1 vs Stage 2
+                                    </Link>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -255,7 +273,7 @@ export function GlassNavbar() {
                                     <li className="group/item">
                                         <Link to="/collections/sculpt" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
-                                                <img src="https://images.unsplash.com/photo-1605763240004-741b7f72e529?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Sculpt" />
+                                                <img src="/assets/sculpt-nav-menu.jpg" className="w-full h-full object-cover" alt="Sculpt" />
                                             </div>
                                             <div>
                                                 <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Sculpt Studio</p>
