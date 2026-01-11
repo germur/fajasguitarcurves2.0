@@ -108,10 +108,10 @@ export default function HourglassPage() {
                     </h2>
 
                     <div className="flex flex-col md:flex-row gap-4 mt-4">
-                        <Link to="#" className="px-8 py-3 bg-stone-900 text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg">
+                        <a href="#products" className="px-8 py-3 bg-stone-900 text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer">
                             Shop Waist Trainers
-                        </Link>
-                        <Link to="#" className="px-8 py-3 border border-stone-900 text-stone-900 uppercase tracking-widest text-xs font-bold hover:bg-stone-900 hover:text-white transition-all duration-300">
+                        </a>
+                        <Link to="/fit-finder" className="px-8 py-3 border border-stone-900 text-stone-900 uppercase tracking-widest text-xs font-bold hover:bg-stone-900 hover:text-white transition-all duration-300">
                             Guía de Tallas
                         </Link>
                     </div>
@@ -139,7 +139,7 @@ export default function HourglassPage() {
                     ) : (
                         <>
                             {/* Denser Grid: 2 cols mobile, 4 cols desktop, 5 cols large screens */}
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12">
+                            <div id="products" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12">
                                 {filteredProducts.map(product => (
                                     <SculptProductCard
                                         key={product.id}

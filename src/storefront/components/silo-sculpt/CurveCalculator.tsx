@@ -26,7 +26,7 @@ export function CurveCalculator() {
 
                 <div className="flex justify-center">
                     <Link
-                        to="/pages/calculator"
+                        to="/tools/calculator"
                         className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#D4AF37] text-[#050505] font-bold text-xs uppercase tracking-widest overflow-hidden hover:bg-white transition-colors duration-300"
                     >
                         <span className="relative z-10">Calcular mi Fit Guitarra</span>
