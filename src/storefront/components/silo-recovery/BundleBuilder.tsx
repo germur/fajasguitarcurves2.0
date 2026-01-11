@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useRecoveryProducts } from '../../hooks/useRecoveryProducts';
 import { useStore } from '../../hooks/useStoreContext';
 
@@ -46,9 +46,9 @@ export function BundleBuilder() {
                         <h2 className="text-3xl font-serif text-[#3E322C] mb-2">Doctor's Orders: The Kit</h2>
                         <p className="text-sm text-gray-500">Los cirujanos recomiendan complementar tu faja con estos accesorios.</p>
                     </div>
-                    <button className="hidden md:flex items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border-b border-[#3E322C] pb-1">
+                    <Link to="/pages/bbl-recovery-kit" className="hidden md:flex items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border-b border-[#3E322C] pb-1">
                         Ver todo el Kit <Plus size={16} />
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -77,9 +77,9 @@ export function BundleBuilder() {
                     ))}
                 </div>
 
-                <button className="md:hidden mt-12 w-full flex justify-center items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border border-[#3E322C]/20 py-4 rounded-xl">
+                <Link to="/pages/bbl-recovery-kit" className="md:hidden mt-12 w-full flex justify-center items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border border-[#3E322C]/20 py-4 rounded-xl">
                     Ver todo el Kit <Plus size={16} />
-                </button>
+                </Link>
             </div>
         </div>
     );

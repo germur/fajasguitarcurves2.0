@@ -103,12 +103,12 @@ export function ShopTheLook() {
                             No es solo una faja, es un sistema de escultura corporal. Combina tu <strong>Faja Stage 2</strong> con el <strong>Brasier Post-Operatorio</strong> para un soporte completo de espalda y máxima definición.
                         </p>
                         <div className="flex gap-4">
-                            <button className="px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
+                            <Link to="/pages/bbl-recovery-kit" className="px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all text-center">
                                 comprar el kit
-                            </button>
-                            <button className="px-8 py-4 border border-[#2C2420] text-[#2C2420] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-100 transition-all">
+                            </Link>
+                            <Link to="/collections/recovery" className="px-8 py-4 border border-[#2C2420] text-[#2C2420] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-100 transition-all text-center">
                                 ver colección
-                            </button>
+                            </Link>
                         </div>
                     </div>
 

@@ -6,14 +6,26 @@ interface BraCardProps {
     product: StoreProduct;
 }
 
+import { useStore } from '../../hooks/useStoreContext';
+
 export function BraCard({ product }: BraCardProps) {
     const { title, price, image, badge, benefit, handle } = product;
+    const { addToCart, toggleCart } = useStore();
     // Fallback optimization: If handle is missing, use the numeric ID from the GID to avoid URL crashes
     const productHandle = handle || product.id.split('/').pop();
 
     // Fallback if no badge/benefit provided (though we just added them to store-data)
     const displayBadge = badge || "Best Seller";
     const displayBenefit = benefit || "Soporte médico certificado y corrección de postura inmediata.";
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // Default to first variant if available, or just the product
+        // Assuming simple product for now or let context handle it
+        addToCart(product, "Default Title");
+        toggleCart();
+    };
 
     return (
         <article className="group relative bg-white rounded-[30px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 ease-out border border-gray-100 min-h-[550px] flex flex-col h-full cursor-pointer">
@@ -55,7 +67,10 @@ export function BraCard({ product }: BraCardProps) {
                 {/* CTA (Interacción) */}
                 <div className="flex justify-between items-center border-t border-gray-100 pt-6 mt-6">
                     <span className="font-mono text-lg font-bold text-gray-900">${price}</span>
-                    <button className="bg-[#2C2420] text-white px-6 py-3 rounded-xl text-xs font-bold tracking-widest uppercase hover:bg-[#D4AF37] transition-colors flex items-center gap-2 group-hover:shadow-lg">
+                    <button
+                        onClick={handleAddToCart}
+                        className="bg-[#2C2420] text-white px-6 py-3 rounded-xl text-xs font-bold tracking-widest uppercase hover:bg-[#D4AF37] transition-colors flex items-center gap-2 group-hover:shadow-lg active:scale-95"
+                    >
                         <ShoppingBag size={14} />
                         Añadir
                     </button>
