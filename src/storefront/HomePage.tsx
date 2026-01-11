@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
 import { SiloBentoGrid } from './components/home/SiloBentoGrid';
@@ -36,6 +37,19 @@ export function HomePage() {
 
             {/* 2. SECTION 1: SEMANTIC HERO (Recover/Sculpt Router) */}
             <HomeHero />
+
+            {/* 🚨 URGENCY TICKER (Recovery Calculator) */}
+            <div className="bg-[#A35944] text-white py-3 overflow-hidden">
+                <div className="container mx-auto px-4 flex items-center justify-center gap-4 animate-fade-in-up">
+                    <span className="text-xl">🩺</span>
+                    <p className="font-bold text-sm md:text-base tracking-wide uppercase">
+                        ¿Te operaste recientemente?
+                        <Link to="/tools/calculator" className="underline ml-2 hover:text-[#D4AF37] transition-colors">
+                            Calcula tu faja ideal según tu día post-op aquí
+                        </Link>
+                    </p>
+                </div>
+            </div>
 
             {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
             <InfiniteMarquee />

@@ -4,9 +4,11 @@ import { useParams, Link } from 'react-router-dom';
 import { getProductById } from './data/store-data';
 import { useProduct } from './hooks/useProduct';
 import { useStore } from './hooks/useStoreContext';
-import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDown, ArrowUpRight } from 'lucide-react';
-import { LocalCollectionGrid } from './components/LocalCollectionGrid';
+import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDown, ArrowUpRight, X } from 'lucide-react';
+import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGrid';
 import { ProductFeatureGrid } from './components/ProductFeatureGrid';
+// Tools imports for Smart Modal
+import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
 
 export function ProductDetailView() {
     const { id } = useParams<{ id: string }>();
@@ -14,6 +16,9 @@ export function ProductDetailView() {
     const [selectedSize, setSelectedSize] = useState<string>('');
     const [selectedColor, setSelectedColor] = useState<string>('Cocoa'); // Default
     const [isDescriptionOpen, setIsDescriptionOpen] = useState(true); // Control manual del acordeón
+
+    // Smart Modal State
+    const [isCalculatorOpen, setCalculatorOpen] = useState(false);
 
     // 1. Data Fetching Logic
     const localProduct = getProductById(id || '');
@@ -29,6 +34,14 @@ export function ProductDetailView() {
     // Scroll to top helper for sticky bar
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Callback for when the calculator finishes in Modal Mode
+    const handleCalculatorResult = (recommendedSize: string) => {
+        setSelectedSize(recommendedSize);
+        setCalculatorOpen(false);
+        // Optional: Add a toast notification here
+        alert(`¡Talla ${recommendedSize} seleccionada automáticamente!`);
     };
 
     if (loading && !product) {
@@ -88,6 +101,7 @@ export function ProductDetailView() {
             // Shake animation or highlight could go here
             return;
         }
+        // ... (rest of handler)
         const { variant } = checkAvailability(selectedColor, selectedSize);
 
         if (uniqueColors.length > 0 && !selectedColor) {
@@ -98,7 +112,6 @@ export function ProductDetailView() {
         if (variant) {
             addToCart(product, variant.title);
         } else {
-            // Fallback for simple products
             addToCart(product, selectedSize);
         }
     };
@@ -108,7 +121,6 @@ export function ProductDetailView() {
         <div className="bg-[#FAF9F6] min-h-screen pb-24 animate-fade-in relative selection:bg-[#D4AF37] selection:text-white">
 
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
-            {/* Aparece solo en móvil para facilitar la compra si hacen scroll */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
                 <div className="flex flex-col">
                     <span className="font-serif text-[#2C2420] font-bold truncate max-w-[120px]">{title}</span>
@@ -265,9 +277,13 @@ export function ProductDetailView() {
                                         <label className="text-xs font-bold uppercase tracking-widest text-stone-900">
                                             Talla: <span className="text-stone-500 font-normal">{selectedSize || 'Seleccionar'}</span>
                                         </label>
-                                        <Link to="/pages/guia-de-tallas" className="flex items-center gap-1 text-[10px] font-bold text-[#D4AF37] hover:text-black transition-colors underline decoration-[#D4AF37]/40">
-                                            <Ruler size={12} /> Guía de Medidas
-                                        </Link>
+                                        {/* TRIGGER FOR SMART MODAL */}
+                                        <button
+                                            onClick={() => setCalculatorOpen(true)}
+                                            className="flex items-center gap-1 text-[10px] font-bold text-[#D4AF37] hover:text-black transition-colors underline decoration-[#D4AF37]/40"
+                                        >
+                                            <Ruler size={12} /> ¿No sabes tu talla? Calcular aquí
+                                        </button>
                                     </div>
 
                                     <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
@@ -317,6 +333,15 @@ export function ProductDetailView() {
                                     <ShoppingBag size={18} className={selectedSize ? "group-hover:animate-bounce" : ""} />
                                     <span>{selectedSize ? 'Agregar al Carrito' : 'Elige una opción'}</span>
                                 </button>
+
+                                {/* 🆚 COMPARATOR MICRO-COMPONENT (Tooltip/Link) - Kept as is, but could be modalized too */}
+                                <Link to="/tools/stage1-vs-stage2" className="mt-4 p-3 bg-[#F9F4E8] border border-[#D4AF37]/30 rounded-lg flex items-center gap-3 cursor-pointer hover:bg-[#F0EBE0] transition-colors group">
+                                    <span className="text-xl group-hover:scale-110 transition-transform">ℹ️</span>
+                                    <div>
+                                        <p className="text-xs font-bold text-[#2C2420] uppercase">¿Miedo a equivocarte de etapa?</p>
+                                        <p className="text-xs text-[#D4AF37] underline decoration-[#D4AF37]/40">Ver Comparativa Visual: Stage 1 vs Stage 2</p>
+                                    </div>
+                                </Link>
                             </div>
 
 
@@ -406,10 +431,33 @@ export function ProductDetailView() {
                             Ver Todo <ArrowUpRight size={14} />
                         </Link>
                     </div>
-                    <LocalCollectionGrid handle="cinturillas" productCount={4} fallbackProducts={category === 'Recovery Room' ? 'recovery' : 'sculpt'} />
+                    <ShopifyCollectionGrid handle={category === 'Recovery Room' ? 'post-quirurgica' : 'sculpt-studio'} productCount={4} />
                 </div>
 
             </div>
+
+            {/* --- SMART MODAL OVERLAY --- */}
+            {isCalculatorOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in">
+                    <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg relative animate-slide-up max-h-[90vh] overflow-y-auto">
+                        <button
+                            onClick={() => setCalculatorOpen(false)}
+                            className="absolute top-4 right-4 z-50 p-2 bg-white rounded-full shadow-sm hover:bg-stone-100 transition-colors"
+                        >
+                            <X size={20} className="text-stone-500" />
+                        </button>
+
+                        <div className="p-2 md:p-6">
+                            {/* Pass mode="modal" to activate the embedded behavior */}
+                            <GuitarRatioQuiz
+                                mode="modal"
+                                onComplete={handleCalculatorResult}
+                                onClose={() => setCalculatorOpen(false)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Search } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { SeoHead } from './components/SeoHead';
 
 export function NotFoundPage() {
@@ -12,11 +12,11 @@ export function NotFoundPage() {
             </div>
 
             <h1 className="font-serif text-4xl font-bold text-[#2C2420] mb-4 -mt-20 relative z-10">
-                Esta página se perdió...<br />pero tus curvas no deberían.
+                Esta página se perdió...<br />pero tu cintura no debería.
             </h1>
 
             <p className="text-stone-500 max-w-md mx-auto mb-8 text-lg">
-                La página que estás buscando no existe o ha sido movida. Regresemos a conseguirte el ajuste perfecto.
+                Te perdiste, pero no pierdas tu figura. Calcula tu talla exacta mientras arreglamos esto.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -27,10 +27,10 @@ export function NotFoundPage() {
                     <ArrowLeft className="w-4 h-4" /> Volver a la Tienda
                 </Link>
                 <Link
-                    to="/solutions"
-                    className="flex items-center justify-center gap-2 bg-stone-200 text-[#2C2420] px-8 py-3 rounded-full font-bold hover:bg-stone-300 transition-colors"
+                    to="/tools/calculator"
+                    className="flex items-center justify-center gap-2 bg-stone-200 text-[#2C2420] px-8 py-3 rounded-full font-bold hover:bg-[#D4AF37] hover:text-white transition-colors"
                 >
-                    <Search className="w-4 h-4" /> Buscar Solución
+                    🩺 Calcular mi Talla
                 </Link>
             </div>
         </div>

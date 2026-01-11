@@ -147,6 +147,11 @@ export function GlassNavbar() {
                                 </span>
                             </div>
 
+                            {/* CALCULATOR LINK (NEW) */}
+                            <Link to="/tools/calculator" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
+                                Calculadora
+                            </Link>
+
                             {/* OTHER LINKS */}
                             <Link to="/pages/our-story" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
                                 Our Story
@@ -397,7 +402,10 @@ export function GlassNavbar() {
 
                         {/* Mobile: EXTRA LINKS */}
                         <div className="space-y-4 pt-4">
-                            <Link to="/pages/guia-de-tallas" className="flex items-center gap-3 text-[#D4AF37] font-bold" onClick={() => setIsMobileMenuOpen(false)}>
+                            <Link to="/tools/calculator" className="flex items-center gap-3 text-[#D4AF37] font-bold text-lg" onClick={() => setIsMobileMenuOpen(false)}>
+                                <span>🧮</span> CALCULADORA DE FAJE
+                            </Link>
+                            <Link to="/pages/guia-de-tallas" className="flex items-center gap-3 text-stone-900 font-bold" onClick={() => setIsMobileMenuOpen(false)}>
                                 <span>📐</span> ENCUENTRA TU TALLA
                             </Link>
                             <Link to="/pages/tracking" className="flex items-center gap-3 text-stone-500 text-sm" onClick={() => setIsMobileMenuOpen(false)}>

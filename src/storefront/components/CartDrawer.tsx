@@ -1,7 +1,8 @@
 
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../hooks/useStoreContext';
-import { Trash2, Lock, ArrowRight, Smartphone, Check } from 'lucide-react';
+import { Trash2, Lock, ArrowRight, Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 // Mock Upsells for the "Smart Cart" strategy
@@ -177,6 +178,29 @@ export function CartDrawer() {
                                             </div>
                                         </div>
                                     ))
+                                )}
+
+                                {cart.some(item => item.product.title.includes('Stage 1') || item.product.category?.includes('Recovery')) && (
+                                    <div className="mt-6 p-4 bg-[#F9F4E8] border border-[#D4AF37]/30 rounded-xl relative overflow-hidden">
+                                        <div className="relative z-10 flex gap-4 items-start">
+                                            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-lg shadow-sm shrink-0">
+                                                ⏳
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-[#2C2420] text-sm mb-1">¿Estás llevando Stage 1?</h4>
+                                                <p className="text-[10px] text-stone-500 mb-2 leading-relaxed">
+                                                    Cuando baje la inflamación (Semana 4-6), necesitarás más compresión para moldear. Ahorra 15% llevando el Kit Completo.
+                                                </p>
+                                                <Link
+                                                    to="/tools/stage1-vs-stage2"
+                                                    onClick={toggleCart}
+                                                    className="text-[10px] font-bold text-[#D4AF37] underline hover:text-[#2C2420] transition-colors"
+                                                >
+                                                    Ver Diferencia: Stage 1 vs Stage 2 &rarr;
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
 
                                 {/* BLOCK 3: THE "ONE-CLICK" UPSELL */}

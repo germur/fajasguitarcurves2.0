@@ -30,6 +30,22 @@ export function CollectionPage({ title, handle, description }: CollectionPagePro
                     </a>
                 </div>
 
+                {/* 🚨 BREAK BANNER (Pattern Interrupt) */}
+                <div className="mb-12 bg-stone-50 border border-[#D4AF37]/20 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-[#D4AF37] text-white rounded-full flex items-center justify-center text-2xl shadow-md">
+                            🩺
+                        </div>
+                        <div>
+                            <h3 className="font-serif text-xl font-bold text-[#2C2420]">Deja de adivinar. Calcula tu etapa exacta.</h3>
+                            <p className="text-sm text-stone-500">Respondemos tus dudas post-quirúrgicas en 1 minuto.</p>
+                        </div>
+                    </div>
+                    <a href="/tools/calculator" className="whitespace-nowrap px-6 py-3 bg-[#2C2420] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#D4AF37] transition-colors shadow-lg">
+                        Usar Calculadora
+                    </a>
+                </div>
+
                 <div className="mb-20">
                     <ShopifyCollectionGrid handle={handle} productCount={12} />
                 </div>

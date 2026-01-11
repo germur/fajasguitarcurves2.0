@@ -19,7 +19,7 @@ export function HomeHero() {
                         className="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale"
                     >
                         {/* Placeholder Video - Medical Vibe */}
-                        <source src="https://cdn.shopify.com/videos/c/o/v/f5f5471c35774312b694380365775796.mp4" type="video/mp4" />
+                        <source src="/assets/gc-animation.mp4" type="video/mp4" />
                     </video>
                     {/* Clinical Blue Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#D6D9DD]/90 via-[#D6D9DD]/50 to-transparent mix-blend-multiply" />
@@ -35,7 +35,7 @@ export function HomeHero() {
                         className="w-full h-full object-cover opacity-60 mix-blend-multiply"
                     >
                         {/* Placeholder Video - Aesthetic Vibe */}
-                        <source src="https://cdn.shopify.com/videos/c/o/v/063f689e47794711855b74668748d536.mp4" type="video/mp4" />
+                        <source src="/assets/gc-animation.mp4" type="video/mp4" />
                     </video>
                     {/* Warm Gold/Cacao Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#8C7A6B]/90 via-[#B49286]/40 to-transparent mix-blend-overlay" />

@@ -29,6 +29,29 @@ import BBLKitPage from '@/storefront/pages/BBLKitPage'
 import OurStoryPage from '@/storefront/pages/OurStoryPage'
 import FAQPage from '@/storefront/pages/FAQPage'
 
+// MAES Content Ecosystem Assets
+import RecoveryTimelineCalculator from '@/storefront/pages/tools/RecoveryTimelineCalculator'
+import StageComparator from '@/storefront/pages/tools/StageComparator'
+import GuitarRatioQuiz from '@/storefront/pages/tools/GuitarRatioQuiz'
+import LipoFoamManual from '@/storefront/pages/guides/LipoFoamManual'
+import FajaTroubleshooting from '@/storefront/pages/guides/FajaTroubleshooting'
+import FibrosisBible from '@/storefront/pages/blog/FibrosisBible'
+import AnatomyFaja from '@/storefront/pages/blog/AnatomyFaja'
+import InflammationTimeline from '@/storefront/pages/blog/InflammationTimeline'
+import SizingAsymmetric from '@/storefront/pages/blog/SizingAsymmetric'
+import ArmBackLipo from '@/storefront/pages/blog/ArmBackLipo'
+import SnatchTest from '@/storefront/pages/blog/SnatchTest'
+import MorningRoutine from '@/storefront/pages/blog/MorningRoutine'
+import WaistTrainingMyths from '@/storefront/pages/blog/WaistTrainingMyths'
+import CurvyBridesLookbook from '@/storefront/pages/lifestyle/CurvyBridesLookbook'
+import PostpartumVsLipo from '@/storefront/pages/blog/PostpartumVsLipo'
+import CityLandingPage from '@/storefront/pages/local/CityLandingPage'
+import GlossaryPage from '@/storefront/pages/resources/GlossaryPage'
+import VsGenericPage from '@/storefront/pages/resources/VsGenericPage'
+import BBLChecklist from '@/storefront/pages/resources/BBLChecklist'
+import RecoveryDiaries from '@/storefront/pages/social/RecoveryDiaries'
+import ToolsHubPage from '@/storefront/pages/tools/ToolsHubPage'
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -198,6 +221,38 @@ export const router = createBrowserRouter([
         path: 'pages/tracking',
         element: <UserDashboard />, // Or ShippingPage, but Account is safer for tracking logic
       },
+
+      /* --- MAES CONTENT ECOSYSTEM ROUTES --- */
+      // 1. Money Pages (Tools & Guides)
+      { path: 'tools', element: <ToolsHubPage /> },
+      { path: 'tools/recovery-timeline', element: <RecoveryTimelineCalculator /> },
+      { path: 'tools/stage1-vs-stage2', element: <StageComparator /> },
+      { path: 'tools/calculator', element: <GuitarRatioQuiz /> },
+      { path: 'tools/guitar-ratio', element: <GuitarRatioQuiz /> },
+      { path: 'guides/lipo-foam-manual', element: <LipoFoamManual /> },
+      { path: 'guides/troubleshooting', element: <FajaTroubleshooting /> },
+
+      // 2. Authority Cluster
+      { path: 'blog/fibrosis-bible', element: <FibrosisBible /> },
+      { path: 'blog/anatomy-of-faja', element: <AnatomyFaja /> },
+      { path: 'blog/inflammation-timeline', element: <InflammationTimeline /> },
+      { path: 'blog/sizing-asymmetric', element: <SizingAsymmetric /> },
+      { path: 'blog/arm-back-lipo', element: <ArmBackLipo /> },
+
+      // 3. Lifestyle
+      { path: 'blog/snatch-test', element: <SnatchTest /> },
+      { path: 'blog/morning-routine', element: <MorningRoutine /> },
+      { path: 'blog/waist-training-myths', element: <WaistTrainingMyths /> },
+      { path: 'gallery/curvy-brides', element: <CurvyBridesLookbook /> },
+      { path: 'blog/postpartum-vs-lipo', element: <PostpartumVsLipo /> },
+
+      // 4. Technical & Local
+      { path: 'local/:city', element: <CityLandingPage /> },
+      { path: 'glossary', element: <GlossaryPage /> },
+      { path: 'compare/vs-generic', element: <VsGenericPage /> },
+      { path: 'resources/bbl-checklist', element: <BBLChecklist /> },
+      { path: 'stories/recovery-diaries', element: <RecoveryDiaries /> },
+
       {
         path: '*',
         element: <NotFoundPage />,
