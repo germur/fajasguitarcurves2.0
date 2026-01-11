@@ -1,0 +1,41 @@
+{
+    "products": [
+        {
+            "id": "mat-1",
+            "title": "Faja Postparto Alta Compresión",
+            "price": 89.00,
+            "image": "/images/products/maternity-1.jpg",
+            "category": "Maternity",
+            "tags": [
+                "Maternity",
+                "Postpartum",
+                "Stage 1"
+            ],
+            "description": "Designed specifically for postpartum recovery to help organs return to place."
+        },
+        {
+            "id": "mat-2",
+            "title": "Short Materno Soporte de Barriga",
+            "price": 55.00,
+            "image": "/images/products/maternity-2.jpg",
+            "category": "Maternity",
+            "tags": [
+                "Maternity",
+                "Pregnancy"
+            ],
+            "description": "Gentle support for your growing bump."
+        },
+        {
+            "id": "mat-3",
+            "title": "Brasier de Lactancia",
+            "price": 45.00,
+            "image": "/images/products/maternity-3.jpg",
+            "category": "Maternity",
+            "tags": [
+                "Maternity",
+                "Nursing"
+            ],
+            "description": "Easy access for nursing with comfortable support."
+        }
+    ]
+}

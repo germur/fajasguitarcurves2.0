@@ -125,7 +125,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const addToCart = async (product: StoreProduct, size: string) => {
         if (!shopifyCartId) {
             console.error("No active Shopify Cart ID. Cannot add item.");
-            // Try to recreate cart if missing?
+            // Try to recreate cart if missing
             if (shopifyClient.checkout) createNewCart().then(() => addToCart(product, size));
             return;
         }
@@ -133,9 +133,55 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setIsCartOpen(true);
 
         try {
-            // Mocking variant ID fetch logic for demo
-            // In Phase 22, we noted this gap. For now, we still assume product.id IS the variant ID or we pass it through.
-            const variantId = product.id;
+            let variantId: string | undefined = undefined;
+
+            // 1. Try to find in local static data first
+            if (product.variants && product.variants.length > 0) {
+                const variant = product.variants.find(v => v.size === size);
+                if (variant) {
+                    variantId = variant.id;
+                }
+            }
+
+            // 2. If not found locally, fetch real data from Shopify
+            // This handles cases where JSON has Product ID but no Variant IDs
+            if (!variantId && shopifyClient.product) {
+                try {
+                    // Try to fetch by ID (assuming product.id is a valid Shopify GID)
+                    const shopifyProduct = await shopifyClient.product.fetch(product.id);
+
+                    if (shopifyProduct && shopifyProduct.variants) {
+                        // Find variant matching the size
+                        const variant = shopifyProduct.variants.find((v: any) => {
+                            // Match by variant title (e.g. "S", "Small")
+                            if (v.title === size) return true;
+                            // Or match by selected options (Name: Size, Value: S)
+                            if (v.selectedOptions) {
+                                return v.selectedOptions.some((opt: any) => opt.value === size);
+                            }
+                            return false;
+                        });
+
+                        if (variant) {
+                            variantId = variant.id;
+                            console.log(`Fetched real Variant ID for ${product.title} (${size}): ${variantId}`);
+                        }
+                    }
+                } catch (fetchErr) {
+                    console.warn(`Failed to fetch product ${product.id} from Shopify.`, fetchErr);
+                }
+            }
+
+            if (!variantId) {
+                // Fallback for demo/dev mode only: Use product ID if it looks like a mock
+                if (!product.id.startsWith('gid://')) {
+                    variantId = product.id; // Allow mock IDs for mock products
+                } else {
+                    console.error(`Could not find Variant ID for ${product.title} size ${size}`);
+                    alert('Lo sentimos, no pudimos verificar el inventario para esta talla. Por favor intenta de nuevo.');
+                    return;
+                }
+            }
 
             const lineItemsToAdd = [
                 {
@@ -149,10 +195,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             updateLocalCartState(updatedCart);
         } catch (e) {
             console.error('Error adding to Shopify cart:', e);
-            // Fallback for demo purposes if API fails (e.g. bad variant ID)
-            // We could optimistically add to local state here if we wanted a "faked" success,
-            // but it is better to show an error or nothing.
-            alert('Note: Setup currently uses mock product IDs. In a real deployment, these must match Shopify Variant IDs exactly.');
+            alert('Hubo un error al agregar el producto al carrito. Por favor intenta de nuevo.');
         }
     };
 

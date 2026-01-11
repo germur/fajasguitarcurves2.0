@@ -1,270 +1,415 @@
 // @ts-nocheck
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { getProductById } from './data/store-data';
+import { useProduct } from './hooks/useProduct';
+import { useStore } from './hooks/useStoreContext';
+import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { LocalCollectionGrid } from './components/LocalCollectionGrid';
+import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 
 export function ProductDetailView() {
     const { id } = useParams<{ id: string }>();
+    const { addToCart } = useStore();
+    const [selectedSize, setSelectedSize] = useState<string>('');
+    const [selectedColor, setSelectedColor] = useState<string>('Cocoa'); // Default
+    const [isDescriptionOpen, setIsDescriptionOpen] = useState(true); // Control manual del acordeón
+
+    // 1. Data Fetching Logic
+    const localProduct = getProductById(id || '');
+    const { product: fetchedProduct, loading, error } = useProduct(localProduct ? '' : (id || ''));
+    const product = localProduct || fetchedProduct;
 
     useEffect(() => {
-        // Scroll to top on mount
         window.scrollTo(0, 0);
+        setSelectedSize('');
+        // Reset color if needed based on product availability, but keeping Cocoa default is fine for logic
     }, [id]);
 
-    if (!id) return <div>Product not found</div>;
+    // Scroll to top helper for sticky bar
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    if (loading && !product) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#FAF9F6]">
+                <Loader2 className="animate-spin text-[#D4AF37]" size={40} />
+            </div>
+        );
+    }
+
+    if (!product) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#FAF9F6] px-4">
+                <div className="text-center max-w-md">
+                    <h2 className="text-3xl font-serif text-[#2C2420] mb-4">Producto no encontrado</h2>
+                    <p className="text-sm text-stone-500 mb-6">{error || 'El producto que buscas no existe.'}</p>
+                    <Link to="/" className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-black transition-colors">Volver al Inicio</Link>
+                </div>
+            </div>
+        );
+    }
+
+    const { title, price, image, description, category, badge, benefit } = product;
+
+    // ---------------------------------------------------------
+    // LOGIC: EXTRACTION & CHECKING
+    // ---------------------------------------------------------
+    const variants = product?.variants || [];
+
+    // 1. Extract Unique Colors & Sizes
+    const rawColors = variants.flatMap((v: any) => v.selectedOptions.filter((o: any) => ['Color', 'Cor', 'Colour'].includes(o.name)).map((o: any) => o.value));
+    const uniqueColors = Array.from(new Set(rawColors));
+
+    const rawSizes = variants.flatMap((v: any) => v.selectedOptions.filter((o: any) => ['Size', 'Talla', 'Tamaño'].includes(o.name)).map((o: any) => o.value));
+    const uniqueSizes = Array.from(new Set(rawSizes)); // Maintain original order usually, or sort manually if needed
+
+    // 2. Helper Availability
+    const checkAvailability = (color: string, size: string) => {
+        const match = (val1: string, val2: string) => val1?.toLowerCase() === val2?.toLowerCase();
+        const exactVariant = variants.find((v: any) => {
+            const vColor = v.selectedOptions.find((o: any) => ['Color', 'Cor', 'Colour'].includes(o.name))?.value;
+            const vSize = v.selectedOptions.find((o: any) => ['Size', 'Talla', 'Tamaño'].includes(o.name))?.value;
+            const colorMatch = color ? match(vColor, color) : true;
+            const sizeMatch = size ? match(vSize, size) : true;
+            return colorMatch && sizeMatch;
+        });
+        return {
+            exists: !!exactVariant,
+            available: exactVariant?.available ?? false,
+            variant: exactVariant
+        };
+    };
+
+    // 3. Add to Cart Handler
+    const handleAddToCart = () => {
+        if (!selectedSize) {
+            // Shake animation or highlight could go here
+            return;
+        }
+        const { variant } = checkAvailability(selectedColor, selectedSize);
+
+        if (uniqueColors.length > 0 && !selectedColor) {
+            alert('Por favor selecciona un color');
+            return;
+        }
+
+        if (variant) {
+            addToCart(product, variant.title);
+        } else {
+            // Fallback for simple products
+            addToCart(product, selectedSize);
+        }
+    };
+
 
     return (
-        <div className="bg-[#FAF9F6] min-h-screen pb-24">
-            {/* Mobile-First Header / Nav would be here or in Layout */}
+        <div className="bg-[#FAF9F6] min-h-screen pb-24 animate-fade-in relative selection:bg-[#D4AF37] selection:text-white">
 
-            <shopify-store
-                store-domain="fajasguitarcurves.com"
-                language="es"
-                country="US"
-                style={{ display: 'block' }}
-            >
-                <shopify-product-context
-                    handle={id}
-                    style={{ display: 'block' }}
-                    dangerouslySetInnerHTML={{
-                        __html: `
-    < template >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 font-sans text-[#2C2420]">
+            {/* --- MOBILE STICKY BAR (New Feature) --- */}
+            {/* Aparece solo en móvil para facilitar la compra si hacen scroll */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+                <div className="flex flex-col">
+                    <span className="font-serif text-[#2C2420] font-bold truncate max-w-[120px]">{title}</span>
+                    <span className="text-xs text-stone-500">${price} USD</span>
+                </div>
+                <button
+                    onClick={selectedSize ? handleAddToCart : scrollToTop}
+                    className={`px-6 py-3 rounded-full font-bold text-xs tracking-widest uppercase shadow-lg transition-all ${selectedSize
+                        ? 'bg-[#D4AF37] text-white'
+                        : 'bg-[#2C2420] text-white'
+                        }`}
+                >
+                    {selectedSize ? 'Agregar' : 'Seleccionar'}
+                </button>
+            </div>
 
-        <!-- 1. Breadcrumbs (SEO & Navigation) -->
-        <nav class="flex items-center text-xs sm:text-sm text-stone-500 mb-6 overflow-x-auto whitespace-nowrap">
-            <a href="/" class="hover:text-[#A35944] transition-colors">Home</a>
-            <span class="mx-2">/</span>
-            <a href="/store/medical" class="hover:text-[#A35944] transition-colors">Post-Surgery</a>
-            <span class="mx-2">/</span>
-            <span class="text-[#2C2420] font-medium truncate"><shopify-data query="product.title"></shopify-data></span>
-        </nav>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 pb-12 font-sans text-[#2C2420]">
 
-            <!-- 2. Visual Gallery (Left Column) -->
-            <div class="md:col-span-7 lg:col-span-8">
-                <div class="grid grid-cols-1 gap-4">
-                    <!-- Main Hero Image -->
-                    <div class="aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-2xl overflow-hidden relative border border-stone-200 shadow-sm">
-                        <shopify-media
-                            query="product.featuredImage"
-                            class="w-full h-full object-cover"
-                        ></shopify-media>
-                        <div class="absolute top-4 left-4 bg-[#D1AB66] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase">
-                            Best Seller
+                {/* 1. Breadcrumbs (Clean Design) */}
+                <nav className="flex items-center text-[10px] sm:text-xs text-stone-400 mb-8 uppercase tracking-wider">
+                    <Link to="/" className="hover:text-[#D4AF37] transition-colors">Home</Link>
+                    <span className="mx-2">/</span>
+                    <Link to="/collections/sculpt" className="hover:text-[#D4AF37] transition-colors">{category || 'Colección'}</Link>
+                    <span className="mx-2">/</span>
+                    <span className="text-[#2C2420] font-bold truncate border-b border-[#D4AF37]">{title}</span>
+                </nav>
+
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16">
+
+                    {/* 2. Visual Gallery (Left Column) */}
+                    <div className="md:col-span-6 lg:col-span-6">
+                        <div className="sticky top-24">
+                            {/* Main Hero Image - Editorial Look */}
+                            <div className="aspect-[4/5] bg-stone-100 rounded-[2rem] overflow-hidden relative shadow-sm group cursor-zoom-in">
+                                <img
+                                    src={image}
+                                    alt={title}
+                                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                                />
+                                {badge && (
+                                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-[#2C2420] text-[10px] font-bold px-4 py-2 rounded-full tracking-widest uppercase shadow-sm border border-white">
+                                        {badge}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Trust Signals (Horizontal Strip) */}
+                            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-stone-200 pt-6">
+                                {[
+                                    { icon: ShieldCheck, title: "Garantía", sub: "Material Certificado" },
+                                    { icon: Truck, title: "Envío Rápido", sub: "Despacho en 24h" },
+                                    { icon: Check, title: "Cambios", sub: "Primer cambio gratis" }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="text-center group">
+                                        <div className="w-10 h-10 mx-auto rounded-full bg-white border border-stone-100 flex items-center justify-center text-[#D4AF37] mb-2 shadow-sm group-hover:scale-110 transition-transform">
+                                            <item.icon size={18} />
+                                        </div>
+                                        <p className="text-xs font-bold text-[#2C2420]">{item.title}</p>
+                                        <p className="text-[10px] text-stone-400">{item.sub}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Thumbnails / Grid (Mobile: Hidden or Carousel) -->
-                    <div class="hidden md:grid grid-cols-2 gap-4">
-                        <div class="aspect-square bg-stone-50 rounded-xl flex items-center justify-center border border-stone-200 p-4 text-center">
+                    {/* 3. The Buy Box (Right Column) */}
+                    <div className="md:col-span-6 lg:col-span-6">
+                        <div className="md:sticky md:top-24 space-y-8">
+
+                            {/* Header Info */}
                             <div>
-                                <span class="text-3xl mb-2 block">🩺</span>
-                                <p class="text-xs font-bold text-stone-600">Doctor<br>Certified</p>
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="flex text-[#D4AF37] gap-0.5">
+                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="currentColor" className="stroke-none" />)}
+                                    </div>
+                                    <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 Reviews</span>
+                                </div>
+
+                                <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-medium leading-tight mb-4">
+                                    {title}
+                                </h1>
+
+                                <div className="flex items-baseline gap-3 mb-6">
+                                    <span className="text-4xl text-[#2C2420] font-light tracking-tight">
+                                        ${price}
+                                    </span>
+                                    <div className="flex flex-col text-[10px] text-stone-400 leading-tight">
+                                        <span>USD</span>
+                                        <span className="text-[#D4AF37] font-bold">En Stock</span>
+                                    </div>
+                                </div>
+
+                                {/* BNPL Widget */}
+                                <div className="bg-[#F9F8F6] border border-[#D4AF37]/20 rounded-lg p-3 flex items-center gap-3">
+                                    <div className="bg-[#D4AF37] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">4x</div>
+                                    <p className="text-xs text-stone-600">
+                                        Paga en cuotas de <span className="font-bold text-[#2C2420]">${(price / 4).toFixed(2)}</span> sin interés.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="aspect-square bg-stone-50 rounded-xl flex items-center justify-center border border-stone-200 p-4 text-center">
-                            <div>
-                                <span class="text-3xl mb-2 block">⏳</span>
-                                <p class="text-xs font-bold text-stone-600">Instant<br>Hourglass</p>
+
+                            {/* --- THE VIBECODED SELECTOR --- */}
+                            <div className="space-y-8">
+
+                                {/* 1. Color Swatches (Visual) */}
+                                {uniqueColors.length > 0 && (
+                                    <div>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-stone-900 mb-4 block flex justify-between">
+                                            <span>Color: <span className="text-stone-500 font-normal capitalize">{selectedColor}</span></span>
+                                        </label>
+                                        <div className="flex gap-4">
+                                            {uniqueColors.map((color: string) => {
+                                                const lowerColor = color.toLowerCase();
+                                                // Mapeo real de colores (Robust Multi-language Support)
+                                                const bgStyle = lowerColor.includes('cocoa') ? '#C8A688'
+                                                    : lowerColor.includes('mocha') ? '#6F4E37'
+                                                        : lowerColor.includes('moka') ? '#6F4E37' // Spanish Moka
+                                                            : lowerColor.includes('black') ? '#1A1A1A'
+                                                                : lowerColor.includes('negro') ? '#1A1A1A' // Spanish Black
+                                                                    : lowerColor.includes('beige') ? '#F5F5DC'
+                                                                        : lowerColor.includes('nude') ? '#E8BEAC'
+                                                                            : lowerColor.includes('cafe') ? '#6F4E37'
+                                                                                : lowerColor.includes('chocolate') ? '#3D2B1F'
+                                                                                    : '#E5E5E5';
+
+                                                return (
+                                                    <button
+                                                        key={color}
+                                                        onClick={() => { setSelectedColor(color); setSelectedSize(''); }}
+                                                        className={`w-12 h-12 rounded-full transition-all relative group ${selectedColor === color
+                                                            ? 'ring-2 ring-offset-2 ring-[#D4AF37] scale-110'
+                                                            : 'hover:scale-105 hover:ring-2 hover:ring-stone-200'
+                                                            }`}
+                                                        style={{ backgroundColor: bgStyle }}
+                                                        title={color}
+                                                        aria-label={`Select color ${color}`}
+                                                    >
+                                                        {selectedColor === color && (
+                                                            <span className="absolute inset-0 flex items-center justify-center text-white drop-shadow-md">
+                                                                <Check size={16} strokeWidth={3} />
+                                                            </span>
+                                                        )}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* 2. Size Grid (The Replacement for Select) */}
+                                <div>
+                                    <div className="flex justify-between items-center mb-4">
+                                        <label className="text-xs font-bold uppercase tracking-widest text-stone-900">
+                                            Talla: <span className="text-stone-500 font-normal">{selectedSize || 'Seleccionar'}</span>
+                                        </label>
+                                        <Link to="/pages/guia-de-tallas" className="flex items-center gap-1 text-[10px] font-bold text-[#D4AF37] hover:text-black transition-colors underline decoration-[#D4AF37]/40">
+                                            <Ruler size={12} /> Guía de Medidas
+                                        </Link>
+                                    </div>
+
+                                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
+                                        {uniqueSizes.map((size: string) => {
+                                            const { exists, available } = checkAvailability(selectedColor, size);
+                                            // Lógica de fallback para productos simples
+                                            const isGenericValid = !selectedColor ? variants.some((v: any) => v.selectedOptions.some((o: any) => ['Size', 'Talla', 'Tamaño'].includes(o.name) && o.value === size)) : exists;
+                                            const isDisabled = !isGenericValid;
+
+                                            return (
+                                                <button
+                                                    key={size}
+                                                    onClick={() => setSelectedSize(size)}
+                                                    disabled={isDisabled}
+                                                    className={`
+                                                        py-3 rounded-lg text-xs font-bold transition-all border
+                                                        ${isDisabled
+                                                            ? 'bg-stone-50 text-stone-300 border-transparent cursor-not-allowed decoration-slice line-through decoration-stone-300'
+                                                            : selectedSize === size
+                                                                ? 'bg-[#2C2420] text-white border-[#2C2420] shadow-md transform -translate-y-0.5'
+                                                                : 'bg-white text-stone-600 border-stone-200 hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                                                        }
+                                                    `}
+                                                >
+                                                    {size}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                    {!selectedSize && (
+                                        <p className="text-[10px] text-[#A35944] mt-2 flex items-center gap-1 animate-pulse">
+                                            * Selecciona una talla para continuar
+                                        </p>
+                                    )}
+                                </div>
+
+                                {/* 3. Main CTA */}
+                                <button
+                                    onClick={handleAddToCart}
+                                    disabled={!selectedSize}
+                                    className={`w-full py-5 rounded-2xl font-bold tracking-[0.2em] text-xs uppercase transition-all shadow-xl flex items-center justify-center gap-3 group
+                                        ${selectedSize
+                                            ? 'bg-[#D4AF37] text-white hover:bg-[#2C2420] hover:shadow-2xl hover:-translate-y-1'
+                                            : 'bg-stone-200 text-stone-400 cursor-not-allowed'}
+                                    `}
+                                >
+                                    <ShoppingBag size={18} className={selectedSize ? "group-hover:animate-bounce" : ""} />
+                                    <span>{selectedSize ? 'Agregar al Carrito' : 'Elige una opción'}</span>
+                                </button>
                             </div>
+
+
+                            {/* Accordions (Clean Design) */}
+                            {/* Accordions (Clean Design) & Feature Grid */}
+                            <div className="border-t border-stone-200 pt-6">
+                                {/* FEATURE GRID */}
+                                <div className="pb-8">
+                                    <h3 className="font-serif text-lg text-[#2C2420] mb-4">Ingeniería Detallada</h3>
+                                    <ProductFeatureGrid />
+                                </div>
+                                <div className="border-b border-stone-100">
+                                    <button
+                                        onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+                                        className="w-full py-4 flex justify-between items-center text-left"
+                                    >
+                                        <span className="font-serif text-lg text-[#2C2420]">
+                                            {isDescriptionOpen ? 'Leer menos' : 'Leer descripción detallada y beneficios (+)'}
+                                        </span>
+                                        <ChevronDown size={16} className={`transition-transform duration-300 ${isDescriptionOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+                                    <div className={`overflow-hidden transition-all duration-300 ${isDescriptionOpen ? 'max-h-[500px] opacity-100 mb-4' : 'max-h-0 opacity-0'}`}>
+                                        <p className="text-sm text-stone-600 leading-relaxed font-light mb-4">
+                                            {benefit || "Esta prenda combina ingeniería textil colombiana con comodidad diaria. Diseñada para moldear sin asfixiar."}
+                                        </p>
+                                        <div className="text-xs text-stone-500 prose prose-stone">
+                                            {description ? <div dangerouslySetInnerHTML={{ __html: description }} /> : null}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="border-b border-stone-100">
+                                    <details className="group">
+                                        <summary className="w-full py-4 flex justify-between items-center text-left cursor-pointer list-none">
+                                            <span className="font-serif text-lg text-[#2C2420]">Especificaciones Técnicas</span>
+                                            <ChevronDown size={16} className="transition-transform duration-300 group-open:rotate-180" />
+                                        </summary>
+                                        <div className="pb-4 text-sm text-stone-600 leading-relaxed font-light pl-4">
+                                            <ul className="list-disc space-y-2 marker:text-[#D4AF37]">
+                                                <li>Powernet de Alta Compresión (Grado Médico).</li>
+                                                <li>Forro interno de Lycra con microcápsulas de Vitamina E.</li>
+                                                <li>Costuras planas imperceptibles (Tecnología Seamless).</li>
+                                                <li>Sistema de cierre perineal.</li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <div className="border-b border-stone-100">
+                                    <details className="group">
+                                        <summary className="w-full py-4 flex justify-between items-center text-left cursor-pointer list-none">
+                                            <span className="font-serif text-lg text-[#2C2420]">Preguntas Frecuentes</span>
+                                            <ChevronDown size={16} className="transition-transform duration-300 group-open:rotate-180" />
+                                        </summary>
+                                        <div className="pb-4 text-sm text-stone-600 leading-relaxed font-light pl-4 space-y-4">
+                                            <div>
+                                                <p className="font-bold text-[#2C2420] mb-1">¿Cómo sé mi talla?</p>
+                                                <p>Usa nuestra Guía de Tallas y mídete cintura y cadera. Si estás en post-op, considera tu inflamación.</p>
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-[#2C2420] mb-1">¿Cómo lavo la prenda?</p>
+                                                <p>Lavar a mano con jabón suave y agua fría. No usar secadora ni exprimir para no dañar el Powernet.</p>
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-[#2C2420] mb-1">¿Aceptan cambios?</p>
+                                                <p>Sí, aceptamos el primer cambio gratis dentro de los 30 días si la prenda está en perfecto estado.</p>
+                                            </div>
+                                            <div className="pt-2">
+                                                <Link to="/pages/faq" className="text-[#D4AF37] font-bold underline text-xs">Ver todas las preguntas frecuentes</Link>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 3. The Buy Box (Right Column / Sticky) -->
-            <div class="md:col-span-5 lg:col-span-4">
-                <div class="md:sticky md:top-24 space-y-6">
-
-                    <!-- Header Info -->
-                    <div>
-                        <div class="flex items-center gap-1 mb-2">
-                            <div class="flex text-[#A35944] text-sm">★★★★★</div>
-                            <span class="text-xs text-stone-500 font-medium ml-1">4.9 (540 Recoveries)</span>
-                        </div>
-                        <h1 class="font-serif text-2xl md:text-3xl lg:text-4xl text-[#2C2420] font-bold leading-tight mb-2">
-                            <shopify-data query="product.title"></shopify-data>
-                        </h1>
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-2xl text-[#2C2420] font-medium">
-                                <shopify-money query="product.priceRange.minVariantPrice"></shopify-money>
-                            </span>
-                            <span class="text-xs text-stone-400">USD</span>
-                        </div>
-
-                        <!-- Klarna / Afterpay Msg -->
-                        <div class="flex items-center gap-2 bg-[#F5EDDF]/30 p-2 rounded-lg border border-[#F5EDDF]">
-                            <span class="text-[10px] text-[#2C2420]">
-                                Pay in 4 interest-free payments of <span class="font-bold">$27.50</span>
-                            </span>
-                        </div>
+                {/* Related Products */}
+                <div className="mt-32">
+                    <div className="flex justify-between items-end mb-12">
+                        <h3 className="font-serif text-3xl md:text-4xl text-[#2C2420]">
+                            También te podría gustar
+                        </h3>
+                        <Link to="/collections/sculpt" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D4AF37] hover:text-[#2C2420] transition-colors">
+                            Ver Todo <ArrowUpRight size={14} />
+                        </Link>
                     </div>
-
-                    <!-- Variants -->
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="font-bold uppercase tracking-wide text-stone-500">Select Size</span>
-                            <button class="text-[#A35944] underline decoration-[#A35944]/30 hover:decoration-[#A35944] transition-all flex items-center gap-1">
-                                <span>📏</span> Guitar Tech Calculator
-                            </button>
-                        </div>
-                        <div class="guitar-variants">
-                            <shopify-variant-selector></shopify-variant-selector>
-                        </div>
-                        <p class="text-[10px] text-[#A35944] bg-[#A35944]/5 p-2 rounded-md border border-[#A35944]/10">
-                            <strong>Note:</strong> Runs small. Between sizes? Size UP.
-                        </p>
-                    </div>
-
-                    <!-- CTA Actions -->
-                    <div class="space-y-4">
-                        <shopify-buy-button>
-                            <button slot="button" class="w-full h-14 bg-[#2C2420] text-white rounded-full font-bold text-base tracking-widest uppercase hover:bg-black hover:scale-[1.01] active:scale-[0.99] transition-all shadow-xl flex items-center justify-center gap-3">
-                                <span>Add to Cart</span>
-                                <span class="w-1 h-1 bg-white rounded-full opacity-50"></span>
-                                <shopify-money query="product.priceRange.minVariantPrice"></shopify-money>
-                            </button>
-                        </shopify-buy-button>
-
-                        <div class="grid grid-cols-3 gap-2 grayscale opacity-60">
-                            <div class="h-8 bg-stone-200 rounded animate-pulse"></div>
-                            <div class="h-8 bg-stone-200 rounded animate-pulse"></div>
-                            <div class="h-8 bg-stone-200 rounded animate-pulse"></div>
-                        </div>
-                    </div>
-
-                    <!-- Smart Upsell Module -->
-                    <div class="bg-white p-4 rounded-xl border-2 border-[#D1AB66]/20 shadow-sm relative overflow-hidden">
-                        <div class="absolute top-0 left-0 bg-[#D1AB66] text-white text-[9px] font-bold px-2 py-0.5 rounded-br-lg uppercase tracking-wider">
-                            Surgeon Recommended
-                        </div>
-                        <div class="flex items-start gap-4 mt-2">
-                            <div class="w-16 h-16 bg-stone-100 rounded-lg shrink-0 flex items-center justify-center text-2xl">
-                                🧴
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-sm text-[#2C2420] mb-0.5">Complete Your Recovery</h4>
-                                <p class="text-xs text-stone-500 mb-2">Add <strong>Lipo Foam 360</strong> to prevent skin marks.</p>
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="checkbox" class="rounded border-stone-300 text-[#2C2420] focus:ring-[#2C2420]">
-                                        <span class="text-xs font-bold text-[#2C2420] group-hover:underline">Add to order (+ $15.00)</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Accordions (Progressive Disclosure) -->
-                    <div class="divide-y divide-stone-100 border-t border-b border-stone-100 text-sm">
-                        
-                        <details class="group py-4 cursor-pointer" open>
-                            <summary class="font-bold text-[#2C2420] flex justify-between items-center list-none">
-                                <span>Description</span>
-                                <span class="transition-transform group-open:rotate-180">↓</span>
-                            </summary>
-                            <div class="pt-3 text-stone-600 leading-relaxed text-xs prose prose-stone max-w-none">
-                                <shopify-data query="product.descriptionHtml"></shopify-data>
-                                
-                                <!-- Cross-Sell Text Links (SEO) -->
-                                <div class="mt-4 pt-4 border-t border-stone-100">
-                                    <p class="font-bold text-[#2C2420] mb-1">Complete Your Kit:</p>
-                                    <ul class="space-y-1">
-                                        <li><a href="/store/products/lipo-foam-360" class="text-[#A35944] hover:underline">360° Lipo Foam for skin protection</a></li>
-                                        <li><a href="/store/products/abdominal-board" class="text-[#A35944] hover:underline">Abdominal Board for extra compression</a></li>
-                                        <li><a href="/store/products/urinal" class="text-[#A35944] hover:underline">Female Urinal for easy bathroom use</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </details>
-
-                        <details class="group py-4 cursor-pointer" open>
-                            <summary class="font-bold text-[#2C2420] flex justify-between items-center list-none">
-                                <span>Description</span>
-                                <span class="transition-transform group-open:rotate-180">↓</span>
-                            </summary>
-                            <div class="pt-3 text-stone-600 leading-relaxed text-xs prose prose-stone max-w-none">
-                                <shopify-data query="product.descriptionHtml"></shopify-data>
-                                
-                                <!-- Cross-Sell Text Links (SEO) -->
-                                <div class="mt-4 pt-4 border-t border-stone-100">
-                                    <p class="font-bold text-[#2C2420] mb-1">Complete Your Kit:</p>
-                                    <ul class="space-y-1">
-                                        <li><a href="/store/products/lipo-foam-360" class="text-[#A35944] hover:underline">360° Lipo Foam for skin protection</a></li>
-                                        <li><a href="/store/products/abdominal-board" class="text-[#A35944] hover:underline">Abdominal Board for extra compression</a></li>
-                                        <li><a href="/store/products/urinal" class="text-[#A35944] hover:underline">Female Urinal for easy bathroom use</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </details>
-
-                        <details class="group py-4 cursor-pointer">
-                            <summary class="font-bold text-[#2C2420] flex justify-between items-center list-none">
-                                <span>Why Guitar Tech?</span>
-                                <span class="transition-transform group-open:rotate-180">↓</span>
-                            </summary>
-                            <div class="pt-3 text-stone-600 leading-relaxed text-xs">
-                                <p class="mb-2"><strong>Smart Compression:</strong> Maximum control for the waist, zero compression for the hips (BBL Safe).</p>
-                                <p><strong>Viveltex Technology:</strong> Infused with Vitamin E, Cosmacol EMI, sea alae, and Ginkgo Biloba to soothe skin.</p>
-                            </div>
-                        </details>
-                        <details class="group py-4 cursor-pointer">
-                            <summary class="font-bold text-[#2C2420] flex justify-between items-center list-none">
-                                <span>Medical Specs</span>
-                                <span class="transition-transform group-open:rotate-180">↓</span>
-                            </summary>
-                            <div class="pt-3 text-stone-600 leading-relaxed text-xs">
-                                <ul class="list-disc pl-4 space-y-1">
-                                    <li>Powernet + Lycra construction</li>
-                                    <li>Flat seams (invisible under clothes)</li>
-                                    <li>Perineal zipper for bathroom ease</li>
-                                </ul>
-                            </div>
-                        </details>
-                        <details class="group py-4 cursor-pointer">
-                            <summary class="font-bold text-[#2C2420] flex justify-between items-center list-none">
-                                <span>Shipping & Returns</span>
-                                <span class="transition-transform group-open:rotate-180">↓</span>
-                            </summary>
-                            <div class="pt-3 text-stone-600 leading-relaxed text-xs">
-                                <p>Free exchanges on sizing issues within 30 days. Fast shipping across USA.</p>
-                            </div>
-                        </details>
-                    </div>
-
+                    <LocalCollectionGrid handle="cinturillas" productCount={4} fallbackProducts={category === 'Recovery Room' ? 'recovery' : 'sculpt'} />
                 </div>
+
             </div>
         </div>
-
-        {/* Related Products (SEO Fallback Strategy) */}
-        <div className="mt-24 border-t border-stone-200 pt-16">
-            <h3 className="font-serif text-2xl md:text-3xl text-[#2C2420] font-bold mb-8 pl-4 border-l-4 border-[#D1AB66]">
-                You Might Also Like
-            </h3>
-            <ShopifyCollectionGrid handle="cinturillas" productCount={4} />
-        </div>
-
-        <!-- 4. UGC / Social Proof (Full Width Below) -->
-        <div class="mt-16 md:mt-24">
-            <h3 class="font-serif text-2xl md:text-3xl text-center text-[#2C2420] font-bold mb-8">
-                Real Results on Real Bodies
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Placeholder UGC -->
-                <div class="aspect-[4/5] bg-stone-100 rounded-xl"></div>
-                <div class="aspect-[4/5] bg-stone-100 rounded-xl"></div>
-                <div class="aspect-[4/5] bg-stone-100 rounded-xl"></div>
-                <div class="aspect-[4/5] bg-stone-100 rounded-xl"></div>
-            </div>
-        </div>
-
-        <!-- 5. Sticky Added-to-Cart (Mobile Only - TODO Logic) -->
-
-    </div>
-                        </template >
-    `}}
-                />
-            </shopify-store>
-        </div >
     );
 }

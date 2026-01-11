@@ -14,13 +14,34 @@ export class ShopifyMapper {
         const title = shopifyProduct.title;
         const price = parseFloat(shopifyProduct.priceRange?.minVariantPrice?.amount || '0');
 
+        // Extract all images
+        const images = shopifyProduct.images?.edges?.map((edge: any) => edge.node.url) || [];
+
         // Base Object
         const mapped = {
             id: shopifyProduct.id,
             title: title,
             price: price,
-            image: shopifyProduct.images?.edges?.[0]?.node?.url || '',
+            image: images[0] || '', // Primary
+            images: images,         // All images for galleries/hovers
             tags: tags,
+            handle: shopifyProduct.handle,
+            variants: shopifyProduct.variants?.edges?.map((edge: any) => ({
+                id: edge.node.id,
+                title: edge.node.title, // "XS / Cocoa"
+                available: edge.node.availableForSale,
+                price: parseFloat(edge.node.price?.amount || '0'),
+                image: edge.node.image?.url,
+                selectedOptions: edge.node.selectedOptions?.map((opt: any) => ({
+                    name: opt.name,
+                    value: opt.value
+                })) || [],
+                size: edge.node.title // Fallback
+            })) || [],
+            options: shopifyProduct.options?.map((opt: any) => ({
+                name: opt.name,
+                values: opt.values
+            })) || [],
             isBestSeller: tags.includes('Best Seller') || tags.includes('Más Vendido'),
         };
 
@@ -31,6 +52,13 @@ export class ShopifyMapper {
                 stage: this.getRecoveryStage(tags),
                 compression: this.getCompressionLevel(tags),
                 features: this.getFeaturesFromTags(tags, ['Cierre', 'Broches', 'Espalda Alta'])
+            };
+        } else if (siloType === 'sculpt') {
+            return {
+                ...mapped,
+                compression: this.getCompressionLevel(tags),
+                occasion: this.getOccasion(tags), // e.g. 'gym', 'party', 'daily'
+                features: this.getFeaturesFromTags(tags, ['Strapless', 'Levanta Cola', 'Latex', 'Invisible'])
             };
         }
 
@@ -61,21 +89,46 @@ export class ShopifyMapper {
     // --- Helper Logic (The "Brain") ---
 
     static getRecoveryStage(tags: string[]) {
-        if (tags.some(t => t.match(/etapa.*1/i))) return 'Stage 1';
-        if (tags.some(t => t.match(/etapa.*3/i))) return 'Stage 3';
-        return 'Stage 2'; // Default safe bet for Post-Op if unspecified
+        // Strict matching based on user provided tags
+        if (tags.some(t => t.toLowerCase().includes('stage 1'))) return 'Stage 1';
+        if (tags.some(t => t.toLowerCase().includes('stage 2'))) return 'Stage 2';
+        if (tags.some(t => t.toLowerCase().includes('stage 3'))) return 'Stage 3';
+        return 'Stage 2'; // Default
+    }
+
+    static getOccasion(tags: string[]) {
+        const lowerTags = tags.map(t => t.toLowerCase());
+
+        // Brasieres (New Priority)
+        if (lowerTags.some(t => t.includes('brasier') || t.includes('post-op bra'))) return 'bra';
+
+        // Vestidos & Fiesta
+        if (lowerTags.some(t => t.includes('strapless') || t.includes('dress'))) return 'dress';
+
+        // Gym & Waist
+        if (lowerTags.some(t => t.includes('gym') || t.includes('waist trainer') || t.includes('neoprene'))) return 'gym';
+
+        // Daily Use / Jeans
+        if (lowerTags.some(t => t.includes('daily use') || t.includes('jeans') || t.includes('butt lifter'))) return 'jeans';
+
+        // BBL Special
+        if (lowerTags.some(t => t.includes('bbl') || t.includes('guitar'))) return 'bbl';
+
+        return 'all';
     }
 
     static getCompressionLevel(tags: string[]) {
-        if (tags.some(t => t.match(/alta.*compresion/i) || t.match(/high.*compression/i))) return 'Alta';
-        if (tags.some(t => t.match(/media/i))) return 'Media';
-        if (tags.some(t => t.match(/baja/i))) return 'Baja';
-        return 'Alta'; // Brand standard
+        const lowerTags = tags.map(t => t.toLowerCase());
+        if (lowerTags.some(t => t.includes('alta compresión') || t.includes('high compression'))) return 'Alta';
+        if (lowerTags.some(t => t.includes('media'))) return 'Media';
+        if (lowerTags.some(t => t.includes('light'))) return 'Baja';
+        return 'Alta';
     }
 
     static getButtLiftLevel(tags: string[]) {
-        if (tags.some(t => t.match(/ultra.*realce/i) || t.match(/butt.*lifter/i))) return 'Ultra Realce';
-        if (tags.some(t => t.match(/natural/i))) return 'Natural';
+        const lowerTags = tags.map(t => t.toLowerCase());
+        if (lowerTags.some(t => t.includes('ultra realce') || t.includes('butt lifter'))) return 'Ultra Realce';
+        if (lowerTags.some(t => t.includes('natural'))) return 'Natural';
         return 'Invisible';
     }
 
@@ -99,7 +152,18 @@ export class ShopifyMapper {
     }
 
     static getFeaturesFromTags(tags: string[], keywords: string[]) {
-        // Extract specific tech features present in tags
-        return tags.filter(tag => keywords.some(k => tag.toLowerCase().includes(k.toLowerCase())));
+        // Also look for English equivalents common in the new dataset
+        const expandedKeywords = [
+            ...keywords,
+            'High Back', 'Espalda Alta',
+            'Knee Length', 'Media Pierna',
+            'Arm Compression', 'Mangas',
+            'Strapless', 'Tiras Removibles',
+            'Cierre Lateral', 'Side Zipper'
+        ];
+
+        return tags.filter(tag =>
+            expandedKeywords.some(k => tag.toLowerCase().includes(k.toLowerCase()))
+        );
     }
 }

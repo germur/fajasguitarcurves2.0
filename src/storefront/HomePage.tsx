@@ -2,8 +2,10 @@ import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
 import { SiloBentoGrid } from './components/home/SiloBentoGrid';
 import { BestSellersCarousel } from './components/home/BestSellersCarousel';
-import { TrustSection } from './components/home/TrustSection';
-// import { TrustBar } from './components/home/TrustBar';
+import { InfiniteMarquee } from './components/home/InfiniteMarquee';
+import { BeforeAfterSlider } from './components/home/BeforeAfterSlider';
+import { ShopTheLook } from './components/home/ShopTheLook';
+import { SocialProofWall } from './components/home/SocialProofWall';
 // import { PainSolutionSlider } from './components/home/PainSolutionSlider';
 // import { SizeQuizCTA } from './components/home/SizeQuizCTA';
 // import { SeoAccordion } from './components/home/SeoAccordion';
@@ -32,17 +34,27 @@ export function HomePage() {
                 }}
             />
 
-            {/* 2. SECTION 1: HERO (Above the Fold) */}
+            {/* 2. SECTION 1: SEMANTIC HERO (Recover/Sculpt Router) */}
             <HomeHero />
 
-            {/* 3. SECTION 2: DISTRIBUIDOR DE TRÁFICO (Silo Architecture) */}
+            {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
+            <InfiniteMarquee />
+
+            {/* 4. SECTION 3: VISUAL NAVIGATION (Bento Grid) */}
             <SiloBentoGrid />
 
-            {/* 4. SECTION 3: LOS MANGOS BAJITOS (Best Sellers) */}
-            <BestSellersCarousel />
+            {/* 5. SECTION 4: PROBLEM/SOLUTION (Interactive Slider) */}
+            <BeforeAfterSlider />
 
-            {/* 5. SECTION 4: EDUCACIÓN & CONFIANZA (E-E-A-T) */}
-            <TrustSection />
+
+            {/* 6. SECTION 5: SHOP THE LOOK (Interactive Hotspots) */}
+            <ShopTheLook />
+
+            {/* 7. SECTION 6: SOCIAL PROOF (Wall of Curves) */}
+            <SocialProofWall />
+
+            {/* 8. SECTION 7: LOS MANGOS BAJITOS (Best Sellers) */}
+            <BestSellersCarousel />
 
         </div>
     );

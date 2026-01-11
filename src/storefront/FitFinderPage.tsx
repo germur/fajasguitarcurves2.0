@@ -121,9 +121,20 @@ function FAQAccordion() {
                             <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold border border-white/30">Reproducir Video</span>
                         </div>
                     </div>
-                    <p className="text-xs text-stone-500 leading-relaxed">
-                        Coloca la cinta métrica horizontalmente. Para la cintura, úsala sobre el ombligo. Para la cadera, busca la parte más prominente de tus glúteos.
-                    </p>
+                    <div className="space-y-4">
+                        <p className="text-sm text-stone-600 font-bold">
+                            Cómo medirte correctamente: Olvida tu talla de pantalón. Las fajas colombianas son prendas de ingeniería y requieren medidas exactas en pulgadas (in).
+                        </p>
+                        <div className="text-sm text-stone-500 bg-white p-3 rounded-lg border border-stone-100">
+                            <strong>CINTURA:</strong> Ubica la cinta métrica justo encima de tu ombligo (la parte más estrecha de tu torso). <em>Tip Pro: Aprieta la cinta ligeramente, tal como te gustaría que te abrace la faja.</em>
+                        </div>
+                        <div className="text-sm text-stone-500 bg-white p-3 rounded-lg border border-stone-100">
+                            <strong>CADERA:</strong> Junta los pies y pasa la cinta por la parte más prominente de tus glúteos.
+                        </div>
+                        <p className="text-xs text-stone-400 italic">
+                            Si tus medidas te ubican entre dos tallas, elige siempre la más grande (especialmente si estás en Stage 1 o inflamada).
+                        </p>
+                    </div>
                 </div>
             )}
         </div>

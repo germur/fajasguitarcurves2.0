@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import { ProductPage } from '@/components/ProductPage'
 import AcademiaView from '@/sections/academia/AcademiaView'
 import MedicalHubView from '@/sections/medical-hub/MedicalHubView'
-import GuitarCurvesView from '@/sections/guitar-curves/GuitarCurvesView'
 import LifestyleView from '@/sections/lifestyle/LifestyleView'
 import PainPointsView from '@/sections/pain-points/PainPointsView'
 import { StorefrontLayout } from '@/storefront/StorefrontLayout'
@@ -15,12 +14,20 @@ import ContactPage from '@/storefront/ContactPage'
 import { UserDashboard } from '@/storefront/UserDashboard'
 import { LabPage } from '@/storefront/LabPage'
 import { CollectionPage } from '@/storefront/CollectionPage'
-import { ReturnsPage } from '@/storefront/ReturnsPage'
 import { ShippingPage } from '@/storefront/ShippingPage'
 import { PrivacyPage } from '@/storefront/PrivacyPage'
 import { TermsPage } from '@/storefront/TermsPage'
 import { NotFoundPage } from '@/storefront/NotFoundPage'
 import { FitFinderPage } from '@/storefront/FitFinderPage'
+import FitGuaranteePage from '@/storefront/pages/FitGuaranteePage'
+import WholesalePage from '@/storefront/pages/WholesalePage'
+import PostSurgeryPage from '@/storefront/pages/PostSurgeryPage'
+import BlogTemplate from '@/storefront/pages/BlogTemplate'
+import HourglassPage from '@/storefront/pages/HourglassPage'
+import EssentialsPage from '@/storefront/pages/EssentialsPage'
+import BBLKitPage from '@/storefront/pages/BBLKitPage'
+import OurStoryPage from '@/storefront/pages/OurStoryPage'
+import FAQPage from '@/storefront/pages/FAQPage'
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +38,43 @@ export const router = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+      {
+        path: 'collections/recovery',
+        element: <PostSurgeryPage />,
+      },
+      // Alias for legacy support
+      {
+        path: 'collections/post-surgery-fajas',
+        element: <PostSurgeryPage />,
+      },
+      {
+        path: 'collections/sculpt',
+        element: <HourglassPage />,
+      },
+      // Alias for legacy support
+      {
+        path: 'collections/hourglass-shapewear',
+        element: <HourglassPage />,
+      },
+      {
+        path: 'collections/bras',
+        element: <EssentialsPage />,
+      },
+      // Alias for legacy support
+      {
+        path: 'collections/lipo-foams-boards',
+        element: <EssentialsPage />,
+      },
+      {
+        path: 'pages/bbl-recovery-kit',
+        element: <BBLKitPage />,
+      },
+      // Alias
+      {
+        path: 'pages/bbl-surgery-essentials',
+        element: <BBLKitPage />,
+      },
+
       {
         path: 'lab',
         element: <LabPage />,
@@ -52,8 +96,8 @@ export const router = createBrowserRouter([
         element: <FitFinderPage />,
       },
       {
-        path: 'guitar-curves',
-        element: <GuitarCurvesView />,
+        path: 'pages/guia-de-tallas',
+        element: <FitFinderPage />,
       },
       {
         path: 'lifestyle',
@@ -89,7 +133,34 @@ export const router = createBrowserRouter([
       },
       {
         path: 'returns',
-        element: <ReturnsPage />,
+        element: <FitGuaranteePage />,
+      },
+      // Alias for direct link
+      {
+        path: 'pages/fit-guarantee',
+        element: <FitGuaranteePage />,
+      },
+      // Alias for SEO
+      {
+        path: 'pages/cambios-y-devoluciones',
+        element: <FitGuaranteePage />,
+      },
+      {
+        path: 'pages/faq',
+        element: <FAQPage />,
+      },
+      {
+        path: 'pages/wholesale',
+        element: <WholesalePage />,
+      },
+      // Alias
+      {
+        path: 'pages/programa-mayorista',
+        element: <WholesalePage />,
+      },
+      {
+        path: 'blogs/recovery-tips/:handle',
+        element: <BlogTemplate />,
       },
       {
         path: 'shipping',
@@ -112,8 +183,20 @@ export const router = createBrowserRouter([
         element: <CollectionPage title="Medical Accessories" handle="accesorios" description="Professional foams, boards, and urinals for optimal recovery." />,
       },
       {
+        path: 'maternity',
+        element: <CollectionPage title="Maternidad" handle="maternity" description="Support and recovery for your post-partum journey." />,
+      },
+      {
         path: 'account',
         element: <UserDashboard />,
+      },
+      {
+        path: 'pages/our-story',
+        element: <OurStoryPage />,
+      },
+      {
+        path: 'pages/tracking',
+        element: <UserDashboard />, // Or ShippingPage, but Account is safer for tracking logic
       },
       {
         path: '*',

@@ -11,7 +11,7 @@ export function PolicyLayout({ title, lastUpdated, children }: PolicyLayoutProps
     return (
         <div className="bg-white min-h-screen pb-20 font-sans text-stone-900">
             {/* Header */}
-            <div className="bg-[#FAF9F6] border-b border-stone-100 py-16 px-6">
+            <div className="bg-[#FAF9F6] border-b border-stone-100 pt-16 pb-20 px-6">
                 <div className="max-w-3xl mx-auto text-center">
                     <div className="inline-flex items-center gap-2 text-[#D1AB66] font-bold uppercase tracking-widest text-xs mb-4">
                         <ShieldCheck className="w-4 h-4" />

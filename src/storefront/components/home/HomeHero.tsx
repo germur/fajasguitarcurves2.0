@@ -1,73 +1,139 @@
+import { useState } from 'react';
+import { ArrowRight, Activity, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity } from 'lucide-react';
-
-const HERO_VIDEO_MOCK = "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop";
-// Note: In production we'd use a real Cloudinaire or S3 URL for the poster and video
-const VIDEO_URL = "https://videos.pexels.com/video-files/4440847/4440847-hd_1920_1080_30fps.mp4";
 
 export function HomeHero() {
+    const [mode, setMode] = useState<'recover' | 'sculpt'>('recover');
+
     return (
-        <div className="relative h-[90vh] w-full overflow-hidden">
-            {/* Background Layer */}
-            <div className="absolute inset-0">
-                <video
-                    src={VIDEO_URL}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster={HERO_VIDEO_MOCK}
-                    className="w-full h-full object-cover"
-                />
-                {/* Overlay for readability */}
-                <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2C2420] via-transparent to-transparent opacity-90"></div>
-            </div>
-
-            {/* Content Layer */}
-            <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center text-[#F5EDDF]">
-
-                {/* Badge */}
-                <div className="mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                    <span className="inline-block px-3 py-1 border border-[#F5EDDF]/30 rounded-full text-xs font-bold tracking-[0.2em] uppercase backdrop-blur-md">
-                        CALIDAD MÉDICA Y CONFORT SUPERIOR
-                    </span>
+        <div className="relative w-full h-[calc(100vh-110px)] min-h-[600px] overflow-hidden bg-[#FAF9F6]">
+            {/* Background Media - Semantic Change */}
+            <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
+                {/* Layer 1: Cool/Clinical (Recover) */}
+                <div className={`absolute inset-0 bg-[#E8EAEB] transition-opacity duration-700 ${mode === 'recover' ? 'opacity-100' : 'opacity-0'}`}>
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover opacity-80 mix-blend-multiply grayscale"
+                    >
+                        {/* Placeholder Video - Medical Vibe */}
+                        <source src="https://cdn.shopify.com/videos/c/o/v/f5f5471c35774312b694380365775796.mp4" type="video/mp4" />
+                    </video>
+                    {/* Clinical Blue Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#D6D9DD]/90 via-[#D6D9DD]/50 to-transparent mix-blend-multiply" />
                 </div>
 
-                {/* H1 SEO Optimized */}
-                <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 max-w-5xl leading-[0.95] opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                    Fajas Colombianas Guitar Curves: <br />
-                    La Solución para Cintura Pequeña y Cadera Grande
-                </h1>
-
-                {/* Subtitle BLUF (Bottom Line Up Front) */}
-                <p className="text-lg md:text-xl text-stone-200 mb-10 max-w-2xl font-light leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                    Olvídate de las fajas que te aplastan los glúteos. Nuestra tecnología se adapta a tus curvas extremas y recuperación BBL.
-                </p>
-
-                {/* Dual Path CTA */}
-                <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-
-                    {/* Path 1: Shop Body Type (Primary) - Pulse Effect */}
-                    <Link
-                        to="/guitar-curves"
-                        className="group relative bg-[#D32F2F] text-white px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-[#B71C1C] transition-all transform hover:scale-105 flex items-center justify-center gap-3 shadow-xl overflow-hidden"
+                {/* Layer 2: Warm/Sculpt (Sculpt) */}
+                <div className={`absolute inset-0 bg-[#B49286] transition-opacity duration-700 ${mode === 'sculpt' ? 'opacity-100' : 'opacity-0'}`}>
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover opacity-60 mix-blend-multiply"
                     >
-                        {/* Pulse Ring */}
-                        <span className="absolute inset-0 rounded-full animate-ping bg-[#D32F2F] opacity-20 group-hover:opacity-0"></span>
+                        {/* Placeholder Video - Aesthetic Vibe */}
+                        <source src="https://cdn.shopify.com/videos/c/o/v/063f689e47794711855b74668748d536.mp4" type="video/mp4" />
+                    </video>
+                    {/* Warm Gold/Cacao Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#8C7A6B]/90 via-[#B49286]/40 to-transparent mix-blend-overlay" />
+                </div>
+            </div>
 
-                        <ArrowRight size={18} />
-                        <span>COMPRAR POR TIPO DE CUERPO</span>
-                    </Link>
+            {/* Glassmorphism Content Container */}
+            <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-start">
 
-                    {/* Path 2: Fit Finder (Secondary) */}
-                    <Link
-                        to="/fit-finder"
-                        className="group bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-5 rounded-full font-bold text-sm tracking-widest hover:bg-white hover:text-[#2C2420] transition-all flex items-center justify-center gap-3"
+                {/* The Semantic Router Switch */}
+                <div className="mb-8 p-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full inline-flex relative">
+                    <div
+                        className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-full shadow-sm transition-all duration-500 ease-out
+                        ${mode === 'recover' ? 'left-1' : 'left-[calc(50%+4px)]'}`}
+                    />
+                    <button
+                        onClick={() => setMode('recover')}
+                        className={`relative z-10 px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-colors duration-300 flex items-center gap-2
+                        ${mode === 'recover' ? 'text-[#2C2420]' : 'text-white/70 hover:text-white'}`}
                     >
-                        <span>CALCULAR MI TALLA</span>
-                        <Activity size={16} />
-                    </Link>
+                        <Activity className="w-3 h-3" />
+                        Recover
+                    </button>
+                    <button
+                        onClick={() => setMode('sculpt')}
+                        className={`relative z-10 px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-colors duration-300 flex items-center gap-2
+                         ${mode === 'sculpt' ? 'text-[#2C2420]' : 'text-white/70 hover:text-white'}`}
+                    >
+                        <Sparkles className="w-3 h-3" />
+                        Sculpt
+                    </button>
+                </div>
+
+                {/* Dynamic Copy */}
+                <div className="max-w-2xl transition-all duration-700 transform">
+                    <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-[#2C2420] leading-[0.9] mb-6">
+                        {mode === 'recover' ? (
+                            <>
+                                Recuperación <br />
+                                <span className="italic font-light">Médica Certificada</span>
+                            </>
+                        ) : (
+                            <>
+                                La Silueta <br />
+                                <span className="italic font-light text-[#FFFBF0] drop-shadow-md">Guitarra Definitiva</span>
+                            </>
+                        )}
+                    </h1>
+
+                    <p className={`text-lg md:text-xl font-medium mb-10 max-w-lg leading-relaxed ${mode === 'recover' ? 'text-stone-600' : 'text-[#F5EDDF]'}`}>
+                        {mode === 'recover'
+                            ? "Ingeniería textil diseñada para proteger tu inversión quirúrgica (BBL & Lipo). Compresión segura Stage 2."
+                            : "Esculpe tu cintura y realza tus curvas naturales con tecnología invisible de alta compresión."
+                        }
+                    </p>
+
+                    {/* Dynamic CTA */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <Link
+                            to={mode === 'recover' ? "/medical" : "/guitar-curves"}
+                            className={`group px-8 py-4 rounded-full flex items-center justify-center gap-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-xl
+                            ${mode === 'recover'
+                                    ? 'bg-[#2C2420] text-white hover:bg-stone-800'
+                                    : 'bg-[#F5EDDF] text-[#2C2420] hover:bg-white'}`}
+                        >
+                            {mode === 'recover' ? "Explorar Kit Stage 2" : "Ver Colección Hourglass"}
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+
+                        <Link
+                            to="/fit-finder"
+                            className={`px-8 py-4 rounded-full flex items-center justify-center gap-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 border backdrop-blur-sm
+                            ${mode === 'recover'
+                                    ? 'border-[#2C2420]/30 text-[#2C2420] hover:bg-[#2C2420]/5'
+                                    : 'border-white/30 text-white hover:bg-white/10'}`}
+                        >
+                            Calcular mi Talla
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Floating Badge (Trust Signal) */}
+                <div className={`absolute bottom-12 right-6 md:right-12 backdrop-blur-xl border p-4 rounded-2xl max-w-xs transition-opacity duration-1000 hidden md:block
+                    ${mode === 'recover'
+                        ? 'bg-white/60 border-white/40 text-stone-800'
+                        : 'bg-black/30 border-white/20 text-white'}`}
+                >
+                    <div className="flex items-center gap-3 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-[10px] font-bold tracking-widest uppercase">
+                            {mode === 'recover' ? "Doctor Recommended" : "Trending Now"}
+                        </span>
+                    </div>
+                    <p className="text-xs font-medium leading-relaxed">
+                        {mode === 'recover'
+                            ? "\"Es vital mantener la compresión constante durante las primeras 8 semanas para evitar seromas.\""
+                            : "\"El efecto de reloj de arena es instantáneo y la comodidad permite usarla todo el día.\""}
+                    </p>
                 </div>
 
             </div>
