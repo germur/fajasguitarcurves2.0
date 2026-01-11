@@ -49,7 +49,7 @@ export default function BlogTemplate() {
 
                         <h3>2. Hidratación con Vitamina E</h3>
                         <p>
-                            La piel traumatizada necesita nutrición. El Powernet de nuestras fajas no es tela común; está infusionado con microcápsulas de Vitamina E, Ginkgo Biloba y Algas Marinas. Al contacto con tu calor corporal, estas cápsulas se rompen y liberan nutrientes directamente en tu piel mientras la usas.
+                            La piel traumatizada necesita nutrición. El tejido de alta compresión de nuestras fajas no es tela común; está infusionado con microcápsulas de Vitamina E, Ginkgo Biloba y Algas Marinas. Al contacto con tu calor corporal, estas cápsulas se rompen y liberan nutrientes directamente en tu piel mientras la usas.
                         </p>
 
                         <h3>3. La Etapa 2 es crucial</h3>

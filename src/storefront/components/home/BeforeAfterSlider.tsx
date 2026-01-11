@@ -47,7 +47,7 @@ export function BeforeAfterSlider() {
                             No es magia, es <br />Ingeniería Textil.
                         </h2>
                         <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-                            Olvídate del "Hip Dip" y la flacidez. Nuestra tecnología Powernet de alta compresión redistribuye el tejido para crear una silueta de reloj de arena instantánea, sin cirugía.
+                            Olvídate del "Hip Dip" y la flacidez. Nuestra tecnología de alta compresión redistribuye el tejido para crear una silueta de reloj de arena instantánea, sin cirugía.
                         </p>
                         <ul className="space-y-4 mb-10">
                             {[
@@ -61,8 +61,8 @@ export function BeforeAfterSlider() {
                                 </li>
                             ))}
                         </ul>
-                        <Link to="/lab" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
-                            Ver Tecnología Powernet
+                        <Link to="/collections/sculpt" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
+                            Descubrir Sculpt Studio
                         </Link>
                     </div>
 

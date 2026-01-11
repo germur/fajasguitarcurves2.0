@@ -17,7 +17,7 @@ const faqs = [
     },
     {
         question: "¿Los brasieres tienen varillas?",
-        answer: "No. Durante la recuperación, las varillas (aros metálicos) están prohibidas porque pueden lastimar las incisiones o alterar la forma del implante. Nuestra tecnología 'Wireless Support' levanta y sostiene el busto usando cortes inteligentes en la tela Powernet, sin necesidad de metales incómodos."
+        answer: "No. Durante la recuperación, las varillas (aros metálicos) están prohibidas porque pueden lastimar las incisiones o alterar la forma del implante. Nuestra tecnología 'Wireless Support' levanta y sostiene el busto usando cortes inteligentes en la tela de alta compresión, sin necesidad de metales incómodos."
     }
 ];
 

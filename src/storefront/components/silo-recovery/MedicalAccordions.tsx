@@ -15,9 +15,10 @@ export function MedicalAccordions() {
             question: "¿POR QUÉ NECESITO UN ORIFICIO PERINEAL O ZIPPER?",
             answer: "Los primeros días de recuperación son difíciles. Nuestro sistema de cierre perineal y zipper inferior está diseñado para permitirte ir al baño sin necesidad de quitarte la faja completa, lo que sería doloroso y complicado."
         },
+
         {
             question: "¿CÓMO EVITAR LA FIBROSIS?",
-            answer: "El uso constante de una faja de alta compresión (Stage 2) junto con tablas abdominales y espumas ayuda a mantener una presión uniforme sobre la piel, evitando la acumulación irregular de líquidos que causa la fibrosis."
+            answer: "El uso constante de una faja de alta compresión (Stage 2) ayuda a mantener una presión uniforme sobre la piel, evitando la acumulación irregular de líquidos que causa la fibrosis."
         }
     ];
 
