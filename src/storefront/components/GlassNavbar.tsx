@@ -369,70 +369,67 @@ export function GlassNavbar() {
                 </div>
 
                 <div className="p-8 flex-1 overflow-y-auto">
-                    <nav className="space-y-6">
-                        {/* Mobile: POST-SURGERY */}
-                        <div className="border-b border-stone-100 pb-4">
-                            <h4 className="font-bold text-lg text-[#2C2420] mb-3 uppercase tracking-wider">POST-SURGERY</h4>
-                            <ul className="space-y-3 pl-2">
-                                {mobileRecoverMenu.categories.map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={item.href} className="text-stone-600 block text-sm" onClick={() => setIsMobileMenuOpen(false)}>
-                                            {item.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                                {/* Add Special */}
-                                <li>
-                                    <Link to="/pages/bbl-recovery-kit" className="text-[#A35944] font-bold block text-sm" onClick={() => setIsMobileMenuOpen(false)}>
-                                        ★ BBL Survival Kit
-                                    </Link>
-                                </li>
-                            </ul>
+                    <nav className="space-y-8">
+
+                        {/* 1. SHOP SECTION */}
+                        <div>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Shop</h4>
+                            <div className="space-y-4 pl-2 border-l-2 border-stone-100">
+                                <Link to="/collections/recovery" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Recovery Room</div>
+                                    <div className="text-xs text-stone-500">Post-Quirúrgico & Stage 1, 2, 3</div>
+                                </Link>
+                                <Link to="/collections/sculpt" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Sculpt Studio</div>
+                                    <div className="text-xs text-stone-500">Fajas de Uso Diario & Waist Trainers</div>
+                                </Link>
+                                <Link to="/collections/bras" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Essentials</div>
+                                    <div className="text-xs text-stone-500">Brasieres & Accesorios</div>
+                                </Link>
+                            </div>
                         </div>
 
-                        {/* Mobile: SHAPEWEAR */}
-                        <div className="border-b border-stone-100 pb-4">
-                            <h4 className="font-bold text-lg text-[#2C2420] mb-3 uppercase tracking-wider">SHAPEWEAR</h4>
-                            <ul className="space-y-3 pl-2">
-                                {mobileSculptMenu.categories.map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={item.href} className="text-stone-600 block text-sm" onClick={() => setIsMobileMenuOpen(false)}>
-                                            {item.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                        {/* 2. TOOLS SECTION */}
+                        <div>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Tools</h4>
+                            <div className="space-y-3 pl-2 border-l-2 border-stone-100">
+                                <Link to="/tools/recovery-timeline" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Recovery Calculator
+                                </Link>
+                                <Link to="/tools/guitar-ratio" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Guitar Ratio Test
+                                </Link>
+                                <Link to="/tools/stage1-vs-stage2" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Stage 1 vs Stage 2
+                                </Link>
+                            </div>
                         </div>
 
-                        {/* Mobile: BRAS */}
-                        <div className="border-b border-stone-100 pb-4">
-                            <h4 className="font-bold text-lg text-[#2C2420] mb-3 uppercase tracking-wider">BRAS & ACCESORIOS</h4>
-                            <ul className="space-y-3 pl-2">
-                                {mobileBrasMenu.categories.map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={item.href} className="text-stone-600 block text-sm" onClick={() => setIsMobileMenuOpen(false)}>
-                                            {item.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                        {/* 3. BRAND SECTION */}
+                        <div>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Brand</h4>
+                            <div className="space-y-3 pl-2 border-l-2 border-stone-100">
+                                <Link to="/pages/our-story" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Our Story
+                                </Link>
+                                <Link to="/pages/faq" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Preguntas Frecuentes
+                                </Link>
+                            </div>
                         </div>
 
-                        {/* Mobile: EXTRA LINKS */}
-                        <div className="space-y-4 pt-4">
-                            <Link to="/tools/calculator" className="flex items-center gap-3 text-[#D4AF37] font-bold text-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                                <span>🧮</span> CALCULADORA DE FAJE
+                        {/* CTA */}
+                        <div className="pt-4">
+                            <Link
+                                to="/fit-finder"
+                                className="w-full bg-[#D4AF37] text-white font-bold uppercase tracking-widest text-xs py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B49286] transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Encuentra tu Talla <ArrowRight size={16} />
                             </Link>
-                            <Link to="/pages/guia-de-tallas" className="flex items-center gap-3 text-stone-900 font-bold" onClick={() => setIsMobileMenuOpen(false)}>
-                                <span>📐</span> ENCUENTRA TU TALLA
-                            </Link>
-                            <Link to="/pages/tracking" className="flex items-center gap-3 text-stone-500 text-sm" onClick={() => setIsMobileMenuOpen(false)}>
-                                <span>🚚</span> Rastrear mi pedido
-                            </Link>
-                            <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-stone-500 text-sm">
-                                <span>📞</span> Ayuda WhatsApp
-                            </a>
                         </div>
+
                     </nav>
                 </div>
 
