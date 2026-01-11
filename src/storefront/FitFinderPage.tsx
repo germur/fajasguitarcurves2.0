@@ -42,7 +42,7 @@ export function FitFinderPage() {
                     </h1>
 
                     <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-sm mx-auto mb-8">
-                        Olvida las tablas genéricas. Nuestra tecnológía analiza la diferencia entre tu cintura y tus caderas para recomendarte la faja exacta.
+                        Nuestra tecnología analiza la diferencia entre tu cintura y tus caderas para recomendarte la faja exacta.
                     </p>
 
 

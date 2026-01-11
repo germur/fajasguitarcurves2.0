@@ -4,21 +4,8 @@ import { Search, ShoppingBag, Menu, X, ChevronDown, ArrowRight } from 'lucide-re
 import { useStore } from '../hooks/useStoreContext';
 
 // Define the interface for menu items
-interface MenuItem {
-    label: string;
-    href: string;
-    highlight?: boolean;
-}
 
-interface MenuData {
-    categories: MenuItem[];
-    concerns: MenuItem[];
-    visual: {
-        image: string;
-        title: string;
-        link: string;
-    };
-}
+
 
 export function GlassNavbar() {
     const { cartCount, toggleCart, toggleSearch } = useStore();
@@ -231,17 +218,7 @@ export function GlassNavbar() {
                                             </div>
                                         </Link>
                                     </li>
-                                    <li className="group/item">
-                                        <Link to="/collections/bras" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
-                                            <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
-                                                <img src="/assets/essentials-flatlay.jpg" className="w-full h-full object-cover" alt="Essentials" />
-                                            </div>
-                                            <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Essentials</p>
-                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Bras, Tablas & Espumas</p>
-                                            </div>
-                                        </Link>
-                                    </li>
+
                                 </ul>
                             </div>
 
@@ -333,10 +310,7 @@ export function GlassNavbar() {
                                     <div className="font-bold text-base text-[#2C2420]">Sculpt Studio</div>
                                     <div className="text-xs text-stone-500">Fajas de Uso Diario & Waist Trainers</div>
                                 </Link>
-                                <Link to="/collections/bras" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Essentials</div>
-                                    <div className="text-xs text-stone-500">Brasieres & Accesorios</div>
-                                </Link>
+
                             </div>
                         </div>
 

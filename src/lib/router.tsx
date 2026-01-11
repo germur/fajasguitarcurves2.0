@@ -198,10 +198,7 @@ export const router = createBrowserRouter([
         path: 'post-quirurgica',
         element: <CollectionPage title="Post-Quirúrgica (Stage 1)" handle="post-quirurgica" description="Medical-grade compression for the immediate post-op recovery phase." />,
       },
-      {
-        path: 'accesorios',
-        element: <CollectionPage title="Medical Accessories" handle="accesorios" description="Professional foams, boards, and urinals for optimal recovery." />,
-      },
+
       {
         path: 'maternity',
         element: <CollectionPage title="Maternidad" handle="maternity" description="Support and recovery for your post-partum journey." />,
@@ -211,10 +208,7 @@ export const router = createBrowserRouter([
         path: 'bras',
         element: <EssentialsPage />,
       },
-      {
-        path: 'collections/accesorios',
-        element: <CollectionPage title="Medical Accessories" handle="accesorios" description="Professional foams, boards, and urinals for optimal recovery." />,
-      },
+
       {
         path: 'account',
         element: <UserDashboard />,

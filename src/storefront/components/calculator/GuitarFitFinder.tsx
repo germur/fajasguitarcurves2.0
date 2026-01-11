@@ -163,7 +163,7 @@ const GuitarFitFinder: React.FC = () => {
                                 <div>
                                     <h3 className="text-2xl font-serif font-bold text-[#2C2420] mb-3">Tu Talla Perfecta</h3>
                                     <p className="text-stone-500 text-sm px-2 leading-relaxed">
-                                        Olvida las tablas genéricas. Analizamos la diferencia entre cintura y cadera para recomendarte el ajuste exacto.
+                                        Analizamos la diferencia entre cintura y cadera para recomendarte el ajuste exacto.
                                     </p>
                                 </div>
 

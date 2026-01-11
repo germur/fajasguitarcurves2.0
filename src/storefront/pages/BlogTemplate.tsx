@@ -1,6 +1,6 @@
 import { GlassNavbar } from '../components/GlassNavbar';
 import { DarkFooter } from '../components/DarkFooter';
-import { Clock, Calculator, ArrowRight } from 'lucide-react';
+import { Clock, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function BlogTemplate() {
@@ -45,18 +45,7 @@ export default function BlogTemplate() {
                         </p>
 
                         {/* BLOQUE DE PRODUCTO INCRUSTADO (Native Ad) */}
-                        <div className="my-10 bg-[#F9F8F6] p-6 md:p-8 rounded-2xl border border-[#D4AF37]/30 flex flex-col md:flex-row gap-6 items-center shadow-sm">
-                            <div className="w-24 h-24 bg-white rounded-xl shrink-0 overflow-hidden shadow-inner p-2">
-                                <img src="/api/placeholder/150/150" alt="Tabla Abdominal 360" className="w-full h-full object-contain mix-blend-multiply" />
-                            </div>
-                            <div className="text-center md:text-left flex-1">
-                                <h4 className="font-bold text-lg text-[#3E322C] mb-1">¿Aún no tienes tu Tabla Abdominal?</h4>
-                                <p className="text-sm text-stone-600 mb-4">Es el enemigo #1 de la fibrosis. Diseñada para aplanar el abdomen bajo.</p>
-                                <Link to="/accesorios" className="inline-flex items-center gap-2 text-xs bg-[#3E322C] text-white px-5 py-2.5 rounded-lg uppercase font-bold tracking-widest hover:bg-black transition-all">
-                                    Ver Precio <ArrowRight size={14} />
-                                </Link>
-                            </div>
-                        </div>
+                        {/* BLOQUE ELIMINADO: TABLA ABDOMINAL (Producto No Existente) */}
 
                         <h3>2. Hidratación con Vitamina E</h3>
                         <p>
@@ -117,15 +106,7 @@ export default function BlogTemplate() {
                                     </div>
                                 </Link>
                                 {/* Product 2 */}
-                                <Link to="/accesorios" className="flex gap-4 items-center group">
-                                    <div className="w-16 h-20 bg-stone-100 rounded-lg overflow-hidden">
-                                        <img src="/api/placeholder/100/120" className="w-full h-full object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm font-bold text-[#3E322C] group-hover:text-[#D4AF37] transition-colors leading-tight mb-1">Tabla Abdominal</p>
-                                        <p className="text-xs text-stone-500">$25.00</p>
-                                    </div>
-                                </Link>
+
                             </div>
                         </div>
 

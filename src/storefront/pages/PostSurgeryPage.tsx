@@ -93,7 +93,7 @@ export default function PostSurgeryPage() {
         <div className="bg-[#F9F8F6] min-h-screen font-sans selection:bg-[#3E322C] selection:text-white">
             <SeoHead
                 title="Recovery Room: Fajas Post-Quirúrgicas Stage 1 & 2 | Guitar Curves"
-                description="Colección especializada para BBL y Lipo. Compresión médica certificada, foams, y tablas para una recuperación segura y sin fibrosis."
+                description="Colección especializada para BBL y Lipo. Compresión médica certificada para una recuperación segura y sin fibrosis."
                 path="/collections/recovery"
                 image="/assets/recovery-hands.png"
                 schema={{
