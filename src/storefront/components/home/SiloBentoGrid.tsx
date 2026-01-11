@@ -11,7 +11,7 @@ export function SiloBentoGrid() {
                 <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 gap-4 h-auto md:h-[600px]">
 
                     {/* 1. Guía de Tallas Inteligente (Large - Left Col - Full Height) */}
-                    <div className="group relative md:col-span-2 md:row-span-4 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#E8EAEB] cursor-pointer">
+                    <div className="group relative h-[500px] md:h-auto md:col-span-2 md:row-span-4 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#E8EAEB] cursor-pointer">
                         <img
                             src="/assets/smart-size-guide.jpg"
                             alt="Scan Biométrico de Cintura"
@@ -38,7 +38,7 @@ export function SiloBentoGrid() {
                     </div>
 
                     {/* 2. Fajas Stage 2 (Medium - Right Top - 2 Rows) */}
-                    <Link to="/medical" className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
+                    <Link to="/medical" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
                         <img
                             src="/assets/stage2-faja-bra.jpg"
                             alt="Colección Fajas Stage 2"
@@ -64,7 +64,7 @@ export function SiloBentoGrid() {
                     </Link>
 
                     {/* 3. Tablas & Espumas (Small - Right Bottom Left - 2 Rows) */}
-                    <Link to="/accesorios" className="group relative md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#F5EDDF] p-6 flex flex-col justify-between">
+                    <Link to="/accesorios" className="group relative h-[250px] md:h-auto md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#F5EDDF] p-6 flex flex-col justify-between">
                         <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
                             <Table size={48} strokeWidth={1} className="text-[#2C2420]" />
                         </div>
@@ -78,7 +78,7 @@ export function SiloBentoGrid() {
                     </Link>
 
                     {/* 4. Brasieres (Small - Right Bottom Right - 2 Rows) */}
-                    <Link to="/bras" className="group relative md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#EAE6E3] p-6 flex flex-col justify-between">
+                    <Link to="/bras" className="group relative h-[250px] md:h-auto md:col-span-1 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#EAE6E3] p-6 flex flex-col justify-between">
                         <div className="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
                             <Shirt size={48} strokeWidth={1} className="text-[#2C2420]" />
                         </div>
