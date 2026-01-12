@@ -138,8 +138,8 @@ export default function HourglassPage() {
                         </div>
                     ) : (
                         <>
-                            {/* Denser Grid: 2 cols mobile, 4 cols desktop, 5 cols large screens */}
-                            <div id="products" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12">
+                            {/* Denser Grid: 1 col mobile, 2 cols tablet, 4 cols desktop, 5 cols large screens */}
+                            <div id="products" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12">
                                 {filteredProducts.map(product => (
                                     <SculptProductCard
                                         key={product.id}

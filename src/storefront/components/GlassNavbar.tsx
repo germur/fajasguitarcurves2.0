@@ -357,15 +357,7 @@ export function GlassNavbar() {
                     </nav>
                 </div>
 
-                <div className="p-6 border-t border-stone-100 bg-stone-50 text-stone-900">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#2C2420] text-white flex items-center justify-center font-bold">GC</div>
-                        <div>
-                            <p className="text-sm font-bold text-stone-900">Guitar Member</p>
-                            <p className="text-xs text-stone-500">Inicia sesión para ver tu historial</p>
-                        </div>
-                    </div>
-                </div>
+                {/* Guitar Member section removed as per request */}
             </div>
         </>
     );
