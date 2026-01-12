@@ -1,56 +1,73 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { ProductPage } from '@/components/ProductPage'
-import AcademiaView from '@/sections/academia/AcademiaView'
 
-import LifestyleView from '@/sections/lifestyle/LifestyleView'
-import PainPointsView from '@/sections/pain-points/PainPointsView'
-import { StorefrontLayout } from '@/storefront/StorefrontLayout'
-import { HomePage } from '@/storefront/HomePage'
-import { ProductDetailView } from '@/storefront/ProductDetailView'
-import { CartPage } from '@/storefront/CartPage'
-import { CheckoutPage } from '@/storefront/CheckoutPage'
-import AboutPage from '@/storefront/AboutPage'
-import ContactPage from '@/storefront/ContactPage'
-import { UserDashboard } from '@/storefront/UserDashboard'
-import { LabPage } from '@/storefront/LabPage'
-import { CollectionPage } from '@/storefront/CollectionPage'
-import { ShippingPage } from '@/storefront/ShippingPage'
-import { PrivacyPage } from '@/storefront/PrivacyPage'
-import { TermsPage } from '@/storefront/TermsPage'
-import { NotFoundPage } from '@/storefront/NotFoundPage'
-import { FitFinderPage } from '@/storefront/FitFinderPage'
-import FitGuaranteePage from '@/storefront/pages/FitGuaranteePage'
-import WholesalePage from '@/storefront/pages/WholesalePage'
-import PostSurgeryPage from '@/storefront/pages/PostSurgeryPage'
-import BlogTemplate from '@/storefront/pages/BlogTemplate'
-import HourglassPage from '@/storefront/pages/HourglassPage'
-import EssentialsPage from '@/storefront/pages/EssentialsPage'
-import BBLKitPage from '@/storefront/pages/BBLKitPage'
-import OurStoryPage from '@/storefront/pages/OurStoryPage'
-import FAQPage from '@/storefront/pages/FAQPage'
+import { createBrowserRouter } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { StorefrontLayout } from '@/storefront/StorefrontLayout';
+import { HomePage } from '@/storefront/HomePage';
+
+// Lazy load all pages for code splitting
+const ProductPage = lazy(() => import('@/components/ProductPage').then(m => ({ default: m.ProductPage })));
+const AcademiaView = lazy(() => import('@/sections/academia/AcademiaView'));
+const LifestyleView = lazy(() => import('@/sections/lifestyle/LifestyleView'));
+const PainPointsView = lazy(() => import('@/sections/pain-points/PainPointsView'));
+const ProductDetailView = lazy(() => import('@/storefront/ProductDetailView').then(m => ({ default: m.ProductDetailView })));
+const CartPage = lazy(() => import('@/storefront/CartPage').then(m => ({ default: m.CartPage })));
+const CheckoutPage = lazy(() => import('@/storefront/CheckoutPage').then(m => ({ default: m.CheckoutPage })));
+const AboutPage = lazy(() => import('@/storefront/AboutPage'));
+const ContactPage = lazy(() => import('@/storefront/ContactPage'));
+const UserDashboard = lazy(() => import('@/storefront/UserDashboard').then(m => ({ default: m.UserDashboard })));
+const LabPage = lazy(() => import('@/storefront/LabPage').then(m => ({ default: m.LabPage })));
+const CollectionPage = lazy(() => import('@/storefront/CollectionPage').then(m => ({ default: m.CollectionPage })));
+const ShippingPage = lazy(() => import('@/storefront/ShippingPage').then(m => ({ default: m.ShippingPage })));
+const PrivacyPage = lazy(() => import('@/storefront/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
+const TermsPage = lazy(() => import('@/storefront/TermsPage').then(m => ({ default: m.TermsPage })));
+const NotFoundPage = lazy(() => import('@/storefront/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const FitFinderPage = lazy(() => import('@/storefront/FitFinderPage').then(m => ({ default: m.FitFinderPage })));
+const FitGuaranteePage = lazy(() => import('@/storefront/pages/FitGuaranteePage'));
+const WholesalePage = lazy(() => import('@/storefront/pages/WholesalePage'));
+const PostSurgeryPage = lazy(() => import('@/storefront/pages/PostSurgeryPage'));
+const BlogTemplate = lazy(() => import('@/storefront/pages/BlogTemplate'));
+const HourglassPage = lazy(() => import('@/storefront/pages/HourglassPage'));
+const EssentialsPage = lazy(() => import('@/storefront/pages/EssentialsPage'));
+const BBLKitPage = lazy(() => import('@/storefront/pages/BBLKitPage'));
+const OurStoryPage = lazy(() => import('@/storefront/pages/OurStoryPage'));
+const FAQPage = lazy(() => import('@/storefront/pages/FAQPage'));
 
 // MAES Content Ecosystem Assets
-import RecoveryTimelineCalculator from '@/storefront/pages/tools/RecoveryTimelineCalculator'
-import StageComparator from '@/storefront/pages/tools/StageComparator'
-import GuitarRatioQuiz from '@/storefront/pages/tools/GuitarRatioQuiz'
-import LipoFoamManual from '@/storefront/pages/guides/LipoFoamManual'
-import FajaTroubleshooting from '@/storefront/pages/guides/FajaTroubleshooting'
-import FibrosisBible from '@/storefront/pages/blog/FibrosisBible'
-import AnatomyFaja from '@/storefront/pages/blog/AnatomyFaja'
-import InflammationTimeline from '@/storefront/pages/blog/InflammationTimeline'
-import SizingAsymmetric from '@/storefront/pages/blog/SizingAsymmetric'
-import ArmBackLipo from '@/storefront/pages/blog/ArmBackLipo'
-import SnatchTest from '@/storefront/pages/blog/SnatchTest'
-import MorningRoutine from '@/storefront/pages/blog/MorningRoutine'
-import WaistTrainingMyths from '@/storefront/pages/blog/WaistTrainingMyths'
-import CurvyBridesLookbook from '@/storefront/pages/lifestyle/CurvyBridesLookbook'
-import PostpartumVsLipo from '@/storefront/pages/blog/PostpartumVsLipo'
-import CityLandingPage from '@/storefront/pages/local/CityLandingPage'
-import GlossaryPage from '@/storefront/pages/resources/GlossaryPage'
-import VsGenericPage from '@/storefront/pages/resources/VsGenericPage'
-import BBLChecklist from '@/storefront/pages/resources/BBLChecklist'
-import RecoveryDiaries from '@/storefront/pages/social/RecoveryDiaries'
-import ToolsHubPage from '@/storefront/pages/tools/ToolsHubPage'
+const RecoveryTimelineCalculator = lazy(() => import('@/storefront/pages/tools/RecoveryTimelineCalculator'));
+const StageComparator = lazy(() => import('@/storefront/pages/tools/StageComparator'));
+const GuitarRatioQuiz = lazy(() => import('@/storefront/pages/tools/GuitarRatioQuiz'));
+const LipoFoamManual = lazy(() => import('@/storefront/pages/guides/LipoFoamManual'));
+const FajaTroubleshooting = lazy(() => import('@/storefront/pages/guides/FajaTroubleshooting'));
+const FibrosisBible = lazy(() => import('@/storefront/pages/blog/FibrosisBible'));
+const AnatomyFaja = lazy(() => import('@/storefront/pages/blog/AnatomyFaja'));
+const InflammationTimeline = lazy(() => import('@/storefront/pages/blog/InflammationTimeline'));
+const SizingAsymmetric = lazy(() => import('@/storefront/pages/blog/SizingAsymmetric'));
+const ArmBackLipo = lazy(() => import('@/storefront/pages/blog/ArmBackLipo'));
+const SnatchTest = lazy(() => import('@/storefront/pages/blog/SnatchTest'));
+const MorningRoutine = lazy(() => import('@/storefront/pages/blog/MorningRoutine'));
+const WaistTrainingMyths = lazy(() => import('@/storefront/pages/blog/WaistTrainingMyths'));
+const CurvyBridesLookbook = lazy(() => import('@/storefront/pages/lifestyle/CurvyBridesLookbook'));
+const PostpartumVsLipo = lazy(() => import('@/storefront/pages/blog/PostpartumVsLipo'));
+const CityLandingPage = lazy(() => import('@/storefront/pages/local/CityLandingPage'));
+const GlossaryPage = lazy(() => import('@/storefront/pages/resources/GlossaryPage'));
+const VsGenericPage = lazy(() => import('@/storefront/pages/resources/VsGenericPage'));
+const BBLChecklist = lazy(() => import('@/storefront/pages/resources/BBLChecklist'));
+const RecoveryDiaries = lazy(() => import('@/storefront/pages/social/RecoveryDiaries'));
+const ToolsHubPage = lazy(() => import('@/storefront/pages/tools/ToolsHubPage'));
+
+// Loading Fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
+    <div className="animate-pulse text-[#D4AF37]">Cargando...</div>
+  </div>
+);
+
+// Helper to wrap lazy components
+const withSuspense = (Component: React.ComponentType<any>, props = {}) => (
+  <Suspense fallback={<LoadingFallback />}>
+    <Component {...props} />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -63,204 +80,204 @@ export const router = createBrowserRouter([
       },
       {
         path: 'collections/recovery',
-        element: <PostSurgeryPage />,
+        element: withSuspense(PostSurgeryPage),
       },
       // Alias for legacy support
       {
         path: 'collections/post-surgery-fajas',
-        element: <PostSurgeryPage />,
+        element: withSuspense(PostSurgeryPage),
       },
       {
         path: 'collections/sculpt',
-        element: <HourglassPage />,
+        element: withSuspense(HourglassPage),
       },
       // Alias for legacy support
       {
         path: 'collections/hourglass-shapewear',
-        element: <HourglassPage />,
+        element: withSuspense(HourglassPage),
       },
       {
         path: 'collections/bras',
-        element: <EssentialsPage />,
+        element: withSuspense(EssentialsPage),
       },
       // Alias for legacy support
       {
         path: 'collections/lipo-foams-boards',
-        element: <EssentialsPage />,
+        element: withSuspense(EssentialsPage),
       },
       {
         path: 'pages/bbl-recovery-kit',
-        element: <BBLKitPage />,
+        element: withSuspense(BBLKitPage),
       },
       // Alias
       {
         path: 'pages/bbl-surgery-essentials',
-        element: <BBLKitPage />,
+        element: withSuspense(BBLKitPage),
       },
 
       {
         path: 'lab',
-        element: <LabPage />,
+        element: withSuspense(LabPage),
       },
       {
         path: 'cart',
-        element: <CartPage />,
+        element: withSuspense(CartPage),
       },
       {
         path: 'checkout',
-        element: <CheckoutPage />,
+        element: withSuspense(CheckoutPage),
       },
 
       {
         path: 'fit-finder',
-        element: <FitFinderPage />,
+        element: withSuspense(FitFinderPage),
       },
       {
         path: 'pages/guia-de-tallas',
-        element: <FitFinderPage />,
+        element: withSuspense(FitFinderPage),
       },
       {
         path: 'lifestyle',
-        element: <LifestyleView />,
+        element: withSuspense(LifestyleView),
       },
       {
         path: 'solutions',
-        element: <PainPointsView />,
+        element: withSuspense(PainPointsView),
       },
       {
         path: 'institute',
-        element: <AcademiaView />,
+        element: withSuspense(AcademiaView),
       },
       {
         path: 'products/:id',
-        element: <ProductDetailView />,
+        element: withSuspense(ProductDetailView),
       },
       {
         path: 'cinturillas',
-        element: <CollectionPage title="Cinturillas" handle="cinturillas" description="Premium waist trainers designed for maximum compression and comfort." />,
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage title="Cinturillas" handle="cinturillas" description="Premium waist trainers designed for maximum compression and comfort." /></Suspense>,
       },
       {
         path: 'shorts',
-        element: <CollectionPage title="Shorts" handle="shorts" description="Sculpting shorts for the perfect lift and control." />,
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage title="Shorts" handle="shorts" description="Sculpting shorts for the perfect lift and control." /></Suspense>,
       },
       {
         path: 'about',
-        element: <AboutPage />,
+        element: withSuspense(AboutPage),
       },
       {
         path: 'contact',
-        element: <ContactPage />,
+        element: withSuspense(ContactPage),
       },
       {
         path: 'returns',
-        element: <FitGuaranteePage />,
+        element: withSuspense(FitGuaranteePage),
       },
       // Alias for direct link
       {
         path: 'pages/fit-guarantee',
-        element: <FitGuaranteePage />,
+        element: withSuspense(FitGuaranteePage),
       },
       // Alias for SEO
       {
         path: 'pages/cambios-y-devoluciones',
-        element: <FitGuaranteePage />,
+        element: withSuspense(FitGuaranteePage),
       },
       {
         path: 'pages/faq',
-        element: <FAQPage />,
+        element: withSuspense(FAQPage),
       },
       {
         path: 'pages/wholesale',
-        element: <WholesalePage />,
+        element: withSuspense(WholesalePage),
       },
       // Alias
       {
         path: 'pages/programa-mayorista',
-        element: <WholesalePage />,
+        element: withSuspense(WholesalePage),
       },
       {
         path: 'blogs/recovery-tips/:handle',
-        element: <BlogTemplate />,
+        element: withSuspense(BlogTemplate),
       },
       {
         path: 'shipping',
-        element: <ShippingPage />,
+        element: withSuspense(ShippingPage),
       },
       {
         path: 'privacy',
-        element: <PrivacyPage />,
+        element: withSuspense(PrivacyPage),
       },
       {
         path: 'terms',
-        element: <TermsPage />,
+        element: withSuspense(TermsPage),
       },
       {
         path: 'post-quirurgica',
-        element: <CollectionPage title="Post-Quirúrgica (Stage 1)" handle="post-quirurgica" description="Medical-grade compression for the immediate post-op recovery phase." />,
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage title="Post-Quirúrgica (Stage 1)" handle="post-quirurgica" description="Medical-grade compression for the immediate post-op recovery phase." /></Suspense>,
       },
 
       {
         path: 'maternity',
-        element: <CollectionPage title="Maternidad" handle="maternity" description="Support and recovery for your post-partum journey." />,
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage title="Maternidad" handle="maternity" description="Support and recovery for your post-partum journey." /></Suspense>,
       },
       // FAILSAFE ALIASES (User reported dead links)
       {
         path: 'bras',
-        element: <EssentialsPage />,
+        element: withSuspense(EssentialsPage),
       },
 
       {
         path: 'account',
-        element: <UserDashboard />,
+        element: withSuspense(UserDashboard),
       },
       {
         path: 'pages/our-story',
-        element: <OurStoryPage />,
+        element: withSuspense(OurStoryPage),
       },
       {
         path: 'pages/tracking',
-        element: <UserDashboard />, // Or ShippingPage, but Account is safer for tracking logic
+        element: withSuspense(UserDashboard), // Or ShippingPage, but Account is safer for tracking logic
       },
 
       /* --- MAES CONTENT ECOSYSTEM ROUTES --- */
       // 1. Money Pages (Tools & Guides)
-      { path: 'tools', element: <ToolsHubPage /> },
-      { path: 'tools/recovery-timeline', element: <RecoveryTimelineCalculator /> },
-      { path: 'tools/stage1-vs-stage2', element: <StageComparator /> },
-      { path: 'tools/calculator', element: <GuitarRatioQuiz /> },
-      { path: 'tools/guitar-ratio', element: <GuitarRatioQuiz /> },
-      { path: 'guides/lipo-foam-manual', element: <LipoFoamManual /> },
-      { path: 'guides/troubleshooting', element: <FajaTroubleshooting /> },
+      { path: 'tools', element: withSuspense(ToolsHubPage) },
+      { path: 'tools/recovery-timeline', element: withSuspense(RecoveryTimelineCalculator) },
+      { path: 'tools/stage1-vs-stage2', element: withSuspense(StageComparator) },
+      { path: 'tools/calculator', element: withSuspense(GuitarRatioQuiz) },
+      { path: 'tools/guitar-ratio', element: withSuspense(GuitarRatioQuiz) },
+      { path: 'guides/lipo-foam-manual', element: withSuspense(LipoFoamManual) },
+      { path: 'guides/troubleshooting', element: withSuspense(FajaTroubleshooting) },
 
       // 2. Authority Cluster
-      { path: 'blog/fibrosis-bible', element: <FibrosisBible /> },
-      { path: 'blog/anatomy-of-faja', element: <AnatomyFaja /> },
-      { path: 'blog/inflammation-timeline', element: <InflammationTimeline /> },
-      { path: 'blog/sizing-asymmetric', element: <SizingAsymmetric /> },
-      { path: 'blog/arm-back-lipo', element: <ArmBackLipo /> },
+      { path: 'blog/fibrosis-bible', element: withSuspense(FibrosisBible) },
+      { path: 'blog/anatomy-of-faja', element: withSuspense(AnatomyFaja) },
+      { path: 'blog/inflammation-timeline', element: withSuspense(InflammationTimeline) },
+      { path: 'blog/sizing-asymmetric', element: withSuspense(SizingAsymmetric) },
+      { path: 'blog/arm-back-lipo', element: withSuspense(ArmBackLipo) },
 
       // 3. Lifestyle
-      { path: 'blog/snatch-test', element: <SnatchTest /> },
-      { path: 'blog/morning-routine', element: <MorningRoutine /> },
-      { path: 'blog/waist-training-myths', element: <WaistTrainingMyths /> },
-      { path: 'gallery/curvy-brides', element: <CurvyBridesLookbook /> },
-      { path: 'blog/postpartum-vs-lipo', element: <PostpartumVsLipo /> },
+      { path: 'blog/snatch-test', element: withSuspense(SnatchTest) },
+      { path: 'blog/morning-routine', element: withSuspense(MorningRoutine) },
+      { path: 'blog/waist-training-myths', element: withSuspense(WaistTrainingMyths) },
+      { path: 'gallery/curvy-brides', element: withSuspense(CurvyBridesLookbook) },
+      { path: 'blog/postpartum-vs-lipo', element: withSuspense(PostpartumVsLipo) },
 
       // 4. Technical & Local
-      { path: 'local/:city', element: <CityLandingPage /> },
-      { path: 'glossary', element: <GlossaryPage /> },
-      { path: 'compare/vs-generic', element: <VsGenericPage /> },
-      { path: 'resources/bbl-checklist', element: <BBLChecklist /> },
-      { path: 'stories/recovery-diaries', element: <RecoveryDiaries /> },
+      { path: 'local/:city', element: withSuspense(CityLandingPage) },
+      { path: 'glossary', element: withSuspense(GlossaryPage) },
+      { path: 'compare/vs-generic', element: withSuspense(VsGenericPage) },
+      { path: 'resources/bbl-checklist', element: withSuspense(BBLChecklist) },
+      { path: 'stories/recovery-diaries', element: withSuspense(RecoveryDiaries) },
 
       {
         path: '*',
-        element: <NotFoundPage />,
+        element: withSuspense(NotFoundPage),
       }
     ]
   },
   {
     path: '/design-os',
-    element: <ProductPage />,
+    element: withSuspense(ProductPage),
   }
 ])
