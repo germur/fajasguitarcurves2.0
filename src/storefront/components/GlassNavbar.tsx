@@ -103,9 +103,9 @@ export function GlassNavbar() {
                                     transform transition-all duration-300 origin-top
                                     ${activeDropdown === 'tools' ? 'opacity-100 visible scale-y-100' : 'opacity-0 invisible scale-y-95'}
                                 `}>
-                                    <Link to="/tools/recovery-timeline" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                    {/* <Link to="/tools/recovery-timeline" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         Recovery Calculator
-                                    </Link>
+                                    </Link> */}
                                     <Link to="/tools/guitar-ratio" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         Guitar Ratio Test
                                     </Link>
@@ -318,9 +318,9 @@ export function GlassNavbar() {
                         <div>
                             <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Tools</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                <Link to="/tools/recovery-timeline" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                {/* <Link to="/tools/recovery-timeline" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     Recovery Calculator
-                                </Link>
+                                </Link> */}
                                 <Link to="/tools/guitar-ratio" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     Guitar Ratio Test
                                 </Link>

@@ -1,11 +1,11 @@
 
 
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity, Calculator, Ruler, Layers } from 'lucide-react';
+import { ArrowRight, Calculator, Ruler, Layers } from 'lucide-react';
 import { SeoHead } from '../../components/SeoHead';
 
 const TOOLS = [
-    {
+    /* {
         id: 'recovery-calc',
         title: "Calculadora de Recuperación",
         description: "Descubre exactamente en qué etapa de recuperación estás y qué faja necesitas usar hoy.",
@@ -14,7 +14,7 @@ const TOOLS = [
         bgImage: "/assets/tool-recovery.png",
         status: "Active",
         cta: "Calcular Etapa"
-    },
+    }, */
     {
         id: 'guitar-ratio',
         title: "Guitar Ratio Finder",

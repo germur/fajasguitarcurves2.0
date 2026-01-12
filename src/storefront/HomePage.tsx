@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
 
@@ -37,6 +37,7 @@ export function HomePage() {
             <HomeHero />
 
             {/* 🚨 URGENCY TICKER (Recovery Calculator) */}
+            {/* 🚨 URGENCY TICKER (Recovery Calculator) - HIDDEN
             <div className="bg-[#A35944] text-white py-3 overflow-hidden">
                 <div className="container mx-auto px-4 flex items-center justify-center gap-4 animate-fade-in-up">
                     <span className="text-xl">🩺</span>
@@ -47,7 +48,7 @@ export function HomePage() {
                         </Link>
                     </p>
                 </div>
-            </div>
+            </div> */}
 
             <Suspense fallback={<div className="h-96 flex items-center justify-center text-[#D4AF37]">Cargando experiencia...</div>}>
                 {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
