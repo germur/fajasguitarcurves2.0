@@ -32,9 +32,9 @@ export function SocialProofWall() {
 
                 <div className="mt-12 text-center">
                     <a
-                        href="https://www.tiktok.com/@fajasguitarcurves"
+                        href="https://www.tiktok.com/@guitarcurvesfajas"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#2C2420] text-white px-8 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all"
                     >
                         Ver más en TikTok
