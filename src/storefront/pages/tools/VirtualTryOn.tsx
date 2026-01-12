@@ -154,23 +154,36 @@ export default function VirtualTryOn() {
                 </button>
             </div>
 
-            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl relative aspect-[3/4] md:aspect-video select-none">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl relative aspect-[3/4] md:aspect-video select-none touch-none">
 
-                {/* AFTER IMAGE (Background) - In a real implementation, this comes from API */}
-                <div className="absolute inset-0">
-                    <img
-                        src="/assets/slider-after-final.png" // Fallback simulation
-                        alt="Resultado After"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-[#2C2420] text-white text-xs font-bold px-3 py-1 rounded">
-                        Con Guitar Curves
+                {/* AFTER IMAGE (Background) - User Photo + Product Overlay */}
+                <div className="absolute inset-0 overflow-hidden">
+                    {/* Base Layer: User Photo */}
+                    {userImage && (
+                        <img
+                            src={userImage}
+                            alt="Tu foto base"
+                            className="w-full h-full object-cover"
+                        />
+                    )}
+
+                    {/* Overlay Layer: The Product (Sticker) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <img
+                            src="/assets/recovery-hands.png" // Simulation Asset
+                            alt="Faja Overlay"
+                            className="w-[85%] h-auto object-contain opacity-90 drop-shadow-2xl mix-blend-multiply filter contrast-125"
+                        />
+                    </div>
+
+                    <div className="absolute top-4 right-4 bg-[#2C2420] text-white text-xs font-bold px-3 py-1 rounded z-20">
+                        Con Guitar Curves (Simulación)
                     </div>
                 </div>
 
                 {/* BEFORE IMAGE (Foreground - Clipped) */}
                 <div
-                    className="absolute inset-0 border-r-2 border-white overflow-hidden bg-stone-100"
+                    className="absolute inset-0 border-r-2 border-white overflow-hidden bg-stone-100 z-10"
                     style={{ width: `${sliderPos}%` }}
                 >
                     {userImage ? (
@@ -189,7 +202,7 @@ export default function VirtualTryOn() {
 
                 {/* SLIDER HANDLE */}
                 <div
-                    className="absolute top-0 bottom-0 w-1 bg-transparent cursor-grab active:cursor-grabbing z-10"
+                    className="absolute top-0 bottom-0 w-1 bg-white/50 cursor-col-resize z-30 hover:bg-white transition-colors"
                     style={{ left: `${sliderPos}%` }}
                     onMouseDown={(e) => {
                         const slider = e.currentTarget.parentElement;
@@ -214,7 +227,7 @@ export default function VirtualTryOn() {
                         setSliderPos((x / rect.width) * 100);
                     }}
                 >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2C2420] cursor-grab">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2C2420] cursor-grab active:cursor-grabbing">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rotate-180 absolute"><path d="m9 18 6-6-6-6" /></svg>
                     </div>
@@ -223,8 +236,8 @@ export default function VirtualTryOn() {
             </div>
 
             <div className="mt-8 text-center max-w-lg mx-auto">
-                <p className="text-stone-500 mb-6 italic">
-                    *Esta es una simulación basada en IA. El resultado real puede variar según la compresión elegida.
+                <p className="text-stone-500 mb-6 italic text-sm">
+                    *Esta es una visualización superpuesta para mostrar el corte de la faja sobre tu cuerpo. Para un ajuste exacto, utiliza nuestra guía de tallas.
                 </p>
                 <Link
                     to={selectedProduct === 'faja-stage-2' ? '/collections/recovery' : '/collections/bras'}
