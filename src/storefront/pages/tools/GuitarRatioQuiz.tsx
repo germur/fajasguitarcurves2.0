@@ -313,7 +313,8 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
 
             {/* Q4 (Simplified for modal if needed, but keeping for logic) */}
             <div className={`bg-white ${mode === 'modal' ? 'p-4' : 'p-6'} rounded-2xl shadow-sm border border-stone-100`}>
-                <p className="font-bold text-[#2C2420] mb-2 text-sm">Intención de Uso:</p>
+                <p className="font-bold text-[#2C2420] mb-2 text-sm">Objetivo Principal:</p>
+                <p className="text-stone-600 text-xs mb-4">¿Buscas realzar y levantar tus glúteos?</p>
                 <div className="space-y-2">
                     {['Sí, ¡absolutamente!', 'Sí, pero me da miedo', 'No, solo compresión', 'Reducir caderas'].map(opt => (
                         <button key={opt} onClick={() => setQ4(opt)} className={`w-full text-left px-4 py-2 rounded-lg border text-xs transition-all ${q4 === opt ? 'border-[#D4AF37] bg-[#D4AF37]/5 font-bold' : 'border-stone-200 text-stone-500'}`}>{opt}</button>
