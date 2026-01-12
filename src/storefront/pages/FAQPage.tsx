@@ -34,7 +34,7 @@ export default function FAQPage() {
                         <input
                             type="text"
                             placeholder="¿Tienes dudas sobre tu talla o envío?"
-                            className="w-full pl-12 pr-4 py-4 rounded-full text-gray-900 focus:ring-4 focus:ring-[#D4AF37]/50 focus:outline-none shadow-xl transition-all"
+                            className="w-full pl-12 pr-4 py-4 rounded-full bg-white text-gray-900 placeholder-gray-500 focus:ring-4 focus:ring-[#D4AF37]/50 focus:outline-none shadow-xl transition-all"
                         />
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#D4AF37] transition-colors" />
                     </div>
