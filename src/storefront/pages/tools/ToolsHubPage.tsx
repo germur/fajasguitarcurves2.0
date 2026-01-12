@@ -1,7 +1,7 @@
 
 
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity, Calculator, Layers, Camera } from 'lucide-react';
+import { ArrowRight, Activity, Calculator, Ruler, Layers } from 'lucide-react';
 import { SeoHead } from '../../components/SeoHead';
 
 const TOOLS = [
@@ -104,50 +104,19 @@ export default function ToolsHubPage() {
                         </Link>
                     ))}
 
-                    {/* Virtual Try-On Card */}
-                    <Link
-                        to="/tools/try-on"
-                        className="group relative h-[500px] rounded-[2rem] overflow-hidden border border-[#D4AF37] shadow-xl hover:shadow-2xl hover:shadow-[#D4AF37]/20 transition-all duration-500 hover:-translate-y-2 block"
-                    >
-                        {/* Background Image */}
-                        <div className="absolute inset-0">
-                            <img
-                                src="/assets/virtual-try-on-bg.jpg"
-                                alt="Probador Virtual"
-                                onError={(e) => e.currentTarget.src = 'https://images.unsplash.com/photo-1520052205864-92d242b3a76b?q=80&w=1489&auto=format&fit=crop'} // Fallback
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#2C2420] via-[#2C2420]/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
+                    {/* Coming Soon Card (Placeholder) */}
+                    <div className="relative h-[500px] rounded-[2rem] border border-dashed border-stone-300 bg-stone-50 flex flex-col items-center justify-center text-center p-8 opacity-60 hover:opacity-100 transition-opacity cursor-default">
+                        <div className="w-16 h-16 rounded-full bg-stone-200 flex items-center justify-center mb-6">
+                            <Ruler className="text-stone-400" />
                         </div>
-
-                        {/* Content */}
-                        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                            <div className="mb-auto pt-4">
-                                <span className="inline-block px-3 py-1 rounded-full bg-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase mb-4 animate-pulse">
-                                    Nuevo
-                                </span>
-                                <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] group-hover:border-[#D4AF37] transition-colors duration-500">
-                                    <Camera className="w-8 h-8 text-white" />
-                                </div>
-                            </div>
-
-                            <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
-                                <h2 className="font-serif text-3xl text-white mb-3">
-                                    Probador Virtual IA
-                                </h2>
-                                <p className="text-white/70 mb-8 line-clamp-3 group-hover:text-white transition-colors">
-                                    Sube tu foto y mira cómo te quedará la faja en segundos con nuestra Inteligencia Artificial.
-                                </p>
-
-                                <div className="inline-flex items-center gap-3 text-white font-bold tracking-widest text-xs uppercase group/btn">
-                                    Probar Ahora
-                                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-[#2C2420] transition-colors">
-                                        <ArrowRight size={14} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
+                        <h3 className="font-serif text-2xl text-stone-400 mb-2">Quiz de Fibrosis</h3>
+                        <p className="text-sm text-stone-400 max-w-xs">
+                            Herramienta de diagnóstico avanzado para detectar irregularidades post-quirúrgicas.
+                        </p>
+                        <span className="mt-6 px-4 py-1.5 bg-stone-200 text-stone-500 text-[10px] font-bold uppercase tracking-widest rounded-full">
+                            Próximamente
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

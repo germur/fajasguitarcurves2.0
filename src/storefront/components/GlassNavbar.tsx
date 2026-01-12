@@ -112,9 +112,6 @@ export function GlassNavbar() {
                                     <Link to="/tools/stage1-vs-stage2" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         Stage 1 vs Stage 2
                                     </Link>
-                                    <Link to="/tools/try-on" className="block px-6 py-3 text-xs font-bold text-[#D4AF37] hover:bg-stone-50 hover:text-[#2C2420] uppercase tracking-wider flex items-center justify-between">
-                                        Probador Virtual IA ✨
-                                    </Link>
                                 </div>
                             </div>
 
@@ -329,9 +326,6 @@ export function GlassNavbar() {
                                 </Link>
                                 <Link to="/tools/stage1-vs-stage2" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     Stage 1 vs Stage 2
-                                </Link>
-                                <Link to="/tools/try-on" className="block text-sm font-bold text-[#D4AF37] flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Probador Virtual IA ✨
                                 </Link>
                             </div>
                         </div>

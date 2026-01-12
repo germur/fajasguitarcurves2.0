@@ -51,7 +51,6 @@ import VsGenericPage from '@/storefront/pages/resources/VsGenericPage'
 import BBLChecklist from '@/storefront/pages/resources/BBLChecklist'
 import RecoveryDiaries from '@/storefront/pages/social/RecoveryDiaries'
 import ToolsHubPage from '@/storefront/pages/tools/ToolsHubPage'
-import VirtualTryOn from '@/storefront/pages/tools/VirtualTryOn'
 
 export const router = createBrowserRouter([
   {
@@ -230,7 +229,6 @@ export const router = createBrowserRouter([
       { path: 'tools/stage1-vs-stage2', element: <StageComparator /> },
       { path: 'tools/calculator', element: <GuitarRatioQuiz /> },
       { path: 'tools/guitar-ratio', element: <GuitarRatioQuiz /> },
-      { path: 'tools/try-on', element: <VirtualTryOn /> },
       { path: 'guides/lipo-foam-manual', element: <LipoFoamManual /> },
       { path: 'guides/troubleshooting', element: <FajaTroubleshooting /> },
 
