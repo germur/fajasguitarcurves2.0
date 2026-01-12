@@ -217,7 +217,7 @@ export function ProductDetailView() {
                             <div>
                                 <div className="flex items-center gap-2 mb-3">
                                     <div className="flex text-[#D4AF37] gap-0.5">
-                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="currentColor" className="stroke-none" />)}
+                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} fill="currentColor" className="stroke-none" />)}
                                     </div>
                                     <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 Reviews</span>
                                 </div>
