@@ -32,9 +32,37 @@ export default function VirtualTryOn() {
         }
     };
 
-    const handleProcess = () => {
+    const handleProcess = async () => {
         setStep('PROCESSING');
-        // Simulate AI Processing time
+
+        try {
+            // Find selected product image URL
+            const product = PRODUCTS.find(p => p.id === selectedProduct);
+
+            // 1. Attempt to call real AI API
+            const response = await fetch('/.netlify/functions/try-on', {
+                method: 'POST',
+                body: JSON.stringify({
+                    userImage: userImage,
+                    garmentImage: product?.img
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.result) {
+                    // Success: Use logic to show generated image (Future V2 State)
+                    // For now, even with API, we might want to guide them to V2
+                    console.log("AI Generation Successful:", data.result);
+                }
+            } else {
+                console.warn("API Key missing or error, falling back to simulation");
+            }
+        } catch (error) {
+            console.error("Try-on Process Error:", error);
+        }
+
+        // Always fallback to simulation result for V1 (guaranteed coherence)
         setTimeout(() => {
             setStep('RESULT');
         }, 3500);
