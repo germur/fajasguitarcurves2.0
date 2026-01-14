@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
+import { RootErrorBoundary } from '@/components/RootErrorBoundary';
 
 // Lazy load all pages for code splitting
 const ProductPage = lazy(() => import('@/components/ProductPage').then(m => ({ default: m.ProductPage })));
@@ -73,6 +74,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <StorefrontLayout />,
+    errorElement: <RootErrorBoundary />,
     children: [
       {
         index: true,
