@@ -107,6 +107,14 @@ export const router = createBrowserRouter([
         path: 'collections/lipo-foams-boards',
         element: withSuspense(EssentialsPage),
       },
+
+      /* --- GRANULAR SEO COLLECTIONS (Programmatic) --- */
+      // Matches /collections/recovery/stage-2, /collections/sculpt/post-lipo, etc.
+      {
+        path: 'collections/:silo/:filter',
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage /></Suspense>,
+      },
+
       {
         path: 'pages/bbl-recovery-kit',
         element: withSuspense(BBLKitPage),

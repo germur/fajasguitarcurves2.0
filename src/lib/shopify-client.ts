@@ -15,3 +15,23 @@ export const shopifyClient = Client.buildClient({
     storefrontAccessToken,
     apiVersion: '2024-01'
 });
+
+/**
+ * Fetches products that match ALL provided tags (Intersection).
+ * This enables Granular SEO Collections (e.g. "Recovery" + "Stage 2").
+ */
+export async function fetchProductsByTags(tags: string[]) {
+    // Construct Query: tag:A AND tag:B
+    const query = tags.map(t => `tag:${t}`).join(' AND ');
+
+    // Safety check
+    if (!query) return [];
+
+    try {
+        const products = await shopifyClient.product.fetchQuery({ query, sortKey: 'BEST_SELLING' });
+        return products;
+    } catch (error) {
+        console.error("Error fetching granular products:", error);
+        return [];
+    }
+}
