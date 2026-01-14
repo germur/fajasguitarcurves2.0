@@ -32,36 +32,41 @@ export default function HourglassPage() {
         if (activeFilter === 'all') return products;
 
         return products.filter(p => {
-            const tags = p.tags ? p.tags.map((t: string) => t.toLowerCase()) : [];
-            const filterLower = activeFilter.toLowerCase(); // Normalized
+            if (!p.tags) return false;
+
+            const tags = p.tags.map((t: string) => t.toLowerCase());
+            const filterLower = activeFilter.toLowerCase();
+
+            // Helper for fuzzy matching (removes symbols/spaces)
+            const clean = (str: string) => str.replace(/[^a-z0-9]/g, '');
+            const filterClean = clean(filterLower);
 
             // 1. Check strict mapped occasion (Legacy logic)
             if (p.occasion === activeFilter) return true;
 
-            // 2. Check for Specific Presets (Legacy + New Body Zones)
+            // 2. Check for Specific Presets (Legacy)
             if (activeFilter === 'booty') {
                 return tags.some((t: string) =>
-                    t.includes('butt') || t.includes('lifter') || t.includes('short') || t.includes('legging') || t.includes('gluteal')
+                    t.includes('butt') || t.includes('lifter') || t.includes('short') || t.includes('gluteal')
                 );
             }
             if (activeFilter === 'waist') {
                 return tags.some((t: string) =>
-                    t.includes('waist') || t.includes('gym') || t.includes('cinturilla') || t.includes('chaleco') || t.includes('vest') || t.includes('latex')
+                    t.includes('waist') || t.includes('gym') || t.includes('cintura') || t.includes('vest')
                 );
             }
             if (activeFilter === 'invisible') {
                 return tags.some((t: string) =>
-                    t.includes('strapless') || t.includes('invisible') || t.includes('daily') || t.includes('body') || t.includes('seamless')
+                    t.includes('strapless') || t.includes('invisible') || t.includes('daily') || t.includes('seamless')
                 );
             }
 
-            // Legacy support if old URLs are hit, though UI doesn't show them
-            if (activeFilter === 'dress') return tags.some((t: string) => t.includes('vestido') || t.includes('dress') || t.includes('fiesta') || t.includes('strapless'));
-            if (activeFilter === 'jeans') return tags.some((t: string) => t.includes('jeans') || t.includes('diario') || t.includes('daily') || t.includes('invisible') || t.includes('butt') || t.includes('gluteal'));
-
-            // 3. Check for Direct Tag Match (New Linkbuilding Logic)
-            // e.g. activeFilter = "Waist Trainer" -> looks for tag "waist trainer"
-            return tags.some((t: string) => t === filterLower || t.includes(filterLower));
+            // 3. Smart Tag Match (Handles 'post lipo' vs 'post-lipo')
+            return tags.some((t: string) => {
+                const tClean = clean(t);
+                // Exact match of clean strings OR simple inclusion
+                return tClean === filterClean || tClean.includes(filterClean) || filterClean.includes(tClean);
+            });
         });
     }, [products, activeFilter]);
 
