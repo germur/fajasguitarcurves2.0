@@ -21,7 +21,7 @@ export function useSculptProducts() {
                 const collectionQuery = `
                 query getCollection($handle: String!) {
                     collectionByHandle(handle: $handle) {
-                        products(first: 20) {
+                        products(first: 250) {
                             edges {
                                 node {
                                     id

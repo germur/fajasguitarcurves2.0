@@ -18,7 +18,7 @@ export function useRecoveryProducts() {
                 const collectionQuery = `
                 query getCollection($handle: String!) {
                     collectionByHandle(handle: $handle) {
-                        products(first: 50) {
+                        products(first: 250) {
                             edges {
                                 node {
                                     id

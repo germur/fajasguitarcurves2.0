@@ -218,6 +218,17 @@ export function GlassNavbar() {
                                             </div>
                                         </Link>
                                     </li>
+                                    <li className="group/item">
+                                        <Link to="/collections/bras" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                            <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
+                                                <img src="/assets/bras-menu.jpg" className="w-full h-full object-cover" alt="Bras" />
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Bras & Essentials</p>
+                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Complementos</p>
+                                            </div>
+                                        </Link>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -309,6 +320,10 @@ export function GlassNavbar() {
                                 <Link to="/collections/sculpt" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                     <div className="font-bold text-base text-[#2C2420]">Sculpt Studio</div>
                                     <div className="text-xs text-stone-500">Fajas de Uso Diario & Waist Trainers</div>
+                                </Link>
+                                <Link to="/collections/bras" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Bras & Essentials</div>
+                                    <div className="text-xs text-stone-500">Brasieres, Tablas y Espumas</div>
                                 </Link>
 
                             </div>
