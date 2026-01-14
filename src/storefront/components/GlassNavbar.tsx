@@ -242,7 +242,10 @@ export function GlassNavbar() {
                                         { label: 'Stage 3 (Mantenimiento)', href: '/collections/recovery?tag=Stage+3' },
                                         { label: 'BBL Protection', href: '/collections/recovery?tag=BBL' },
                                         { label: 'Levanta Cola', href: '/collections/sculpt?tag=Butt+Lifter' },
-                                        { label: 'Cintura de Avispa', href: '/collections/sculpt?tag=Waist+Trainer' }
+                                        { label: 'Cintura de Avispa', href: '/collections/sculpt?tag=Waist+Trainer' },
+                                        { label: 'Strapless / Invisible', href: '/collections/sculpt?tag=Strapless' },
+                                        { label: 'Shorts & Bodys', href: '/collections/sculpt?tag=Short' },
+                                        { label: 'Media Pierna', href: '/collections/recovery?tag=Media+Pierna' }
                                     ].map((item) => (
                                         <li key={item.label}>
                                             <Link
@@ -326,6 +329,23 @@ export function GlassNavbar() {
                                     <div className="text-xs text-stone-500">Brasieres, Tablas y Espumas</div>
                                 </Link>
 
+                            </div>
+
+                            {/* MOBILE TAGS CLOUD */}
+                            <div className="mt-4 pt-4 border-t border-stone-100">
+                                <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">Filtrar por Etiqueta</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {['Stage 2', 'BBL', 'Strapless', 'Short', 'Media Pierna', 'Talle Alto'].map(tag => (
+                                        <Link
+                                            key={tag}
+                                            to={tag.includes('Stage') ? `/collections/recovery?tag=${tag}` : `/collections/sculpt?tag=${tag}`}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="px-3 py-1 bg-stone-50 rounded-full text-[10px] text-stone-600 font-bold border border-stone-100 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-colors"
+                                        >
+                                            {tag}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 

@@ -245,6 +245,29 @@ export function ProductDetailView() {
                                         Paga en cuotas de <span className="font-bold text-[#2C2420]">${(price / 4).toFixed(2)}</span> sin interés.
                                     </p>
                                 </div>
+
+                                {/* Tags Display */}
+                                {product.tags && product.tags.length > 0 && (
+                                    <div className="flex flex-wrap gap-2 mt-4">
+                                        {product.tags.map((tag: string) => {
+                                            if (tag.toLowerCase() === 'best seller' || tag.includes('HIDDEN')) return null; // Skip non-customer tags
+                                            const isRecovery = tag.toLowerCase().includes('stage');
+                                            const targetLink = isRecovery
+                                                ? `/collections/recovery?tag=${tag.toLowerCase()}`
+                                                : `/collections/sculpt?tag=${tag.toLowerCase()}`;
+
+                                            return (
+                                                <Link
+                                                    key={tag}
+                                                    to={targetLink}
+                                                    className="text-[10px] uppercase font-bold tracking-wider bg-stone-100 text-stone-500 px-3 py-1.5 rounded-md hover:bg-[#D4AF37] hover:text-white transition-colors"
+                                                >
+                                                    #{tag}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                             </div>
 
                             {/* --- THE VIBECODED SELECTOR --- */}
