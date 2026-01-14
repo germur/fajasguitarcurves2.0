@@ -26,7 +26,8 @@ export function SculptProductCard({ product, onAddToCart }: SculptProductCardPro
                 <Link to={`/products/${productHandle}`} className="block w-full h-full">
                     {/* Image 1: Product (Default Visible) */}
                     <img
-                        src={product.imageProduct}
+                        src={product.imageProduct || '/assets/placeholder-image_square.jpg'}
+                        onError={(e) => { e.currentTarget.src = '/assets/placeholder-image_square.jpg'; }}
                         alt={product.title}
                         className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out z-10 group-hover:opacity-0"
                     />
