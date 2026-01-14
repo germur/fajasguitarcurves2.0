@@ -52,7 +52,7 @@ export function SculptProductCard({ product, onAddToCart }: SculptProductCardPro
                             e.preventDefault();
                             onAddToCart?.(product.id);
                         }}
-                        className="w-full bg-stone-900 text-white font-bold text-xs uppercase tracking-widest py-3 hover:bg-[#D4AF37] transition-colors flex items-center justify-center gap-2"
+                        className="w-full bg-[#2C2420] text-white font-bold text-[10px] uppercase tracking-[0.2em] py-3 hover:bg-[#D4AF37] transition-colors flex items-center justify-center gap-2"
                     >
                         Add to Cart
                     </button>
@@ -66,8 +66,8 @@ export function SculptProductCard({ product, onAddToCart }: SculptProductCardPro
                         {product.title}
                     </h3>
                 </Link>
-                <p className="text-stone-500 text-xs uppercase tracking-widest font-bold mt-1">
-                    {product.price} USD
+                <p className="text-stone-500 text-xs font-mono uppercase tracking-widest mt-1">
+                    {Number(product.price).toLocaleString()} USD
                 </p>
             </div>
         </div>

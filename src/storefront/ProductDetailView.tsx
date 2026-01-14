@@ -132,7 +132,7 @@ export function ProductDetailView() {
                 description={seoDescription}
                 type="product"
                 image={image}
-                path={`/products/${id}`}
+                path={`/products/${product.handle || id}`}
                 schema={{
                     type: 'product',
                     data: product,
@@ -143,7 +143,6 @@ export function ProductDetailView() {
                     ]
                 }}
             />
-
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
                 <div className="flex flex-col">

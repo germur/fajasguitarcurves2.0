@@ -12,36 +12,65 @@ export class ShopifyMapper {
     static mapProduct(shopifyProduct: any, siloType = 'standard') {
         const tags = shopifyProduct.tags || [];
         const title = shopifyProduct.title;
-        const price = parseFloat(shopifyProduct.priceRange?.minVariantPrice?.amount || '0');
 
-        // Extract all images
-        const images = shopifyProduct.images?.edges?.map((edge: any) => edge.node.url) || [];
+        // PRICE MAPPING (Robust)
+        let price = 0;
+        if (shopifyProduct.priceRange?.minVariantPrice?.amount) {
+            price = parseFloat(shopifyProduct.priceRange.minVariantPrice.amount);
+        } else if (shopifyProduct.variants && shopifyProduct.variants.length > 0) {
+            // Unrolling SDK structure or simple array
+            const v = shopifyProduct.variants[0];
+            const val = v.price?.amount ?? v.price; // Handle { amount: "100" } or "100"
+            price = parseFloat(val);
+        }
+        if (isNaN(price)) price = 0; // Final safety net
+
+        // IMAGE MAPPING (Robust)
+        let images: string[] = [];
+        if (shopifyProduct.images?.edges) {
+            // Raw GraphQL
+            images = shopifyProduct.images.edges.map((edge: any) => edge.node.url);
+        } else if (Array.isArray(shopifyProduct.images)) {
+            // SDK or Simple Array
+            images = shopifyProduct.images.map((img: any) => {
+                const url = img.url || img.src || img;
+                return typeof url === 'string' ? url : '';
+            }).filter(Boolean);
+        }
+
+        // VARIANT MAPPING (Robust)
+        const mapVariant = (v: any) => {
+            const node = v.node || v; // Handle Edge or Direct Object
+            return {
+                id: node.id,
+                title: node.title,
+                available: node.availableForSale ?? node.available,
+                price: parseFloat(node.price?.amount || node.price || '0'),
+                image: node.image?.url || node.image?.src || '',
+                selectedOptions: node.selectedOptions || [],
+                size: node.title
+            };
+        };
+
+        const rawVariants = shopifyProduct.variants?.edges || shopifyProduct.variants || [];
+        const variants = rawVariants.map(mapVariant);
 
         // Base Object
         const mapped = {
             id: shopifyProduct.id,
             title: title,
-            price: price,
+            price: price, // Number
             image: images[0] || '', // Primary
             images: images,         // All images for galleries/hovers
+
+            // Compatibility for SculptProductCard
+            imageProduct: images[0] || '',
+            imageResult: images[1] || images[0] || '',
+
             tags: tags,
             handle: shopifyProduct.handle,
-            variants: shopifyProduct.variants?.edges?.map((edge: any) => ({
-                id: edge.node.id,
-                title: edge.node.title, // "XS / Cocoa"
-                available: edge.node.availableForSale,
-                price: parseFloat(edge.node.price?.amount || '0'),
-                image: edge.node.image?.url,
-                selectedOptions: edge.node.selectedOptions?.map((opt: any) => ({
-                    name: opt.name,
-                    value: opt.value
-                })) || [],
-                size: edge.node.title // Fallback
-            })) || [],
-            options: shopifyProduct.options?.map((opt: any) => ({
-                name: opt.name,
-                values: opt.values
-            })) || [],
+            variants: variants,
+            options: shopifyProduct.options || [],
             isBestSeller: tags.includes('Best Seller') || tags.includes('Más Vendido'),
         };
 
