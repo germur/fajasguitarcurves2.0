@@ -7,21 +7,21 @@ export function SurgeryTimelineFilter({ activeStage, onStageChange }: SurgeryTim
     const filters = [
         {
             id: 'stage2',
-            label: 'Soporte & Control',
-            subLabel: 'Ideal Post-Op (Stage 2)',
-            badge: '⏳ Talle Alto'
+            label: 'Stage 2',
+            subLabel: 'Alta Compresión',
+            badge: '🛡️ Recuperación'
         },
         {
             id: 'stage3',
-            label: 'Cintura de Avispa',
-            subLabel: 'Mantenimiento (Stage 3)',
-            badge: '⭐ Define Curvas'
+            label: 'Stage 3',
+            subLabel: 'Mantenimiento',
+            badge: '⏳ Uso Diario'
         },
         {
             id: 'bbl',
-            label: 'Protección BBL',
+            label: 'Guitar / BBL',
             subLabel: 'Cintura XS - Cadera XL',
-            badge: '🍑 Guitar Shape'
+            badge: '🍑 Caderas Anchas'
         }
     ] as const;
 
