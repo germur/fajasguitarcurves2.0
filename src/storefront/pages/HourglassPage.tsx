@@ -97,9 +97,9 @@ export default function HourglassPage() {
                 {/* Background Image - Clean & Bright */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/assets/hourglass-hero-bg.jpg"
-                        alt="Modelo usando Fajas Colombianas Guitar Curves efecto reloj de arena"
-                        className="w-full h-full object-cover"
+                        src="/assets/group-sculpt-hero.jpg"
+                        alt="Modelos usando diversa variedad de Fajas Colombianas Guitar Curves"
+                        className="w-full h-full object-cover object-top"
                     />
                     {/* Soft White Gradient for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent"></div>
