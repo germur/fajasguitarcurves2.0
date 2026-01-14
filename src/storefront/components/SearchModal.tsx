@@ -77,7 +77,7 @@ export function SearchModal() {
     }, [query, products]);
 
     const handleNavigate = (id: string) => {
-        navigate(`/store/products/${id}`);
+        navigate(`/products/${id}`);
         toggleSearch();
     };
 

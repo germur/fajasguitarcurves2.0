@@ -152,11 +152,6 @@ export const router = createBrowserRouter([
         path: 'products/:id',
         element: withSuspense(ProductDetailView),
       },
-      // Legacy Redirect / Alias for SEO
-      {
-        path: 'store/products/:id',
-        element: withSuspense(ProductDetailView),
-      },
       {
         path: 'cinturillas',
         element: <Suspense fallback={<LoadingFallback />}><CollectionPage title="Cinturillas" handle="cinturillas" description="Premium waist trainers designed for maximum compression and comfort." /></Suspense>,
