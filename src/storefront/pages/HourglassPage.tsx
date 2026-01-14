@@ -11,6 +11,7 @@ import { useSculptProducts } from '../hooks/useSculptProducts';
 
 import { SeoHead } from '../../lib/seo/SeoHead';
 
+// Version: 1.0.1 - Fixed Missing Products & Routing
 export default function HourglassPage() {
     const { products, loading, error } = useSculptProducts();
     const [searchParams] = useSearchParams();
