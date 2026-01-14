@@ -23,9 +23,11 @@ export function ProductDetailView() {
     const [isCalculatorOpen, setCalculatorOpen] = useState(false);
 
     // 1. Data Fetching Logic
+    const { product: fetchedProduct, loading, error } = useProduct(id || '');
     const localProduct = getProductById(id || '');
-    const { product: fetchedProduct, loading, error } = useProduct(localProduct ? '' : (id || ''));
-    const product = localProduct || fetchedProduct;
+
+    // PRIORITY: Live Data -> Local Fallback
+    const product = fetchedProduct || localProduct;
 
     useEffect(() => {
         window.scrollTo(0, 0);
