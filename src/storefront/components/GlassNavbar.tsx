@@ -221,7 +221,7 @@ export function GlassNavbar() {
                                     <li className="group/item">
                                         <Link to="/collections/bras" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
-                                                <img src="/assets/bras-menu.jpg" className="w-full h-full object-cover" alt="Bras" />
+                                                <img src="/assets/essentials-flatlay.jpg" className="w-full h-full object-cover" alt="Bras" />
                                             </div>
                                             <div>
                                                 <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Bras & Essentials</p>

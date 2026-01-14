@@ -43,9 +43,9 @@ export function WaistTrainingLab() {
                 {/* Interactive Image Side */}
                 <div className="relative h-[500px] lg:h-auto bg-stone-200 order-1 lg:order-2">
                     <img
-                        src="/assets/sewing-detail.png"
-                        alt="Ingeniería Textil en Detalle"
-                        className="w-full h-full object-cover opacity-90"
+                        src="/assets/waist-training-detail.png"
+                        alt="Detalle de Latex Premium y Varillas Flexibles"
+                        className="w-full h-full object-cover opacity-100 shadow-2xl"
                     />
 
                     {/* Hotspots */}
