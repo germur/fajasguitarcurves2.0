@@ -40,7 +40,8 @@ export function BraCard({ product }: BraCardProps) {
             {/* IMAGEN (Con Zoom suave) */}
             <Link to={`/products/${productHandle}`} className="relative h-[60%] overflow-hidden bg-[#F9F8F6]">
                 <img
-                    src={image}
+                    src={image || '/assets/essentials-flatlay.jpg'}
+                    onError={(e) => { e.currentTarget.src = '/assets/essentials-flatlay.jpg'; }}
                     alt={title} // SEO: Alt text automático
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
