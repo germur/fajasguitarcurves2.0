@@ -53,7 +53,7 @@ export function ShopifyCollectionGrid({ handle, productCount = 4 }: ShopifyColle
                 e.preventDefault();
                 const handleFn = card.querySelector('.data-handle')?.textContent?.trim();
                 if (handleFn) {
-                    navigate(`/store/products/${handleFn}`);
+                    navigate(`/products/${handleFn}`);
                 }
             }
         };
