@@ -1,0 +1,30 @@
+# --- REDIRECCIONES DE PRODUCTOS CRÍTICOS (WooCommerce -> Shopify) ---
+# Mapeo basado en nombres similares del catálogo nuevo
+
+/producto/hourglass-etapa-3-bbl/  /products/faja-reloj-de-arena-etapa-3  301
+/producto/strapless-faja-panty/   /products/bodysuit-panty-strapless     301
+/producto/faja-short-levanta-cola/ /products/short-levanta-cola-talle-alto 301
+/producto/chaleco-corset/         /products/chaleco-corset-reductor      301
+/producto/cinturilla-avispa/      /products/faja-cinturilla-avispa       301
+/producto/faja-media-pierna/      /products/faja-etapa-2-media-pierna    301
+
+# --- REDIRECCIONES DE CATEGORÍAS (Silos) ---
+/categoria-producto/post-quirurgica/* /collections/recovery  301
+/categoria-producto/uso-diario/* /collections/sculpt    301
+/categoria-producto/fajas/* /collections/all       301
+/collections/moldeadoras.atom          /collections/sculpt    301
+
+# --- LIMPIEZA DE URLS VIEJAS / BASURA ---
+# Si alguien entra a una URL vieja de filtro o feed, lo mandamos a la tienda
+/store/* /collections/recovery  301
+/shop/* /collections/recovery  301
+/en/* /                      301
+/*.atom             /                      301
+
+# --- FALLBACK INTELIGENTE (CATCH-ALL) ---
+# Cualquier URL vieja de producto que no hayamos mapeado arriba,
+# intenta mandarla a la colección principal en lugar de un 404 duro.
+/producto/* /collections/recovery  301
+
+# --- REGLA DE SPA (OBLIGATORIA AL FINAL) ---
+/* /index.html  200
