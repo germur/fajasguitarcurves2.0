@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGrid';
 import { GranularProductGrid } from './components/GranularProductGrid';
-import { fetchProductsByTags } from '../lib/shopify-client';
+import { fetchProductsByTags, fetchAllProducts } from '../lib/shopify-client';
 import { ShopifyMapper } from '../lib/shopify-mapper';
 import { SeoHead } from '../lib/seo/SeoHead';
 import { ArrowRight, Shield } from 'lucide-react';
@@ -20,42 +20,44 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     const params = useParams();
     const location = useLocation();
 
-    // Determine Mode: Route Params (Granular) vs Props (Standard)
+    // Determine Mode: Route Params (Granular) vs Props (Standard) vs View All
+    const handle = propHandle || params.handle || '';
     const isGranular = !!params.silo && !!params.filter;
+    const isViewAll = handle === 'all';
 
-    // State for Granular Mode
+    // State for Granular/Manual Mode
     const [granularProducts, setGranularProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
 
-    // Derived Data
-    const handle = propHandle || params.handle || '';
     const silo = params.silo || '';
     const filter = params.filter || '';
 
     // SEO Data Construction
-    const pageTitle = isGranular
-        ? `${capitalize(filter)} ${capitalize(silo)} Fajas`
-        : (propTitle || capitalize(handle));
+    let pageTitle = propTitle || capitalize(handle);
+    let seoDescription = propDesc || `Explore our ${pageTitle} collection at Guitar Curves.`;
 
-    const seoDescription = isGranular
-        ? `Shop the best ${filter.replace(/-/g, ' ')} options from our ${silo} collection. High compression and specialized support.`
-        : (propDesc || `Explore our ${pageTitle} collection at Guitar Curves.`);
+    if (isGranular) {
+        pageTitle = `${capitalize(filter)} ${capitalize(silo)} Fajas`;
+        seoDescription = `Shop the best ${filter.replace(/-/g, ' ')} options from our ${silo} collection. High compression and specialized support.`;
+    }
 
-    // Granular Fetching Logic
+    // Data Fetching Logic (Granular OR View All)
     useEffect(() => {
-        if (isGranular) {
+        if (isGranular || isViewAll) {
             setLoading(true);
-            // Only fetch valid tags. If mapSiloToTag returns empty string (e.g. for Sculpt), we just search by the filter tag (e.g. 'Short').
-            const tagsToFetch = [mapSiloToTag(silo), mapFilterToTag(filter)].filter(t => t && t.length > 0);
 
-            fetchProductsByTags(tagsToFetch)
+            const fetchPromise = isViewAll
+                ? fetchAllProducts()
+                : fetchProductsByTags([mapSiloToTag(silo), mapFilterToTag(filter)].filter(t => t && t.length > 0));
+
+            fetchPromise
                 .then(rawProducts => {
                     const mapped = rawProducts.map((p: any) => ShopifyMapper.mapProduct(p, 'standard'));
                     setGranularProducts(mapped);
                 })
                 .finally(() => setLoading(false));
         }
-    }, [silo, filter, isGranular]);
+    }, [silo, filter, isGranular, isViewAll]);
 
     // Asset Data
     const { image: heroImage, subtitle: heroSubtitle } = getSiloAsset(silo || 'default');
@@ -148,7 +150,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                 )}
 
                 <div className="mb-20">
-                    {isGranular ? (
+                    {isGranular || isViewAll ? (
                         <GranularProductGrid products={granularProducts} loading={loading} />
                     ) : (
                         <ShopifyCollectionGrid handle={handle} productCount={12} />

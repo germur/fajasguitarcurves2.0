@@ -17,6 +17,18 @@ export const shopifyClient = Client.buildClient({
 });
 
 /**
+ * Validates a product to ensure it has necessary assets (Data Hygiene).
+ * - Must have at least 1 image.
+ * - Must have variants.
+ */
+function validateProduct(product: any) {
+    if (!product) return false;
+    const hasImages = product.images && product.images.length > 0;
+    const hasVariants = product.variants && product.variants.length > 0;
+    return hasImages && hasVariants;
+}
+
+/**
  * Fetches products that match ALL provided tags (Intersection).
  * This enables Granular SEO Collections (e.g. "Recovery" + "Stage 2").
  */
@@ -29,9 +41,24 @@ export async function fetchProductsByTags(tags: string[]) {
 
     try {
         const products = await shopifyClient.product.fetchQuery({ query, sortKey: 'BEST_SELLING' });
-        return products;
+        return products.filter(validateProduct);
     } catch (error) {
         console.error("Error fetching granular products:", error);
+        return [];
+    }
+}
+
+/**
+ * Fetches all products (up to 250) for the 'View All' page.
+ * Applies strict data hygiene.
+ */
+export async function fetchAllProducts() {
+    try {
+        // Fetch up to 250 products (Shopify limit for single page usually)
+        const products = await shopifyClient.product.fetchAll(250);
+        return products.filter(validateProduct);
+    } catch (error) {
+        console.error("Error fetching all products:", error);
         return [];
     }
 }

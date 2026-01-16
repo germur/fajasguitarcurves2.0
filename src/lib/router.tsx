@@ -108,6 +108,12 @@ export const router = createBrowserRouter([
         element: withSuspense(EssentialsPage),
       },
 
+      // --- VIEW ALL (Client Request) ---
+      {
+        path: 'collections/all',
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage handle="all" title="Todo el Catálogo" description="Explora toda nuestra colección de fajas colombianas premium." /></Suspense>,
+      },
+
       /* --- GRANULAR SEO COLLECTIONS (Programmatic) --- */
       // Matches /collections/recovery/stage-2, /collections/sculpt/post-lipo, etc.
       {
