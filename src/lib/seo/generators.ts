@@ -51,6 +51,7 @@ export function generateProductSchema(product: any, url: string) {
             "url": url,
             "priceCurrency": "USD",
             "price": product.priceRange?.minVariantPrice?.amount || "0",
+            "priceValidUntil": getFutureDate(),
             "availability": product.availableForSale ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "itemCondition": "https://schema.org/NewCondition",
             "shippingDetails": {
@@ -140,3 +141,4 @@ export function generateOrganizationSchema() {
         }
     };
 }
+export function getFutureDate() { const d = new Date(); d.setFullYear(d.getFullYear() + 1); return d.toISOString().split('T')[0]; }

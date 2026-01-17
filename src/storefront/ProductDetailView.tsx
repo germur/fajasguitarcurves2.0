@@ -10,7 +10,7 @@ import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 // Tools imports for Smart Modal
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
 import { SeoHead } from '../lib/seo/SeoHead';
-import { generateMetaTags } from '../lib/seo/generators';
+import { generateMetaTags, generateProductSchema } from '../lib/seo/generators';
 import { fetchCollectionByHandle } from '../lib/shopify-client';
 import { GranularProductGrid } from './components/GranularProductGrid';
 
@@ -245,15 +245,7 @@ export function ProductDetailView() {
                 type="product"
                 image={displayImage}
                 path={`/products/${product.handle || id}`}
-                schema={{
-                    type: 'product',
-                    data: product,
-                    breadcrumbs: [
-                        { name: 'Home', item: '/' },
-                        { name: category || 'Colección', item: '/collections/sculpt' },
-                        { name: title, item: `/products/${id}` }
-                    ]
-                }}
+                schema={generateProductSchema(product, `https://guitarcurves.com/products/${product.handle || id}`)}
             />
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
