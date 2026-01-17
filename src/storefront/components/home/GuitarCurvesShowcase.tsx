@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { fetchCollectionByHandle, fetchAllProducts } from '@/lib/shopify-client';
+import { fetchAllProducts } from '@/lib/shopify-client';
 import { ShopifyMapper } from '@/lib/shopify-mapper';
 // Reuse existing ProductCard or modify
 import { SculptProductCard } from '../silo-sculpt/SculptProductCard';
@@ -20,7 +20,7 @@ export function GuitarCurvesShowcase() {
                 const allItems = await fetchAllProducts();
 
                 // MAPPER IS CRITICAL: Converts raw nodes to the shape SculptProductCard expects (imageProduct, etc.)
-                const mappedItems = allItems.map(item => ShopifyMapper.mapProduct(item, 'sculpt'));
+                const mappedItems = allItems.map((item: any) => ShopifyMapper.mapProduct(item, 'sculpt'));
 
                 // Filter if possible, otherwise show mixed (User asked for "Guitar Curves", traditionally stage 2/sculpt)
                 // We will try to filter by tag 'Sculpt' or 'Waist Trainer' if possible, otherwise just show bestsellers (first 8)
