@@ -218,8 +218,8 @@ export default function PostSurgeryPage() {
                             <img src="/assets/cero-fibrosis-texture.jpg" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="No Fibrosis" />
                             <div className="absolute inset-0 bg-black/20"></div>
                             <div className="absolute bottom-8 left-8 text-white">
-                                <h3 className="text-3xl font-serif mb-2">Cero Fibrosis</h3>
-                                <p className="text-sm opacity-90">Compresión uniforme que previene seromas.</p>
+                                <h3 className="text-3xl font-serif mb-2">Compresión Inteligente</h3>
+                                <p className="text-sm opacity-90">Diseño que apoya tu recuperación segura.</p>
                             </div>
                         </div>
 

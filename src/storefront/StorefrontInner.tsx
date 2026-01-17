@@ -6,6 +6,7 @@ import { GlassNavbar } from './components/GlassNavbar';
 import { DarkFooter } from './components/DarkFooter';
 
 import { ScrollToTop } from './components/ScrollToTop';
+import { WhatsAppButton } from './components/WhatsAppButton';
 
 export function StorefrontInner() {
     const location = useLocation();
@@ -26,6 +27,9 @@ export function StorefrontInner() {
 
             {/* Global Footer (The Trust Foundation) */}
             <DarkFooter />
+
+            {/* Persistent Communications */}
+            <WhatsAppButton />
         </div>
     );
 }

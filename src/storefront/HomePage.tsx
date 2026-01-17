@@ -4,9 +4,11 @@ import { SeoHead } from './components/SeoHead';
 import { HomeHero } from './components/home/HomeHero';
 
 // Lazy Load Below-the-fold components
-const SiloBentoGrid = lazy(() => import('./components/home/SiloBentoGrid').then(module => ({ default: module.SiloBentoGrid })));
+const SkimsBentoGrid = lazy(() => import('./components/home/SkimsBentoGrid').then(module => ({ default: module.SkimsBentoGrid })));
+const GuitarCurvesShowcase = lazy(() => import('./components/home/GuitarCurvesShowcase').then(module => ({ default: module.GuitarCurvesShowcase })));
+// const SiloBentoGrid = lazy(() => import('./components/home/SiloBentoGrid').then(module => ({ default: module.SiloBentoGrid })));
 const InfiniteMarquee = lazy(() => import('./components/home/InfiniteMarquee').then(module => ({ default: module.InfiniteMarquee })));
-const BeforeAfterSlider = lazy(() => import('./components/home/BeforeAfterSlider').then(module => ({ default: module.BeforeAfterSlider })));
+// const BeforeAfterSlider = lazy(() => import('./components/home/BeforeAfterSlider').then(module => ({ default: module.BeforeAfterSlider })));
 const SocialProofWall = lazy(() => import('./components/home/SocialProofWall').then(module => ({ default: module.SocialProofWall })));
 
 export function HomePage() {
@@ -54,11 +56,11 @@ export function HomePage() {
                 {/* 3. SECTION 2: TRUST BAR (Infinite Marquee) */}
                 <InfiniteMarquee />
 
-                {/* 4. SECTION 3: VISUAL NAVIGATION (Bento Grid) */}
-                <SiloBentoGrid />
+                {/* 4. SECTION 3: VISUAL NAVIGATION (Skims Bento Grid) */}
+                <SkimsBentoGrid />
 
-                {/* 5. SECTION 4: PROBLEM/SOLUTION (Interactive Slider) */}
-                <BeforeAfterSlider />
+                {/* 5. NEW SECTION: GUITAR CURVES SHOWCASE */}
+                <GuitarCurvesShowcase />
 
                 {/* 7. SECTION 6: SOCIAL PROOF (Wall of Curves) */}
                 <SocialProofWall />

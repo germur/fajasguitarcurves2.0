@@ -14,23 +14,30 @@ interface ShapeResult {
     recommendedProductId: string;
     recommendationTitle: string;
     productImage: string;
+    size: string;
 }
 
 // Logic provided by USER
-// Standard Colombian Faja Sizing (Approximation based on Waist)
+// Standard Colombian Faja Sizing
 const SIZE_CHART = [
-    { size: 'XS', min: 24, max: 26 },
-    { size: 'S', min: 26, max: 28 },
-    { size: 'M', min: 28, max: 30 },
-    { size: 'L', min: 30, max: 32 },
-    { size: 'XL', min: 32, max: 34 },
-    { size: '2XL', min: 34, max: 36 },
-    { size: '3XL', min: 36, max: 38 },
+    { size: 'XXS', min: 22.1, max: 24.4 },
+    { size: 'XS', min: 24.4, max: 26.7 },
+    { size: 'S', min: 26.7, max: 28.3 },
+    { size: 'M', min: 28.3, max: 30.7 },
+    { size: 'L', min: 30.7, max: 33.1 },
+    { size: 'XL', min: 33.1, max: 35.4 },
+    { size: '2XL', min: 35.4, max: 37.8 },
+    { size: '3XL', min: 37.8, max: 40.2 },
+    { size: '4XL', min: 40.2, max: 42.5 },
+    { size: '5XL', min: 42.5, max: 44.8 },
+    { size: '6XL', min: 44.8, max: 47.2 },
 ];
 
 const calculateSize = (waist: number): string => {
     const match = SIZE_CHART.find(s => waist >= s.min && waist < s.max);
-    return match ? match.size : (waist < 24 ? 'XXS' : '4XL+');
+    if (match) return match.size;
+    if (waist < 22.1) return 'XXS';
+    return '7XL+';
 };
 
 const calculateShape = (waist: number, hips: number): ShapeResult | null => {
@@ -42,10 +49,11 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
         return {
             type: "TRUE_GUITAR",
             title: `¡Eres una Verdadera Guitarra! (Talla ${size}) 🎸`,
-            description: `Tu cintura es significativamente más pequeña que tus caderas (Ratio de Oro). Según tu cintura de ${waist}", tu talla ideal es ${size}, pero necesitas el corte 'Signature Guitar' para acomodar tus caderas de ${hips}".`,
+            description: `Tu cintura es significativamente más pequeña que tus caderas (Ratio de Oro). Según tu cintura de ${waist.toFixed(1)}", tu talla ideal es ${size}, pero necesitas el corte 'Signature Guitar' para acomodar tus caderas de ${hips.toFixed(1)}".`,
             recommendedProductId: "cinturilla-extrema-con-cremallera-y-clips-14-varillas",
             recommendationTitle: "Faja Reloj de Arena Stage 3",
-            productImage: "/assets/quiz-result-guitar.jpg"
+            productImage: "/assets/quiz-result-guitar.jpg",
+            size: size
         };
     } else if (ratio >= 0.65 && ratio <= 0.75) {
         return {
@@ -54,7 +62,8 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
             description: `Tienes curvas naturales. Tu talla base es ${size}. Eres una 'Falsa S': pequeña de frente, pero necesitas espacio atrás. Con la compresión adecuada en cintura, alcanzarás el Ratio Guitarra.`,
             recommendedProductId: "faja-etapa-2-con-mangas-y-bra",
             recommendationTitle: "Cinturilla Extrema Reloj de Arena",
-            productImage: "/assets/essentials-flatlay.jpg"
+            productImage: "/assets/essentials-flatlay.jpg",
+            size: size
         };
     } else {
         return {
@@ -63,7 +72,8 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
             description: `Tienes una figura balanceada. Tu talla para alta compresión es ${size}. Tu objetivo es crear la ilusión de curva mediante High Compression.`,
             recommendedProductId: "leggins-deportivo-ideal-para-uso-diario",
             recommendationTitle: "Faja Cinturilla de Avispa",
-            productImage: "/assets/essentials-flatlay.jpg"
+            productImage: "/assets/essentials-flatlay.jpg",
+            size: size
         };
     }
 };
@@ -149,8 +159,18 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
 
     const handleCalculate = () => {
         setStep('CALCULATING');
-        const res = calculateShape(waist, hips);
+
+        // NORMALIZE TO INCHES FOR LOGIC
+        // The sizing logic (calculateShape) expects Inches.
+        // If user is in CM, we convert: 1 inch = 2.54 cm
+        const normalize = (val: number) => unit === 'CM' ? val / 2.54 : val;
+
+        const wInches = normalize(waist);
+        const hInches = normalize(hips);
+
+        const res = calculateShape(wInches, hInches);
         setResult(res);
+
         setTimeout(() => {
             setStep('GATE');
         }, 2000);
@@ -378,7 +398,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
 
     const renderResult = () => {
         if (!result) return null;
-        const calculatedSize = calculateSize(waist);
+        const calculatedSize = result.size;
 
         return (
             <div className="animate-slide-up">

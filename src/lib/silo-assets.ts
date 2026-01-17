@@ -40,7 +40,7 @@ export const SiloAssets: Record<string, {
         ]
     },
     'default': {
-        image: '/assets/hourglass-hero-bg.jpg', // Generic fallback
+        image: '/assets/fajas-real-duo.jpg', // Updated to Real Photo per user request
         title: 'The Collection',
         subtitle: 'Premium Shapewear',
         subCollections: []

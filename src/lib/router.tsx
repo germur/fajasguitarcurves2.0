@@ -8,7 +8,6 @@ import { RootErrorBoundary } from '@/components/RootErrorBoundary';
 // Lazy load all pages for code splitting
 const ProductPage = lazy(() => import('@/components/ProductPage').then(m => ({ default: m.ProductPage })));
 const AcademiaView = lazy(() => import('@/sections/academia/AcademiaView'));
-const LifestyleView = lazy(() => import('@/sections/lifestyle/LifestyleView'));
 const PainPointsView = lazy(() => import('@/sections/pain-points/PainPointsView'));
 const ProductDetailView = lazy(() => import('@/storefront/ProductDetailView').then(m => ({ default: m.ProductDetailView })));
 const CartPage = lazy(() => import('@/storefront/CartPage').then(m => ({ default: m.CartPage })));
@@ -151,10 +150,6 @@ export const router = createBrowserRouter([
       {
         path: 'pages/guia-de-tallas',
         element: withSuspense(FitFinderPage),
-      },
-      {
-        path: 'lifestyle',
-        element: withSuspense(LifestyleView),
       },
       {
         path: 'solutions',

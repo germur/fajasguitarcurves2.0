@@ -56,12 +56,13 @@ export default function OurStoryPage() {
                     viewport={{ once: true }}
                     className="relative"
                 >
-                    {/* Foto con marco desplazado estilo editorial */}
+                    {/* Video con marco desplazado estilo editorial */}
                     <div className="absolute inset-0 border-2 border-[#D4AF37] translate-x-4 translate-y-4"></div>
-                    <img
-                        src="/assets/atelier-workshop.png"
-                        alt="Taller de Confección Guitar Curves"
-                        className="relative z-10 w-full h-auto shadow-xl grayscale hover:grayscale-0 transition-all duration-700"
+                    <video
+                        src="/assets/nelly-video.mp4"
+                        controls
+                        playsInline
+                        className="relative z-10 w-full h-auto shadow-xl object-cover"
                     />
                 </motion.div>
 

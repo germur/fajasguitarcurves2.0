@@ -1,74 +1,63 @@
-import { useState, useMemo, useEffect } from 'react';
 // import { GlassNavbar } from '../components/GlassNavbar';
 // import { DarkFooter } from '../components/DarkFooter';
-import { OutfitMatcher } from '../components/silo-sculpt/OutfitMatcher';
+// import { OutfitMatcher } from '../components/silo-sculpt/OutfitMatcher';
 import { SculptProductCard } from '../components/silo-sculpt/SculptProductCard';
 import { CurveCalculator } from '../components/silo-sculpt/CurveCalculator';
 import { WaistTrainingLab } from '../components/silo-sculpt/WaistTrainingLab';
 import { Loader2 } from 'lucide-react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSculptProducts } from '../hooks/useSculptProducts';
-
+import { FilterSidebar } from '../components/FilterSidebar';
 import { SeoHead } from '../../lib/seo/SeoHead';
+import { useState, useMemo } from 'react';
 
-// Version: 1.0.1 - Fixed Missing Products & Routing
+// Version: 1.0.3 - Fixed Component Structure & Imports
 export default function HourglassPage() {
     const { products, loading, error } = useSculptProducts();
-    const [searchParams] = useSearchParams();
-    const urlTag = searchParams.get('tag');
 
-    // Initial state from URL or 'all'
-    const [activeFilter, setActiveFilter] = useState(urlTag || 'all');
+    // Filter State (Advanced)
+    const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
+        stage: [],
+        compression: [],
+        occasion: [],
+        features: []
+    });
 
-    // Update if URL changes
-    useEffect(() => {
-        if (searchParams.get('tag')) {
-            setActiveFilter(searchParams.get('tag')!);
-        }
-    }, [searchParams]);
+    // Handle Filter Change
+    const handleFilterChange = (category: string, value: string) => {
+        setActiveFilters(prev => {
+            const current = prev[category] || [];
+            const isSelected = current.includes(value);
 
-    // Robust Filtering Logic
-    const filteredProducts = useMemo(() => {
-        if (activeFilter === 'all') return products;
-
-        return products.filter(p => {
-            if (!p.tags) return false;
-
-            const tags = p.tags.map((t: string) => t.toLowerCase());
-            const filterLower = activeFilter.toLowerCase();
-
-            // Helper for fuzzy matching (removes symbols/spaces)
-            const clean = (str: string) => str.replace(/[^a-z0-9]/g, '');
-            const filterClean = clean(filterLower);
-
-            // 1. Check strict mapped occasion (Legacy logic)
-            if (p.occasion === activeFilter) return true;
-
-            // 2. Check for Specific Presets (Legacy)
-            if (activeFilter === 'booty') {
-                return tags.some((t: string) =>
-                    t.includes('butt') || t.includes('lifter') || t.includes('short') || t.includes('gluteal')
-                );
+            if (isSelected) {
+                return { ...prev, [category]: current.filter(v => v !== value) };
+            } else {
+                return { ...prev, [category]: [...current, value] };
             }
-            if (activeFilter === 'waist') {
-                return tags.some((t: string) =>
-                    t.includes('waist') || t.includes('gym') || t.includes('cintura') || t.includes('vest')
-                );
-            }
-            if (activeFilter === 'invisible') {
-                return tags.some((t: string) =>
-                    t.includes('strapless') || t.includes('invisible') || t.includes('daily') || t.includes('seamless')
-                );
-            }
-
-            // 3. Smart Tag Match (Handles 'post lipo' vs 'post-lipo')
-            return tags.some((t: string) => {
-                const tClean = clean(t);
-                // Exact match of clean strings OR simple inclusion
-                return tClean === filterClean || tClean.includes(filterClean) || filterClean.includes(tClean);
-            });
         });
-    }, [products, activeFilter]);
+    };
+
+    // Robust Filtering Logic (Sidebar Compatible)
+    const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+            const checkCategory = (cat: string, value: string | string[]) => {
+                const active = activeFilters[cat];
+                if (!active || active.length === 0) return true;
+
+                if (Array.isArray(value)) {
+                    return value.some(v => active.includes(v));
+                }
+                return active.includes(value);
+            };
+
+            return (
+                checkCategory('stage', product.stage) &&
+                checkCategory('compression', product.compression) &&
+                checkCategory('occasion', product.occasion) &&
+                checkCategory('features', product.features)
+            );
+        });
+    }, [products, activeFilters]);
 
     return (
         <div className="bg-white min-h-screen font-sans selection:bg-[#D4AF37] selection:text-white">
@@ -92,84 +81,145 @@ export default function HourglassPage() {
 
             {/* Navbar handled by Layout */}
 
-            {/* 1. HERO SECTION: DAYLIGHT STUDIO */}
-            <div className="relative pt-0 h-[60vh] w-full overflow-hidden bg-[#f4f4f4]">
-                {/* Background Image - Clean & Bright */}
-                <div className="absolute inset-0 z-0">
-                    <img
-                        src="/assets/group-sculpt-hero.jpg"
-                        alt="Modelos usando diversa variedad de Fajas Colombianas Guitar Curves"
-                        className="w-full h-full object-cover object-top"
-                    />
-                    {/* Soft White Gradient for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent"></div>
-                </div>
+            {/* 1. HERO SECTION: SPLIT LAYOUT (Standardized) */}
+            <div className="pt-6 pb-8 px-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Left: Copy */}
+                    <div className="space-y-6">
+                        <div className="inline-flex items-center gap-2 bg-[#F5EDDF] text-[#A35944] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            <span className="text-xs">🛡️</span>
+                            Ingeniería Invisible
+                        </div>
 
-                <div className="relative z-10 h-full flex flex-col justify-center px-6 lg:px-20 max-w-7xl mx-auto">
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-900 mb-6 tracking-tighter">
-                        The Sculpt
-                    </h1>
-                    <h2 className="text-xl md:text-2xl font-light text-stone-600 mb-8 tracking-[0.3em] uppercase">
-                        Ingeniería Invisible
-                    </h2>
+                        <h1 className="text-4xl lg:text-6xl font-serif font-bold text-[#2C2420] leading-tight capitalize">
+                            The Sculpt Collection
+                        </h1>
 
-                    <div className="flex flex-col md:flex-row gap-4 mt-4">
-                        <a href="#products" className="px-8 py-3 bg-stone-900 text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer">
-                            Shop Waist Trainers
-                        </a>
-                        <Link to="/fit-finder" className="px-8 py-3 border border-stone-900 text-stone-900 uppercase tracking-widest text-xs font-bold hover:bg-stone-900 hover:text-white transition-all duration-300">
-                            Guía de Tallas
-                        </Link>
+                        <p className="text-xl text-stone-500 font-light border-l-4 border-[#D4AF37] pl-4">
+                            Ingeniería invisible para realzar tus curvas. La silueta de reloj de arena definitiva.
+                        </p>
+
+                        <div className="flex gap-4 pt-2">
+                            <Link to="/fit-finder" className="px-8 py-3 bg-[#2C2420] text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer rounded-lg">
+                                Guía de Tallas
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Right: Technical Visual */}
+                    <div className="relative h-[400px] lg:h-[500px] bg-stone-100 rounded-[2rem] overflow-hidden flex items-center justify-center shadow-lg">
+                        <img
+                            src="/assets/group-sculpt-hero.jpg"
+                            alt="The Sculpt Collection"
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/10"></div>
+                        <div className="absolute bottom-8 right-8 text-white text-right">
+                            <h3 className="font-bold text-2xl font-serif">Sculpt</h3>
+                            <p className="text-sm opacity-90 tracking-widest uppercase">Signature Collection</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* 2. OUTFIT MATCHER (Sticky Header Effect? Maybe just normal section) */}
-            <div id="matcher" className="relative z-50 bg-white border-b border-stone-100">
-                <OutfitMatcher activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+            {/* SUB-COLLECTION PILLS */}
+            <div className="max-w-7xl mx-auto px-6 mb-12">
+                <div className="flex flex-wrap gap-3 pb-4 border-b border-stone-100">
+                    <button
+                        onClick={() => handleFilterChange('features', 'Short')}
+                        className={`px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all ${activeFilters['features']?.includes('Short')
+                            ? 'bg-[#2C2420] text-white shadow-md'
+                            : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
+                            }`}
+                    >
+                        Shorts
+                    </button>
+
+                    <button
+                        onClick={() => handleFilterChange('features', 'Waist Trainer')}
+                        className={`px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all ${activeFilters['features']?.includes('Waist Trainer')
+                            ? 'bg-[#2C2420] text-white shadow-md'
+                            : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
+                            }`}
+                    >
+                        Waist Trainers
+                    </button>
+
+                    <button
+                        onClick={() => handleFilterChange('features', 'Strapless')}
+                        className={`px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all ${activeFilters['features']?.includes('Strapless')
+                            ? 'bg-[#2C2420] text-white shadow-md'
+                            : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
+                            }`}
+                    >
+                        Strapless
+                    </button>
+
+                    <button
+                        onClick={() => handleFilterChange('compression', 'Alta')}
+                        className={`px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all ${activeFilters['compression']?.includes('Alta')
+                            ? 'bg-[#2C2420] text-white shadow-md'
+                            : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
+                            }`}
+                    >
+                        High Compression
+                    </button>
+                </div>
             </div>
 
-            {/* 3. PRODUCT GRID */}
+            {/* 3. PRODUCT GRID WITH SIDEBAR */}
             <div className="bg-white py-12 px-4 md:px-8">
                 <div className="max-w-[1600px] mx-auto">
-                    {loading ? (
-                        <div className="flex justify-center py-20">
-                            <Loader2 className="animate-spin text-[#D4AF37]" size={40} />
-                        </div>
-                    ) : error ? (
-                        <div className="py-20 text-center text-red-500">
-                            <p className="text-xl font-bold">Error Loading Products</p>
-                            <p className="text-sm mt-2">{error}</p>
-                            <p className="text-xs text-gray-500 mt-4">Please check Shopify Storefront API permissions.</p>
-                        </div>
-                    ) : (
-                        <>
-                            {/* Denser Grid: 1 col mobile, 2 cols tablet, 4 cols desktop, 5 cols large screens */}
-                            <div id="products" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12">
-                                {filteredProducts.map(product => (
-                                    <SculptProductCard
-                                        key={product.id}
-                                        product={{
-                                            ...product,
-                                            imageProduct: product.image, // Mapper returns 'image'
-                                            // Use second image if available, else fallback to first
-                                            imageResult: product.images && product.images.length > 1 ? product.images[1] : product.image,
-                                            // Benefit can be 'features' joined
-                                            benefit: product.features ? product.features.join(' • ') : 'Sculpting'
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                            {filteredProducts.length === 0 && (
-                                <div className="py-20 text-center text-gray-400">
-                                    <p>No se encontraron productos para esta ocasión.</p>
-                                    <button onClick={() => setActiveFilter('all')} className="mt-4 text-[#D4AF37] underline">
-                                        Ver todos
-                                    </button>
+
+                    <div className="flex flex-col lg:flex-row gap-8 items-start">
+                        {/* SIDEBAR FILTER */}
+                        <aside className="w-full lg:w-64 flex-shrink-0 hidden lg:block">
+                            <FilterSidebar
+                                products={products}
+                                activeFilters={activeFilters}
+                                onFilterChange={handleFilterChange}
+                            />
+                        </aside>
+
+                        {/* PRODUCT GRID */}
+                        <div className="flex-1 w-full">
+                            {loading ? (
+                                <div className="flex justify-center py-20">
+                                    <Loader2 className="animate-spin text-[#D4AF37]" size={40} />
                                 </div>
+                            ) : error ? (
+                                <div className="py-20 text-center text-red-500">
+                                    <p className="text-xl font-bold">Error Loading Products</p>
+                                    <p className="text-sm mt-2">{error}</p>
+                                    <p className="text-xs text-gray-500 mt-4">Please check Shopify Storefront API permissions.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <div id="products" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12">
+                                        {filteredProducts.map(product => (
+                                            <SculptProductCard
+                                                key={product.id}
+                                                product={{
+                                                    ...product,
+                                                    imageProduct: product.image,
+                                                    imageResult: product.images && product.images.length > 1 ? product.images[1] : product.image,
+                                                    benefit: product.features ? product.features.join(' • ') : 'Sculpting'
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                    {filteredProducts.length === 0 && (
+                                        <div className="py-20 text-center text-gray-400">
+                                            <p>No se encontraron productos para esta selección.</p>
+                                            <button onClick={() => setActiveFilters({ stage: [], compression: [], occasion: [], features: [] })} className="mt-4 text-[#D4AF37] underline">
+                                                Limpiar Filtros
+                                            </button>
+                                        </div>
+                                    )}
+                                </>
                             )}
-                        </>
-                    )}
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 import { TrendingUp, ShieldCheck, Camera, Truck, Users } from 'lucide-react';
 import { GlassNavbar } from '../components/GlassNavbar';
-import { DarkFooter } from '../components/DarkFooter';
+
 
 export default function WholesalePage() {
     return (
@@ -151,8 +151,6 @@ export default function WholesalePage() {
                     </form>
                 </div>
             </section>
-
-            <DarkFooter />
-        </div>
+        </div >
     );
 }

@@ -1,5 +1,5 @@
 import { GlassNavbar } from '../components/GlassNavbar';
-import { DarkFooter } from '../components/DarkFooter';
+
 import { Clock, Calculator } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -114,7 +114,7 @@ export default function BlogTemplate() {
                 </aside>
 
             </div>
-            <DarkFooter />
+
         </div>
     );
 }

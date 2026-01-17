@@ -4,19 +4,44 @@ import { useParams, Link } from 'react-router-dom';
 import { getProductById } from './data/store-data';
 import { useProduct } from './hooks/useProduct';
 import { useStore } from './hooks/useStoreContext';
+// Keys imports
 import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDown, ArrowUpRight, X } from 'lucide-react';
-import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGrid';
 import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 // Tools imports for Smart Modal
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
 import { SeoHead } from '../lib/seo/SeoHead';
 import { generateMetaTags } from '../lib/seo/generators';
+import { fetchCollectionByHandle } from '../lib/shopify-client';
+import { GranularProductGrid } from './components/GranularProductGrid';
+
+// Sub-component for clean separation
+function RelatedProducts({ category }: { category?: string }) {
+    const [products, setProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadRelated() {
+            const handle = category === 'Recovery Room' ? 'post-quirurgica' : 'sculpt-studio';
+            try {
+                const items = await fetchCollectionByHandle(handle);
+                setProducts(items.slice(0, 4));
+            } catch (e) {
+                console.error("Related products err", e);
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadRelated();
+    }, [category]);
+
+    return <GranularProductGrid products={products} loading={loading} />;
+}
 
 export function ProductDetailView() {
     const { id } = useParams<{ id: string }>();
     const { addToCart } = useStore();
     const [selectedSize, setSelectedSize] = useState<string>('');
-    const [selectedColor, setSelectedColor] = useState<string>('Cocoa'); // Default
+    const [selectedColor, setSelectedColor] = useState<string>(''); // Default empty, let effect handle it
     const [isDescriptionOpen, setIsDescriptionOpen] = useState(true); // Control manual del acordeón
 
     // Smart Modal State
@@ -29,10 +54,106 @@ export function ProductDetailView() {
     // PRIORITY: Live Data -> Local Fallback
     const product = fetchedProduct || localProduct;
 
+    // ---------------------------------------------------------
+    // LOGIC: EXTRACTION & CHECKING
+    // ---------------------------------------------------------
+    const variants = product?.variants || [];
+
+    // 1. Extract Unique Colors & Sizes
+    // Define helper to extract unique values safely
+    const getUniqueOptions = (names: string[]) => {
+        if (!variants) return [];
+        const raw = variants.flatMap((v: any) =>
+            v.selectedOptions
+                .filter((o: any) => names.includes(o.name))
+                .map((o: any) => o.value)
+        );
+        return Array.from(new Set(raw));
+    };
+
+    const uniqueColors = getUniqueOptions(['Color', 'Cor', 'Colour']);
+    const uniqueSizes = getUniqueOptions(['Size', 'Talla', 'Tamaño']);
+
+    // 4. Dynamic Image Logic - MOVED UP TO FIX HOOKS ERROR
+    const [activeImage, setActiveImage] = useState<string>('');
+
+    // Find the current variant based on selected options
+    // Find the current variant based on selected options
+    const currentVariant = variants.find((v: any) =>
+        v.selectedOptions.some((o: any) => {
+            const name = o.name.toLowerCase().trim();
+            // Use .some + .includes to catch "Color Principal", "Color ", etc.
+            const isColorOption = ['color', 'cor', 'colour'].some(key => name.includes(key));
+
+            const val = o.value?.toLowerCase().trim();
+            const selected = selectedColor?.toLowerCase().trim();
+
+            // Log matching attempts if needed, but for now we trust the logic improvement
+            return isColorOption && val === selected;
+        })
+    );
+
+    // EFFECT: Update image when variant changes
+    // EFFECT: Update image when variant changes
+    useEffect(() => {
+        if (currentVariant) {
+            let variantImg = currentVariant.image?.src || currentVariant.image?.url || currentVariant.image;
+
+            // --- FALLBACK FOR DUPLICATE IMAGES (3+ Colors Updated) ---
+            if (product?.images && variantImg === product.image) {
+                const normalizedSelected = selectedColor?.trim().toLowerCase();
+                const firstColor = uniqueColors[0]?.trim().toLowerCase();
+                const isNotFirstColor = normalizedSelected && firstColor && normalizedSelected !== firstColor;
+
+                if (isNotFirstColor) {
+                    // Map color index to image index (Index 0->Img0, Index 1->Img1, Index 2->Img2...)
+                    const colorIndex = uniqueColors.findIndex(c => c?.toLowerCase().trim() === normalizedSelected);
+
+                    let targetImage = null;
+                    const imgs = product.images;
+                    const targetIndex = colorIndex > 0 ? colorIndex : 1; // Default to 1 if index not found/zero logic fails
+
+                    if (Array.isArray(imgs) && imgs.length > targetIndex) {
+                        targetImage = imgs[targetIndex]?.node?.url || imgs[targetIndex]?.url || (typeof imgs[targetIndex] === 'string' ? imgs[targetIndex] : null);
+                    } else if (imgs?.edges && imgs.edges.length > targetIndex) {
+                        targetImage = imgs.edges[targetIndex]?.node?.url;
+                    }
+
+                    if (targetImage) variantImg = targetImage;
+                }
+            }
+            // ----------------------------------------------------------------
+
+            if (variantImg) setActiveImage(variantImg);
+        } else if (product?.image && !activeImage) {
+            setActiveImage(product.image);
+        }
+    }, [currentVariant, product, selectedColor, uniqueColors]);
+
+    const displayImage = activeImage || product?.image || '';
+
+    // AUTO-SELECT FIRST COLOR (UX Fix)
+    useEffect(() => {
+        if (uniqueColors.length > 0) {
+            // Check if current selection is valid
+            const isSelectedValid = uniqueColors.includes(selectedColor);
+
+            // If nothing selected OR invalid selection, defaults to first
+            if (!selectedColor || !isSelectedValid) {
+                // Try to find "Cocoa" or "Beige" as preference, else first one
+                const preferred = uniqueColors.find((c: any) =>
+                    ['cocoa', 'beige', 'negro', 'black'].some(p => c.toLowerCase().includes(p))
+                );
+                setSelectedColor((preferred || uniqueColors[0]) as string);
+            }
+        }
+    }, [uniqueColors, selectedColor]);
+
+
     useEffect(() => {
         window.scrollTo(0, 0);
         setSelectedSize('');
-        // Reset color if needed based on product availability, but keeping Cocoa default is fine for logic
+        // NOTE: We do NOT reset color here to empty, we let the auto-select logic handle it or keep it if navigating
     }, [id]);
 
     // Scroll to top helper for sticky bar
@@ -73,17 +194,6 @@ export function ProductDetailView() {
     // --- SEO GENERATION (MAES Formula) ---
     const { title: seoTitle, description: seoDescription } = generateMetaTags(product);
 
-    // ---------------------------------------------------------
-    // LOGIC: EXTRACTION & CHECKING
-    // ---------------------------------------------------------
-    const variants = product?.variants || [];
-
-    // 1. Extract Unique Colors & Sizes
-    const rawColors = variants.flatMap((v: any) => v.selectedOptions.filter((o: any) => ['Color', 'Cor', 'Colour'].includes(o.name)).map((o: any) => o.value));
-    const uniqueColors = Array.from(new Set(rawColors));
-
-    const rawSizes = variants.flatMap((v: any) => v.selectedOptions.filter((o: any) => ['Size', 'Talla', 'Tamaño'].includes(o.name)).map((o: any) => o.value));
-    const uniqueSizes = Array.from(new Set(rawSizes)); // Maintain original order usually, or sort manually if needed
 
     // 2. Helper Availability
     const checkAvailability = (color: string, size: string) => {
@@ -124,6 +234,8 @@ export function ProductDetailView() {
     };
 
 
+
+
     return (
         <div className="bg-[#FAF9F6] min-h-screen pb-24 animate-fade-in relative selection:bg-[#D4AF37] selection:text-white">
             {/* NEW SEO SYSTEM IMPLEMENTATION */}
@@ -131,7 +243,7 @@ export function ProductDetailView() {
                 title={seoTitle}
                 description={seoDescription}
                 type="product"
-                image={image}
+                image={displayImage}
                 path={`/products/${product.handle || id}`}
                 schema={{
                     type: 'product',
@@ -178,11 +290,11 @@ export function ProductDetailView() {
                     <div className="md:col-span-6 lg:col-span-6">
                         <div className="sticky top-24">
                             {/* Main Hero Image - Editorial Look */}
-                            <div className="aspect-[4/5] bg-stone-100 rounded-[2rem] overflow-hidden relative shadow-sm group cursor-zoom-in">
+                            <div className="aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-[2rem] overflow-hidden relative shadow-sm group cursor-zoom-in">
                                 <img
-                                    src={image}
+                                    src={displayImage}
                                     alt={title}
-                                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                                    className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-110"
                                 />
                                 {badge && (
                                     <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-[#2C2420] text-[10px] font-bold px-4 py-2 rounded-full tracking-widest uppercase shadow-sm border border-white">
@@ -477,7 +589,8 @@ export function ProductDetailView() {
                             Ver Todo <ArrowUpRight size={14} />
                         </Link>
                     </div>
-                    <ShopifyCollectionGrid handle={category === 'Recovery Room' ? 'post-quirurgica' : 'sculpt-studio'} productCount={4} />
+                    {/* Unified Granular Grid Substitution */}
+                    <RelatedProducts category={category} />
                 </div>
 
             </div>

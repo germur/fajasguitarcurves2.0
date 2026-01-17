@@ -39,7 +39,7 @@ export function GlassNavbar() {
     }, []);
 
     const announcements = [
-        "🇺🇸 Envíos Gratis a todo USA en órdenes +$100",
+        "🇺🇸 Envíos Gratis en todo Estados Unidos",
         "💬 Asesoría de Talla por Expertas en WhatsApp"
     ];
 
@@ -84,7 +84,10 @@ export function GlassNavbar() {
                                 </span>
                             </div>
 
-
+                            {/* NEW TOP LEVEL LINK */}
+                            <Link to="/collections/all" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
+                                <span className="text-[#D4AF37]">✨</span> Ver Todo
+                            </Link>
 
                             {/* OTHER LINKS */}
                             <Link to="/pages/our-story" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
@@ -229,7 +232,6 @@ export function GlassNavbar() {
                                             </div>
                                         </Link>
                                     </li>
-
                                 </ul>
                             </div>
 
@@ -316,6 +318,10 @@ export function GlassNavbar() {
                         <div>
                             <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Shop</h4>
                             <div className="space-y-4 pl-2 border-l-2 border-stone-100">
+                                <Link to="/collections/all" className="block p-2 bg-stone-50 rounded-lg transition-colors border border-stone-100" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#D4AF37] flex items-center gap-2">✨ Ver Todo</div>
+                                    <div className="text-xs text-stone-500">Catálogo Completo</div>
+                                </Link>
                                 <Link to="/collections/recovery" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                     <div className="font-bold text-base text-[#2C2420]">Recovery Room</div>
                                     <div className="text-xs text-stone-500">Post-Quirúrgico & Stage 1, 2, 3</div>

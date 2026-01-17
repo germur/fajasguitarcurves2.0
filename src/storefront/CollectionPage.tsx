@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { ShopifyCollectionGrid } from './components/shopify/ShopifyCollectionGrid';
 import { GranularProductGrid } from './components/GranularProductGrid';
-import { fetchProductsByTags, fetchAllProducts } from '../lib/shopify-client';
+import { fetchProductsByTags, fetchAllProducts, fetchCollectionByHandle } from '../lib/shopify-client';
 import { ShopifyMapper } from '../lib/shopify-mapper';
 import { SeoHead } from '../lib/seo/SeoHead';
 import { ArrowRight, Shield } from 'lucide-react';
 import { getSiloAsset } from '../lib/silo-assets';
 import { GranularFAQ } from './components/GranularFAQ';
 import { TrustBanner } from './components/TrustBanner';
+import { FilterSidebar } from './components/FilterSidebar';
 
 interface CollectionPageProps {
     title?: string;
@@ -25,9 +25,17 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     const isGranular = !!params.silo && !!params.filter;
     const isViewAll = handle === 'all';
 
-    // State for Granular/Manual Mode
-    const [granularProducts, setGranularProducts] = useState<any[]>([]);
+    // State
+    const [products, setProducts] = useState<any[]>([]); // Unified Product List
     const [loading, setLoading] = useState(false);
+
+    // Filter State
+    const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
+        stage: [],
+        compression: [],
+        occasion: [],
+        features: []
+    });
 
     const silo = params.silo || '';
     const filter = params.filter || '';
@@ -41,23 +49,74 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
         seoDescription = `Shop the best ${filter.replace(/-/g, ' ')} options from our ${silo} collection. High compression and specialized support.`;
     }
 
-    // Data Fetching Logic (Granular OR View All)
+    // Unified Data Fetching Logic
     useEffect(() => {
-        if (isGranular || isViewAll) {
-            setLoading(true);
+        setLoading(true);
+        let fetchPromise;
 
-            const fetchPromise = isViewAll
-                ? fetchAllProducts()
-                : fetchProductsByTags([mapSiloToTag(silo), mapFilterToTag(filter)].filter(t => t && t.length > 0));
-
-            fetchPromise
-                .then(rawProducts => {
-                    const mapped = rawProducts.map((p: any) => ShopifyMapper.mapProduct(p, 'standard'));
-                    setGranularProducts(mapped);
-                })
-                .finally(() => setLoading(false));
+        if (isViewAll) {
+            fetchPromise = fetchAllProducts();
+        } else if (isGranular) {
+            fetchPromise = fetchProductsByTags([mapSiloToTag(silo), mapFilterToTag(filter)].filter(t => t && t.length > 0));
+        } else {
+            // Standard Collection (e.g. /collections/recovery)
+            fetchPromise = fetchCollectionByHandle(handle);
         }
-    }, [silo, filter, isGranular, isViewAll]);
+
+        fetchPromise
+            .then(rawProducts => {
+                // MAPPER: Use 'universal' for View All or Standard to get full metadata, or specific matching silo logic
+                // For simplicity and richness, 'universal' is often best unless we need very specific silo fields
+                const mapperMode = isViewAll ? 'universal' : (silo === 'recovery' ? 'medical' : 'universal');
+                const mapped = rawProducts.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode));
+                setProducts(mapped);
+            })
+            .catch(err => console.error("Error loading products:", err))
+            .finally(() => setLoading(false));
+
+    }, [silo, filter, isGranular, isViewAll, handle]);
+
+
+    // Filter Logic
+    const filteredProducts = isViewAll ? products.filter(product => {
+        // Validation: If a category has filters active, product matching ONE of them is enough (OR logic within category)
+        // AND logic between categories
+
+        const checkCategory = (cat: string, value: string | string[]) => {
+            const active = activeFilters[cat];
+            if (!active || active.length === 0) return true; // No filter = pass
+
+            if (Array.isArray(value)) {
+                // Product has array of features -> check if it has ANY of the active filters
+                return value.some(v => active.includes(v));
+            }
+
+            // Product has single value -> check if it is in active list
+            return active.includes(value);
+        };
+
+        return (
+            checkCategory('stage', product.stage) &&
+            checkCategory('compression', product.compression) &&
+            checkCategory('occasion', product.occasion) &&
+            checkCategory('features', product.features)
+        );
+    }) : products;
+
+
+    // Handle Filter Change
+    const handleFilterChange = (category: string, value: string) => {
+        setActiveFilters(prev => {
+            const current = prev[category] || [];
+            const isSelected = current.includes(value);
+
+            if (isSelected) {
+                return { ...prev, [category]: current.filter(v => v !== value) };
+            } else {
+                return { ...prev, [category]: [...current, value] };
+            }
+        });
+    };
 
     // Asset Data
     const { image: heroImage, subtitle: heroSubtitle } = getSiloAsset(silo || 'default');
@@ -103,7 +162,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
-                            <h3 className="font-bold text-2xl font-serif">{capitalize(silo)}</h3>
+                            <h3 className="font-bold text-2xl font-serif">{capitalize(silo || 'Colección')}</h3>
                             <p className="text-sm opacity-90 tracking-widest uppercase">Official Collection</p>
                         </div>
                     </div>
@@ -150,11 +209,25 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                 )}
 
                 <div className="mb-20">
-                    {isGranular || isViewAll ? (
-                        <GranularProductGrid products={granularProducts} loading={loading} />
-                    ) : (
-                        <ShopifyCollectionGrid handle={handle} productCount={12} />
-                    )}
+                    {/* MAIN LAYOUT: Sidebar (if View All) + Grid */}
+                    <div className={isViewAll ? "flex flex-col lg:flex-row gap-8 items-start" : ""}>
+
+                        {/* SIDEBAR FILTER */}
+                        {isViewAll && (
+                            <aside className="w-full lg:w-64 flex-shrink-0">
+                                <FilterSidebar
+                                    products={products} // Pass raw list to calc counts
+                                    activeFilters={activeFilters}
+                                    onFilterChange={handleFilterChange}
+                                />
+                            </aside>
+                        )}
+
+                        {/* PRODUCT GRID */}
+                        <div className="flex-1 w-full">
+                            <GranularProductGrid products={filteredProducts} loading={loading} />
+                        </div>
+                    </div>
                 </div>
             </div>
 

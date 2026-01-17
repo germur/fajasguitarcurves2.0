@@ -75,7 +75,7 @@ export function HomeHero() {
                         {mode === 'recover' ? (
                             <>
                                 Recuperación <br />
-                                <span className="italic font-light">Médica Certificada</span>
+                                <span className="italic font-light">Especializada</span>
                             </>
                         ) : (
                             <>
@@ -126,7 +126,7 @@ export function HomeHero() {
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         <span className="text-[10px] font-bold tracking-widest uppercase">
-                            {mode === 'recover' ? "Doctor Recommended" : "Trending Now"}
+                            {mode === 'recover' ? "Calidad Premium" : "Trending Now"}
                         </span>
                     </div>
                     <p className="text-xs font-medium leading-relaxed">
