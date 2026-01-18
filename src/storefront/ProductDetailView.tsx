@@ -94,41 +94,22 @@ export function ProductDetailView() {
     );
 
     // EFFECT: Update image when variant changes
-    // EFFECT: Update image when variant changes
     useEffect(() => {
         if (currentVariant) {
-            let variantImg = currentVariant.image?.src || currentVariant.image?.url || currentVariant.image;
+            // Try to get image from variant directly
+            const variantImg = currentVariant.image?.src || currentVariant.image?.url || currentVariant.image;
 
-            // --- FIX: Direct color-to-image mapping based on selection order ---
-            // If variant doesn't have its own image or image matches product default,
-            // use the color's position in the color list to select the corresponding image.
-            const hasDistinctVariantImage = variantImg && variantImg !== product?.image;
-
-            if (!hasDistinctVariantImage && product?.images && uniqueColors.length > 0) {
-                const normalizedSelected = selectedColor?.trim().toLowerCase();
-                const colorIndex = uniqueColors.findIndex(c => c?.toLowerCase().trim() === normalizedSelected);
-
-                // Direct mapping: Color 0 -> Image 0, Color 1 -> Image 1, etc.
-                if (colorIndex >= 0) {
-                    const imgs = product.images;
-                    let targetImage = null;
-
-                    if (Array.isArray(imgs) && imgs.length > colorIndex) {
-                        targetImage = imgs[colorIndex]?.node?.url || imgs[colorIndex]?.url || (typeof imgs[colorIndex] === 'string' ? imgs[colorIndex] : null);
-                    } else if (imgs?.edges && imgs.edges.length > colorIndex) {
-                        targetImage = imgs.edges[colorIndex]?.node?.url;
-                    }
-
-                    if (targetImage) variantImg = targetImage;
-                }
+            // If variant has its own distinct image, use it
+            // NOTE: We do NOT try to map color index to image index - that mapping is unreliable
+            // because Shopify variant order doesn't correspond to image gallery order
+            if (variantImg && typeof variantImg === 'string') {
+                setActiveImage(variantImg);
             }
-            // ----------------------------------------------------------------
-
-            if (variantImg) setActiveImage(variantImg);
+            // If no variant image, activeImage stays as is (main product image)
         } else if (product?.image && !activeImage) {
             setActiveImage(product.image);
         }
-    }, [currentVariant, product, selectedColor, uniqueColors]);
+    }, [currentVariant, product, activeImage]);
 
     const displayImage = activeImage || product?.image || '';
 
