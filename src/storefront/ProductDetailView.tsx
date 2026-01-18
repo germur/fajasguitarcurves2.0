@@ -99,24 +99,24 @@ export function ProductDetailView() {
         if (currentVariant) {
             let variantImg = currentVariant.image?.src || currentVariant.image?.url || currentVariant.image;
 
-            // --- FALLBACK FOR DUPLICATE IMAGES (3+ Colors Updated) ---
-            if (product?.images && variantImg === product.image) {
+            // --- FIX: Direct color-to-image mapping based on selection order ---
+            // If variant doesn't have its own image or image matches product default,
+            // use the color's position in the color list to select the corresponding image.
+            const hasDistinctVariantImage = variantImg && variantImg !== product?.image;
+
+            if (!hasDistinctVariantImage && product?.images && uniqueColors.length > 0) {
                 const normalizedSelected = selectedColor?.trim().toLowerCase();
-                const firstColor = uniqueColors[0]?.trim().toLowerCase();
-                const isNotFirstColor = normalizedSelected && firstColor && normalizedSelected !== firstColor;
+                const colorIndex = uniqueColors.findIndex(c => c?.toLowerCase().trim() === normalizedSelected);
 
-                if (isNotFirstColor) {
-                    // Map color index to image index (Index 0->Img0, Index 1->Img1, Index 2->Img2...)
-                    const colorIndex = uniqueColors.findIndex(c => c?.toLowerCase().trim() === normalizedSelected);
-
-                    let targetImage = null;
+                // Direct mapping: Color 0 -> Image 0, Color 1 -> Image 1, etc.
+                if (colorIndex >= 0) {
                     const imgs = product.images;
-                    const targetIndex = colorIndex > 0 ? colorIndex : 1; // Default to 1 if index not found/zero logic fails
+                    let targetImage = null;
 
-                    if (Array.isArray(imgs) && imgs.length > targetIndex) {
-                        targetImage = imgs[targetIndex]?.node?.url || imgs[targetIndex]?.url || (typeof imgs[targetIndex] === 'string' ? imgs[targetIndex] : null);
-                    } else if (imgs?.edges && imgs.edges.length > targetIndex) {
-                        targetImage = imgs.edges[targetIndex]?.node?.url;
+                    if (Array.isArray(imgs) && imgs.length > colorIndex) {
+                        targetImage = imgs[colorIndex]?.node?.url || imgs[colorIndex]?.url || (typeof imgs[colorIndex] === 'string' ? imgs[colorIndex] : null);
+                    } else if (imgs?.edges && imgs.edges.length > colorIndex) {
+                        targetImage = imgs.edges[colorIndex]?.node?.url;
                     }
 
                     if (targetImage) variantImg = targetImage;
