@@ -96,26 +96,37 @@ export function ProductDetailView() {
     // Get all product images for color mapping
     const productImages: string[] = product?.images || [];
 
-    // EFFECT: Update image when color changes - MAP COLOR INDEX TO IMAGE INDEX
+    // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
     useEffect(() => {
-        if (selectedColor && uniqueColors.length > 0 && productImages.length > 0) {
-            // Find the index of the selected color
-            const colorIndex = uniqueColors.findIndex(
-                (c: string) => c.toLowerCase() === selectedColor.toLowerCase()
-            );
+        if (selectedColor && uniqueColors.length > 0) {
+            // PRIORITY 1: Use variant's linked image (most reliable - Shopify native association)
+            if (currentVariant?.image) {
+                setActiveImage(currentVariant.image);
+                return;
+            }
 
-            // If we found a valid color and have an image at that index, use it
-            if (colorIndex !== -1 && productImages[colorIndex]) {
-                setActiveImage(productImages[colorIndex]);
-            } else if (productImages[0]) {
-                // Fallback to first image if index doesn't exist
+            // PRIORITY 2: Fallback to index matching (for variants without specific images)
+            if (productImages.length > 0) {
+                const colorIndex = uniqueColors.findIndex(
+                    (c: string) => c.toLowerCase() === selectedColor.toLowerCase()
+                );
+                if (colorIndex !== -1 && productImages[colorIndex]) {
+                    setActiveImage(productImages[colorIndex]);
+                    return;
+                }
+            }
+
+            // PRIORITY 3: Default to first available image
+            if (productImages[0]) {
                 setActiveImage(productImages[0]);
+            } else if (product?.image) {
+                setActiveImage(product.image);
             }
         } else if (product?.image && !activeImage) {
-            // Fallback: use main product image
+            // Initial load fallback
             setActiveImage(product.image);
         }
-    }, [selectedColor, uniqueColors, productImages, product, activeImage]);
+    }, [selectedColor, currentVariant, uniqueColors, productImages, product, activeImage]);
 
     const displayImage = activeImage || product?.image || '';
 
