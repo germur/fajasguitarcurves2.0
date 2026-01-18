@@ -285,7 +285,7 @@ export function ProductDetailView() {
                             <div className="aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-[2rem] overflow-hidden relative shadow-sm group cursor-zoom-in">
                                 <img
                                     src={displayImage}
-                                    alt={title}
+                                    alt={`${title} - ${selectedColor || 'Cocoa'} Colombian Shapewear for BBL & Post Lipo Recovery`}
                                     className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-110"
                                 />
                                 {badge && (

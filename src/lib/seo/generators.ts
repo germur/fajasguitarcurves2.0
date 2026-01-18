@@ -8,26 +8,52 @@ export const DEFAULT_IMAGE = `${BASE_URL}/assets/social-share.jpg`;
 // --- MAES FORMULA: Model, Audience, Effect, Silo ---
 export function generateMetaTags(product: any) {
     if (!product) return {
-        title: "Fajas Colombianas Guitar Curves | Cintura de Avispa & BBL",
-        description: "Descubre la ingeniería textil de Guitar Curves. Fajas Stage 2 y Brasieres Post-Quirúrgicos diseñados para moldear tu cintura y proteger tu inversión."
+        title: "Colombian Shapewear & BBL Fajas | Guitar Curves",
+        description: "Discover Guitar Curves engineering. Stage 2 Fajas and Post-Surgical Bras designed to sculpt your hourglass waist and protect your investment."
     };
 
     const tags = product.tags ? product.tags.map((t: string) => t.toLowerCase()) : [];
-    const isStage2 = tags.some((t: string) => t.includes('stage 2') || t.includes('faja'));
+    const titleBase = product.title;
+
+    // Detect product type from tags
+    const isStage2 = tags.some((t: string) => t.includes('stage 2') || t.includes('faja') || t.includes('etapa 2'));
+    const isStage1 = tags.some((t: string) => t.includes('stage 1') || t.includes('etapa 1'));
     const isBra = tags.some((t: string) => t.includes('bra') || t.includes('brasier'));
-    const isWaist = tags.some((t: string) => t.includes('waist') || t.includes('cinturilla'));
+    const isWaist = tags.some((t: string) => t.includes('waist') || t.includes('cinturilla') || t.includes('trainer'));
+    const isBBL = tags.some((t: string) => t.includes('bbl') || t.includes('butt') || t.includes('levanta'));
 
-    // 1. Title Generation (High Intent)
-    let title = `${product.title} | ${BRAND}`;
-    if (isStage2) title = `Faja Stage 2 Reloj de Arena: ${product.title} | ${BRAND}`;
-    if (isBra) title = `Brasier Post-Quirúrgico: ${product.title} | ${BRAND}`;
-    if (isWaist) title = `Waist Trainer & Cinturilla: ${product.title} | ${BRAND}`;
+    // 1. Title Generation with ENGLISH Keywords (High Intent for US Market)
+    let suffix = " - High Compression Shapewear"; // Default
 
-    // 2. Description Generation (Benefit Focused)
-    let description = `${product.title} de Guitar Curves. `;
-    if (isStage2) description += "Compresión médica alta para moldear cintura de avispa post-lipo o BBL. Zipper invisible y soporte glúteo.";
-    else if (isBra) description += "Soporte de espalda y corrección de postura sin aros. Ideal para uso diario o post-operatorio.";
-    else description += "Ingeniería invisible para realzar tus curvas naturales. Calidad colombiana premium.";
+    if (isStage1) {
+        suffix = " - Post Op Stage 1 Compression";
+    } else if (isStage2 || isBBL) {
+        suffix = " - Post Lipo & BBL Compression"; // Most valuable keyword
+    } else if (isBra) {
+        suffix = " - Post Surgery Support Bra";
+    } else if (isWaist) {
+        suffix = " - Hourglass Waist Trainer";
+    }
+
+    // Keep title under 60 chars for SERP display
+    let title = `${titleBase}${suffix} | ${BRAND}`;
+    if (title.length > 65) {
+        title = `${titleBase} | ${BRAND}`;
+    }
+
+    // 2. Description Generation (Benefit Focused + Keywords)
+    let description = `Shop ${titleBase} from Guitar Curves. `;
+    if (isStage2 || isBBL) {
+        description += "Medical-grade compression to sculpt your hourglass waist post-lipo or BBL. Invisible zipper and butt lift technology.";
+    } else if (isStage1) {
+        description += "Maximum compression for immediate post-op recovery. Designed for Stage 1 healing with medical-grade support.";
+    } else if (isBra) {
+        description += "Post-surgery support bra with back posture correction. Wire-free comfort for daily use or recovery.";
+    } else if (isWaist) {
+        description += "Colombian latex waist trainer for hourglass results. Thermogenic core for sweat and sculpt.";
+    } else {
+        description += "Premium Colombian shapewear engineered to enhance your natural curves. High compression, invisible design.";
+    }
 
     return { title, description };
 }
@@ -35,13 +61,23 @@ export function generateMetaTags(product: any) {
 // --- UNIVERSAL COMMERCE PROTOCOL (SCHEMA) ---
 
 export function generateProductSchema(product: any, url: string) {
+    // Robust image extraction for Shopify's varying structures
+    let images: string[] = [];
+    if (product.images?.edges) {
+        images = product.images.edges.map((edge: any) => edge.node?.url || edge.node?.src).filter(Boolean);
+    } else if (Array.isArray(product.images)) {
+        images = product.images.map((img: any) => img.url || img.src || (typeof img === 'string' ? img : '')).filter(Boolean);
+    } else if (product.image) {
+        images = [product.image];
+    }
+
     return {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": product.title,
-        "image": product.images?.map((img: any) => img.src) || [],
-        "description": product.description || `Compra ${product.title} en Guitar Curves.`,
-        "sku": product.id,
+        "image": images,
+        "description": product.description || `Shop ${product.title} from Guitar Curves. Premium Colombian shapewear.`,
+        "sku": product.id || product.handle,
         "brand": {
             "@type": "Brand",
             "name": BRAND
@@ -50,7 +86,7 @@ export function generateProductSchema(product: any, url: string) {
             "@type": "Offer",
             "url": url,
             "priceCurrency": "USD",
-            "price": product.priceRange?.minVariantPrice?.amount || "0",
+            "price": product.price || product.priceRange?.minVariantPrice?.amount || "0",
             "priceValidUntil": getFutureDate(),
             "availability": product.availableForSale ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "itemCondition": "https://schema.org/NewCondition",
