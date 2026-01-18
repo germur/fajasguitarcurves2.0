@@ -47,15 +47,18 @@ export function SeoHead({ title, description, type = 'website', image, schema }:
             updateOgMeta('og:image', image);
         }
 
-        // Update JSON-LD Schema
+        // Update JSON-LD Schema (with unique ID for reliable updates)
         if (schema) {
-            let script = document.querySelector('script[type="application/ld+json"]');
+            const schemaId = 'gc-product-schema';
+            let script = document.getElementById(schemaId) as HTMLScriptElement | null;
             if (!script) {
                 script = document.createElement('script');
+                script.setAttribute('id', schemaId);
                 script.setAttribute('type', 'application/ld+json');
                 document.head.appendChild(script);
             }
             script.textContent = JSON.stringify(schema);
+            console.log('[SEO] Product schema injected:', schema['@type']);
         }
 
         // Cleanup function (optional, but good practice to reset if needed)

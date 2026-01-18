@@ -10,7 +10,7 @@ import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 // Tools imports for Smart Modal
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
 import { SeoHead } from '../lib/seo/SeoHead';
-import { generateMetaTags, generateProductSchema } from '../lib/seo/generators';
+import { generateMetaTags } from '../lib/seo/generators';
 import { fetchCollectionByHandle } from '../lib/shopify-client';
 import { GranularProductGrid } from './components/GranularProductGrid';
 
@@ -93,23 +93,29 @@ export function ProductDetailView() {
         })
     );
 
-    // EFFECT: Update image when variant changes
-    useEffect(() => {
-        if (currentVariant) {
-            // Try to get image from variant directly
-            const variantImg = currentVariant.image?.src || currentVariant.image?.url || currentVariant.image;
+    // Get all product images for color mapping
+    const productImages: string[] = product?.images || [];
 
-            // If variant has its own distinct image, use it
-            // NOTE: We do NOT try to map color index to image index - that mapping is unreliable
-            // because Shopify variant order doesn't correspond to image gallery order
-            if (variantImg && typeof variantImg === 'string') {
-                setActiveImage(variantImg);
+    // EFFECT: Update image when color changes - MAP COLOR INDEX TO IMAGE INDEX
+    useEffect(() => {
+        if (selectedColor && uniqueColors.length > 0 && productImages.length > 0) {
+            // Find the index of the selected color
+            const colorIndex = uniqueColors.findIndex(
+                (c: string) => c.toLowerCase() === selectedColor.toLowerCase()
+            );
+
+            // If we found a valid color and have an image at that index, use it
+            if (colorIndex !== -1 && productImages[colorIndex]) {
+                setActiveImage(productImages[colorIndex]);
+            } else if (productImages[0]) {
+                // Fallback to first image if index doesn't exist
+                setActiveImage(productImages[0]);
             }
-            // If no variant image, activeImage stays as is (main product image)
         } else if (product?.image && !activeImage) {
+            // Fallback: use main product image
             setActiveImage(product.image);
         }
-    }, [currentVariant, product, activeImage]);
+    }, [selectedColor, uniqueColors, productImages, product, activeImage]);
 
     const displayImage = activeImage || product?.image || '';
 
@@ -226,7 +232,7 @@ export function ProductDetailView() {
                 type="product"
                 image={displayImage}
                 path={`/products/${product.handle || id}`}
-                schema={generateProductSchema(product, `https://guitarcurves.com/products/${product.handle || id}`)}
+                schema={{ type: 'product', data: product }}
             />
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">

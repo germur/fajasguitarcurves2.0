@@ -12,34 +12,64 @@ export function generateMetaTags(product: any) {
         description: "Discover Guitar Curves engineering. Stage 2 Fajas and Post-Surgical Bras designed to sculpt your hourglass waist and protect your investment."
     };
 
-    const titleBase = product.title;
+    let titleBase = product.title;
     const lowerTitle = titleBase.toLowerCase();
+
+    // 0. CLEAN UP: Remove existing Spanish parenthetical text like "(Alta Compresión)" 
+    // to make room for English keywords
+    titleBase = titleBase.replace(/\s*\(Alta Compresión\)/gi, '');
+    titleBase = titleBase.replace(/\s*\(Especial BBL\)/gi, '');
+    titleBase = titleBase.replace(/\s*\(High Compression\)/gi, '');
+    titleBase = titleBase.trim();
 
     // 1. MIAMI STYLE: Map Spanish product names to English keywords
     // Format: "Faja Reloj de Arena (Hourglass Body Shaper) | Guitar Curves"
     let englishKeyword = "";
 
-    if (lowerTitle.includes("reloj de arena")) englishKeyword = "Hourglass Body Shaper";
-    else if (lowerTitle.includes("etapa 2") || lowerTitle.includes("stage 2")) englishKeyword = "Stage 2 Post-Op Faja";
-    else if (lowerTitle.includes("etapa 1") || lowerTitle.includes("stage 1")) englishKeyword = "Stage 1 Compression";
-    else if (lowerTitle.includes("cinturilla")) englishKeyword = "Waist Trainer Corset";
-    else if (lowerTitle.includes("levanta cola")) englishKeyword = "Butt Lifter Short";
+    // Priority order matters - more specific matches first
+    if (lowerTitle.includes("reloj de arena")) englishKeyword = "Hourglass Shaper";
+    else if (lowerTitle.includes("chaleco") && lowerTitle.includes("brasier")) englishKeyword = "Vest Shaper + Bra";
+    else if (lowerTitle.includes("chaleco")) englishKeyword = "Colombian Vest Shaper";
+    else if (lowerTitle.includes("etapa 2") || lowerTitle.includes("stage 2")) englishKeyword = "Stage 2 Post-Op";
+    else if (lowerTitle.includes("etapa 3") || lowerTitle.includes("stage 3")) englishKeyword = "Stage 3 BBL Faja";
+    else if (lowerTitle.includes("etapa 1") || lowerTitle.includes("stage 1")) englishKeyword = "Stage 1 Post-Op";
+    else if (lowerTitle.includes("cinturilla")) englishKeyword = "Waist Trainer";
+    else if (lowerTitle.includes("levanta cola")) englishKeyword = "Butt Lifter";
     else if (lowerTitle.includes("brasier") || lowerTitle.includes("bra")) englishKeyword = "Post-Surgical Bra";
     else if (lowerTitle.includes("short")) englishKeyword = "Compression Short";
+    else if (lowerTitle.includes("pierna larga")) englishKeyword = "Full Body Faja";
+    else if (lowerTitle.includes("media pierna")) englishKeyword = "Mid-Thigh Faja";
     else if (lowerTitle.includes("faja")) englishKeyword = "Colombian Shapewear";
-    else englishKeyword = "High Compression Shapewear";
+    else englishKeyword = "Body Shaper";
 
-    // 2. Build hybrid title - avoid duplication if English keyword already present
-    let title: string;
-    if (lowerTitle.includes(englishKeyword.toLowerCase())) {
-        title = `${titleBase} | ${BRAND}`;
-    } else {
-        title = `${titleBase} (${englishKeyword}) | ${BRAND}`;
-    }
+    // 2. Build hybrid title with smart truncation
+    // Max ~65 chars for SERP visibility
+    let title = `${titleBase} (${englishKeyword}) | ${BRAND}`;
 
-    // Truncate if too long for SERP (max ~60 chars visible)
+    // 3. If too long, truncate the base title intelligently
     if (title.length > 65) {
-        title = `${titleBase} | ${BRAND}`;
+        // Strategy: Extract shorter product identifier
+        // "Faja Chaleco Reductor con Brasier - 8 Varillas..." -> "Faja Chaleco con Bra"
+        let shortBase = titleBase
+            .replace(/ - .*$/, '') // Remove everything after dash
+            .replace(/Reductor /gi, '') // Remove verbose words
+            .replace(/Removibles?/gi, '')
+            .replace(/con Brasier/gi, '+ Bra')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        // Try with shortened base
+        title = `${shortBase} (${englishKeyword}) | ${BRAND}`;
+
+        // If STILL too long, drop the brand
+        if (title.length > 65) {
+            title = `${shortBase} (${englishKeyword})`;
+        }
+
+        // Ultimate fallback: just keyword and brand
+        if (title.length > 65) {
+            title = `${englishKeyword} Faja | ${BRAND}`;
+        }
     }
 
     // 3. Description - English focused with Spanish flavor
