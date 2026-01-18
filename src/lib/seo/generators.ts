@@ -5,54 +5,58 @@ export const BRAND = "Guitar Curves";
 export const BASE_URL = "https://guitarcurves.com";
 export const DEFAULT_IMAGE = `${BASE_URL}/assets/social-share.jpg`;
 
-// --- MAES FORMULA: Model, Audience, Effect, Silo ---
+// --- MAES FORMULA + MIAMI STYLE: Hybrid Spanglish for Dual-Market SEO ---
 export function generateMetaTags(product: any) {
     if (!product) return {
         title: "Colombian Shapewear & BBL Fajas | Guitar Curves",
         description: "Discover Guitar Curves engineering. Stage 2 Fajas and Post-Surgical Bras designed to sculpt your hourglass waist and protect your investment."
     };
 
-    const tags = product.tags ? product.tags.map((t: string) => t.toLowerCase()) : [];
     const titleBase = product.title;
+    const lowerTitle = titleBase.toLowerCase();
 
-    // Detect product type from tags
-    const isStage2 = tags.some((t: string) => t.includes('stage 2') || t.includes('faja') || t.includes('etapa 2'));
-    const isStage1 = tags.some((t: string) => t.includes('stage 1') || t.includes('etapa 1'));
-    const isBra = tags.some((t: string) => t.includes('bra') || t.includes('brasier'));
-    const isWaist = tags.some((t: string) => t.includes('waist') || t.includes('cinturilla') || t.includes('trainer'));
-    const isBBL = tags.some((t: string) => t.includes('bbl') || t.includes('butt') || t.includes('levanta'));
+    // 1. MIAMI STYLE: Map Spanish product names to English keywords
+    // Format: "Faja Reloj de Arena (Hourglass Body Shaper) | Guitar Curves"
+    let englishKeyword = "";
 
-    // 1. Title Generation with ENGLISH Keywords (High Intent for US Market)
-    let suffix = " - High Compression Shapewear"; // Default
+    if (lowerTitle.includes("reloj de arena")) englishKeyword = "Hourglass Body Shaper";
+    else if (lowerTitle.includes("etapa 2") || lowerTitle.includes("stage 2")) englishKeyword = "Stage 2 Post-Op Faja";
+    else if (lowerTitle.includes("etapa 1") || lowerTitle.includes("stage 1")) englishKeyword = "Stage 1 Compression";
+    else if (lowerTitle.includes("cinturilla")) englishKeyword = "Waist Trainer Corset";
+    else if (lowerTitle.includes("levanta cola")) englishKeyword = "Butt Lifter Short";
+    else if (lowerTitle.includes("brasier") || lowerTitle.includes("bra")) englishKeyword = "Post-Surgical Bra";
+    else if (lowerTitle.includes("short")) englishKeyword = "Compression Short";
+    else if (lowerTitle.includes("faja")) englishKeyword = "Colombian Shapewear";
+    else englishKeyword = "High Compression Shapewear";
 
-    if (isStage1) {
-        suffix = " - Post Op Stage 1 Compression";
-    } else if (isStage2 || isBBL) {
-        suffix = " - Post Lipo & BBL Compression"; // Most valuable keyword
-    } else if (isBra) {
-        suffix = " - Post Surgery Support Bra";
-    } else if (isWaist) {
-        suffix = " - Hourglass Waist Trainer";
+    // 2. Build hybrid title - avoid duplication if English keyword already present
+    let title: string;
+    if (lowerTitle.includes(englishKeyword.toLowerCase())) {
+        title = `${titleBase} | ${BRAND}`;
+    } else {
+        title = `${titleBase} (${englishKeyword}) | ${BRAND}`;
     }
 
-    // Keep title under 60 chars for SERP display
-    let title = `${titleBase}${suffix} | ${BRAND}`;
+    // Truncate if too long for SERP (max ~60 chars visible)
     if (title.length > 65) {
         title = `${titleBase} | ${BRAND}`;
     }
 
-    // 2. Description Generation (Benefit Focused + Keywords)
-    let description = `Shop ${titleBase} from Guitar Curves. `;
-    if (isStage2 || isBBL) {
-        description += "Medical-grade compression to sculpt your hourglass waist post-lipo or BBL. Invisible zipper and butt lift technology.";
-    } else if (isStage1) {
-        description += "Maximum compression for immediate post-op recovery. Designed for Stage 1 healing with medical-grade support.";
-    } else if (isBra) {
-        description += "Post-surgery support bra with back posture correction. Wire-free comfort for daily use or recovery.";
-    } else if (isWaist) {
-        description += "Colombian latex waist trainer for hourglass results. Thermogenic core for sweat and sculpt.";
+    // 3. Description - English focused with Spanish flavor
+    const price = product.price || product.priceRange?.minVariantPrice?.amount || '';
+    const priceStr = price ? ` Price: $${price} USD.` : '';
+
+    let description = `Buy ${titleBase}. `;
+    if (lowerTitle.includes("etapa 2") || lowerTitle.includes("stage 2") || lowerTitle.includes("bbl")) {
+        description += `Authentic Colombian Fajas for BBL & Lipo recovery. Medical-grade compression.${priceStr}`;
+    } else if (lowerTitle.includes("etapa 1") || lowerTitle.includes("stage 1")) {
+        description += `Post-op Stage 1 compression for immediate recovery. Medical-grade support.${priceStr}`;
+    } else if (lowerTitle.includes("cinturilla") || lowerTitle.includes("waist")) {
+        description += `Colombian latex waist trainer for hourglass results. Thermogenic core.${priceStr}`;
+    } else if (lowerTitle.includes("brasier") || lowerTitle.includes("bra")) {
+        description += `Post-surgery support bra with posture correction. Wire-free daily comfort.${priceStr}`;
     } else {
-        description += "Premium Colombian shapewear engineered to enhance your natural curves. High compression, invisible design.";
+        description += `Premium Colombian shapewear. High compression, invisible design.${priceStr}`;
     }
 
     return { title, description };
