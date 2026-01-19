@@ -61,6 +61,7 @@ export default function OurStoryPage() {
                     <video
                         src="/assets/nelly-video.mp4"
                         controls
+                        preload="metadata"
                         playsInline
                         className="relative z-10 w-full h-auto shadow-xl object-cover"
                     />

@@ -16,13 +16,15 @@ export function RootErrorBoundary() {
             error?.name === 'ChunkLoadError';
 
         if (isChunkError) {
-            console.log('🔄 Version Mismatch Detected. Reloading App...');
+            console.log('🔄 Version Mismatch Detected. (Auto-Reload Disabled for Debugging)');
             // Double check to prevent infinite reload loops if it's persistent (optional, but good practice)
+            /* 
             const lastReload = sessionStorage.getItem('chunk_reload');
             if (!lastReload || Date.now() - parseInt(lastReload) > 10000) {
                 sessionStorage.setItem('chunk_reload', Date.now().toString());
                 window.location.reload();
-            }
+            } 
+            */
         }
     }, [error]);
 
