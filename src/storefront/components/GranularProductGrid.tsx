@@ -34,13 +34,25 @@ export function GranularProductGrid({ products, loading }: GranularProductGridPr
                 const firstImage = product.images?.[0]?.src || product.images?.[0]?.url || product.featuredImage?.url || product.image;
                 const secondImage = product.images?.[1]?.src || product.images?.[1]?.url || firstImage;
 
+                // Robust Price Resolver
+                let resolvedPrice = "0";
+                if (product.price && (typeof product.price === 'string' || typeof product.price === 'number')) {
+                    resolvedPrice = String(product.price);
+                } else if (product.price?.amount) {
+                    resolvedPrice = product.price.amount;
+                } else if (product.variants?.[0]?.price?.amount) {
+                    resolvedPrice = product.variants[0].price.amount;
+                } else if (product.variants?.[0]?.price && (typeof product.variants[0].price === 'string')) {
+                    resolvedPrice = product.variants[0].price;
+                }
+
                 const mappedProduct = {
                     ...product,
                     // If properties exist, use them. If not, map from images array.
                     imageProduct: product.imageProduct || firstImage,
                     imageResult: product.imageResult || secondImage,
-                    // Ensure price is accessible (SDK vs Graphql)
-                    price: product.price?.amount || product.variants?.[0]?.price?.amount || product.price || "0"
+                    // Force resolved price
+                    price: resolvedPrice
                 };
 
                 return (
@@ -51,7 +63,7 @@ export function GranularProductGrid({ products, loading }: GranularProductGridPr
                             addToCart({
                                 id: product.id,
                                 title: product.title,
-                                price: typeof mappedProduct.price === 'string' ? parseFloat(mappedProduct.price) : mappedProduct.price,
+                                price: parseFloat(resolvedPrice),
                                 image: mappedProduct.imageProduct,
                                 category: 'Granular'
                             }, 'M');
