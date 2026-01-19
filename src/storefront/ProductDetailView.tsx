@@ -127,26 +127,40 @@ export function ProductDetailView() {
     const productImages: string[] = product?.images || [];
 
     // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
+    // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
     useEffect(() => {
         if (selectedColor && uniqueColors.length > 0) {
-            // PRIORITY 1: Use variant's linked image (most reliable - Shopify native association)
-            if (currentVariant?.image) {
-                setActiveImage(currentVariant.image);
-                return;
-            }
 
-            // PRIORITY 2: Fallback to index matching (for variants without specific images)
-            if (productImages.length > 0) {
+            // 0. Detect "Suspicious Default" (Shopify Bug Fix)
+            // If the variant image is exactly the same as the first image (default), 
+            // BUT we are NOT on the first color, it's likely a wrong link in Shopify.
+            const variantImage = currentVariant?.image;
+            const defaultImage = productImages[0];
+            const isFirstColor = uniqueColors[0] && selectedColor.toLowerCase() === uniqueColors[0].toLowerCase();
+
+            // Heuristic: If we have a variant image, but it looks like a lazy default fallback for a different color...
+            const isSuspicious = variantImage && variantImage === defaultImage && !isFirstColor;
+
+            // PRIORITY 1: Index Matching (If suspicious or no variant image)
+            // We favor this when we detect the bug
+            if (isSuspicious || !variantImage) {
                 const colorIndex = uniqueColors.findIndex(
                     (c: string) => c.toLowerCase() === selectedColor.toLowerCase()
                 );
+                // Try to find a corresponding image at that index
                 if (colorIndex !== -1 && productImages[colorIndex]) {
                     setActiveImage(productImages[colorIndex]);
                     return;
                 }
             }
 
-            // PRIORITY 3: Default to first available image
+            // PRIORITY 2: Use variant's linked image (Standard Behavior)
+            if (variantImage && !isSuspicious) {
+                setActiveImage(variantImage);
+                return;
+            }
+
+            // PRIORITY 3: Default to first available
             if (productImages[0]) {
                 setActiveImage(productImages[0]);
             } else if (product?.image) {
