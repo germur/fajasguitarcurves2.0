@@ -314,7 +314,7 @@ export function ProductDetailView() {
                                 <img
                                     src={displayImage}
                                     alt={`${title} - ${selectedColor || 'Cocoa'} Colombian Shapewear for BBL & Post Lipo Recovery`}
-                                    className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-110"
+                                    className="w-full h-full object-contain object-center transition-transform duration-1000 ease-out group-hover:scale-110 bg-white"
                                 />
                                 {badge && (
                                     <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-[#2C2420] text-[10px] font-bold px-4 py-2 rounded-full tracking-widest uppercase shadow-sm border border-white">
