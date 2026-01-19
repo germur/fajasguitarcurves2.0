@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProductById } from './data/store-data';
 import { useProduct } from './hooks/useProduct';
 import { useStore } from './hooks/useStoreContext';
@@ -37,8 +37,38 @@ function RelatedProducts({ category }: { category?: string }) {
     return <GranularProductGrid products={products} loading={loading} />;
 }
 
+// Redirect Map for Legacy/Broken URLs
+const LEGACY_REDIRECTS: Record<string, string> = {
+    'faja-etapa-2-mangas-bra': 'faja-etapa-2-con-mangas-y-bra',
+    'faja-etapa-3-media-pierna-bra': 'faja-con-brasier-media-pierna-7-varillas',
+    'faja-etapa-3-pierna-larga-bra': 'faja-etapa-3-pierna-larga-con-brasier-7-varillas',
+    'faja-etapa-3-tira-gruesa': 'faja-tira-gruesa-7-varillas-media-pierna',
+    'faja-etapa-3-mangas-bra': 'faja-etapa-3-mangas-y-bra-media-pierna',
+    'faja-etapa-3-cuerpo-completo': 'faja-etapa-3-mangas-bra-pierna-larga',
+    'faja-reloj-arena-tira-delgada': 'faja-tira-delgada-media-pierna',
+    'faja-reloj-arena-pierna-larga-stage-3': 'faja-pierna-larga-tira-delgada',
+    'faja-reloj-arena-media-pierna-stage-3': 'faja-stage-3-media-pierna',
+    'faja-reloj-arena-pierna-larga-bra-stage-3': 'fajas-pierna-larga-con-bra',
+    'faja-reloj-arena-tira-gruesa-stage-3': 'faja-etapa-3-tira-gruesa-media-pierna',
+    'faja-reloj-arena-pierna-larga-tira-gruesa': 'faja-etapa-3-pierna-larga-tira-gruesa',
+    'faja-reloj-arena-cierre-lateral': 'faja-cierre-lateral-media-pierna',
+    'faja-reloj-arena-bbl-cadera-ancha': 'faja-reloj-de-arena-etapa-3',
+    'faja-reloj-arena-mangas-bra': 'faja-mangas-media-pierna',
+    'faja-body-postparto': 'faja-corta-tira-delgada',
+    'faja-corta-alta-compresion': 'faja-alta-compresion-con-bra-corta'
+};
+
 export function ProductDetailView() {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
+
+    // 0. Redirect Legacy URLs immediately
+    useEffect(() => {
+        if (id && LEGACY_REDIRECTS[id]) {
+            console.log(`Redirecting legacy product: ${id} -> ${LEGACY_REDIRECTS[id]}`);
+            navigate(`/products/${LEGACY_REDIRECTS[id]}`, { replace: true });
+        }
+    }, [id, navigate]);
     const { addToCart } = useStore();
     const [selectedSize, setSelectedSize] = useState<string>('');
     const [selectedColor, setSelectedColor] = useState<string>(''); // Default empty, let effect handle it
