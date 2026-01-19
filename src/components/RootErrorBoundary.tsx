@@ -39,10 +39,16 @@ export function RootErrorBoundary() {
                 >
                     Recargar Ahora
                 </button>
-                {/* Debug Info (Hidden in Production usually, or small) */}
-                <p className="mt-8 text-[10px] text-stone-400 font-mono">
-                    {error?.message || 'Unknown Error'}
-                </p>
+                {/* Debug Info: EXPOSED */}
+                <div className="mt-8 bg-red-50 p-4 rounded text-left border border-red-200">
+                    <p className="text-xs text-red-800 font-bold mb-1">Error Técnico:</p>
+                    <p className="text-[11px] text-red-600 font-mono break-all">
+                        {error?.message || JSON.stringify(error) || 'Unknown Error'}
+                    </p>
+                    <p className="text-[10px] text-stone-400 mt-2">
+                        {error?.stack?.slice(0, 150)}...
+                    </p>
+                </div>
             </div>
         </div>
     );
