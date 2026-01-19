@@ -73,20 +73,23 @@ export function generateMetaTags(product: any) {
     }
 
     // 3. Description - English focused with Spanish flavor
+    // 3. Description - Targeted Medical vs Aesthetic Logic
     const price = product.price || product.priceRange?.minVariantPrice?.amount || '';
-    const priceStr = price ? ` Price: $${price} USD.` : '';
+    const safeTags = Array.isArray(product.tags) ? product.tags : [];
 
-    let description = `Buy ${titleBase}. `;
-    if (lowerTitle.includes("etapa 2") || lowerTitle.includes("stage 2") || lowerTitle.includes("bbl")) {
-        description += `Authentic Colombian Fajas for BBL & Lipo recovery. Medical-grade compression.${priceStr}`;
-    } else if (lowerTitle.includes("etapa 1") || lowerTitle.includes("stage 1")) {
-        description += `Post-op Stage 1 compression for immediate recovery. Medical-grade support.${priceStr}`;
-    } else if (lowerTitle.includes("cinturilla") || lowerTitle.includes("waist")) {
-        description += `Colombian latex waist trainer for hourglass results. Thermogenic core.${priceStr}`;
-    } else if (lowerTitle.includes("brasier") || lowerTitle.includes("bra")) {
-        description += `Post-surgery support bra with posture correction. Wire-free daily comfort.${priceStr}`;
+    // Heuristic for Medical/Post-Op Context
+    const isMedical =
+        safeTags.some((t: string) => /Post-Op|Stage|Etapa|Surgery|Lipo|BBL/i.test(t)) ||
+        /Etapa|Stage|Post-Op|Post-M|Postquir|Recovery/i.test(titleBase) ||
+        (product.category && /Recovery/i.test(product.category));
+
+    let description = "";
+
+    if (isMedical) {
+        description = `Looking for ${product.title}? Professional Stage 2 & 3 Post-Op Faja for BBL & Lipo recovery. Medical grade compression. Buy now for $${price}.`;
     } else {
-        description += `Premium Colombian shapewear. High compression, invisible design.${priceStr}`;
+        // Aesthetic / Daily Use / Waist Training
+        description = `Get the hourglass look with ${product.title}. Best Colombian Waist Trainer & Butt Lifter for daily use. High compression. Price: $${price}.`;
     }
 
     return { title, description };
