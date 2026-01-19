@@ -20,22 +20,22 @@ export function WaistTrainingLab() {
                     <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-4 block">The Science of Curves</span>
 
                     <h2 className="text-4xl md:text-5xl font-serif mb-6 leading-none text-stone-900">
-                        Entrena tu Cintura:<br />
-                        <span className="text-stone-500">El Reto de 28 Días</span>
+                        Cinturilla Extrema:<br />
+                        <span className="text-stone-500">Reloj de Arena</span>
                     </h2>
 
                     <p className="text-stone-600 mb-8 max-w-md leading-relaxed border-l border-[#D4AF37] pl-6">
-                        Nuestras cinturillas no solo moldean al instante. El uso constante (6-8 horas diarias) ayuda a la <strong className="text-stone-900">memoria muscular</strong> y la termogénesis para resultados permanentes.
+                        Diseñada con <strong>14 varillas de acero</strong> y látex de máxima calidad para esculpir tu figura al instante. Soporte lumbar reforzado y compresión inteligente donde más la necesitas.
                     </p>
 
                     <div className="grid grid-cols-2 gap-8 mt-4">
                         <div>
-                            <h4 className="text-2xl font-serif text-[#D4AF37]">4cm</h4>
-                            <p className="text-[10px] uppercase tracking-widest text-stone-500">Reducción Instantánea</p>
+                            <h4 className="text-2xl font-serif text-[#D4AF37]">14</h4>
+                            <p className="text-[10px] uppercase tracking-widest text-stone-500">Varillas Flexibles</p>
                         </div>
                         <div>
                             <h4 className="text-2xl font-serif text-[#D4AF37]">100%</h4>
-                            <p className="text-[10px] uppercase tracking-widest text-stone-500">Control de Postura</p>
+                            <p className="text-[10px] uppercase tracking-widest text-stone-500">Látex Premium</p>
                         </div>
                     </div>
                 </div>
