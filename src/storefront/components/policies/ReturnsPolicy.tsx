@@ -79,7 +79,7 @@ export default function ReturnsPolicy() {
             {/* CTA */}
             <div className="text-center">
                 <a
-                    href="https://wa.me/1xxxxxxxxxx"
+                    href="https://wa.me/14077585862?text=Hola,%20me%20gustar%C3%ADa%20iniciar%20un%20proceso%20de%20cambio."
                     target="_blank"
                     rel="noreferrer"
                     className="inline-block bg-[#2C2420] text-[#F5EDDF] px-10 py-4 rounded-full font-bold tracking-wider hover:bg-[#D1AB66] hover:text-[#2C2420] transition-all duration-300 shadow-xl"
