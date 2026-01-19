@@ -53,7 +53,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 2", "Post Lipo", "High Compression"]
     },
     {
-        id: "faja-etapa-2-mangas-bra",
+        id: "faja-etapa-2-con-mangas-y-bra",
         title: "Faja Etapa 2 con Mangas y Brasier - Cobertura de Brazos y Espalda",
         price: 135,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -69,7 +69,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 2", "Post Lipo", "High Back"]
     },
     {
-        id: "faja-etapa-3-media-pierna-bra",
+        id: "faja-con-brasier-media-pierna-7-varillas",
         title: "Faja Etapa 3 Media Pierna con Brasier - 7 Varillas de Soporte",
         price: 140,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -77,7 +77,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Post Lipo", "High Compression"]
     },
     {
-        id: "faja-etapa-3-pierna-larga-bra",
+        id: "faja-etapa-3-pierna-larga-con-brasier-7-varillas",
         title: "Faja Etapa 3 Pierna Larga con Brasier - 7 Varillas de Soporte",
         price: 145,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -85,7 +85,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Post Lipo", "Knee Length"]
     },
     {
-        id: "faja-etapa-3-tira-gruesa",
+        id: "faja-tira-gruesa-7-varillas-media-pierna",
         title: "Faja Etapa 3 Tira Gruesa Media Pierna - 7 Varillas y Espalda Alta",
         price: 138,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -93,7 +93,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Post Lipo", "High Back"]
     },
     {
-        id: "faja-etapa-3-mangas-bra",
+        id: "faja-etapa-3-mangas-y-bra-media-pierna",
         title: "Faja Etapa 3 con Mangas y Brasier - Media Pierna (Alta Compresión BBL)",
         price: 150,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -101,7 +101,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "BBL", "Post Lipo", "Arm Compression"]
     },
     {
-        id: "faja-etapa-3-cuerpo-completo",
+        id: "faja-etapa-3-mangas-bra-pierna-larga",
         title: "Faja Etapa 3 Cuerpo Completo con Mangas y Brasier - Lipo 360 & Brazos (Alta Compresión)",
         price: 160,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -109,7 +109,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Full Body", "Lipo 360"]
     },
     {
-        id: "faja-reloj-arena-tira-delgada",
+        id: "faja-tira-delgada-media-pierna",
         title: "Faja Reloj de Arena Tira Delgada - Especial BBL (Cintura Pequeña / Cadera Grande)",
         price: 130,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -117,7 +117,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 2", "Guitar Shape", "BBL"]
     },
     {
-        id: "faja-reloj-arena-pierna-larga-stage-3",
+        id: "faja-pierna-larga-tira-delgada",
         title: "Faja Reloj de Arena Pierna Larga - Tira Delgada y Alta Compresión (Stage 3)",
         price: 145,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -125,7 +125,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "BBL"]
     },
     {
-        id: "faja-reloj-arena-media-pierna-stage-3",
+        id: "faja-stage-3-media-pierna",
         title: "Faja Reloj de Arena Stage 3 Media Pierna - Alta Compresión (Especial BBL)",
         price: 140,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -133,7 +133,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "BBL"]
     },
     {
-        id: "faja-reloj-arena-pierna-larga-bra-stage-3",
+        id: "fajas-pierna-larga-con-bra",
         title: "Faja Reloj de Arena Pierna Larga con Brasier - Etapa 3 (Especial BBL)",
         price: 155,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -141,7 +141,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "BBL"]
     },
     {
-        id: "faja-reloj-arena-tira-gruesa-stage-3",
+        id: "faja-etapa-3-tira-gruesa-media-pierna",
         title: "Faja Reloj de Arena Etapa 3 Tira Gruesa - Media Pierna y Alta Compresión",
         price: 142,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -149,7 +149,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "High Compression"]
     },
     {
-        id: "faja-reloj-arena-pierna-larga-tira-gruesa",
+        id: "faja-etapa-3-pierna-larga-tira-gruesa",
         title: "Faja Reloj de Arena Pierna Larga - Tira Gruesa y Alta Compresión (Stage 3)",
         price: 148,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -157,7 +157,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "High Compression"]
     },
     {
-        id: "faja-reloj-arena-cierre-lateral",
+        id: "faja-cierre-lateral-media-pierna",
         title: "Faja Reloj de Arena Etapa 3 Cierre Lateral - Media Pierna (Vientre Plano)",
         price: 135,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -165,7 +165,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "Side Zipper"]
     },
     {
-        id: "faja-reloj-arena-bbl-cadera-ancha",
+        id: "faja-reloj-de-arena-etapa-3",
         title: "Faja Reloj de Arena Etapa 3: Especial BBL y Cadera Ancha",
         price: 140,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -173,7 +173,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 3", "Guitar Shape", "BBL"]
     },
     {
-        id: "faja-reloj-arena-mangas-bra",
+        id: "faja-mangas-media-pierna",
         title: "Faja Reloj de Arena con Mangas y Brasier - Media Pierna (Post Lipo de Brazos)",
         price: 150,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -181,7 +181,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Stage 2", "Arm Compression", "Post Lipo"]
     },
     {
-        id: "faja-body-postparto",
+        id: "faja-corta-tira-delgada",
         title: "Faja Body Postparto \"Snap Back\" Tira Delgada - Alta Compresión",
         price: 95,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
@@ -189,7 +189,7 @@ const recoveryProducts: StoreProduct[] = [
         tags: ["Post-Partum", "Stage 1", "High Compression"]
     },
     {
-        id: "faja-corta-alta-compresion",
+        id: "faja-alta-compresion-con-bra-corta",
         title: "Faja Corta Alta Compresión con Brasier - Soporte Diario",
         price: 85,
         image: "https://images.unsplash.com/photo-1615211913495-927dcc75d26f?q=80&w=800&auto=format&fit=crop",
