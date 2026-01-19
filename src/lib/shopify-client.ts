@@ -155,7 +155,35 @@ export async function fetchCollectionByHandle(handle: string) {
     const collection = await shopifyClient.collection.fetchByHandle(handle);
     if (!collection || !collection.products) return [];
 
-    return collection.products.filter(validateProduct);
+    // NORMALIZE SDK OBJECTS -> CLEAN POJOS
+    // The SDK returns GraphModel objects that don't always behave like plain objects when spread.
+    // We explicitly extract the fields we need to ensure downstream components receive consistent data.
+    const normalized = collection.products.map((p: any) => {
+      return {
+        id: p.id,
+        title: p.title,
+        handle: p.handle,
+        descriptionHtml: p.descriptionHtml,
+        publishedAt: p.publishedAt,
+        createdAt: p.createdAt,
+        vendor: p.vendor,
+        productType: p.productType,
+        tags: p.tags,
+        availableForSale: p.availableForSale,
+        // Ensure price is a string or object as expected
+        price: p.variants?.[0]?.price || p.priceRange?.minVariantPrice || { amount: "0", currencyCode: "USD" },
+        // Normalize Images: Ensure 'url' property exists (SDK often uses 'src')
+        images: p.images?.map((img: any) => ({
+          ...img,
+          url: img.src || img.url, // CRITICAL FIX: GranularProductGrid expects .url
+          altText: img.altText
+        })),
+        variants: p.variants,
+        options: p.options
+      };
+    });
+
+    return normalized.filter(validateProduct);
   } catch (error) {
     console.error(`Error fetching collection ${handle}:`, error);
     return [];

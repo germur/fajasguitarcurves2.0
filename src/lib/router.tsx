@@ -1,5 +1,5 @@
 
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
@@ -158,6 +158,11 @@ export const router = createBrowserRouter([
       {
         path: 'institute',
         element: withSuspense(AcademiaView),
+      },
+      // Fix for /products/ causing blank page -> Redirect to Catalog
+      {
+        path: 'products',
+        element: <Navigate to="/collections/all" replace />,
       },
       {
         path: 'products/:id',
