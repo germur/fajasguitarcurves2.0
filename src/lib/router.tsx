@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
@@ -162,7 +162,7 @@ export const router = createBrowserRouter([
       // Fix for /products/ causing blank page -> Redirect to Catalog
       {
         path: 'products',
-        element: <Navigate to="/collections/all" replace />,
+        element: <Suspense fallback={<LoadingFallback />}><CollectionPage handle="all" title="Todo el Catálogo" description="Explora toda nuestra colección de fajas colombianas premium." /></Suspense>,
       },
       {
         path: 'products/:id',
