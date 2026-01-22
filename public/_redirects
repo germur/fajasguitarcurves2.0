@@ -8,23 +8,76 @@
 /producto/cinturilla-avispa/      /products/faja-cinturilla-avispa       301
 /producto/faja-media-pierna/      /products/faja-etapa-2-media-pierna    301
 
-# --- REDIRECCIONES DE CATEGORÍAS (Silos) ---
-/categoria-producto/post-quirurgica/* /collections/recovery  301
-/categoria-producto/uso-diario/* /collections/sculpt    301
-/categoria-producto/fajas/* /collections/all       301
-/collections/moldeadoras.atom          /collections/sculpt    301
+# --- MIGRACIÓN A ESPAÑOL V2 (SEO OPTIMIZED): REDIRECCIONES 301 ---
+/about              /nosotros           301
+/contact            /contacto           301
+/fit-finder         /calculadora-de-tallas  301
+/cart               /carrito            301
+/checkout           /pago               301
+/shipping           /envios             301
+/privacy            /privacidad         301
+/terms              /terminos           301
+/returns            /devoluciones       301
+/account            /cuenta             301
+/glossary           /glosario           301
+/lab                /laboratorio        301
+
+# Core Silos (English & Legacy Spanish -> New Spanish SEO)
+/collections/all            /colecciones/todo                      301
+/collections/recovery       /colecciones/recuperacion-postquirurgica 301
+/colecciones/recuperacion   /colecciones/recuperacion-postquirurgica 301
+/collections/sculpt         /colecciones/moldeo-y-estetica         301
+/colecciones/moldeo         /colecciones/moldeo-y-estetica         301
+/collections/bras           /colecciones/brasieres-y-postura       301
+/colecciones/brasieres      /colecciones/brasieres-y-postura       301
+
+# Tools & Apps
+/tools                     /herramientas                        301
+/tools/guitar-ratio        /herramientas/calculadora-reloj-de-arena 301
+/herramientas/ratio-guitarra /herramientas/calculadora-reloj-de-arena 301
+/herramientas/calculadora  /herramientas/calculadora-reloj-de-arena 301
+/tools/stage1-vs-stage2    /herramientas/comparador-de-etapas     301
+/herramientas/etapa1-vs-etapa2 /herramientas/comparador-de-etapas 301
+/tools/recovery-timeline   /herramientas/linea-de-tiempo-recuperacion 301
+/herramientas/linea-de-tiempo /herramientas/linea-de-tiempo-recuperacion 301
+
+# Deep Links / Granular (Examples)
+/collections/recovery/stage-1 /colecciones/recuperacion-postquirurgica/etapa-1 301
+/collections/recovery/stage-2 /colecciones/recuperacion-postquirurgica/etapa-2 301
+/collections/sculpt/waist-trainer /colecciones/moldeo-y-estetica/cinturillas 301
+
+# Guides
+/guides/lipo-foam-manual /guias/manual-espuma-lipo  301
+/guides/troubleshooting /guias/solucion-problemas  301
+
+# Blog
+/blog/fibrosis-bible    /articulos/biblia-fibrosis  301
+/blog/anatomy-of-faja   /articulos/anatomia-faja  301
+
+# Others
+/gallery/curvy-brides   /galeria/novias-curvas  301
+/compare/vs-generic     /comparar/vs-genericas  301
+/resources/bbl-checklist /recursos/checklist-bbl  301
+/stories/recovery-diaries /historias/diarios-recuperacion  301
+
+# --- REDIRECCIONES DE CATEGORÍAS (Legacy WP/Woo) ---
+/categoria-producto/post-quirurgica/* /colecciones/recuperacion-postquirurgica  301
+/categoria-producto/uso-diario/* /colecciones/moldeo-y-estetica    301
+/categoria-producto/fajas/* /colecciones/todo       301
+/collections/moldeadoras.atom          /colecciones/moldeo-y-estetica    301
 
 # --- LIMPIEZA DE URLS VIEJAS / BASURA ---
 # Si alguien entra a una URL vieja de filtro o feed, lo mandamos a la tienda
-/store/* /collections/recovery  301
-/shop/* /collections/recovery  301
+/store/* /colecciones/recuperacion-postquirurgica  301
+/shop/* /colecciones/recuperacion-postquirurgica  301
 /en/* /                      301
 /*.atom             /                      301
 
 # --- FALLBACK INTELIGENTE (CATCH-ALL) ---
 # Cualquier URL vieja de producto que no hayamos mapeado arriba,
 # intenta mandarla a la colección principal en lugar de un 404 duro.
-/producto/* /collections/recovery  301
+/producto/* /colecciones/recuperacion-postquirurgica  301
 
 # --- REGLA DE SPA (OBLIGATORIA AL FINAL) ---
 /* /index.html  200
+

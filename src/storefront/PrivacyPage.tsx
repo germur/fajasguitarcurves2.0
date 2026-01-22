@@ -8,7 +8,7 @@ export function PrivacyPage() {
                 title="Política de Privacidad | Fajas Guitar Curves"
                 description="Tu privacidad y tus datos son sagrados para nosotros."
             />
-            <PolicyLayout title="Política de Privacidad" lastUpdated="January 1, 2026">
+            <PolicyLayout title="Política de Privacidad" lastUpdated="1 de Enero, 2026">
 
                 <p className="lead">
                     En Fajas Guitar Curves, entendemos que la privacidad no es solo un requisito legal, es una cuestión de confianza.

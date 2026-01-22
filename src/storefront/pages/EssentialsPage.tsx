@@ -26,7 +26,7 @@ export default function EssentialsPage() {
                     <div className="space-y-6">
                         <div className="inline-flex items-center gap-2 bg-[#F5EDDF] text-[#A35944] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                             <Shield size={14} />
-                            Post-Surgical Support
+                            Soporte Post-Quirúrgico
                         </div>
                         {/* H1 Semántico SEO */}
                         <h1 className="text-4xl lg:text-6xl font-serif font-bold text-gray-900 leading-tight">
@@ -51,8 +51,8 @@ export default function EssentialsPage() {
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
-                            <h3 className="font-bold text-2xl">Medical Grade</h3>
-                            <p className="text-sm opacity-90">Post-Op & Daily Use</p>
+                            <h3 className="font-bold text-2xl">Grado Médico</h3>
+                            <p className="text-sm opacity-90">Post-Op y Uso Diario</p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ export default function EssentialsPage() {
                     </div>
 
                     {loading ? (
-                        <div className="py-20 text-center animate-pulse">Loading essentials...</div>
+                        <div className="py-20 text-center animate-pulse">Cargando esenciales...</div>
                     ) : error ? (
                         <div className="py-20 text-center text-red-500">
                             <p>{error}</p>
@@ -92,7 +92,7 @@ export default function EssentialsPage() {
                     ) : products.length === 0 ? (
                         <div className="py-20 text-center border-2 border-dashed border-gray-200 rounded-xl">
                             <Box size={48} className="mx-auto text-gray-300 mb-4" />
-                            <h3 className="text-gray-900 font-bold">Collection Empty</h3>
+                            <h3 className="text-gray-900 font-bold">Colección Vacía</h3>
                         </div>
                     ) : (
                         // EDITORIAL LAYOUT CHANGE: grid-cols-1 md:grid-cols-3
@@ -112,7 +112,7 @@ export default function EssentialsPage() {
             <div className="py-24 px-6 max-w-7xl mx-auto">
                 <div className="bg-[#2C2420] rounded-[3rem] p-8 md:p-20 text-white text-center relative overflow-hidden shadow-2xl">
                     <div className="relative z-10">
-                        <p className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-4">Complete your Kit</p>
+                        <p className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase mb-4">Completa tu Kit</p>
                         <h2 className="text-3xl md:text-5xl font-serif mb-6 leading-tight">
                             Recuperación <span className="italic font-light">Inteligente</span>
                         </h2>
@@ -120,7 +120,7 @@ export default function EssentialsPage() {
                             Combina tu brasier con una faja Stage 2 y obtén un 15% de descuento automático.
                         </p>
                         <div className="flex flex-col md:flex-row gap-6 justify-center">
-                            <Link to="/collections/recovery" className="bg-white text-[#2C2420] px-10 py-4 rounded-full font-bold hover:bg-[#D4AF37] hover:text-white transition-all shadow-lg transform hover:-translate-y-1">
+                            <Link to="/colecciones/recuperacion" className="bg-white text-[#2C2420] px-10 py-4 rounded-full font-bold hover:bg-[#D4AF37] hover:text-white transition-all shadow-lg transform hover:-translate-y-1">
                                 Ver Fajas Stage 2
                             </Link>
                         </div>

@@ -64,7 +64,7 @@ export default function HourglassPage() {
             <SeoHead
                 title="The Sculpt Collection | Fajas Reloj de Arena & Cinturillas"
                 description="Ingeniería invisible para realzar tus curvas. Explora nuestra línea de fajas de uso diario, waist trainers y shorts levanta cola."
-                path="/collections/sculpt"
+                path="/colecciones/moldeo"
                 image="/assets/hourglass-hero-bg.jpg"
                 schema={{
                     type: 'collection',
@@ -73,8 +73,8 @@ export default function HourglassPage() {
                         description: 'Colección de fajas moldeadoras y waist trainers.'
                     },
                     breadcrumbs: [
-                        { name: 'Home', item: '/' },
-                        { name: 'Sculpt Studio', item: '/collections/sculpt' }
+                        { name: 'Inicio', item: '/' },
+                        { name: 'Moldeo', item: '/colecciones/moldeo' }
                     ]
                 }}
             />
@@ -92,7 +92,7 @@ export default function HourglassPage() {
                         </div>
 
                         <h1 className="text-4xl lg:text-6xl font-serif font-bold text-[#2C2420] leading-tight capitalize">
-                            The Sculpt Collection
+                            La Colección de Moldeo
                         </h1>
 
                         <p className="text-xl text-stone-500 font-light border-l-4 border-[#D4AF37] pl-4">
@@ -100,7 +100,7 @@ export default function HourglassPage() {
                         </p>
 
                         <div className="flex gap-4 pt-2">
-                            <Link to="/fit-finder" className="px-8 py-3 bg-[#2C2420] text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer rounded-lg">
+                            <Link to="/calculadora-de-tallas" className="px-8 py-3 bg-[#2C2420] text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer rounded-lg">
                                 Guía de Tallas
                             </Link>
                         </div>
@@ -115,8 +115,8 @@ export default function HourglassPage() {
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
-                            <h3 className="font-bold text-2xl font-serif">Sculpt</h3>
-                            <p className="text-sm opacity-90 tracking-widest uppercase">Signature Collection</p>
+                            <h3 className="font-bold text-2xl font-serif">Moldeo</h3>
+                            <p className="text-sm opacity-90 tracking-widest uppercase">Colección Insignia</p>
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        Waist Trainers
+                        Cinturillas
                     </button>
 
                     <button
@@ -162,7 +162,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        High Compression
+                        Alta Compresión
                     </button>
                 </div>
             </div>
@@ -189,9 +189,9 @@ export default function HourglassPage() {
                                 </div>
                             ) : error ? (
                                 <div className="py-20 text-center text-red-500">
-                                    <p className="text-xl font-bold">Error Loading Products</p>
+                                    <p className="text-xl font-bold">Error Cargando Productos</p>
                                     <p className="text-sm mt-2">{error}</p>
-                                    <p className="text-xs text-gray-500 mt-4">Please check Shopify Storefront API permissions.</p>
+                                    <p className="text-xs text-gray-500 mt-4">Por favor verifica los permisos del API de Shopify Storefront.</p>
                                 </div>
                             ) : (
                                 <>

@@ -28,7 +28,7 @@ export function ShippingPage() {
                 description="Envíos desde USA en 24 horas. Recibe tu faja en 3-5 días sin aduanas."
                 schema={schema}
             />
-            <PolicyLayout title="Política de Envíos" lastUpdated="January 1, 2026">
+            <PolicyLayout title="Política de Envíos" lastUpdated="1 de Enero, 2026">
 
                 <p className="lead text-xl text-stone-600 mb-8">
                     Sabemos que cuando pides tu faja, ¡la necesitas YA! Ya sea que tu cirugía se acerque o simplemente quieras estrenar tus curvas.
@@ -60,17 +60,17 @@ export function ShippingPage() {
                     </thead>
                     <tbody>
                         <tr className="border-b border-stone-100">
-                            <td className="py-3 font-bold">Standard Shipping</td>
+                            <td className="py-3 font-bold">Envío Estándar</td>
                             <td className="py-3">3-5 Días Hábiles</td>
                             <td className="py-3 text-green-700 font-bold">GRATIS (Pedidos +$200)</td>
                         </tr>
                         <tr className="border-b border-stone-100">
-                            <td className="py-3 text-stone-600">Standard Shipping</td>
+                            <td className="py-3 text-stone-600">Envío Estándar</td>
                             <td className="py-3 text-stone-600">3-5 Días Hábiles</td>
                             <td className="py-3 text-stone-600">$9.99</td>
                         </tr>
                         <tr className="border-b border-stone-100">
-                            <td className="py-3 font-bold text-[#2C2420]">Express / Priority</td>
+                            <td className="py-3 font-bold text-[#2C2420]">Express / Prioritario</td>
                             <td className="py-3">1-2 Días Hábiles</td>
                             <td className="py-3">$24.99</td>
                         </tr>

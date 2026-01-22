@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { ShopifyMapper } from '../../lib/shopify-mapper';
+import { fetchCollectionByHandle } from '../../lib/shopify-client';
 
 const SILO_HANDLE = 'essentials';
 
@@ -11,76 +12,32 @@ export function useEssentialsProducts() {
 
     useEffect(() => {
         async function fetchProducts() {
+            setLoading(true);
             try {
-                // Direct Fetch
-                const storeDomain = '92542c-b5.myshopify.com';
-                const storeToken = '04c58a7586c413051625b8a9aedd0416';
-                const endpoint = `https://${storeDomain}/api/2024-01/graphql.json`;
+                // Use the shared client to fetch collection data properly
+                // Pass strict=false because these products might rely on BraCard fallbacks for images
+                const rawProducts = await fetchCollectionByHandle(SILO_HANDLE, false);
 
-                // Query for collection. If not found, products will be empty.
-                const collectionQuery = `
-                query getCollection($handle: String!) {
-                    collectionByHandle(handle: $handle) {
-                        products(first: 250) {
-                            edges {
-                                node {
-                                    id
-                                    title
-                                    handle
-                                    description
-                                    tags
-                                    images(first: 2) {
-                                        edges {
-                                            node {
-                                                url
-                                                altText
-                                            }
-                                        }
-                                    }
-                                    priceRange {
-                                        minVariantPrice {
-                                            amount
-                                            currencyCode
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }`;
-
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Shopify-Storefront-Access-Token': storeToken,
-                    },
-                    body: JSON.stringify({
-                        query: collectionQuery,
-                        variables: { handle: SILO_HANDLE }
-                    })
-                });
-
-                const { data, errors } = await response.json();
-
-                if (errors) {
-                    console.error('[useEssentialsProducts] GraphQL Errors:', errors);
-                    throw new Error(errors[0].message);
+                if (rawProducts.length === 0) {
+                    console.warn(`[useEssentialsProducts] Collection '${SILO_HANDLE}' returned 0 products.`);
                 }
 
-                if (!data?.collectionByHandle) {
-                    // Collection missing
-                    console.warn(`[useEssentialsProducts] Collection '${SILO_HANDLE}' not found.`);
-                    // Fallback search? No, strictly real data. If empty, UI shows empty.
-                    return;
-                }
+                const mapped = rawProducts
+                    .map((p: any) => ShopifyMapper.mapProduct(p, 'essentials'))
+                    .filter((p: any) => {
+                        // Logic similar to before, but safer
+                        const t = p.title.toLowerCase();
+                        const tags = p.tags ? p.tags.map((tag: string) => tag.toLowerCase()) : [];
 
-                const edges = data.collectionByHandle.products.edges || [];
-                const mapped = edges.map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'lifestyle')); // Using lifestyle mapping for now as it's similar (general items)
+                        return t.includes('brasier') ||
+                            t.includes('bra ') ||
+                            tags.some((tag: string) => tag.includes('brasier') || tag.includes('sujetador') || tag.includes('bra '));
+                    });
+
                 setProducts(mapped);
             } catch (err: any) {
                 console.error('[useEssentialsProducts] Error fetching products:', err);
-                setError(err.message);
+                setError(err.message || 'Error loading essentials.');
             } finally {
                 setLoading(false);
             }

@@ -23,10 +23,9 @@ export const SiloAssets: Record<string, {
         title: 'Sculpt Collection',
         subtitle: 'Ingeniería Invisible',
         subCollections: [
-            { label: 'Shorts', path: '/collections/sculpt/shorts' },
-            { label: 'Waist Trainers', path: '/collections/sculpt/waist' },
-            { label: 'Strapless', path: '/collections/sculpt/strapless' },
-            { label: 'High Compression', path: '/collections/sculpt/high-compression' }
+            { label: 'Shorts', path: '/colecciones/moldeo-y-estetica/shorts' },
+            { label: 'Waist Trainers', path: '/colecciones/moldeo-y-estetica/cinturillas' },
+            { label: 'Strapless', path: '/colecciones/moldeo-y-estetica/strapless' }
         ]
     },
     'bras': {

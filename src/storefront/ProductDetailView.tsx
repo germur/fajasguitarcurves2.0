@@ -128,47 +128,86 @@ export function ProductDetailView() {
 
     // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
     // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
+    // EFFECT: Update image when color changes - PRIORITY: Alt Text Match > Variant Image > Index Match > Default
     useEffect(() => {
         if (selectedColor && uniqueColors.length > 0) {
 
-            // 0. Detect "Suspicious Default" (Shopify Bug Fix)
-            // If the variant image is exactly the same as the first image (default), 
-            // BUT we are NOT on the first color, it's likely a wrong link in Shopify.
-            const variantImage = currentVariant?.image;
-            const defaultImage = productImages[0];
-            const isFirstColor = uniqueColors[0] && selectedColor.toLowerCase() === uniqueColors[0].toLowerCase();
+            // Normalize images to ensure we can check Alt Text
+            // We expect productImages to be Objects { url, altText }, but handle legacy strings
+            const normalizedImages = productImages.map((img: any) => {
+                if (typeof img === 'string') return { url: img, altText: '' };
+                return { url: img.url || img.src || '', altText: img.altText || img.alt || '' };
+            });
 
-            // Heuristic: If we have a variant image, but it looks like a lazy default fallback for a different color...
-            const isSuspicious = variantImage && variantImage === defaultImage && !isFirstColor;
+            const targetColor = selectedColor.toLowerCase();
 
-            // PRIORITY 1: Index Matching (If suspicious or no variant image)
-            // We favor this when we detect the bug
-            if (isSuspicious || !variantImage) {
-                const colorIndex = uniqueColors.findIndex(
-                    (c: string) => c.toLowerCase() === selectedColor.toLowerCase()
-                );
-                // Try to find a corresponding image at that index
-                if (colorIndex !== -1 && productImages[colorIndex]) {
-                    setActiveImage(productImages[colorIndex]);
-                    return;
-                }
-            }
+            // 1. ALT TEXT MATCH (Highest Priority)
+            // If we find an image that explicitly says "Negro" in Alt Text, and we want Negro, USE IT.
+            // This overrides any localized/variant linking errors.
+            const altMatch = normalizedImages.find(img => {
+                const alt = img.altText.toLowerCase();
+                // We want strict match on color name to avoid false positives (e.g. "Negro" in "Cintura Negro")
+                // But typically Alt Text is "Faja Negro Stage 2", so .includes is okay if we are careful.
+                return alt.includes(targetColor);
+            });
 
-            // PRIORITY 2: Use variant's linked image (Standard Behavior)
-            if (variantImage && !isSuspicious) {
-                setActiveImage(variantImage);
+            if (altMatch?.url) {
+                setActiveImage(altMatch.url);
                 return;
             }
 
-            // PRIORITY 3: Default to first available
-            if (productImages[0]) {
-                setActiveImage(productImages[0]);
-            } else if (product?.image) {
-                setActiveImage(product.image);
+            // 2. VARIANT LINK CHECK
+            const variantImage = currentVariant?.image;
+            let shouldUseVariant = !!variantImage;
+
+            if (variantImage) {
+                // "Anti-Match" Guard:
+                // If the Variant Image linked in Shopify has Alt Text for a DIFFERENT color, BLOCK IT.
+                const vImgUrl = variantImage.url || variantImage.src || (typeof variantImage === 'string' ? variantImage : '');
+
+                // Find full metadata for this variant image URL
+                const fullVImg = normalizedImages.find(img => img.url === vImgUrl);
+
+                if (fullVImg && fullVImg.altText) {
+                    const alt = fullVImg.altText.toLowerCase();
+                    // Check if it mentions a OTHER color
+                    // e.g. We want "Cocoa", but Alt says "Negro"
+                    const colorsToCheck = uniqueColors.map((c: string) => c.toLowerCase()).filter((c: string) => c !== targetColor);
+
+                    const referencesWrongColor = colorsToCheck.some((wrongColor: string) => alt.includes(wrongColor));
+
+                    if (referencesWrongColor) {
+                        shouldUseVariant = false; // Block this "poisoned" link
+                    }
+                }
             }
+
+            if (shouldUseVariant) {
+                setActiveImage(typeof variantImage === 'string' ? variantImage : variantImage.url);
+                return;
+            }
+
+            // 3. SMART INDEX FALLBACK
+            // If we blocked the variant or didn't have one, fallback to index
+            // e.g. If "Negro" is the 2nd color, try to use the 2nd image.
+            const colorIndex = uniqueColors.findIndex(
+                (c: string) => c.toLowerCase() === targetColor
+            );
+            if (colorIndex !== -1 && productImages[colorIndex]) {
+                const fallbackImg = productImages[colorIndex];
+                setActiveImage(typeof fallbackImg === 'string' ? fallbackImg : fallbackImg.url);
+                return;
+            }
+
+            // 4. DEFAULT
+            if (productImages[0]) {
+                const defaultImg = productImages[0];
+                setActiveImage(typeof defaultImg === 'string' ? defaultImg : defaultImg.url);
+            }
+
         } else if (product?.image && !activeImage) {
             // Initial load fallback
-            setActiveImage(product.image);
+            setActiveImage(typeof product.image === 'string' ? product.image : product.image.url);
         }
     }, [selectedColor, currentVariant, uniqueColors, productImages, product, activeImage]);
 
@@ -285,7 +324,7 @@ export function ProductDetailView() {
                 title={seoTitle}
                 description={seoDescription}
                 type="product"
-                image={displayImage}
+                image={typeof displayImage === 'string' ? displayImage : (displayImage as any).url}
                 path={`/products/${product.handle || id}`}
                 schema={{ type: 'product', data: product }}
             />
@@ -311,9 +350,9 @@ export function ProductDetailView() {
 
                 {/* 1. Breadcrumbs (Clean Design) */}
                 <nav className="flex items-center text-[10px] sm:text-xs text-stone-400 mb-8 uppercase tracking-wider">
-                    <Link to="/" className="hover:text-[#D4AF37] transition-colors">Home</Link>
+                    <Link to="/" className="hover:text-[#D4AF37] transition-colors">Inicio</Link>
                     <span className="mx-2">/</span>
-                    <Link to="/collections/sculpt" className="hover:text-[#D4AF37] transition-colors">{category || 'Colección'}</Link>
+                    <Link to="/colecciones/moldeo-y-estetica" className="hover:text-[#D4AF37] transition-colors">{category || 'Colección'}</Link>
                     <span className="mx-2">/</span>
                     <span className="text-[#2C2420] font-bold truncate border-b border-[#D4AF37]">{title}</span>
                 </nav>
@@ -326,7 +365,7 @@ export function ProductDetailView() {
                             {/* Main Hero Image - Editorial Look */}
                             <div className="aspect-[3/4] md:aspect-[4/5] bg-stone-100 rounded-[2rem] overflow-hidden relative shadow-sm group cursor-zoom-in">
                                 <img
-                                    src={displayImage}
+                                    src={typeof displayImage === 'string' ? displayImage : (displayImage as any).url}
                                     alt={`${title} - ${selectedColor || 'Cocoa'} Colombian Shapewear for BBL & Post Lipo Recovery`}
                                     className="w-full h-full object-contain object-center transition-transform duration-1000 ease-out group-hover:scale-110 bg-white"
                                 />
@@ -366,7 +405,7 @@ export function ProductDetailView() {
                                     <div className="flex text-[#D4AF37] gap-0.5">
                                         {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} fill="currentColor" className="stroke-none" />)}
                                     </div>
-                                    <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 Reviews</span>
+                                    <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 Reseñas</span>
                                 </div>
 
                                 <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-medium leading-tight mb-4">
@@ -398,8 +437,8 @@ export function ProductDetailView() {
                                             if (tag.toLowerCase() === 'best seller' || tag.includes('HIDDEN')) return null; // Skip non-customer tags
                                             const isRecovery = tag.toLowerCase().includes('stage');
                                             const targetLink = isRecovery
-                                                ? `/collections/recovery?tag=${tag.toLowerCase()}`
-                                                : `/collections/sculpt?tag=${tag.toLowerCase()}`;
+                                                ? `/colecciones/recuperacion?tag=${tag.toLowerCase()}`
+                                                : `/colecciones/moldeo-y-estetica?tag=${tag.toLowerCase()}`;
 
                                             return (
                                                 <Link
@@ -619,7 +658,7 @@ export function ProductDetailView() {
                         <h3 className="font-serif text-3xl md:text-4xl text-[#2C2420]">
                             También te podría gustar
                         </h3>
-                        <Link to="/collections/sculpt" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D4AF37] hover:text-[#2C2420] transition-colors">
+                        <Link to="/colecciones/moldeo-y-estetica" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D4AF37] hover:text-[#2C2420] transition-colors">
                             Ver Todo <ArrowUpRight size={14} />
                         </Link>
                     </div>

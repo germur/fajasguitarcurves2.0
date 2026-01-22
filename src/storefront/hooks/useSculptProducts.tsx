@@ -85,7 +85,13 @@ export function useSculptProducts() {
                 // useFallback(); // REMOVED per user request for real data only
                 // return; // REMOVED to allow mapping
 
-                const mapped = edges.map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'sculpt'));
+                const mapped = edges
+                    .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'sculpt'))
+                    .filter((p: any) =>
+                        p.stage === 'Stage 3' ||
+                        p.stage === 'Etapa 3' ||
+                        p.tags.some((t: string) => t.toLowerCase().includes('cinturilla') || t.toLowerCase().includes('waist trainer'))
+                    );
                 setProducts(mapped);
             } catch (err: any) {
                 console.error('[useSculptProducts] Error fetching products:', err);

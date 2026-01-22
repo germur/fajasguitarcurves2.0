@@ -22,7 +22,7 @@ export function CartPage() {
                     >
                         <ArrowLeft className="w-6 h-6" />
                     </button>
-                    <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-bold">Shopping Cart</h1>
+                    <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-bold">Carrito de Compras</h1>
                 </div>
 
                 {cart.length === 0 ? (
@@ -30,15 +30,15 @@ export function CartPage() {
                         <div className="w-20 h-20 bg-stone-100 rounded-full mx-auto mb-6 flex items-center justify-center">
                             <Lock className="w-10 h-10 text-stone-300" />
                         </div>
-                        <h2 className="text-xl font-bold text-[#2C2420] mb-2">Your cart is empty</h2>
+                        <h2 className="text-xl font-bold text-[#2C2420] mb-2">Tu carrito está vacío</h2>
                         <p className="text-stone-500 mb-8 max-w-md mx-auto">
-                            Looks like you haven't found your perfect fit yet. Explore our collections to find your signature curve.
+                            Parece que aún no has encontrado tu ajuste perfecto. Explora nuestras colecciones para encontrar tu curva ideal.
                         </p>
                         <Link
                             to="/"
                             className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full font-bold hover:bg-[#A35944] transition-colors"
                         >
-                            Return to Store
+                            Volver a la Tienda
                         </Link>
                     </div>
                 ) : (
@@ -61,7 +61,7 @@ export function CartPage() {
                                         <div className="flex justify-between items-start">
                                             <div>
                                                 <h3 className="font-bold text-lg text-[#2C2420] mb-1">{item.product.title}</h3>
-                                                <p className="text-sm text-stone-500">Size: {item.selectedSize}</p>
+                                                <p className="text-sm text-stone-500">Talla: {item.selectedSize}</p>
                                             </div>
                                             <button
                                                 onClick={() => removeFromCart(item.product.id, item.selectedSize)}
@@ -103,7 +103,7 @@ export function CartPage() {
                         {/* Order Summary */}
                         <div className="lg:col-span-1">
                             <div className="bg-white p-8 rounded-2xl shadow-sm sticky top-24">
-                                <h2 className="font-serif text-xl font-bold text-[#2C2420] mb-6">Order Summary</h2>
+                                <h2 className="font-serif text-xl font-bold text-[#2C2420] mb-6">Resumen del Pedido</h2>
 
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between text-stone-600">
@@ -111,8 +111,8 @@ export function CartPage() {
                                         <span className="font-medium">${cartTotal.toFixed(2)}</span>
                                     </div>
                                     <div className="flex justify-between text-stone-600">
-                                        <span>Shipping</span>
-                                        <span className="text-sm italic">Calculated at checkout</span>
+                                        <span>Envío</span>
+                                        <span className="text-sm italic">Calculado en el checkout</span>
                                     </div>
                                     <div className="pt-4 border-t border-stone-100 flex justify-between items-center">
                                         <span className="font-bold text-lg text-[#2C2420]">Total</span>
@@ -124,7 +124,7 @@ export function CartPage() {
                                     onClick={checkout}
                                     className="w-full bg-[#A35944] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#D1AB66] transition-colors shadow-lg shadow-[#A35944]/20 flex items-center justify-center gap-2 mb-6"
                                 >
-                                    CHECKOUT
+                                    PAGAR AHORA
                                     <ArrowRight className="w-5 h-5" />
                                 </button>
 
@@ -133,13 +133,13 @@ export function CartPage() {
                                         <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center shrink-0">
                                             <Lock className="w-3 h-3 text-[#B49286]" />
                                         </div>
-                                        <span>Secure SSL Encryption</span>
+                                        <span>Encriptación SSL Segura</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-xs text-stone-500">
                                         <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center shrink-0">
                                             <ArrowRight className="w-3 h-3 text-[#B49286]" />
                                         </div>
-                                        <span>30-Day Free Returns</span>
+                                        <span>Devoluciones Gratis por 30 Días</span>
                                     </div>
                                 </div>
                             </div>

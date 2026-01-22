@@ -15,7 +15,7 @@ export function SocialProofWall() {
                         Resultados Reales
                     </span>
                     <h2 className="font-serif text-3xl md:text-5xl text-[#2C2420] font-bold mb-4">
-                        Wall of Curves
+                        Muro de Curvas
                     </h2>
                     <p className="text-stone-500 max-w-2xl mx-auto">
                         Únete a miles de mujeres mostrando sus resultados en TikTok.

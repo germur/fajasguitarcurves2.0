@@ -43,7 +43,7 @@ export function WaistTrainingLab() {
                 {/* Interactive Image Side */}
                 <div className="relative h-[500px] lg:h-auto bg-stone-200 order-1 lg:order-2">
                     <img
-                        src="/assets/faja-REAL-final.jpg"
+                        src="/assets/cinturilla-extrema.jpg"
                         alt="Faja Real: Detalle de Latex y Varillas"
                         className="w-full h-full object-cover opacity-100 shadow-2xl"
                     />

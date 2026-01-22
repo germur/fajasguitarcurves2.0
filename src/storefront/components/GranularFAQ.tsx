@@ -29,7 +29,7 @@ export function GranularFAQ() {
         <section className="py-20 bg-white max-w-4xl mx-auto px-6 border-t border-stone-100">
             <div className="mb-12 text-center">
                 <span className="text-xs font-bold tracking-[0.2em] text-[#D4AF37] uppercase mb-4 block">
-                    Support Center
+                    Centro de Soporte
                 </span>
                 <h2 className="text-3xl md:text-4xl font-serif text-[#2C2420]">
                     Preguntas Frecuentes

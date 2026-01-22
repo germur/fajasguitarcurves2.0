@@ -41,23 +41,23 @@ export function DarkFooter() {
                         <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">Explora</h3>
                         <ul className="space-y-4 text-sm font-medium">
                             <li>
-                                <Link to="/pages/our-story" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/nuestra-historia" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Nuestra Historia
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/collections/post-surgery-fajas" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Post-Surgery (Recovery)
+                                <Link to="/colecciones/recuperacion" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    Postquirúrgicas (Recuperación)
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/collections/sculpt" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Shapewear (Sculpt)
+                                <Link to="/colecciones/moldeo-y-estetica" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    Moldeo (Reloj de Arena)
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/collections/bras" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Bras & Accesorios
+                                <Link to="/colecciones/brasieres" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    Brasieres & Accesorios
                                 </Link>
                             </li>
                             <li className="pt-2">
@@ -66,8 +66,8 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/institute" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Journal (Education)
+                                <Link to="/instituto" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    Instituto (Educación)
                                 </Link>
                             </li>
 
@@ -80,12 +80,12 @@ export function DarkFooter() {
                         <ul className="space-y-4 text-sm font-medium">
 
                             <li>
-                                <Link to="/pages/fit-guarantee" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/devoluciones" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Cambios y Devoluciones
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/fit-finder" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/calculadora-de-tallas" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Guía de Tallas (AI)
                                 </Link>
                             </li>
@@ -95,7 +95,7 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/contact" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/contacto" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Contáctanos
                                 </Link>
                             </li>
@@ -144,8 +144,8 @@ export function DarkFooter() {
                     <div className="flex flex-col md:flex-row gap-6 items-center text-[11px] text-gray-600 font-medium">
                         <span>&copy; 2026 Guitar Curves LLC.</span>
                         <div className="flex gap-4">
-                            <Link to="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-                            <Link to="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+                            <Link to="/privacidad" className="hover:text-gray-400 transition-colors">Política de Privacidad</Link>
+                            <Link to="/terminos" className="hover:text-gray-400 transition-colors">Términos de Servicio</Link>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@ export function DarkFooter() {
                         {/* Simulated Payment Icons using Text/Divs for now, or could use generic CreditCard icon */}
                         <div className="flex gap-2 items-center text-white/40">
                             <CreditCard size={18} />
-                            <span className="text-[10px] tracking-widest uppercase">Secure Payment</span>
+                            <span className="text-[10px] tracking-widest uppercase">Pago Seguro</span>
                         </div>
                         <div className="h-4 w-px bg-white/10 mx-2"></div>
                         <div className="flex gap-2 items-center text-white/40">

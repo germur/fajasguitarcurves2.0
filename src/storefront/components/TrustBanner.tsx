@@ -11,8 +11,8 @@ export function TrustBanner() {
                             <Shield size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Medical Grade</h3>
-                            <p className="text-sm text-stone-500">Certified compression for post-op safety.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Grado Médico</h3>
+                            <p className="text-sm text-stone-500">Compresión certificada para seguridad post-operatoria.</p>
                         </div>
                     </div>
 
@@ -22,8 +22,8 @@ export function TrustBanner() {
                             <Truck size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Fast Shipping</h3>
-                            <p className="text-sm text-stone-500">Worldwide delivery via DHL & FedEx.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Envío Rápido</h3>
+                            <p className="text-sm text-stone-500">Envíos internacionales vía DHL y FedEx.</p>
                         </div>
                     </div>
 
@@ -33,8 +33,8 @@ export function TrustBanner() {
                             <RefreshCcw size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Perfect Fit</h3>
-                            <p className="text-sm text-stone-500">Free exchanges if the size isn't perfect.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Talla Perfecta</h3>
+                            <p className="text-sm text-stone-500">Cambios gratis si la talla no es perfecta.</p>
                         </div>
                     </div>
 
@@ -44,8 +44,8 @@ export function TrustBanner() {
                             <HeartHandshake size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Expert Support</h3>
-                            <p className="text-sm text-stone-500">Free sizing advice from our specialists.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Soporte Experto</h3>
+                            <p className="text-sm text-stone-500">Asesoría de tallas gratis con nuestras especialistas.</p>
                         </div>
                     </div>
                 </div>

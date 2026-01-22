@@ -33,7 +33,7 @@ export default function FibrosisBible() {
                         No todas las fajas sirven para esta etapa. Necesitas materiales específicos que ofrezcan soporte uniforme sin cortar la circulación.
                     </p>
                     <Link
-                        to="/collections/recovery/stage-2"
+                        to="/colecciones/recuperacion?tag=Etapa+2"
                         className="inline-flex items-center gap-2 bg-[#2C2420] text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-[#D4AF37] transition-colors"
                     >
                         Ver Fajas Anti-Fibrosis

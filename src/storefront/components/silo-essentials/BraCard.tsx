@@ -18,6 +18,20 @@ export function BraCard({ product }: BraCardProps) {
     const displayBadge = badge || "Best Seller";
     const displayBenefit = benefit || "Soporte médico certificado y corrección de postura inmediata.";
 
+    // UI FIX: Force "Brasier" instead of "Sujetador" in displayed text per user request
+    const formatText = (text: string) => text.replace(/Sujetador/gi, "Brasier");
+
+    const formattedTitle = formatText(title);
+    const formattedBenefit = formatText(displayBenefit);
+
+    const getFallbackImage = (t: string) => {
+        const lower = t.toLowerCase();
+        if (lower.includes('mangas') || lower.includes('sleeves')) return '/assets/brasier-post-op.jpg';
+        if (lower.includes('cubrimiento') || lower.includes('high back')) return '/assets/brasier-hero-premium.png';
+        if (lower.includes('post operatorio') || lower.includes('quirurgico')) return '/assets/stage2-faja-bra.jpg';
+        return '/assets/essentials-flatlay.jpg';
+    };
+
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -40,9 +54,9 @@ export function BraCard({ product }: BraCardProps) {
             {/* IMAGEN (Con Zoom suave) */}
             <Link to={`/products/${productHandle}`} className="relative h-[60%] overflow-hidden bg-[#F9F8F6]">
                 <img
-                    src={image || '/assets/essentials-flatlay.jpg'}
-                    onError={(e) => { e.currentTarget.src = '/assets/essentials-flatlay.jpg'; }}
-                    alt={title} // SEO: Alt text automático
+                    src={image || getFallbackImage(formattedTitle)}
+                    onError={(e) => { e.currentTarget.src = getFallbackImage(formattedTitle); }}
+                    alt={formattedTitle} // SEO: Alt text automático
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
 
@@ -56,12 +70,12 @@ export function BraCard({ product }: BraCardProps) {
                     {/* H3 para SEO */}
                     <Link to={`/products/${productHandle}`}>
                         <h3 className="font-serif text-2xl text-gray-900 mb-3 leading-tight group-hover:text-[#D4AF37] transition-colors">
-                            {title}
+                            {formattedTitle}
                         </h3>
                     </Link>
                     {/* Micro-copy de Beneficio */}
                     <p className="text-sm text-gray-500 font-medium leading-relaxed border-l-2 border-[#D4AF37]/30 pl-3">
-                        {displayBenefit}
+                        {formattedBenefit}
                     </p>
                 </div>
 

@@ -68,9 +68,17 @@ export function useRecoveryProducts() {
                 if (data?.collectionByHandle?.products) {
                     console.log('✅ Shopify Data Fetched (Recovery):', data.collectionByHandle.products.edges.length, 'items');
                     // Map raw Shopify nodes to our "Medical Product" schema
-                    const mappedProducts = data.collectionByHandle.products.edges.map((edge: any) =>
-                        ShopifyMapper.mapProduct(edge.node, 'medical')
-                    );
+                    const mappedProducts = data.collectionByHandle.products.edges
+                        .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'medical'))
+                        .filter((p: any) => {
+                            const t = p.tags ? p.tags.join(' ').toLowerCase() : '';
+                            return t.includes('stage 1') || t.includes('etapa 1') ||
+                                t.includes('stage 2') || t.includes('etapa 2') ||
+                                t.includes('stage 3') || t.includes('etapa 3') ||
+                                t.includes('post-operatorio') || t.includes('post surgery') ||
+                                t.includes('post lipo') || t.includes('recuperacion');
+                        });
+
                     setProducts(mappedProducts);
                 } else {
                     console.warn(`⚠️ Collection "${SILO_HANDLE}" not found or empty.`);

@@ -8,7 +8,7 @@ export function TermsPage() {
                 title="Términos del Servicio | Fajas Guitar Curves"
                 description="Condiciones de uso y descargos de responsabilidad médica."
             />
-            <PolicyLayout title="Términos del Servicio" lastUpdated="January 1, 2026">
+            <PolicyLayout title="Términos del Servicio" lastUpdated="1 de Enero, 2026">
 
                 <p>
                     Bienvenido a Fajas Guitar Curves. Al acceder o comprar en nuestro sitio, aceptas los siguientes términos y condiciones.

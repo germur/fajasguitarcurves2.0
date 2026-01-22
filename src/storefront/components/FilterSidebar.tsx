@@ -12,6 +12,7 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
     const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
         stage: true,
         compression: true,
+        category: true, // NEW
         occasion: true,
         features: false,
     });
@@ -25,6 +26,7 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
         const c: Record<string, Record<string, number>> = {
             stage: {},
             compression: {},
+            category: {}, // NEW
             occasion: {},
             features: {}
         };
@@ -32,6 +34,7 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
         products.forEach(p => {
             if (p.stage) c.stage[p.stage] = (c.stage[p.stage] || 0) + 1;
             if (p.compression) c.compression[p.compression] = (c.compression[p.compression] || 0) + 1;
+            if (p.category) c.category[p.category] = (c.category[p.category] || 0) + 1; // NEW
             if (p.occasion) c.occasion[p.occasion] = (c.occasion[p.occasion] || 0) + 1;
             if (p.features && Array.isArray(p.features)) {
                 p.features.forEach((f: string) => c.features[f] = (c.features[f] || 0) + 1);
@@ -54,35 +57,40 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
         return <CheckCircle2 size={14} className="text-stone-300" />;
     };
 
-    // Helper to render a checkbox group
+    // Helper to render a checkbox group (Refactored to Premium Pills)
     const renderFilterGroup = (title: string, category: string, options: string[]) => {
         const isExpanded = expandedSections[category];
 
         return (
-            <div className="border-b border-stone-100 py-4">
+            <div className="border-b border-stone-100 py-6">
                 <button
                     onClick={() => toggleSection(category)}
-                    className="flex items-center justify-between w-full text-left mb-2"
+                    className="flex items-center justify-between w-full text-left mb-3 group"
                 >
-                    <h4 className="font-bold text-[#2C2420] uppercase text-xs tracking-widest">{title}</h4>
-                    {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    <h4 className="font-bold text-[#2C2420] uppercase text-xs tracking-widest group-hover:text-[#D4AF37] transition-colors">{title}</h4>
+                    {isExpanded ? <ChevronUp size={14} className="text-stone-400" /> : <ChevronDown size={14} className="text-stone-400" />}
                 </button>
 
                 {isExpanded && (
-                    <div className="space-y-2 mt-2">
+                    <div className="flex flex-wrap gap-2 mt-2">
                         {options.map(opt => {
                             const count = counts[category][opt] || 0;
                             const isSelected = activeFilters[category]?.includes(opt);
                             const isDisabled = count === 0 && !isSelected;
 
                             return (
-                                <label key={opt} className={`flex items-center gap-3 group ${isDisabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'}`}>
-                                    <div className={`w-4 h-4 border rounded-sm flex items-center justify-center transition-colors 
-                                        ${isSelected ? 'bg-[#D4AF37] border-[#D4AF37]' : 'border-stone-300 bg-white'}
-                                        ${!isDisabled && !isSelected && 'group-hover:border-[#D4AF37]'}
-                                    `}>
-                                        {isSelected && <span className="text-white text-[10px]">✓</span>}
-                                    </div>
+                                <label
+                                    key={opt}
+                                    className={`
+                                        cursor-pointer select-none px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all border
+                                        flex items-center gap-2
+                                        ${isDisabled ? 'opacity-40 grayscale cursor-not-allowed bg-stone-50 border-stone-100 text-stone-300' : ''}
+                                        ${isSelected
+                                            ? 'bg-[#2C2420] border-[#2C2420] text-white shadow-md'
+                                            : 'bg-white border-stone-200 text-stone-600 hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                                        }
+                                    `}
+                                >
                                     <input
                                         type="checkbox"
                                         className="hidden"
@@ -90,12 +98,9 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
                                         onChange={() => !isDisabled && onFilterChange(category, opt)}
                                         disabled={isDisabled}
                                     />
-                                    <div className="flex items-center gap-2">
-                                        {getIconForOption(opt)}
-                                        <span className={`text-sm ${isSelected ? 'text-[#2C2420] font-bold' : 'text-stone-600'}`}>
-                                            {opt} <span className="text-stone-400 text-xs ml-1">({count})</span>
-                                        </span>
-                                    </div>
+                                    {getIconForOption(opt)}
+                                    <span>{opt}</span>
+                                    {(!isDisabled) && <span className={`${isSelected ? 'text-stone-400' : 'text-stone-300'} text-[10px]`}>({count})</span>}
                                 </label>
                             );
                         })}
@@ -138,10 +143,15 @@ export function FilterSidebar({ products, activeFilters, onFilterChange }: Filte
 
                     {/* Filter Sections - ONLY RENDER IF OPTIONS EXIST */}
                     <div className="space-y-1">
-                        {/* Only show categories that actually have data */}
+                        {/* 1. TIPO DE PRENDA (Category) - Most Important */}
+                        {getDynamicOptions('category').length > 0 && renderFilterGroup('Tipo de Prenda', 'category', getDynamicOptions('category'))}
+
+                        {/* 2. Primary Filters */}
                         {getDynamicOptions('occasion').length > 0 && renderFilterGroup('Uso / Actividad', 'occasion', getDynamicOptions('occasion'))}
                         {getDynamicOptions('compression').length > 0 && renderFilterGroup('Nivel de Compresión', 'compression', getDynamicOptions('compression'))}
                         {getDynamicOptions('stage').length > 0 && renderFilterGroup('Etapa Post-Op', 'stage', getDynamicOptions('stage'))}
+
+                        {/* 3. Secondary Features */}
                         {getDynamicOptions('features').length > 0 && renderFilterGroup('Características', 'features', getDynamicOptions('features'))}
                     </div>
 

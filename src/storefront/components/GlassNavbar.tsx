@@ -80,25 +80,25 @@ export function GlassNavbar() {
                                 onMouseEnter={() => setActiveDropdown('shop')}
                             >
                                 <span className="flex items-center gap-1 font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                    SHOP <ChevronDown size={14} />
+                                    TIENDA <ChevronDown size={14} />
                                 </span>
                             </div>
 
                             {/* NEW TOP LEVEL LINK */}
-                            <Link to="/collections/all" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
+                            <Link to="/colecciones/todo" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
                                 <span className="text-[#D4AF37]">✨</span> Ver Todo
                             </Link>
 
                             {/* OTHER LINKS */}
-                            <Link to="/pages/our-story" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                Our Story
+                            <Link to="/nuestra-historia" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
+                                Nuestra Historia
                             </Link>
                             <div
                                 className="h-full flex items-center cursor-pointer group relative"
                                 onMouseEnter={() => setActiveDropdown('tools')}
                             >
                                 <span className="flex items-center gap-1 font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                    TOOLS <ChevronDown size={14} />
+                                    HERRAMIENTAS <ChevronDown size={14} />
                                 </span>
                                 {/* Tools Dropdown (Mini) */}
                                 <div className={`
@@ -109,11 +109,11 @@ export function GlassNavbar() {
                                     {/* <Link to="/tools/recovery-timeline" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         Recovery Calculator
                                     </Link> */}
-                                    <Link to="/tools/guitar-ratio" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
-                                        Guitar Ratio Test
+                                    <Link to="/herramientas/ratio-guitarra" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        Test Ratio Guitarra
                                     </Link>
-                                    <Link to="/tools/stage1-vs-stage2" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
-                                        Stage 1 vs Stage 2
+                                    <Link to="/herramientas/etapa1-vs-etapa2" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        Etapa 1 vs Etapa 2
                                     </Link>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@ export function GlassNavbar() {
 
                         {/* 3. Right (Actions) */}
                         <div className="hidden md:flex items-center space-x-6">
-                            <Link to="/pages/guia-de-tallas" className="hidden lg:flex bg-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-5 py-2 rounded-full hover:bg-[#B49286] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap">
+                            <Link to="/calculadora-de-tallas" className="hidden lg:flex bg-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-5 py-2 rounded-full hover:bg-[#B49286] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap">
                                 ENCUENTRA TU TALLA 📐
                             </Link>
                             <button
@@ -195,39 +195,38 @@ export function GlassNavbar() {
                     <div className="max-w-7xl mx-auto px-8 py-12">
                         <div className="grid grid-cols-12 gap-8">
 
-                            {/* COL 1: BY COLLECTION (The Silos) */}
                             <div className="col-span-3 border-r border-stone-100 pr-8">
-                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">By Collection</h4>
+                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Colección</h4>
                                 <ul className="space-y-6">
                                     <li className="group/item">
-                                        <Link to="/collections/recovery" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                        <Link to="/colecciones/recuperacion" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
                                                 <img src="/assets/recovery-hands.png" className="w-full h-full object-cover" alt="Recovery" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Recovery Room</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Postquirúrgicas</p>
                                                 <p className="text-[10px] text-stone-400 uppercase tracking-wide">Post-Quirúrgico & Médico</p>
                                             </div>
                                         </Link>
                                     </li>
                                     <li className="group/item">
-                                        <Link to="/collections/sculpt" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                        <Link to="/colecciones/moldeo-y-estetica" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
                                                 <img src="/assets/sculpt-nav-menu.jpg" className="w-full h-full object-cover" alt="Sculpt" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Sculpt Studio</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Reloj de Arena</p>
                                                 <p className="text-[10px] text-stone-400 uppercase tracking-wide">Uso Diario & Estético</p>
                                             </div>
                                         </Link>
                                     </li>
                                     <li className="group/item">
-                                        <Link to="/collections/bras" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                        <Link to="/colecciones/brasieres" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
                                                 <img src="/assets/essentials-flatlay.jpg" className="w-full h-full object-cover" alt="Bras" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Bras & Essentials</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Brasieres</p>
                                                 <p className="text-[10px] text-stone-400 uppercase tracking-wide">Complementos</p>
                                             </div>
                                         </Link>
@@ -237,17 +236,17 @@ export function GlassNavbar() {
 
                             {/* COL 2: BY GOAL (Solutions) */}
                             <div className="col-span-3 border-r border-stone-100 pr-8 pl-4">
-                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Shop by Goal</h4>
+                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Objetivo</h4>
                                 <ul className="space-y-3">
                                     {[
-                                        { label: 'Stage 2 (Alta Compresión)', href: '/collections/recovery?tag=Stage+2' },
-                                        { label: 'Stage 3 (Mantenimiento)', href: '/collections/recovery?tag=Stage+3' },
-                                        { label: 'BBL Protection', href: '/collections/recovery?tag=BBL' },
-                                        { label: 'Levanta Cola', href: '/collections/sculpt?tag=Butt+Lifter' },
-                                        { label: 'Cintura de Avispa', href: '/collections/sculpt?tag=Waist+Trainer' },
-                                        { label: 'Strapless / Invisible', href: '/collections/sculpt?tag=Strapless' },
-                                        { label: 'Shorts & Bodys', href: '/collections/sculpt?tag=Short' },
-                                        { label: 'Media Pierna', href: '/collections/recovery?tag=Media+Pierna' }
+                                        { label: 'Etapa 2 (Alta Compresión)', href: '/colecciones/recuperacion?tag=Etapa+2' },
+                                        { label: 'Etapa 3 (Mantenimiento)', href: '/colecciones/recuperacion?tag=Etapa+3' },
+                                        { label: 'Post-Op / BBL', href: '/colecciones/recuperacion?tag=Post-Op' },
+                                        { label: 'Realce Glúteo', href: '/colecciones/moldeo-y-estetica?tag=Realce' },
+                                        { label: 'Cintura de Avispa', href: '/colecciones/moldeo-y-estetica?tag=Cinturilla' },
+                                        { label: 'Strapless / Invisible', href: '/colecciones/moldeo-y-estetica?tag=Strapless' },
+                                        { label: 'Shorts y Bodys', href: '/colecciones/moldeo-y-estetica?tag=Shorts' },
+                                        { label: 'Media Pierna', href: '/colecciones/recuperacion?tag=Media+Pierna' }
                                     ].map((item) => (
                                         <li key={item.label}>
                                             <Link
@@ -261,28 +260,29 @@ export function GlassNavbar() {
                                     ))}
                                 </ul>
                                 <div className="mt-8 pt-6 border-t border-stone-100">
-                                    <Link to="/pages/guia-de-tallas" className="flex items-center gap-2 text-xs font-bold text-[#D4AF37] hover:underline uppercase tracking-wider" onClick={() => setActiveDropdown(null)}>
+                                    <Link to="/calculadora-de-tallas" className="flex items-center gap-2 text-xs font-bold text-[#D4AF37] hover:underline uppercase tracking-wider" onClick={() => setActiveDropdown(null)}>
                                         HACER QUIZ DE TALLA <ArrowRight size={12} />
                                     </Link>
                                 </div>
+
                             </div>
 
                             {/* COL 3 & 4: FEATURED VISUALS (Skims Effect) */}
                             <div className="col-span-6 grid grid-cols-2 gap-4 pl-4">
 
                                 {/* Visual Card 1: New In */}
-                                <Link to="/collections/sculpt" className="relative h-48 bg-stone-100 rounded-xl overflow-hidden group cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                <Link to="/colecciones/moldeo-y-estetica" className="relative h-48 bg-stone-100 rounded-xl overflow-hidden group cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                     <img src="/assets/sewing-detail.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="New In" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
-                                        <span className="text-white text-xs font-bold uppercase tracking-widest mb-1">New In</span>
+                                        <span className="text-white text-xs font-bold uppercase tracking-widest mb-1">Lo Nuevo</span>
                                         <p className="text-white font-serif text-xl">The Guitar Cut™</p>
                                     </div>
                                 </Link>
 
                                 {/* Visual Card 2: Sale */}
-                                <Link to="/collections/sculpt" className="relative h-48 bg-[#F5F3F0] rounded-xl overflow-hidden group cursor-pointer flex items-center justify-center p-6 text-center" onClick={() => setActiveDropdown(null)}>
+                                <Link to="/colecciones/moldeo-y-estetica" className="relative h-48 bg-[#F5F3F0] rounded-xl overflow-hidden group cursor-pointer flex items-center justify-center p-6 text-center" onClick={() => setActiveDropdown(null)}>
                                     <div>
-                                        <h5 className="font-serif text-2xl text-[#2C2420] mb-2">Sale</h5>
+                                        <h5 className="font-serif text-2xl text-[#2C2420] mb-2">Ofertas</h5>
                                         <p className="text-xs text-stone-500 mb-4">Hasta 40% OFF en referencias seleccionadas</p>
                                         <span className="inline-block bg-[#2C2420] text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] transition-colors">
                                             Ver Ofertas
@@ -316,22 +316,22 @@ export function GlassNavbar() {
 
                         {/* 1. SHOP SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Shop</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Tienda</h4>
                             <div className="space-y-4 pl-2 border-l-2 border-stone-100">
-                                <Link to="/collections/all" className="block p-2 bg-stone-50 rounded-lg transition-colors border border-stone-100" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/colecciones/todo" className="block p-2 bg-stone-50 rounded-lg transition-colors border border-stone-100" onClick={() => setIsMobileMenuOpen(false)}>
                                     <div className="font-bold text-base text-[#D4AF37] flex items-center gap-2">✨ Ver Todo</div>
                                     <div className="text-xs text-stone-500">Catálogo Completo</div>
                                 </Link>
-                                <Link to="/collections/recovery" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Recovery Room</div>
-                                    <div className="text-xs text-stone-500">Post-Quirúrgico & Stage 1, 2, 3</div>
+                                <Link to="/colecciones/recuperacion" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Postquirúrgicas</div>
+                                    <div className="text-xs text-stone-500">Post-Quirúrgico & Etapa 1, 2, 3</div>
                                 </Link>
-                                <Link to="/collections/sculpt" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Sculpt Studio</div>
-                                    <div className="text-xs text-stone-500">Fajas de Uso Diario & Waist Trainers</div>
+                                <Link to="/colecciones/moldeo-y-estetica" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Reloj de Arena</div>
+                                    <div className="text-xs text-stone-500">Fajas de Uso Diario & Cinturillas</div>
                                 </Link>
-                                <Link to="/collections/bras" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Bras & Essentials</div>
+                                <Link to="/colecciones/brasieres" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="font-bold text-base text-[#2C2420]">Brasieres</div>
                                     <div className="text-xs text-stone-500">Brasieres, Tablas y Espumas</div>
                                 </Link>
 
@@ -341,14 +341,21 @@ export function GlassNavbar() {
                             <div className="mt-4 pt-4 border-t border-stone-100">
                                 <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">Filtrar por Etiqueta</p>
                                 <div className="flex flex-wrap gap-2">
-                                    {['Stage 2', 'BBL', 'Strapless', 'Short', 'Media Pierna', 'Talle Alto'].map(tag => (
+                                    {[
+                                        { label: 'Etapa 2', tag: 'Etapa 2' },
+                                        { label: 'Post-Op', tag: 'Post-Op' },
+                                        { label: 'Strapless', tag: 'Strapless' },
+                                        { label: 'Shorts', tag: 'Shorts' },
+                                        { label: 'Media Pierna', tag: 'Media Pierna' },
+                                        { label: 'Talle Alto', tag: 'Talle Alto' }
+                                    ].map(({ label, tag }) => (
                                         <Link
                                             key={tag}
-                                            to={tag.includes('Stage') ? `/collections/recovery?tag=${tag}` : `/collections/sculpt?tag=${tag}`}
+                                            to={tag.includes('Etapa') ? `/colecciones/recuperacion-postquirurgica?tag=${tag}` : `/colecciones/moldeo-y-estetica?tag=${tag}`}
                                             onClick={() => setIsMobileMenuOpen(false)}
                                             className="px-3 py-1 bg-stone-50 rounded-full text-[10px] text-stone-600 font-bold border border-stone-100 hover:bg-[#D4AF37] hover:text-white hover:border-[#D4AF37] transition-colors"
                                         >
-                                            {tag}
+                                            {label}
                                         </Link>
                                     ))}
                                 </div>
@@ -357,26 +364,23 @@ export function GlassNavbar() {
 
                         {/* 2. TOOLS SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Tools</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Herramientas</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                {/* <Link to="/tools/recovery-timeline" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Recovery Calculator
-                                </Link> */}
-                                <Link to="/tools/guitar-ratio" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Guitar Ratio Test
+                                <Link to="/herramientas/ratio-guitarra" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Test Ratio Guitarra
                                 </Link>
-                                <Link to="/tools/stage1-vs-stage2" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Stage 1 vs Stage 2
+                                <Link to="/herramientas/etapa1-vs-etapa2" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Etapa 1 vs Etapa 2
                                 </Link>
                             </div>
                         </div>
 
                         {/* 3. BRAND SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Brand</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Marca</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                <Link to="/pages/our-story" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Our Story
+                                <Link to="/nuestra-historia" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Nuestra Historia
                                 </Link>
                                 <Link to="/pages/faq" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     Preguntas Frecuentes
@@ -384,10 +388,9 @@ export function GlassNavbar() {
                             </div>
                         </div>
 
-                        {/* CTA */}
                         <div className="pt-4">
                             <Link
-                                to="/fit-finder"
+                                to="/calculadora-de-tallas"
                                 className="w-full bg-[#D4AF37] text-white font-bold uppercase tracking-widest text-xs py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B49286] transition-colors"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >

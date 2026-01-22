@@ -19,7 +19,7 @@ const HOTSPOTS: ProductHotspot[] = [
         y: 40,
         productName: "Faja Etapa 2 Media Pierna",
         price: "$120.00",
-        link: "/products/faja-etapa-2-media-pierna",
+        link: "/productos/faja-etapa-2-media-pierna",
         image: "/assets/faja-popup-final.jpg"
     },
     {
@@ -28,7 +28,7 @@ const HOTSPOTS: ProductHotspot[] = [
         y: 65,
         productName: "Brasier Post-Op",
         price: "$50.00",
-        link: "/products/brasier-post-operatorio-postura",
+        link: "/productos/brasier-post-operatorio-postura",
         image: "/assets/brasier-post-op.jpg"
     }
 ];
@@ -94,7 +94,7 @@ export function ShopTheLook() {
                     {/* 2. The Context/Copy */}
                     <div className="w-full md:w-1/2 md:pl-12">
                         <span className="text-[#B49286] font-bold tracking-widest text-xs uppercase mb-4 block">
-                            Curated Style
+                            Estilo Curado
                         </span>
                         <h2 className="font-serif text-4xl md:text-5xl text-[#2C2420] font-bold mb-6 leading-tight">
                             El "Kit Guitarra" <br />Completo.
@@ -106,7 +106,7 @@ export function ShopTheLook() {
                             <Link to="/pages/bbl-recovery-kit" className="px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all text-center">
                                 comprar el kit
                             </Link>
-                            <Link to="/collections/recovery" className="px-8 py-4 border border-[#2C2420] text-[#2C2420] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-100 transition-all text-center">
+                            <Link to="/colecciones/recuperacion" className="px-8 py-4 border border-[#2C2420] text-[#2C2420] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-100 transition-all text-center">
                                 ver colección
                             </Link>
                         </div>

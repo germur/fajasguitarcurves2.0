@@ -19,7 +19,7 @@ export function ReturnsPage() {
                 description="Cambios de talla gratis en tu primera compra. Garantía de ajuste perfecto por 30 días."
                 schema={schema}
             />
-            <PolicyLayout title="Garantía de Ajuste Perfecto & Política de Cambios" lastUpdated="January 1, 2026">
+            <PolicyLayout title="Garantía de Ajuste Perfecto & Política de Cambios" lastUpdated="1 de Enero, 2026">
 
                 <p className="lead text-xl text-stone-600 mb-8">
                     Queremos que te sientas espectacular y segura. Sabemos que comprar una faja colombiana por internet puede generar dudas.

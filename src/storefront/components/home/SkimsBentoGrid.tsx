@@ -13,7 +13,7 @@ export function SkimsBentoGrid() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
                     {/* 1. CARD 1: Guía de Tallas */}
-                    <Link to="/collections/sculpt" className={cardBaseClass}>
+                    <Link to="/colecciones/moldeo-y-estetica" className={cardBaseClass}>
                         <img
                             src="/assets/skims-grid-front.jpg"
                             alt="Fajas Guitar Curves"
@@ -35,7 +35,7 @@ export function SkimsBentoGrid() {
                     </Link>
 
                     {/* 2. CARD 2: Fajas Stage 2 */}
-                    <Link to="/collections/recovery?tag=Stage+2" className={cardBaseClass}>
+                    <Link to="/colecciones/recuperacion?tag=Stage+2" className={cardBaseClass}>
                         <img
                             src="/assets/skims-grid-back.jpg"
                             alt="Fajas Stage 2"
@@ -45,7 +45,7 @@ export function SkimsBentoGrid() {
 
                         <div className="absolute top-6 right-6">
                             <span className="bg-[#A35944] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-                                Best Seller
+                                Más Vendido
                             </span>
                         </div>
 
@@ -61,7 +61,7 @@ export function SkimsBentoGrid() {
                     </Link>
 
                     {/* 3. CARD 3: Brasieres Post-Op */}
-                    <Link to="/collections/bras" className={cardBaseClass}>
+                    <Link to="/colecciones/brasieres" className={cardBaseClass}>
                         <img
                             src="/assets/skims-grid-group.jpg"
                             alt="Brasieres Post-Op"
@@ -73,7 +73,7 @@ export function SkimsBentoGrid() {
                             <h3 className="text-2xl md:text-3xl font-serif text-white mb-2 leading-tight">
                                 Brasieres Post-Op
                             </h3>
-                            <p className="text-white/80 text-xs mb-3">Soporte & Comfort Total</p>
+                            <p className="text-white/80 text-xs mb-3">Soporte y Comodidad Total</p>
                             <span className="flex items-center gap-2 text-white/90 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors">
                                 Ver Colección <ArrowUpRight size={16} />
                             </span>

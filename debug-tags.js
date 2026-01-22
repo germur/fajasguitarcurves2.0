@@ -9,6 +9,7 @@ async function fetchTags() {
                 node {
                     title
                     tags
+                    productType
                 }
             }
         }
@@ -35,13 +36,11 @@ async function fetchTags() {
             return;
         }
 
-        const titles = [];
         json.data.products.edges.forEach(edge => {
-            titles.push(edge.node.title);
+            console.log(`\nProduct: ${edge.node.title}`);
+            console.log(`Tags: ${JSON.stringify(edge.node.tags)}`);
+            console.log(`ProductType: ${edge.node.productType}`); // Also check productType
         });
-
-        console.log("PRODUCT TITLES:");
-        console.log(titles.join('\n'));
 
     } catch (e) {
         console.error(e);

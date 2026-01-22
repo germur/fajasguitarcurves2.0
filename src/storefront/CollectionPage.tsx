@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { GranularProductGrid } from './components/GranularProductGrid';
-import { fetchProductsByTags, fetchAllProducts, fetchCollectionByHandle } from '../lib/shopify-client';
-import { ShopifyMapper } from '../lib/shopify-mapper';
+import { fetchProductsByTags, fetchAllProducts, fetchCollectionByHandle, fetchProductsByQuery } from '../lib/shopify-client';
+import { ShopifyMapper, SILO_DESCRIPTIONS } from '../lib/shopify-mapper';
 import { SeoHead } from '../lib/seo/SeoHead';
 import { ArrowRight, Shield } from 'lucide-react';
 import { getSiloAsset } from '../lib/silo-assets';
@@ -21,46 +21,88 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     const location = useLocation();
 
     // Determine Mode: Route Params (Granular) vs Props (Standard) vs View All
-    const handle = propHandle || params.handle || '';
-    const isGranular = !!params.silo && !!params.filter;
-    const isViewAll = handle === 'all';
+    const rawHandle = propHandle || params.handle || '';
+
+    // SEO Slug Resolution (Reverse Map Logic)
+    const seoParams = resolveSeoSlug(rawHandle);
+
+    // If SEO match, clear handle so generic fetch doesn't run, and use the resolved params
+    const handle = seoParams ? '' : rawHandle;
+    const isGranular = (!!params.silo && !!params.filter) || !!seoParams;
+    const isViewAll = rawHandle === 'all';
+
+    // Derived Granular Params
+    const silo = params.silo || seoParams?.silo || '';
+    const filter = params.filter || seoParams?.filter || '';
 
     // State
     const [products, setProducts] = useState<any[]>([]); // Unified Product List
     const [loading, setLoading] = useState(false);
 
     // Filter State
+    // Filter State
     const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
         stage: [],
         compression: [],
+        category: [], // NEW
         occasion: [],
         features: []
     });
 
-    const silo = params.silo || '';
-    const filter = params.filter || '';
-
     // SEO Data Construction
-    let pageTitle = propTitle || capitalize(handle);
-    let seoDescription = propDesc || `Explore our ${pageTitle} collection at Guitar Curves.`;
+    let pageTitle = propTitle || capitalize(handle || filter || 'Colección');
 
-    if (isGranular) {
-        pageTitle = `${capitalize(filter)} ${capitalize(silo)} Fajas`;
-        seoDescription = `Shop the best ${filter.replace(/-/g, ' ')} options from our ${silo} collection. High compression and specialized support.`;
+    // Authority Descriptions Injection
+    let seoDescription = propDesc || `Explora nuestra colección ${pageTitle} en Guitar Curves.`;
+
+    // 1. Check for Silo Match first (Most specific top-level)
+    if (handle === 'recovery' || silo === 'recovery' || handle === 'recuperacion' || silo === 'recuperacion' || handle === 'recuperacion-postquirurgica') {
+        seoDescription = SILO_DESCRIPTIONS.RECOVERY;
+    }
+    else if (handle === 'sculpt' || silo === 'sculpt' || handle === 'moldeo' || silo === 'moldeo' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena') {
+        seoDescription = SILO_DESCRIPTIONS.SCULPT;
+    }
+    else if (handle === 'bras' || silo === 'bras' || handle === 'essentials' || handle === 'brasieres' || silo === 'brasieres' || handle === 'brasieres-y-postura') {
+        seoDescription = SILO_DESCRIPTIONS.ESSENTIALS;
     }
 
-    // Unified Data Fetching Logic
+    if (isGranular) {
+        // Spanish-friendly granular titles
+        if (silo === 'recuperacion') {
+            pageTitle = `Fajas ${capitalize(filter.replace(/-/g, ' '))} - Post Quirúrgicas`;
+        } else if (silo === 'moldeo') {
+            pageTitle = `Fajas ${capitalize(filter.replace(/-/g, ' '))} - Moldeo y Uso Diario`;
+        } else {
+            pageTitle = `${capitalize(filter.replace(/-/g, ' '))} - ${capitalize(silo)}`;
+        }
+
+        seoDescription = `Compra las mejores opciones de ${filter.replace(/-/g, ' ')} de nuestra colección ${silo}. Alta compresión y soporte especializado para tu cuerpo.`;
+    }
     useEffect(() => {
         setLoading(true);
         let fetchPromise;
 
+        // Resolve Alias Handles to Real Shopify Handles
+        const realHandle = resolveShopifyHandle(rawHandle);
+
         if (isViewAll) {
             fetchPromise = fetchAllProducts();
         } else if (isGranular) {
-            fetchPromise = fetchProductsByTags([mapSiloToTag(silo), mapFilterToTag(filter)].filter(t => t && t.length > 0));
+            const siloTag = mapSiloToTag(silo);
+            const filterTag = mapFilterToTag(filter);
+
+            // SPECIAL CASE: Post Parto (Missing Tag Fix)
+            // Use smart search query: (Tag OR Title match). 
+            // Broadened to IGNORE Silo Tag because some Post Parto items lack "Post Surgery" tag too.
+            if (filter === 'post-parto') {
+                const q = `tag:'Post Parto' OR title:Postparto OR title:Cesarea OR title:Maternidad`;
+                fetchPromise = fetchProductsByQuery(q);
+            } else {
+                fetchPromise = fetchProductsByTags([siloTag, filterTag].filter(t => t && t.length > 0));
+            }
         } else {
             // Standard Collection (e.g. /collections/recovery)
-            fetchPromise = fetchCollectionByHandle(handle);
+            fetchPromise = fetchCollectionByHandle(realHandle);
         }
 
         fetchPromise
@@ -74,7 +116,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             .catch(err => console.error("Error loading products:", err))
             .finally(() => setLoading(false));
 
-    }, [silo, filter, isGranular, isViewAll, handle]);
+    }, [silo, filter, isGranular, isViewAll, rawHandle]);
 
 
     // Filter Logic
@@ -98,6 +140,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
         return (
             checkCategory('stage', product.stage) &&
             checkCategory('compression', product.compression) &&
+            checkCategory('category', product.category) && // NEW
             checkCategory('occasion', product.occasion) &&
             checkCategory('features', product.features)
         );
@@ -163,7 +206,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
                             <h3 className="font-bold text-2xl font-serif">{capitalize(silo || 'Colección')}</h3>
-                            <p className="text-sm opacity-90 tracking-widest uppercase">Official Collection</p>
+                            <p className="text-sm opacity-90 tracking-widest uppercase">Colección Oficial</p>
                         </div>
                     </div>
                 </div>
@@ -261,40 +304,100 @@ function capitalize(s: string) {
 }
 
 // Map URL slugs to real Shopify Tags
+// Map URL slugs to real Shopify Tags
 function mapSiloToTag(silo: string) {
-    if (silo === 'recovery') return 'Post Surgery'; // CHANGED: 'Recovery' tag doesn't exist, 'Post Surgery' does.
-    if (silo === 'sculpt') return ''; // 'Sculpt' tag doesn't exist. Often these are 'Daily Use' or 'Waist Trainer', but for granular SEO we might rely solely on the specific filter.
-    if (silo === 'bras') return 'Post-Op Bra'; // CHANGED: 'Brasier' matches nothing. 'Post-Op Bra' is the real tag.
+    // English (Legacy/Alias)
+    if (silo === 'recovery') return 'Post Surgery';
+    if (silo === 'bras') return 'Post-Op Bra';
+    if (silo === 'sculpt') return '';
+
+    // Spanish (New)
+    if (silo === 'recuperacion') return 'Post Surgery';
+    if (silo === 'brasieres') return 'Post-Op Bra';
+    if (silo === 'moldeo') return ''; // Uses specific filters usually, or 'Waist Trainer' if we wanted a broad tag, but 'Sculpt' logic was empty.
+
     return '';
 }
 
 function mapFilterToTag(filter: string) {
-    // Precise mapping based on live store data (2024-01-13)
-    if (filter === 'stage-2') return 'Stage 2'; // Not seen in top 10, but likely exists
-    if (filter === 'stage-1') return 'Stage 1';
-    if (filter === 'stage-3') return 'Stage 3'; // Verified
+    if (!filter) return '';
 
-    if (filter === 'shorts') return 'Short'; // Verified (Tag is singular "Short")
+    // Precise mapping based on live store data
+    // Spanish Mappings
+    if (filter === 'etapa-1') return 'Stage 1';
+    if (filter === 'etapa-2') return 'Stage 2';
+    if (filter === 'etapa-3') return 'Stage 3';
+
+    if (filter === 'cinturillas' || filter === 'cinturillas-reductoras') return 'Waist Trainer';
+    if (filter === 'cinturilla') return 'Waist Trainer';
+
+    if (filter === 'shorts') return 'Short'; // Same in Spanish often, or...
     if (filter === 'short') return 'Short';
 
-    if (filter === 'post-lipo') return 'Post Lipo'; // Verified (Space, no hyphen)
-    if (filter === 'strapless') return 'Strapless';
+    if (filter === 'fajas-espalda-alta' || filter === 'espalda-alta') return 'High Back';
+    if (filter === 'fajas-media-pierna' || filter === 'media-pierna') return 'Knee Length';
 
-    if (filter === 'high-back') return 'High Back'; // Verified
-    if (filter === 'butt-lifter') return 'Butt Lifter'; // Verified
+    if (filter === 'uso-diario') return 'Daily Use';
+    if (filter === 'corrector') return 'Corrector de Postura';
 
-    // New mappings for test suite
-    if (filter === 'high-compression') return 'High Compression';
+    if (filter === 'post-lipo' || filter === 'lipo-360') return 'Post Lipo'; // Assuming 'Post Lipo' covers 360, or 'Lipo 360' exists
+    if (filter === 'brazos') return 'Arm Compression';
+
     if (filter === 'invisible') return 'Invisible';
+    if (filter === 'levantacola') return 'Butt Lifter';
+
+    // Post Parto is handled by the Query fallback in CollectionPage, but we map here to check tags first?
+    if (filter === 'post-parto' || filter === 'fajas-postparto') return 'Post Parto';
+
+    // English Mappings (Keep for aliases)
+    if (filter === 'stage-2') return 'Stage 2';
+    if (filter === 'stage-1') return 'Stage 1';
+    if (filter === 'stage-3') return 'Stage 3';
+
+    if (filter === 'strapless') return 'Strapless';
+    if (filter === 'high-back') return 'High Back';
+    if (filter === 'butt-lifter') return 'Butt Lifter';
+    if (filter === 'high-compression') return 'High Compression';
     if (filter === 'arm-compression') return 'Arm Compression';
     if (filter === 'bbl') return 'BBL';
     if (filter === 'post-op-bra') return 'Post-Op Bra';
 
     // Sub-Collection Mappings (Explicit)
     if (filter === 'waist') return 'Waist Trainer';
-    if (filter === 'corrector') return 'Corrector de Postura';
     if (filter === 'daily') return 'Daily Use';
 
-    // Default: try to capitalize
+    // Default: try to capitalize logic for simple cases
     return capitalize(filter);
+}
+
+// Helper to bridge language gaps in URL handles
+function resolveShopifyHandle(handle: string) {
+    if (handle === 'moldeo' || handle === 'sculpt' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena') return 'sculpt-studio';
+    if (handle === 'recuperacion' || handle === 'recovery' || handle === 'recuperacion-postquirurgica') return 'post-quirurgica';
+    if (handle === 'bras' || handle === 'brasieres' || handle === 'brasieres-y-postura') return 'essentials';
+    return handle;
+}
+
+// Helper for Virtual SEO Slugs / "Long Tail" URLs
+// Maps: "fajas-etapa-1" -> { silo: 'recuperacion', filter: 'etapa-1' }
+function resolveSeoSlug(handle: string): { silo: string; filter: string } | null {
+    if (!handle) return null;
+
+    // Etapas
+    if (handle === 'fajas-etapa-1') return { silo: 'recuperacion', filter: 'etapa-1' };
+    if (handle === 'fajas-etapa-2') return { silo: 'recuperacion', filter: 'etapa-2' };
+    if (handle === 'fajas-etapa-3') return { silo: 'recuperacion', filter: 'etapa-3' };
+
+    // Necesidades
+    if (handle === 'fajas-postparto') return { silo: 'recuperacion', filter: 'post-parto' };
+    if (handle === 'fajas-para-lipo-360') return { silo: 'recuperacion', filter: 'lipo-360' };
+
+    // Cinturillas (Waist Trainers usually in Sculpt/Moldeo)
+    if (handle === 'cinturillas-reductoras') return { silo: 'moldeo', filter: 'cinturillas' };
+
+    // Atributos
+    if (handle === 'fajas-espalda-alta') return { silo: 'recuperacion', filter: 'espalda-alta' }; // Typically medical usage
+    if (handle === 'fajas-media-pierna') return { silo: 'recuperacion', filter: 'media-pierna' };
+
+    return null;
 }

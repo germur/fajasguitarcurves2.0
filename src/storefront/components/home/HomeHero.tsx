@@ -57,7 +57,7 @@ export function HomeHero() {
                         ${mode === 'recover' ? 'text-[#2C2420]' : 'text-white/70 hover:text-white'}`}
                     >
                         <Activity className="w-3 h-3" />
-                        Recover
+                        Recuperar
                     </button>
                     <button
                         onClick={() => setMode('sculpt')}
@@ -65,7 +65,7 @@ export function HomeHero() {
                          ${mode === 'sculpt' ? 'text-[#2C2420]' : 'text-stone-400 hover:text-[#2C2420]'}`}
                     >
                         <Sparkles className="w-3 h-3" />
-                        Sculpt
+                        Moldear
                     </button>
                 </div>
 
@@ -95,7 +95,7 @@ export function HomeHero() {
                     {/* Dynamic CTA */}
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link
-                            to={mode === 'recover' ? "/collections/recovery" : "/collections/sculpt"}
+                            to={mode === 'recover' ? "/colecciones/recuperacion-postquirurgica" : "/colecciones/moldeo-y-estetica"}
                             className={`group px-8 py-4 rounded-full flex items-center justify-center gap-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-xl
                             ${mode === 'recover'
                                     ? 'bg-[#2C2420] text-white hover:bg-stone-800'
@@ -106,7 +106,7 @@ export function HomeHero() {
                         </Link>
 
                         <Link
-                            to="/fit-finder"
+                            to="/calculadora-de-tallas"
                             className={`px-8 py-4 rounded-full flex items-center justify-center gap-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 border backdrop-blur-sm
                             ${mode === 'recover'
                                     ? 'border-[#2C2420]/30 text-[#2C2420] hover:bg-[#2C2420]/5'
@@ -126,7 +126,7 @@ export function HomeHero() {
                     <div className="flex items-center gap-3 mb-2">
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         <span className="text-[10px] font-bold tracking-widest uppercase">
-                            {mode === 'recover' ? "Calidad Premium" : "Trending Now"}
+                            {mode === 'recover' ? "Calidad Premium" : "En Tendencia"}
                         </span>
                     </div>
                     <p className="text-xs font-medium leading-relaxed">

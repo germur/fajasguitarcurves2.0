@@ -5,6 +5,19 @@
  * and the rich structured data required by the Design OS logic.
  */
 
+// Lógica de traducción interna
+export const SILO_NAMES = {
+    RECOVERY: "Postquirúrgicas",
+    SCULPT: "Reloj de Arena",
+    ESSENTIALS: "Brasieres"
+};
+
+export const SILO_DESCRIPTIONS = {
+    RECOVERY: "Acelera tu recuperación con ingeniería textil colombiana de grado médico. Diseñadas específicamente para procesos de Etapa 2 y Etapa 3, nuestras fajas ofrecen la compresión exacta para reducir la inflamación, prevenir la fibrosis y proteger tus resultados de Lipo 360, BBL o Tummy Tuck. Sin oprimir glúteos ni caderas, solo el soporte que tu cirujano recomienda.",
+    SCULPT: "Moldea una silueta de impacto con nuestras cinturillas y fajas de alta compresión. Diseñadas para el Cuerpo Guitarra, estas prendas logran una reducción máxima de cintura mientras realzan tus curvas naturales sin aplastarlas. El equilibrio perfecto entre una cintura de avispa y la comodidad que necesitas para destacar tu figura todos los días.",
+    ESSENTIALS: "El soporte profesional que tu busto y espalda necesitan. Desde brasieres postoperatorios con corrector de postura hasta complementos esenciales para tu faja, cada prenda está fabricada con telas hipoalergénicas que cuidan tu piel. Soporte diario, estabilidad y descanso sin sacrificar la discreción bajo tu ropa."
+};
+
 export class ShopifyMapper {
     /**
      * Maps a raw Shopify Product Node to our specific Section Data schema
@@ -26,16 +39,21 @@ export class ShopifyMapper {
         if (isNaN(price)) price = 0; // Final safety net
 
         // IMAGE MAPPING (Robust)
-        let images: string[] = [];
+        // UPDATED: Return objects with { url, altText } instead of just strings to enable Alt Matching
+        let images: { url: string; altText: string }[] | string[] = [];
         if (shopifyProduct.images?.edges) {
             // Raw GraphQL
-            images = shopifyProduct.images.edges.map((edge: any) => edge.node.url);
+            images = shopifyProduct.images.edges.map((edge: any) => ({
+                url: edge.node.url,
+                altText: edge.node.altText || ''
+            }));
         } else if (Array.isArray(shopifyProduct.images)) {
-            // SDK or Simple Array
+            // SDK or Simple Array - Ensure we keep metadata if available
             images = shopifyProduct.images.map((img: any) => {
-                const url = img.url || img.src || img;
-                return typeof url === 'string' ? url : '';
-            }).filter(Boolean);
+                const url = img.url || img.src || (typeof img === 'string' ? img : '');
+                const altText = img.altText || img.alt || '';
+                return { url, altText };
+            }).filter((img: any) => img.url);
         }
 
         // VARIANT MAPPING (Robust)
@@ -60,12 +78,14 @@ export class ShopifyMapper {
             id: shopifyProduct.id,
             title: title,
             price: price, // Number
-            image: images[0] || '', // Primary
-            images: images,         // All images for galleries/hovers
+            // Primary Image: Prefer URL string for compatibility, but keep objects in array
+            image: (images[0] as any)?.url || images[0] || '',
+            images: images,         // Now contains objects { url, altText }
 
             // Compatibility for SculptProductCard
-            imageProduct: images[0] || '',
-            imageResult: images[1] || images[0] || '',
+            // Compatibility for SculptProductCard
+            imageProduct: (images[0] as any)?.url || images[0] || '',
+            imageResult: (images[1] as any)?.url || images[1] || (images[0] as any)?.url || images[0] || '',
 
             tags: tags,
             handle: shopifyProduct.handle,
@@ -109,11 +129,20 @@ export class ShopifyMapper {
                 ...mapped,
                 stage: this.getRecoveryStage(tags),
                 compression: this.getCompressionLevel(tags),
+                category: this.getCategory(tags), // RESTORED: ProductType is empty, must infer from tags
                 occasion: this.getOccasion(tags),
-                features: this.getFeaturesFromTags(tags, [
-                    'Strapless', 'Espalda Alta', 'Cierre', 'Broches',
-                    'Levanta Cola', 'Latex', 'Invisible', 'Short'
-                ])
+                features: this.getFeaturesFromTags(tags, [])
+            };
+        }
+
+        if (siloType === 'essentials') {
+            return {
+                ...mapped,
+                badge: tags.includes('Corrector de Postura') ? 'Corrector Postura' : 'Soporte Médico', // Dynamic Badge
+                benefit: this.getEssentialsBenefit(tags),
+                stage: this.getRecoveryStage(tags),
+                compression: this.getCompressionLevel(tags),
+                features: this.getFeaturesFromTags(tags, ['Espalda Alta', 'Mangas', 'Cierre Frontal', 'Soporte'])
             };
         }
 
@@ -122,22 +151,74 @@ export class ShopifyMapper {
 
     // --- Helper Logic (The "Brain") ---
 
+    // RESTORED & PROPERLY DYNAMIC: Extract Exact Category Tag
+    static getCategory(tags: string[]) {
+        const lowerTags = tags.map(t => t.toLowerCase());
+
+        // Helper to find original tag by lower match
+        const findTag = (keyword: string) => {
+            const index = lowerTags.findIndex(t => t.includes(keyword));
+            return index !== -1 ? tags[index] : null;
+        };
+
+        // 1. HIGH SPECIFICITY (Return exact tag like "Faja Etapa 3")
+        const tier1 = [
+            'faja etapa', 'faja post', 'faja chaleco', 'faja short',
+            'cinturilla', 'corset', 'chaleco', 'body moldeador',
+            'mallas', 'faja de mantenimiento', 'faja con brasier',
+            'full body shaper' // Map this -> 'Faja Completa' if we want, but better to skip if user hates English.
+            // REMOVED: 'body' (too broad, catches 'Full Body'), 'leggings', 'set'
+        ];
+
+        // Anti-Pattern: If we match "Full Body", we strictly ignore it so we don't display it
+        // actually, logic below ignores checks keywords. If I don't check for 'full body', it won't return it.
+
+        for (const k of tier1) {
+            const match = findTag(k);
+            if (match) {
+                // Double check: If the matched tag is PURELY English, ignore it?
+                // No, just don't include English keywords in Tier 1.
+                // "body" matched "Full Body". Removing "body" fixes it.
+                return match;
+            }
+        }
+
+        // 2. GENERIC TYPES
+        const tier2 = ['faja', 'short', 'brasier', 'tabla'];
+        // REMOVED: 'bra' (use 'brasier')
+
+        for (const k of tier2) {
+            const match = findTag(k);
+            if (match) return match;
+        }
+
+        return 'Varios';
+    }
+
     static getRecoveryStage(tags: string[]) {
-        if (tags.some(t => t === 'Stage 1')) return 'Stage 1';
-        if (tags.some(t => t === 'Stage 2')) return 'Stage 2';
-        if (tags.some(t => t === 'Stage 3')) return 'Stage 3';
+        if (tags.some(t => t === 'Stage 1' || t.includes('Etapa 1'))) return 'Etapa 1';
+        if (tags.some(t => t === 'Stage 2' || t.includes('Etapa 2'))) return 'Etapa 2';
+        if (tags.some(t => t === 'Stage 3' || t.includes('Etapa 3'))) return 'Etapa 3';
         return ''; // No default if not found
     }
 
     static getOccasion(tags: string[]) {
-        const lowerTags = tags.map(t => t.toLowerCase());
+        // 1. GOLDEN LIST (Official Spanish Tags from CSV)
+        // These are the specific tags the user wants to see
+        if (tags.includes('Uso Deportivo') || tags.includes('Faja de Neopreno')) return 'Uso Deportivo';
+        if (tags.includes('Uso Diario') || tags.includes('Cintura de Avispa')) return 'Uso Diario';
+        if (tags.includes('Faja Invisible') || tags.includes('Strapless')) return 'Vestido / Invisible';
+        if (tags.includes('Faja Postoperatoria') || tags.includes('Recuperación BBL')) return 'Post-Op / BBL';
+        if (tags.includes('Oficina') || tags.includes('Soporte de Espalda')) return 'Oficina';
+        if (tags.includes('Faja con Brasier') || tags.includes('Post-Quirúrgico')) return 'Post-Quirúrgico';
 
-        // Exact matches from verified list
-        if (lowerTags.includes('gym')) return 'gym';
-        if (tags.includes('Post-Op Bra')) return 'bra';
-        if (tags.includes('Special Occasion') || lowerTags.includes('dress') || lowerTags.includes('strapless')) return 'dress';
-        if (tags.includes('Daily Use') || lowerTags.includes('jeans')) return 'jeans';
-        if (tags.includes('BBL') || lowerTags.includes('guitar shape')) return 'bbl';
+        // 2. FALLBACK (Legacy/English cleanup)
+        // Kept silently to ensure UI doesn't break if API sends old data
+        const lowerTags = tags.map(t => t.toLowerCase());
+        if (lowerTags.includes('gym') || lowerTags.includes('workout') || lowerTags.includes('activewear')) return 'Uso Deportivo';
+        if (lowerTags.includes('dress') || lowerTags.includes('wedding') || lowerTags.includes('boda') || lowerTags.includes('novia')) return 'Vestido / Invisible';
+        if (lowerTags.includes('daily') || lowerTags.includes('jeans')) return 'Uso Diario';
+        if (tags.includes('BBL') || lowerTags.includes('guitar shape') || lowerTags.includes('lipo 360')) return 'Post-Op / BBL';
 
         return ''; // NO DEFAULT - Hide if not found
     }
@@ -175,23 +256,42 @@ export class ShopifyMapper {
         return 95;
     }
 
-    static getFeaturesFromTags(tags: string[], keywords: string[]) {
-        // Expanded with verified tags
-        const expandedKeywords = [
-            ...keywords,
-            'High Back', 'Espalda Alta',
-            'Knee Length', 'Media Pierna',
-            'Arm Compression', 'Mangas', 'Faja con Mangas',
-            'Strapless', 'Tiras Removibles',
-            'Side Zipper', 'Cierre Lateral', 'Cierre',
-            'Seamless', 'Invisible',
-            'Butt Lifter', 'Levanta Cola',
-            'Short', 'Powernet', 'Latex',
-            'Waist Trainer', 'Cinturilla', 'Trainer'
+    static getEssentialsBenefit(tags: string[]) {
+        if (tags.some(t => t.toLowerCase().includes('postura'))) return "Corrige tu postura y alivia el dolor de espalda inmediatamente.";
+        if (tags.some(t => t.toLowerCase().includes('mangas'))) return "Control total de brazos y espalda con máxima suavidad.";
+        return "Soporte médico certificado y descanso para tu busto.";
+    }
+
+    static getFeaturesFromTags(tags: string[], _keywords: string[]) {
+        // dynamic BLACKLIST approach:
+        // We want to show ALL unique tags from the inventory as features, 
+        // EXCEPT for those we have already categorized into 'Category', 'Stage', 'Compression', 'Occasion'.
+        // and internal system tags.
+
+        const LOWER_SYSTEM_TAGS = [
+            // Internal / Status (Keep these blocked)
+            'best seller', 'más vendido', 'new arrival', 'nuevo', 'sale', 'oferta',
+
+            // LEGACY / GARBAGE TO HIDE (User Explicit Request)
+            'gym', 'activewear', 'arm shaper', 'body moldeador', 'lipo 360',
+            'full body', 'guitar shape', 'bbl', 'special occasion',
+            'daily use', 'workout', 'post op', 'surgery', 'leggings',
+            'butt lifter', 'levanta cola', 'invisible', 'seamless', 'powernet', 'strapless',
+
+            // NEWLY IDENTIFIED LEAKS (From Browser Inspection)
+            'full body shaper', 'high back', 'high compression', 'light compression',
+            'knee length', 'post lipo', 'stage 3', 'waist trainer', 'braquioplastia' // User might want Braquioplastia? It's Spanish. Keep it? 
+            // The user complained about "Tags in English". Braquioplastia is Spanish. 
+            // I will block the English ones: High Back, High Compression, Knee Length, Light Compression, Post Lipo, Stage 3, Waist Trainer.
         ];
 
-        return tags.filter(tag =>
-            expandedKeywords.some(k => tag.toLowerCase().includes(k.toLowerCase()))
-        );
+        return tags.filter(tag => {
+            const t = tag.toLowerCase();
+            // Filter out system tags
+            if (LOWER_SYSTEM_TAGS.some(sys => t === sys || t.includes(sys))) return false;
+
+            // Keep everything else as a "Feature"
+            return true;
+        });
     }
 }

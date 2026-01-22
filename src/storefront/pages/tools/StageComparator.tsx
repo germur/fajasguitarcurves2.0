@@ -237,7 +237,7 @@ export default function StageComparator() {
         <div id="quiz" className="bg-[#FAF9F6] py-24 border-y border-stone-200">
             <div className="max-w-2xl mx-auto px-6">
                 <div className="text-center mb-12">
-                    <span className="text-[#D4AF37] font-bold tracking-widest uppercase text-xs mb-2 block">Quick Check</span>
+                    <span className="text-[#D4AF37] font-bold tracking-widest uppercase text-xs mb-2 block">Test Rápido</span>
                     <h2 className="font-serif text-3xl md:text-4xl text-[#2C2420] mb-4">¿Estás lista para Stage 2?</h2>
                     <p className="text-stone-500">Responde con honestidad para cuidar tus resultados.</p>
                 </div>
@@ -375,12 +375,12 @@ export default function StageComparator() {
                     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-100 hover:shadow-xl transition-all">
                         <div className="aspect-[4/5] bg-stone-200 relative">
                             <img src="/assets/essentials-flatlay.jpg" alt="Faja Reloj de Arena Stage 2 Best Seller" className="w-full h-full object-cover" />
-                            <span className="absolute top-4 left-4 bg-[#D4AF37] text-white px-3 py-1 text-xs font-bold uppercase rounded">Best Seller</span>
+                            <span className="absolute top-4 left-4 bg-[#D4AF37] text-white px-3 py-1 text-xs font-bold uppercase rounded">Más Vendido</span>
                         </div>
                         <div className="p-6">
                             <h4 className="font-serif text-lg text-[#2C2420] mb-2">Reloj de Arena Stage 3</h4>
                             <p className="text-stone-500 text-sm mb-4">La favorita para definir cintura.</p>
-                            <Link to="/collections/sculpt" className="block w-full py-3 text-center bg-[#D4AF37] text-white font-bold rounded-lg hover:bg-[#C5A028] transition-colors shadow-lg">
+                            <Link to="/colecciones/moldeo" className="block w-full py-3 text-center bg-[#D4AF37] text-white font-bold rounded-lg hover:bg-[#C5A028] transition-colors shadow-lg">
                                 Ver Colección Moldeadora
                             </Link>
                         </div>
@@ -406,9 +406,9 @@ export default function StageComparator() {
                         description: 'Herramienta interactiva para comparar la compresión y materiales de fajas post-quirúrgicas.'
                     },
                     breadcrumbs: [
-                        { name: 'Home', item: '/' },
-                        { name: 'Tools', item: '/tools' },
-                        { name: 'Stage Comparator', item: '/tools/stage1-vs-stage2' }
+                        { name: 'Inicio', item: '/' },
+                        { name: 'Herramientas', item: '/herramientas' },
+                        { name: 'Comparador de Etapas', item: '/herramientas/etapa1-vs-etapa2' }
                     ]
                 }}
             />

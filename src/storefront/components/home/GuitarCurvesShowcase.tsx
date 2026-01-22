@@ -57,7 +57,7 @@ export function GuitarCurvesShowcase() {
                 <div className="flex items-end justify-between mb-10">
                     <div>
                         <span className="text-[#A35944] font-bold tracking-widest text-xs uppercase mb-2 block animate-pulse">
-                            Trending Now
+                            En Tendencia
                         </span>
                         <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#2C2420] flex items-center gap-3">
                             Tus Curvas, Redefinidas <Sparkles className="w-6 h-6 text-[#D4AF37]" />
@@ -66,7 +66,7 @@ export function GuitarCurvesShowcase() {
                             Descubre la colección diseñada para realzar tu silueta de guitarra natural.
                         </p>
                     </div>
-                    <Link to="/collections/sculpt" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors uppercase tracking-widest text-xs">
+                    <Link to="/colecciones/moldeo-y-estetica" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors uppercase tracking-widest text-xs">
                         Ver Colección <ArrowRight size={16} />
                     </Link>
                 </div>
@@ -119,7 +119,7 @@ export function GuitarCurvesShowcase() {
                 </div>
 
                 <div className="flex md:hidden justify-center mt-6">
-                    <Link to="/collections/sculpt" className="flex items-center gap-2 font-bold text-[#A35944] uppercase tracking-widest text-xs">
+                    <Link to="/colecciones/moldeo-y-estetica" className="flex items-center gap-2 font-bold text-[#A35944] uppercase tracking-widest text-xs">
                         Ver Colección Completa <ArrowRight size={16} />
                     </Link>
                 </div>

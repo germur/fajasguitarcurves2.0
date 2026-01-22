@@ -51,7 +51,7 @@ export function BestSellersCarousel() {
                             Los productos que han moldeado más de 10k figuras de reloj de arena.
                         </p>
                     </div>
-                    <Link to="/collections/all" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
+                    <Link to="/colecciones/todo" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
                         Ver Todo <ArrowRight size={16} />
                     </Link>
                 </div>
@@ -97,7 +97,7 @@ export function BestSellersCarousel() {
                                             title: product.title,
                                             price: typeof product.price === 'string' ? parseFloat(product.price) : product.price,
                                             image: product.image,
-                                            category: 'Best Sellers'
+                                            category: 'Más Vendidos'
                                         }, 'M')}
                                     />
                                 </div>
@@ -107,7 +107,7 @@ export function BestSellersCarousel() {
                 </div>
 
                 <div className="flex md:hidden justify-center mt-4">
-                    <Link to="/collections/all" className="flex items-center gap-2 font-bold text-[#A35944]">
+                    <Link to="/colecciones/todo" className="flex items-center gap-2 font-bold text-[#A35944]">
                         Ver Todo <ArrowRight size={16} />
                     </Link>
                 </div>

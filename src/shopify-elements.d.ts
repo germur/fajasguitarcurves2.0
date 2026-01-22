@@ -13,7 +13,10 @@ declare global {
                 handle?: string;
                 variant?: string;
             }, HTMLElement>;
-            'shopify-context': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'shopify-context': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+                type?: string;
+                handle?: string;
+            }, HTMLElement>;
             'shopify-cart-link': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'shopify-list-context': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
                 type?: string;
@@ -25,6 +28,10 @@ declare global {
             }, HTMLElement>;
             'shopify-media': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
                 query?: string;
+            }, HTMLElement>;
+            'shopify-title': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+            'shopify-buy-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+                variant?: string;
             }, HTMLElement>;
             'shopify-money': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
                 query?: string;

@@ -61,7 +61,7 @@ export function BeforeAfterSlider() {
                                 </li>
                             ))}
                         </ul>
-                        <Link to="/collections/sculpt" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
+                        <Link to="/colecciones/moldeo-y-estetica" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
                             Descubrir Sculpt Studio
                         </Link>
                     </div>

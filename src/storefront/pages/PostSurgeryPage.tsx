@@ -14,30 +14,39 @@ export default function PostSurgeryPage() {
     const [searchParams] = useSearchParams(); // Added
     const urlTag = searchParams.get('tag'); // Get tag from URL
 
-    // Map URL tags to Stage Tabs if possible
+    // Map URL tags to Visual Filter ID if possible
     const initialStage = useMemo(() => {
-        if (!urlTag) return 'stage2'; // Default to Stage 2
-        if (urlTag.toLowerCase().includes('bbl') || urlTag.toLowerCase().includes('guitar')) return 'bbl';
-        if (urlTag.includes('Stage 3') || urlTag.includes('Stage+3')) return 'stage3';
-        return 'stage2'; // Default catch-all and Stage 2
+        if (!urlTag) return 'etapa2'; // Default
+        const t = urlTag.toLowerCase();
+        if (t.includes('etapa 2') || t.includes('stage 2')) return 'etapa2';
+        if (t.includes('etapa 3') || t.includes('stage 3')) return 'etapa3';
+        if (t.includes('lipo') || t.includes('abdo')) return 'post-lipo';
+        if (t.includes('bbl')) return 'bbl';
+        if (t.includes('parto') || t.includes('mom') || t.includes('mam')) return 'post-parto';
+        if (t.includes('reloj') || t.includes('guitar')) return 'reloj-arena';
+        return 'etapa2';
     }, [urlTag]);
 
-    const [activeStage, setActiveStage] = useState<'stage1' | 'stage2' | 'stage3' | 'bbl'>(initialStage as any);
+    const [activeStage, setActiveStage] = useState<string>(initialStage);
     const [activeTagFilter, setActiveTagFilter] = useState<string | null>(urlTag);
 
     // Sync state if URL changes
     useEffect(() => {
         const newTag = searchParams.get('tag');
         setActiveTagFilter(newTag);
-
-        if (newTag?.toLowerCase().includes('bbl')) setActiveStage('bbl');
-        else if (newTag?.includes('Stage 3')) setActiveStage('stage3');
-        else if (newTag?.includes('Stage 2')) setActiveStage('stage2');
-        else if (newTag?.includes('Stage 1') || newTag?.includes('Post-Partum')) setActiveStage('stage1');
+        if (newTag) {
+            const t = newTag.toLowerCase();
+            if (t.includes('etapa 2') || t.includes('stage 2')) setActiveStage('etapa2');
+            else if (t.includes('etapa 3') || t.includes('stage 3')) setActiveStage('etapa3');
+            else if (t.includes('lipo') || t.includes('abdo')) setActiveStage('post-lipo');
+            else if (t.includes('bbl')) setActiveStage('bbl');
+            else if (t.includes('parto') || t.includes('mom') || t.includes('mam')) setActiveStage('post-parto');
+            else if (t.includes('reloj') || t.includes('guitar')) setActiveStage('reloj-arena');
+        }
     }, [searchParams]);
 
     // Handle Tab Click (RESET tag filter so tabs work)
-    const handleStageChange = (stage: 'stage1' | 'stage2' | 'stage3' | 'bbl') => {
+    const handleStageChange = (stage: string) => {
         setActiveStage(stage);
         setActiveTagFilter(null); // Clear URL tag so Tab logic takes over
     };
@@ -54,36 +63,36 @@ export default function PostSurgeryPage() {
         // 1. If explicit Tag Filter exists (from URL), PRIORITY over Tabs
         if (activeTagFilter) {
             filtered = filtered.filter(p => p.tags && p.tags.some((t: string) => t.toLowerCase().includes(activeTagFilter.toLowerCase())));
-            // If the tag corresponds to a stage, we might want to also ensure stage logic, but usually tag is specific enough.
-            // But wait, if tag is 'BBL', we just show BBL items.
         } else {
-            // 2. Fallback to Stage Tabs
-            if (activeStage === 'bbl') {
-                // Special BBL Filter: Look for "BBL" or "Guitar" tags
-                filtered = filtered.filter(p => p.tags && p.tags.some((t: string) => t.toLowerCase().includes('bbl') || t.toLowerCase().includes('guitar')));
-            } else if (activeStage === 'stage1') {
-                // Stage 1: Soft Recovery (Post-Partum or Stage 1)
-                filtered = filtered.filter(p => {
-                    const tags = p.tags ? p.tags.map((t: string) => t.toLowerCase()) : [];
-                    return tags.some((t: string) => t.includes('stage 1') || t.includes('stage1') || t.includes('post-partum') || t.includes('postpartum'));
-                });
-            } else if (activeStage === 'stage2') {
-                // Stage 2: High Compression (MERGED with Stage 1/Post-Op per UX request)
-                filtered = filtered.filter(p => {
-                    // Is it explicit Stage 2?
-                    const isStage2 = p.stage?.toLowerCase().replace(' ', '') === 'stage2' || (p.tags && p.tags.some((t: string) => t.toLowerCase().includes('stage 2')));
+            // 2. Fallback to Visual Filter Keys
+            const checkTag = (p: any, ...keys: string[]) => {
+                const searchSpace = `${(p.tags || []).join(' ')} ${p.title}`.toLowerCase();
+                return keys.some(k => searchSpace.includes(k.toLowerCase()));
+            };
 
-                    // Is it Stage 1 / Post-Partum? (Show them here so they aren't hidden)
-                    const isStage1 = p.tags && p.tags.some((t: string) => t.toLowerCase().includes('stage 1') || t.toLowerCase().includes('post-partum') || t.toLowerCase().includes('postpartum'));
-
-                    return isStage2 || isStage1;
-                });
-            } else {
-                // Stage 3
-                filtered = filtered.filter(p => {
-                    const pStage = p.stage?.toLowerCase().replace(' ', ''); // 'stage3'
-                    return pStage === activeStage;
-                });
+            switch (activeStage) {
+                case 'etapa2': // Stage 2
+                    filtered = filtered.filter(p => checkTag(p, 'stage 2', 'etapa 2', 'fase 2') || (p.stage === 'Etapa 2'));
+                    break;
+                case 'etapa3': // Stage 3
+                    filtered = filtered.filter(p => checkTag(p, 'stage 3', 'etapa 3', 'fase 3') || (p.stage === 'Etapa 3'));
+                    break;
+                case 'post-lipo':
+                    filtered = filtered.filter(p => checkTag(p, 'post lipo', 'lipo 360', 'lipo', 'abdominoplastia', 'tummy tuck'));
+                    break;
+                case 'bbl':
+                    filtered = filtered.filter(p => checkTag(p, 'bbl', 'brazilian', 'gluteoplastia'));
+                    break;
+                case 'post-parto':
+                    filtered = filtered.filter(p => checkTag(p, 'post parto', 'cesarea', 'postpartum', 'mam'));
+                    break;
+                case 'reloj-arena':
+                    filtered = filtered.filter(p => checkTag(p, 'reloj de arena', 'guitar', 'hourglass'));
+                    break;
+                default:
+                    // Default to Stage 2 if unknown
+                    filtered = filtered.filter(p => checkTag(p, 'stage 2', 'etapa 2'));
+                    break;
             }
         }
         return filtered;
@@ -94,7 +103,7 @@ export default function PostSurgeryPage() {
             <SeoHead
                 title="Recovery Room: Fajas Post-Quirúrgicas Stage 1 & 2 | Guitar Curves"
                 description="Colección especializada para BBL y Lipo. Compresión médica certificada para una recuperación segura y sin fibrosis."
-                path="/collections/recovery"
+                path="/colecciones/recuperacion"
                 image="/assets/recovery-hands.png"
                 schema={{
                     type: 'collection',
@@ -103,8 +112,8 @@ export default function PostSurgeryPage() {
                         description: 'Fajas médicas para post-operatorio Stage 1 y Stage 2.'
                     },
                     breadcrumbs: [
-                        { name: 'Home', item: '/' },
-                        { name: 'Recovery Room', item: '/collections/recovery' }
+                        { name: 'Inicio', item: '/' },
+                        { name: 'Recuperación', item: '/colecciones/recuperacion' }
                     ]
                 }}
             />
@@ -123,12 +132,12 @@ export default function PostSurgeryPage() {
 
                             <div className="inline-flex items-center gap-2 bg-[#E0E5DF] text-[#3E322C] px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase">
                                 <Activity size={14} />
-                                Certified Stage 2
+                                Etapa 2 Certificada
                             </div>
 
                             <h1 className="text-5xl lg:text-7xl font-serif text-[#3E322C] leading-[0.9]">
-                                Medical Grade<br />
-                                <span className="italic font-light">Precision</span>
+                                Precisión<br />
+                                <span className="italic font-light">de Grado Médico</span>
                             </h1>
 
                             <p className="text-base text-gray-500 max-w-md leading-relaxed border-l-2 border-[#3E322C] pl-6">
@@ -162,8 +171,8 @@ export default function PostSurgeryPage() {
                             {/* Glassmorphism Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#3E322C]/40 to-transparent"></div>
                             <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 text-white">
-                                <p className="font-serif text-2xl mb-1">"The Sanctuary"</p>
-                                <p className="text-xs uppercase tracking-widest opacity-80">Recover in peace</p>
+                                <p className="font-serif text-2xl mb-1">"El Santuario"</p>
+                                <p className="text-xs uppercase tracking-widest opacity-80">Recuéperate en paz</p>
                             </div>
                         </div>
 

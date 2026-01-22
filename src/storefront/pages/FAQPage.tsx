@@ -13,11 +13,11 @@ export default function FAQPage() {
                 schema={{
                     type: 'website',
                     data: {
-                        name: "Help Center - Guitar Curves",
+                        name: "Centro de Ayuda - Guitar Curves",
                     },
                     breadcrumbs: [
-                        { name: 'Home', item: '/' },
-                        { name: 'Help Center', item: '/pages/faq' }
+                        { name: 'Inicio', item: '/' },
+                        { name: 'Centro de Ayuda', item: '/pages/faq' }
                     ]
                 }}
             />
@@ -70,7 +70,7 @@ export default function FAQPage() {
                     </Link>
 
                     {/* Card 3: Médicas */}
-                    <Link to="/collections/recovery" className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group border border-transparent hover:border-[#D4AF37]/30">
+                    <Link to="/colecciones/recuperacion" className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group border border-transparent hover:border-[#D4AF37]/30">
                         <div className="w-12 h-12 bg-[#F9F8F6] rounded-full flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] transition-colors">
                             <Stethoscope className="text-[#3E322C] group-hover:text-white" />
                         </div>
