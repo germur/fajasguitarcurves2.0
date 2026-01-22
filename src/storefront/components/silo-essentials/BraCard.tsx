@@ -42,7 +42,7 @@ export function BraCard({ product }: BraCardProps) {
     };
 
     return (
-        <article className="group relative bg-white rounded-[30px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 ease-out border border-gray-100 min-h-[550px] flex flex-col h-full cursor-pointer">
+        <article className="group relative bg-white rounded-[30px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 ease-out border border-gray-100 flex flex-col h-full cursor-pointer">
 
             {/* BADGE FLOTANTE (UI) */}
             <div className="absolute top-6 left-6 z-20">
@@ -52,12 +52,13 @@ export function BraCard({ product }: BraCardProps) {
             </div>
 
             {/* IMAGEN (Con Zoom suave) */}
-            <Link to={`/products/${productHandle}`} className="relative h-[60%] overflow-hidden bg-[#F9F8F6]">
+            {/* IMAGEN (Con Zoom suave) */}
+            <Link to={`/products/${productHandle}`} className="relative aspect-[3/4] overflow-hidden bg-[#F9F8F6]">
                 <img
                     src={image || getFallbackImage(formattedTitle)}
                     onError={(e) => { e.currentTarget.src = getFallbackImage(formattedTitle); }}
                     alt={formattedTitle} // SEO: Alt text automático
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700 p-2"
                 />
 
                 {/* Overlay on hover for interaction hint */}
