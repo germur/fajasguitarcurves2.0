@@ -46,7 +46,7 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/colecciones/recuperacion" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/colecciones/recuperacion-postquirurgica" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Postquirúrgicas (Recuperación)
                                 </Link>
                             </li>
@@ -56,7 +56,7 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/colecciones/brasieres" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/colecciones/brasieres-y-postura" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Brasieres & Accesorios
                                 </Link>
                             </li>

@@ -43,13 +43,10 @@ export interface StoreProduct {
 
 
 // --- SILO 1: RECOVERY ROOM (Mock Data Removed) ---
-export const recoveryProducts: StoreProduct[] = [];
 
 // --- SILO 2: SCULPT STUDIO (Mock Data Removed) ---
-export const sculptProducts: StoreProduct[] = [];
 
 // --- SILO 3: BRASIERES (Mock Data Removed) ---
-export const brasierProducts: StoreProduct[] = [];
 
 
 export const RAW_CATALOG: StoreProduct[] = [];

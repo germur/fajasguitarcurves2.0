@@ -199,7 +199,7 @@ export function GlassNavbar() {
                                 <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Colección</h4>
                                 <ul className="space-y-6">
                                     <li className="group/item">
-                                        <Link to="/colecciones/recuperacion" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                        <Link to="/colecciones/recuperacion-postquirurgica" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
                                                 <img src="/assets/recovery-hands.png" className="w-full h-full object-cover" alt="Recovery" />
                                             </div>
@@ -221,7 +221,7 @@ export function GlassNavbar() {
                                         </Link>
                                     </li>
                                     <li className="group/item">
-                                        <Link to="/colecciones/brasieres" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
+                                        <Link to="/colecciones/brasieres-y-postura" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                             <div className="w-10 h-10 bg-stone-100 rounded-lg overflow-hidden group-hover/item:ring-2 ring-[#D4AF37] transition-all">
                                                 <img src="/assets/essentials-flatlay.jpg" className="w-full h-full object-cover" alt="Bras" />
                                             </div>
@@ -239,14 +239,14 @@ export function GlassNavbar() {
                                 <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Objetivo</h4>
                                 <ul className="space-y-3">
                                     {[
-                                        { label: 'Etapa 2 (Alta Compresión)', href: '/colecciones/recuperacion?tag=Etapa+2' },
-                                        { label: 'Etapa 3 (Mantenimiento)', href: '/colecciones/recuperacion?tag=Etapa+3' },
-                                        { label: 'Post-Op / BBL', href: '/colecciones/recuperacion?tag=Post-Op' },
+                                        { label: 'Etapa 2 (Alta Compresión)', href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+2' },
+                                        { label: 'Etapa 3 (Mantenimiento)', href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+3' },
+                                        { label: 'Post-Op / BBL', href: '/colecciones/recuperacion-postquirurgica?tag=Post-Op' },
                                         { label: 'Realce Glúteo', href: '/colecciones/moldeo-y-estetica?tag=Realce' },
                                         { label: 'Cintura de Avispa', href: '/colecciones/moldeo-y-estetica?tag=Cinturilla' },
                                         { label: 'Strapless / Invisible', href: '/colecciones/moldeo-y-estetica?tag=Strapless' },
                                         { label: 'Shorts y Bodys', href: '/colecciones/moldeo-y-estetica?tag=Shorts' },
-                                        { label: 'Media Pierna', href: '/colecciones/recuperacion?tag=Media+Pierna' }
+                                        { label: 'Media Pierna', href: '/colecciones/recuperacion-postquirurgica?tag=Media+Pierna' }
                                     ].map((item) => (
                                         <li key={item.label}>
                                             <Link
@@ -322,7 +322,7 @@ export function GlassNavbar() {
                                     <div className="font-bold text-base text-[#D4AF37] flex items-center gap-2">✨ Ver Todo</div>
                                     <div className="text-xs text-stone-500">Catálogo Completo</div>
                                 </Link>
-                                <Link to="/colecciones/recuperacion" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/colecciones/recuperacion-postquirurgica" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                     <div className="font-bold text-base text-[#2C2420]">Postquirúrgicas</div>
                                     <div className="text-xs text-stone-500">Post-Quirúrgico & Etapa 1, 2, 3</div>
                                 </Link>
@@ -330,7 +330,7 @@ export function GlassNavbar() {
                                     <div className="font-bold text-base text-[#2C2420]">Reloj de Arena</div>
                                     <div className="text-xs text-stone-500">Fajas de Uso Diario & Cinturillas</div>
                                 </Link>
-                                <Link to="/colecciones/brasieres" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/colecciones/brasieres-y-postura" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                     <div className="font-bold text-base text-[#2C2420]">Brasieres</div>
                                     <div className="text-xs text-stone-500">Brasieres, Tablas y Espumas</div>
                                 </Link>

@@ -281,9 +281,10 @@ export const router = createBrowserRouter([
       { path: 'pages/our-story', element: <Navigate to="/nuestra-historia" replace /> },
 
       {
-        path: 'pages/tracking',
+        path: 'rastreo',
         element: withSuspense(UserDashboard),
       },
+      { path: 'pages/tracking', element: <Navigate to="/rastreo" replace /> },
 
       /* --- ECOSISTEMA DE CONTENIDO MAES --- */
       // 1. Herramientas y Guías (Rutas en Español)

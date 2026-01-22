@@ -204,29 +204,25 @@ export class ShopifyMapper {
 
     static getOccasion(tags: string[]) {
         // 1. GOLDEN LIST (Official Spanish Tags from CSV)
-        // These are the specific tags the user wants to see
-        if (tags.includes('Uso Deportivo') || tags.includes('Faja de Neopreno')) return 'Uso Deportivo';
-        if (tags.includes('Uso Diario') || tags.includes('Cintura de Avispa')) return 'Uso Diario';
-        if (tags.includes('Faja Invisible') || tags.includes('Strapless')) return 'Vestido / Invisible';
-        if (tags.includes('Faja Postoperatoria') || tags.includes('Recuperación BBL')) return 'Post-Op / BBL';
-        if (tags.includes('Oficina') || tags.includes('Soporte de Espalda')) return 'Oficina';
-        if (tags.includes('Faja con Brasier') || tags.includes('Post-Quirúrgico')) return 'Post-Quirúrgico';
+        if (tags.some(t => t === 'Uso Deportivo' || t.includes('Deportivo'))) return 'Uso Deportivo';
+        if (tags.some(t => t === 'Uso Diario' || t.includes('Cintura de Avispa'))) return 'Uso Diario';
+        if (tags.some(t => t === 'Faja Invisible' || t === 'Strapless' || t.includes('Invisible'))) return 'Vestido / Invisible';
+        if (tags.some(t => t === 'Faja Postoperatoria' || t.includes('Post-Op') || t.includes('BBL') || t.includes('Post-Quirúrgico'))) return 'Post-Op / BBL';
+        if (tags.some(t => t === 'Oficina' || t.includes('Soporte de Espalda'))) return 'Oficina';
 
         // 2. FALLBACK (Legacy/English cleanup)
-        // Kept silently to ensure UI doesn't break if API sends old data
         const lowerTags = tags.map(t => t.toLowerCase());
-        if (lowerTags.includes('gym') || lowerTags.includes('workout') || lowerTags.includes('activewear')) return 'Uso Deportivo';
-        if (lowerTags.includes('dress') || lowerTags.includes('wedding') || lowerTags.includes('boda') || lowerTags.includes('novia')) return 'Vestido / Invisible';
-        if (lowerTags.includes('daily') || lowerTags.includes('jeans')) return 'Uso Diario';
-        if (tags.includes('BBL') || lowerTags.includes('guitar shape') || lowerTags.includes('lipo 360')) return 'Post-Op / BBL';
+        if (lowerTags.includes('gym') || lowerTags.includes('workout')) return 'Uso Deportivo';
+        if (lowerTags.includes('wedding') || lowerTags.includes('boda') || lowerTags.includes('novia')) return 'Vestido / Invisible';
+        if (lowerTags.includes('daily')) return 'Uso Diario';
 
         return ''; // NO DEFAULT - Hide if not found
     }
 
     static getCompressionLevel(tags: string[]) {
-        if (tags.includes('High Compression')) return 'Alta';
-        if (tags.includes('Light Compression')) return 'Baja';
-        if (tags.includes('Medium Compression')) return 'Media';
+        if (tags.some(t => t === 'Alta Compresión' || t === 'High Compression')) return 'Alta';
+        if (tags.some(t => t === 'Baja Compresión' || t === 'Light Compression')) return 'Baja';
+        if (tags.some(t => t === 'Media Compresión' || t === 'Medium Compression')) return 'Media';
         return ''; // NO DEFAULT
     }
 
@@ -279,10 +275,9 @@ export class ShopifyMapper {
             'butt lifter', 'levanta cola', 'invisible', 'seamless', 'powernet', 'strapless',
 
             // NEWLY IDENTIFIED LEAKS (From Browser Inspection)
-            'full body shaper', 'high back', 'high compression', 'light compression',
-            'knee length', 'post lipo', 'stage 3', 'waist trainer', 'braquioplastia' // User might want Braquioplastia? It's Spanish. Keep it? 
-            // The user complained about "Tags in English". Braquioplastia is Spanish. 
-            // I will block the English ones: High Back, High Compression, Knee Length, Light Compression, Post Lipo, Stage 3, Waist Trainer.
+            'full body shaper', 'high back', 'high compression', 'light compression', 'medium compression',
+            'knee length', 'post lipo', 'stage 1', 'stage 2', 'stage 3', 'waist trainer', 'daily use',
+            'braquioplastia', 'post-op', 'post surgery'
         ];
 
         return tags.filter(tag => {
