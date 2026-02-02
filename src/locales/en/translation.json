@@ -107,7 +107,17 @@
                 "button": "FIND MY PERFECT FAJA"
             }
         },
+        "about": {
+            "seo": {
+                "title": "About Us | Guitar Curves Fajas",
+                "description": "Learn the story behind the leading Colombian shapewear brand. Textile engineering designed by women for women."
+            }
+        },
         "contact": {
+            "seo": {
+                "title": "Contact Us | Guitar Curves",
+                "description": "We are here to help. Contact us for sizing advice, order tracking, or questions about our products."
+            },
             "badge": "Support Center",
             "title": "We Are Here for You.",
             "desc": "Whether you're looking for your size or tracking an order, our team of specialists is ready to help.",
@@ -232,6 +242,10 @@
             "cta_btn": "Chat with an Expert"
         },
         "wholesale": {
+            "seo": {
+                "title": "Wholesale Program | Become a Partner",
+                "description": "Join our wholesale program and offer the best Colombian faja to your clients. High margins and full support."
+            },
             "hero": {
                 "badge": "Certified Partner Program",
                 "title": "Turn Recovery <br /> into Your Best Business",

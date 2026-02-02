@@ -107,7 +107,17 @@
                 "button": "ENCONTRAR MI FAJA IDEAL"
             }
         },
+        "about": {
+            "seo": {
+                "title": "Sobre Nosotros | Fajas Guitar Curves",
+                "description": "Conoce la historia detrás de la marca líder en fajas colombianas. Ingeniería textil diseñada por mujeres para mujeres."
+            }
+        },
         "contact": {
+            "seo": {
+                "title": "Contáctanos | Fajas Guitar Curves",
+                "description": "Estamos aquí para ayudarte. Contáctanos para asesoría de tallas, rastreo de pedidos o dudas sobre nuestros productos."
+            },
             "badge": "Centro de Soporte",
             "title": "Estamos Aquí para Ti.",
             "desc": "Ya sea que estés buscando tu talla o rastreando un pedido, nuestro equipo de especialistas está listo para ayudarte.",
@@ -232,6 +242,10 @@
             "cta_btn": "Chatear con Experta"
         },
         "wholesale": {
+            "seo": {
+                "title": "Ventas al Por Mayor | Programa Partners Guitar Curves",
+                "description": "Únete a nuestro programa de mayoristas y ofrece la mejor faja colombiana a tus clientes. Márgenes altos y soporte total."
+            },
             "hero": {
                 "badge": "Programa de Partners Certificados",
                 "title": "Convierte la Recuperación <br /> en tu Mejor Negocio",
