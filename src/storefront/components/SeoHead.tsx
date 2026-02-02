@@ -11,6 +11,8 @@ interface SeoProps {
     schema?: Record<string, unknown>;
 }
 
+import { translatePathToEnglish, translatePathToSpanish } from '../../lib/routeTranslations';
+
 export function SeoHead({ title, description, type = 'website', image, schema }: SeoProps) {
     const { i18n } = useTranslation();
     const location = useLocation();
@@ -20,13 +22,22 @@ export function SeoHead({ title, description, type = 'website', image, schema }:
     const isEn = currentLang === 'en';
 
     // Path logic for Canonical and Hreflang
-    // Remove /en prefix if present to get the "clean" path (which maps to Spanish root)
-    const cleanPath = location.pathname.replace(/^\/en/, '') || '/';
+    // 1. Determine the "Source of Truth" path (The Spanish Path)
+    const currentPath = location.pathname;
+    const spanishPath = currentPath.startsWith('/en')
+        ? translatePathToSpanish(currentPath)
+        : currentPath;
+
+    // 2. Generate the English equivalent
+    // We pass the clean Spanish path to translate it
+    const englishPath = translatePathToEnglish(spanishPath);
 
     // Domain hardcoded for now (could be env var)
     const baseUrl = 'https://guitarcurves.com';
-    const esUrl = `${baseUrl}${cleanPath}`;
-    const enUrl = `${baseUrl}/en${cleanPath === '/' ? '' : cleanPath}`;
+
+    // 3. Construct Full URLs
+    const esUrl = `${baseUrl}${spanishPath === '/' ? '' : spanishPath}`;
+    const enUrl = `${baseUrl}/en${englishPath === '/' ? '' : englishPath}`;
 
     // Canonical is the current page's definitive URL
     const canonicalUrl = isEn ? enUrl : esUrl;
