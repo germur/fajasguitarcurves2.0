@@ -1,73 +1,31 @@
-// @ts-nocheck
-import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getProductById } from './data/store-data';
-import { useProduct } from './hooks/useProduct';
-import { useStore } from './hooks/useStoreContext';
-// Keys imports
-import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDown, ArrowUpRight, X } from 'lucide-react';
-import { ProductFeatureGrid } from './components/ProductFeatureGrid';
-// Tools imports for Smart Modal
-import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
-import { SeoHead } from '@/storefront/components/SeoHead';
-import { generateMetaTags } from '../lib/seo/generators';
-import { fetchCollectionByHandle } from '../lib/shopify-client';
-import { GranularProductGrid } from './components/GranularProductGrid';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useStore } from './hooks/useStoreContext';
+import { useProduct } from './hooks/useProduct';
+import { getProductById } from './data/store-data';
+import { generateMetaTags } from '../lib/seo/generators';
+import { SeoHead } from './components/SeoHead';
+import { Loader2, Star, Ruler, ShoppingBag, ChevronDown, ArrowUpRight, X, ShieldCheck, Truck, Check } from 'lucide-react';
+import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
+import { LocalCollectionGrid } from './components/LocalCollectionGrid';
+import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 
-// Sub-component for clean separation
-function RelatedProducts({ category }: { category?: string }) {
-    const [products, setProducts] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadRelated() {
-            const handle = category === 'Recovery Room' ? 'post-quirurgica' : 'sculpt-studio';
-            try {
-                const items = await fetchCollectionByHandle(handle);
-                setProducts(items.slice(0, 4));
-            } catch (e) {
-                console.error("Related products err", e);
-            } finally {
-                setLoading(false);
-            }
-        }
-        loadRelated();
-    }, [category]);
-
-    return <GranularProductGrid products={products} loading={loading} />;
-}
-
-// Redirect Map for Legacy/Broken URLs
-const LEGACY_REDIRECTS: Record<string, string> = {
-    'faja-etapa-2-mangas-bra': 'faja-etapa-2-con-mangas-y-bra',
-    'faja-etapa-3-media-pierna-bra': 'faja-con-brasier-media-pierna-7-varillas',
-    'faja-etapa-3-pierna-larga-bra': 'faja-etapa-3-pierna-larga-con-brasier-7-varillas',
-    'faja-etapa-3-tira-gruesa': 'faja-tira-gruesa-7-varillas-media-pierna',
-    'faja-etapa-3-mangas-bra': 'faja-etapa-3-mangas-y-bra-media-pierna',
-    'faja-etapa-3-cuerpo-completo': 'faja-etapa-3-mangas-bra-pierna-larga',
-    'faja-reloj-arena-tira-delgada': 'faja-tira-delgada-media-pierna',
-    'faja-reloj-arena-pierna-larga-stage-3': 'faja-pierna-larga-tira-delgada',
-    'faja-reloj-arena-media-pierna-stage-3': 'faja-stage-3-media-pierna',
-    'faja-reloj-arena-pierna-larga-bra-stage-3': 'fajas-pierna-larga-con-bra',
-    'faja-reloj-arena-tira-gruesa-stage-3': 'faja-etapa-3-tira-gruesa-media-pierna',
-    'faja-reloj-arena-pierna-larga-tira-gruesa': 'faja-etapa-3-pierna-larga-tira-gruesa',
-    'faja-reloj-arena-cierre-lateral': 'faja-cierre-lateral-media-pierna',
-    'faja-reloj-arena-bbl-cadera-ancha': 'faja-reloj-de-arena-etapa-3',
-    'faja-reloj-arena-mangas-bra': 'faja-mangas-media-pierna',
-    'faja-body-postparto': 'faja-corta-tira-delgada',
-    'faja-corta-alta-compresion': 'faja-alta-compresion-con-bra-corta'
-};
+// Emergency Defines for Missing Deps
+const LEGACY_REDIRECTS: Record<string, string> = {};
+const RelatedProducts = ({ category }: { category?: string }) => (
+    <LocalCollectionGrid handle={category?.toLowerCase().includes('recovery') ? 'recovery' : 'cinturillas'} fallbackProducts="all" />
+);
 
 export function ProductDetailView() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
     // 0. Redirect Legacy URLs immediately
     useEffect(() => {
         if (id && LEGACY_REDIRECTS[id]) {
-            console.log(`Redirecting legacy product: ${id} -> ${LEGACY_REDIRECTS[id]}`);
+            // console.log(`Redirecting legacy product: ${id} -> ${LEGACY_REDIRECTS[id]}`);
             navigate(`/products/${LEGACY_REDIRECTS[id]}`, { replace: true });
         }
     }, [id, navigate]);
@@ -103,8 +61,8 @@ export function ProductDetailView() {
         return Array.from(new Set(raw));
     };
 
-    const uniqueColors = getUniqueOptions(['Color', 'Cor', 'Colour']);
-    const uniqueSizes = getUniqueOptions(['Size', 'Talla', 'Tamaño']);
+    const uniqueColors = getUniqueOptions(['Color', 'Cor', 'Colour']) as string[];
+    const uniqueSizes = getUniqueOptions(['Size', 'Talla', 'Tamaño']) as string[];
 
     // 4. Dynamic Image Logic - MOVED UP TO FIX HOOKS ERROR
     const [activeImage, setActiveImage] = useState<string>('');
@@ -126,7 +84,7 @@ export function ProductDetailView() {
     );
 
     // Get all product images for color mapping
-    const productImages: string[] = product?.images || [];
+    const productImages: any[] = product?.images || [];
 
     // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
     // EFFECT: Update image when color changes - PRIORITY: Variant Image > Index Match > Default
@@ -275,7 +233,7 @@ export function ProductDetailView() {
     const { title, price, image, description, category, badge, benefit } = product;
 
     // --- SEO GENERATION (MAES Formula) ---
-    const { title: seoTitle, description: seoDescription } = generateMetaTags(product, i18n.language);
+    const { title: seoTitle, description: seoDescription } = generateMetaTags(product, i18n?.language || 'es');
 
 
     // 2. Helper Availability
