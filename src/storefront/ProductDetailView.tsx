@@ -230,7 +230,7 @@ export function ProductDetailView() {
         );
     }
 
-    const { title, price, image, description, category, badge, benefit } = product;
+    const { title, price, description, category, badge, benefit } = product;
 
     // --- SEO GENERATION (MAES Formula) ---
     const { title: seoTitle, description: seoDescription } = generateMetaTags(product, i18n?.language || 'es');
@@ -479,7 +479,7 @@ export function ProductDetailView() {
 
                                     <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
                                         {uniqueSizes.map((size: string) => {
-                                            const { exists, available } = checkAvailability(selectedColor, size);
+                                            const { exists } = checkAvailability(selectedColor, size);
                                             // Lógica de fallback para productos simples
                                             const isGenericValid = !selectedColor ? variants.some((v: any) => v.selectedOptions.some((o: any) => ['Size', 'Talla', 'Tamaño'].includes(o.name) && o.value === size)) : exists;
                                             const isDisabled = !isGenericValid;

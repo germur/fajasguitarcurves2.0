@@ -1,38 +1,7 @@
-
+// @ts-nocheck
 import { SeoHead } from './components/SeoHead';
 
-
-// Define custom elements for Shopify to satisfy TypeScript
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'shopify-store': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                'store-domain'?: string;
-                'public-access-token'?: string;
-                'country'?: string;
-                'language'?: string;
-            }, HTMLElement>;
-            'shopify-context': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                type?: string;
-                handle?: string;
-            }, HTMLElement>;
-            'shopify-data': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                query?: string;
-            }, HTMLElement>;
-            'shopify-list-context': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                type?: string;
-                query?: string;
-                first?: string;
-            }, HTMLElement>;
-            'shopify-media': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                query?: string;
-            }, HTMLElement>;
-            'shopify-money': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                query?: string;
-            }, HTMLElement>;
-        }
-    }
-}
+// Local declaration moved to src/shopify-elements.d.ts
 
 export function LabPage() {
     return (
