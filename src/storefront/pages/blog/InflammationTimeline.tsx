@@ -1,11 +1,14 @@
 import { MaesPlaceholder } from '../../components/maes/MaesPlaceholder';
+import { useTranslation } from 'react-i18next';
 
 export default function InflammationTimeline() {
+    const { t } = useTranslation();
+
     return (
         <MaesPlaceholder
-            title="Cronología de la Inflamación"
+            title={t('pages.blog.inflammation.title')}
             type="Article"
-            objective="Gestionar expectativas y vender por etapas"
+            objective={t('pages.blog.inflammation.objective')}
             tags={["Authority Cluster", "Chart", "Data"]}
         />
     );

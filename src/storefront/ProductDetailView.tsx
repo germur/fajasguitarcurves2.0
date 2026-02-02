@@ -13,6 +13,7 @@ import { SeoHead } from '../lib/seo/SeoHead';
 import { generateMetaTags } from '../lib/seo/generators';
 import { fetchCollectionByHandle } from '../lib/shopify-client';
 import { GranularProductGrid } from './components/GranularProductGrid';
+import { useTranslation } from 'react-i18next';
 
 // Sub-component for clean separation
 function RelatedProducts({ category }: { category?: string }) {
@@ -59,6 +60,7 @@ const LEGACY_REDIRECTS: Record<string, string> = {
 };
 
 export function ProductDetailView() {
+    const { t } = useTranslation();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
@@ -247,7 +249,7 @@ export function ProductDetailView() {
         setSelectedSize(recommendedSize);
         setCalculatorOpen(false);
         // Optional: Add a toast notification here
-        alert(`¡Talla ${recommendedSize} seleccionada automáticamente!`);
+        alert(t('components.product_detail.size_selected', { size: recommendedSize }));
     };
 
     if (loading && !product) {
@@ -262,9 +264,9 @@ export function ProductDetailView() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#FAF9F6] px-4">
                 <div className="text-center max-w-md">
-                    <h2 className="text-3xl font-serif text-[#2C2420] mb-4">Producto no encontrado</h2>
-                    <p className="text-sm text-stone-500 mb-6">{error || 'El producto que buscas no existe.'}</p>
-                    <Link to="/" className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-black transition-colors">Volver al Inicio</Link>
+                    <h2 className="text-3xl font-serif text-[#2C2420] mb-4">{t('components.product_detail.product_not_found')}</h2>
+                    <p className="text-sm text-stone-500 mb-6">{error || t('components.product_detail.product_not_found_desc')}</p>
+                    <Link to="/" className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-black transition-colors">{t('components.product_detail.back_home')}</Link>
                 </div>
             </div>
         );
@@ -273,7 +275,7 @@ export function ProductDetailView() {
     const { title, price, image, description, category, badge, benefit } = product;
 
     // --- SEO GENERATION (MAES Formula) ---
-    const { title: seoTitle, description: seoDescription } = generateMetaTags(product);
+    const { title: seoTitle, description: seoDescription } = generateMetaTags(product, i18n.language);
 
 
     // 2. Helper Availability
@@ -303,7 +305,7 @@ export function ProductDetailView() {
         const { variant } = checkAvailability(selectedColor, selectedSize);
 
         if (uniqueColors.length > 0 && !selectedColor) {
-            alert('Por favor selecciona un color');
+            alert(t('components.product_detail.please_select_color'));
             return;
         }
 
@@ -341,7 +343,7 @@ export function ProductDetailView() {
                         : 'bg-[#2C2420] text-white'
                         }`}
                 >
-                    {selectedSize ? 'Agregar' : 'Seleccionar'}
+                    {selectedSize ? t('components.product_detail.add') : t('components.product_detail.select')}
                 </button>
             </div>
 
@@ -350,9 +352,9 @@ export function ProductDetailView() {
 
                 {/* 1. Breadcrumbs (Clean Design) */}
                 <nav className="flex items-center text-[10px] sm:text-xs text-stone-400 mb-8 uppercase tracking-wider">
-                    <Link to="/" className="hover:text-[#D4AF37] transition-colors">Inicio</Link>
+                    <Link to="/" className="hover:text-[#D4AF37] transition-colors">{t('components.product_detail.home')}</Link>
                     <span className="mx-2">/</span>
-                    <Link to="/colecciones/moldeo-y-estetica" className="hover:text-[#D4AF37] transition-colors">{category || 'Colección'}</Link>
+                    <Link to="/colecciones/moldeo-y-estetica" className="hover:text-[#D4AF37] transition-colors">{category || t('components.product_detail.collection')}</Link>
                     <span className="mx-2">/</span>
                     <span className="text-[#2C2420] font-bold truncate border-b border-[#D4AF37]">{title}</span>
                 </nav>
@@ -379,9 +381,9 @@ export function ProductDetailView() {
                             {/* Trust Signals (Horizontal Strip) */}
                             <div className="mt-8 grid grid-cols-3 gap-4 border-t border-stone-200 pt-6">
                                 {[
-                                    { icon: ShieldCheck, title: "Garantía", sub: "Material Certificado" },
-                                    { icon: Truck, title: "Envío Rápido", sub: "Despacho en 24h" },
-                                    { icon: Check, title: "Cambios", sub: "Primer cambio gratis" }
+                                    { icon: ShieldCheck, title: t('components.product_detail.trust_guarantee'), sub: t('components.product_detail.trust_guarantee_sub') },
+                                    { icon: Truck, title: t('components.product_detail.trust_shipping'), sub: t('components.product_detail.trust_shipping_sub') },
+                                    { icon: Check, title: t('components.product_detail.trust_returns'), sub: t('components.product_detail.trust_returns_sub') }
                                 ].map((item, idx) => (
                                     <div key={idx} className="text-center group">
                                         <div className="w-10 h-10 mx-auto rounded-full bg-white border border-stone-100 flex items-center justify-center text-[#D4AF37] mb-2 shadow-sm group-hover:scale-110 transition-transform">
@@ -405,7 +407,7 @@ export function ProductDetailView() {
                                     <div className="flex text-[#D4AF37] gap-0.5">
                                         {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} fill="currentColor" className="stroke-none" />)}
                                     </div>
-                                    <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 Reseñas</span>
+                                    <span className="text-xs text-stone-500 font-medium border-b border-stone-200 pb-0.5">540 {t('components.product_detail.reviews')}</span>
                                 </div>
 
                                 <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-medium leading-tight mb-4">
@@ -418,7 +420,7 @@ export function ProductDetailView() {
                                     </span>
                                     <div className="flex flex-col text-[10px] text-stone-400 leading-tight">
                                         <span>USD</span>
-                                        <span className="text-[#D4AF37] font-bold">En Stock</span>
+                                        <span className="text-[#D4AF37] font-bold">{t('components.product_detail.in_stock')}</span>
                                     </div>
                                 </div>
 
@@ -426,7 +428,7 @@ export function ProductDetailView() {
                                 <div className="bg-[#F9F8F6] border border-[#D4AF37]/20 rounded-lg p-3 flex items-center gap-3">
                                     <div className="bg-[#D4AF37] text-white text-[10px] font-bold px-1.5 py-0.5 rounded">4x</div>
                                     <p className="text-xs text-stone-600">
-                                        Paga en cuotas de <span className="font-bold text-[#2C2420]">${(price / 4).toFixed(2)}</span> sin interés.
+                                        {t('components.product_detail.installments')} <span className="font-bold text-[#2C2420]">${(price / 4).toFixed(2)}</span> {t('components.product_detail.no_interest')}.
                                     </p>
                                 </div>
 
@@ -506,14 +508,14 @@ export function ProductDetailView() {
                                 <div>
                                     <div className="flex justify-between items-center mb-4">
                                         <label className="text-xs font-bold uppercase tracking-widest text-stone-900">
-                                            Talla: <span className="text-stone-500 font-normal">{selectedSize || 'Seleccionar'}</span>
+                                            {t('components.product_detail.size')}: <span className="text-stone-500 font-normal">{selectedSize || t('components.product_detail.select_size')}</span>
                                         </label>
                                         {/* TRIGGER FOR SMART MODAL */}
                                         <button
                                             onClick={() => setCalculatorOpen(true)}
                                             className="flex items-center gap-1 text-[10px] font-bold text-[#D4AF37] hover:text-black transition-colors underline decoration-[#D4AF37]/40"
                                         >
-                                            <Ruler size={12} /> ¿No sabes tu talla? Calcular aquí
+                                            <Ruler size={12} /> {t('components.product_detail.size_help')}
                                         </button>
                                     </div>
 
@@ -546,7 +548,7 @@ export function ProductDetailView() {
                                     </div>
                                     {!selectedSize && (
                                         <p className="text-[10px] text-[#A35944] mt-2 flex items-center gap-1 animate-pulse">
-                                            * Selecciona una talla para continuar
+                                            {t('components.product_detail.select_size_warning')}
                                         </p>
                                     )}
                                 </div>
@@ -562,15 +564,15 @@ export function ProductDetailView() {
                                     `}
                                 >
                                     <ShoppingBag size={18} className={selectedSize ? "group-hover:animate-bounce" : ""} />
-                                    <span>{selectedSize ? 'Agregar al Carrito' : 'Elige una opción'}</span>
+                                    <span>{selectedSize ? t('components.product_detail.add_to_cart') : t('components.product_detail.choose_option')}</span>
                                 </button>
 
                                 {/* 🆚 COMPARATOR MICRO-COMPONENT (Tooltip/Link) - Kept as is, but could be modalized too */}
                                 <Link to="/tools/stage1-vs-stage2" className="mt-4 p-3 bg-[#F9F4E8] border border-[#D4AF37]/30 rounded-lg flex items-center gap-3 cursor-pointer hover:bg-[#F0EBE0] transition-colors group">
                                     <span className="text-xl group-hover:scale-110 transition-transform">ℹ️</span>
                                     <div>
-                                        <p className="text-xs font-bold text-[#2C2420] uppercase">¿Miedo a equivocarte de etapa?</p>
-                                        <p className="text-xs text-[#D4AF37] underline decoration-[#D4AF37]/40">Ver Comparativa Visual: Stage 1 vs Stage 2</p>
+                                        <p className="text-xs font-bold text-[#2C2420] uppercase">{t('components.product_detail.stage_compare_title')}</p>
+                                        <p className="text-xs text-[#D4AF37] underline decoration-[#D4AF37]/40">{t('components.product_detail.stage_compare_link')}</p>
                                     </div>
                                 </Link>
                             </div>
@@ -581,7 +583,7 @@ export function ProductDetailView() {
                             <div className="border-t border-stone-200 pt-6">
                                 {/* FEATURE GRID */}
                                 <div className="pb-8">
-                                    <h3 className="font-serif text-lg text-[#2C2420] mb-4">Ingeniería Detallada</h3>
+                                    <h3 className="font-serif text-lg text-[#2C2420] mb-4">{t('components.product_detail.engineering')}</h3>
                                     <ProductFeatureGrid />
                                 </div>
                                 <div className="border-b border-stone-100">
@@ -590,13 +592,13 @@ export function ProductDetailView() {
                                         className="w-full py-4 flex justify-between items-center text-left"
                                     >
                                         <span className="font-serif text-lg text-[#2C2420]">
-                                            {isDescriptionOpen ? 'Leer menos' : 'Leer descripción detallada y beneficios (+)'}
+                                            {isDescriptionOpen ? t('components.product_detail.read_less') : t('components.product_detail.read_more')}
                                         </span>
                                         <ChevronDown size={16} className={`transition-transform duration-300 ${isDescriptionOpen ? 'rotate-180' : ''}`} />
                                     </button>
                                     <div className={`overflow-hidden transition-all duration-300 ${isDescriptionOpen ? 'max-h-[500px] opacity-100 mb-4' : 'max-h-0 opacity-0'}`}>
                                         <p className="text-sm text-stone-600 leading-relaxed font-light mb-4">
-                                            {benefit || "Esta prenda combina ingeniería textil colombiana con comodidad diaria. Diseñada para moldear sin asfixiar."}
+                                            {benefit || t('components.product_detail.default_benefit')}
                                         </p>
                                         <div className="text-xs text-stone-500 prose prose-stone">
                                             {description ? <div dangerouslySetInnerHTML={{ __html: description }} /> : null}
@@ -607,15 +609,15 @@ export function ProductDetailView() {
                                 <div className="border-b border-stone-100">
                                     <details className="group">
                                         <summary className="w-full py-4 flex justify-between items-center text-left cursor-pointer list-none">
-                                            <span className="font-serif text-lg text-[#2C2420]">Especificaciones Técnicas</span>
+                                            <span className="font-serif text-lg text-[#2C2420]">{t('components.product_detail.tech_specs')}</span>
                                             <ChevronDown size={16} className="transition-transform duration-300 group-open:rotate-180" />
                                         </summary>
                                         <div className="pb-4 text-sm text-stone-600 leading-relaxed font-light pl-4">
                                             <ul className="list-disc space-y-2 marker:text-[#D4AF37]">
-                                                <li>Powernet de Alta Compresión (Grado Médico).</li>
-                                                <li>Forro interno de Lycra con microcápsulas de Vitamina E.</li>
-                                                <li>Costuras planas imperceptibles (Tecnología Seamless).</li>
-                                                <li>Sistema de cierre perineal.</li>
+                                                <li>{t('components.product_detail.spec_powernet')}</li>
+                                                <li>{t('components.product_detail.spec_lining')}</li>
+                                                <li>{t('components.product_detail.spec_seams')}</li>
+                                                <li>{t('components.product_detail.spec_closure')}</li>
                                             </ul>
                                         </div>
                                     </details>
@@ -624,24 +626,24 @@ export function ProductDetailView() {
                                 <div className="border-b border-stone-100">
                                     <details className="group">
                                         <summary className="w-full py-4 flex justify-between items-center text-left cursor-pointer list-none">
-                                            <span className="font-serif text-lg text-[#2C2420]">Preguntas Frecuentes</span>
+                                            <span className="font-serif text-lg text-[#2C2420]">{t('components.product_detail.faq_title')}</span>
                                             <ChevronDown size={16} className="transition-transform duration-300 group-open:rotate-180" />
                                         </summary>
                                         <div className="pb-4 text-sm text-stone-600 leading-relaxed font-light pl-4 space-y-4">
                                             <div>
-                                                <p className="font-bold text-[#2C2420] mb-1">¿Cómo sé mi talla?</p>
-                                                <p>Usa nuestra Guía de Tallas y mídete cintura y cadera. Si estás en post-op, considera tu inflamación.</p>
+                                                <p className="font-bold text-[#2C2420] mb-1">{t('components.product_detail.faq_size_q')}</p>
+                                                <p>{t('components.product_detail.faq_size_a')}</p>
                                             </div>
                                             <div>
-                                                <p className="font-bold text-[#2C2420] mb-1">¿Cómo lavo la prenda?</p>
-                                                <p>Lavar a mano con jabón suave y agua fría. No usar secadora ni exprimir para no dañar el Powernet.</p>
+                                                <p className="font-bold text-[#2C2420] mb-1">{t('components.product_detail.faq_wash_q')}</p>
+                                                <p>{t('components.product_detail.faq_wash_a')}</p>
                                             </div>
                                             <div>
-                                                <p className="font-bold text-[#2C2420] mb-1">¿Aceptan cambios?</p>
-                                                <p>Sí, aceptamos el primer cambio gratis dentro de los 30 días si la prenda está en perfecto estado.</p>
+                                                <p className="font-bold text-[#2C2420] mb-1">{t('components.product_detail.faq_returns_q')}</p>
+                                                <p>{t('components.product_detail.faq_returns_a')}</p>
                                             </div>
                                             <div className="pt-2">
-                                                <Link to="/pages/faq" className="text-[#D4AF37] font-bold underline text-xs">Ver todas las preguntas frecuentes</Link>
+                                                <Link to="/pages/faq" className="text-[#D4AF37] font-bold underline text-xs">{t('components.product_detail.faq_all')}</Link>
                                             </div>
                                         </div>
                                     </details>
@@ -656,10 +658,10 @@ export function ProductDetailView() {
                 <div className="mt-32">
                     <div className="flex justify-between items-end mb-12">
                         <h3 className="font-serif text-3xl md:text-4xl text-[#2C2420]">
-                            También te podría gustar
+                            {t('components.product_detail.related_products')}
                         </h3>
                         <Link to="/colecciones/moldeo-y-estetica" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#D4AF37] hover:text-[#2C2420] transition-colors">
-                            Ver Todo <ArrowUpRight size={14} />
+                            {t('components.product_detail.view_all')} <ArrowUpRight size={14} />
                         </Link>
                     </div>
                     {/* Unified Granular Grid Substitution */}

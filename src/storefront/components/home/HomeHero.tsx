@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Activity, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 
 export function HomeHero() {
     const [mode, setMode] = useState<'recover' | 'sculpt'>('recover');

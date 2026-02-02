@@ -6,8 +6,10 @@ import { ShopifyMapper } from '@/lib/shopify-mapper';
 // Reuse existing ProductCard or modify
 import { SculptProductCard } from '../silo-sculpt/SculptProductCard';
 import { useStore } from '@/storefront/hooks/useStoreContext';
+import { useTranslation } from 'react-i18next';
 
 export function GuitarCurvesShowcase() {
+    const { t, i18n } = useTranslation();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,7 @@ export function GuitarCurvesShowcase() {
                 const allItems = await fetchAllProducts();
 
                 // MAPPER IS CRITICAL: Converts raw nodes to the shape SculptProductCard expects (imageProduct, etc.)
-                const mappedItems = allItems.map((item: any) => ShopifyMapper.mapProduct(item, 'sculpt'));
+                const mappedItems = allItems.map((item: any) => ShopifyMapper.mapProduct(item, 'sculpt', i18n.language));
 
                 // Filter if possible, otherwise show mixed (User asked for "Guitar Curves", traditionally stage 2/sculpt)
                 // We will try to filter by tag 'Sculpt' or 'Waist Trainer' if possible, otherwise just show bestsellers (first 8)
@@ -34,7 +36,7 @@ export function GuitarCurvesShowcase() {
             }
         }
         loadGuitarCurves();
-    }, []);
+    }, [i18n.language]);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
@@ -57,17 +59,17 @@ export function GuitarCurvesShowcase() {
                 <div className="flex items-end justify-between mb-10">
                     <div>
                         <span className="text-[#A35944] font-bold tracking-widest text-xs uppercase mb-2 block animate-pulse">
-                            En Tendencia
+                            {t('pages.home.showcase.badge')}
                         </span>
                         <h2 className="font-serif text-3xl md:text-5xl font-bold text-[#2C2420] flex items-center gap-3">
-                            Tus Curvas, Redefinidas <Sparkles className="w-6 h-6 text-[#D4AF37]" />
+                            {t('pages.home.showcase.title')} <Sparkles className="w-6 h-6 text-[#D4AF37]" />
                         </h2>
                         <p className="text-stone-500 mt-3 max-w-lg">
-                            Descubre la colección diseñada para realzar tu silueta de guitarra natural.
+                            {t('pages.home.showcase.subtitle')}
                         </p>
                     </div>
                     <Link to="/colecciones/moldeo-y-estetica" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors uppercase tracking-widest text-xs">
-                        Ver Colección <ArrowRight size={16} />
+                        {t('pages.home.showcase.cta')} <ArrowRight size={16} />
                     </Link>
                 </div>
 
@@ -120,7 +122,7 @@ export function GuitarCurvesShowcase() {
 
                 <div className="flex md:hidden justify-center mt-6">
                     <Link to="/colecciones/moldeo-y-estetica" className="flex items-center gap-2 font-bold text-[#A35944] uppercase tracking-widest text-xs">
-                        Ver Colección Completa <ArrowRight size={16} />
+                        {t('pages.home.showcase.cta_mobile')} <ArrowRight size={16} />
                     </Link>
                 </div>
 

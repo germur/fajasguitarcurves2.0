@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function SkimsBentoGrid() {
+    const { t } = useTranslation();
+
     // Shared card styles for consistency
     const cardBaseClass = "relative group overflow-hidden rounded-[2rem] aspect-[3/4] w-full";
     const imageClass = "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105";
@@ -23,13 +26,13 @@ export function SkimsBentoGrid() {
 
                         <div className="absolute bottom-6 left-6 right-6">
                             <span className="bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 inline-block">
-                                Colección
+                                {t('pages.home.bento.card1_badge')}
                             </span>
                             <h3 className="text-2xl md:text-3xl font-serif text-white mb-2 leading-tight">
-                                Fajas Guitar Curves
+                                {t('pages.home.bento.card1_title')}
                             </h3>
                             <button className="flex items-center gap-2 text-white/90 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors">
-                                Ver Colección <ArrowUpRight size={16} />
+                                {t('pages.home.bento.card1_cta')} <ArrowUpRight size={16} />
                             </button>
                         </div>
                     </Link>
@@ -45,17 +48,17 @@ export function SkimsBentoGrid() {
 
                         <div className="absolute top-6 right-6">
                             <span className="bg-[#A35944] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-                                Más Vendido
+                                {t('pages.home.bento.card2_badge')}
                             </span>
                         </div>
 
                         <div className="absolute bottom-6 left-6 right-6">
                             <h3 className="text-2xl md:text-3xl font-serif text-white mb-2 leading-tight">
-                                Fajas Stage 2
+                                {t('pages.home.bento.card2_title')}
                             </h3>
-                            <p className="text-white/80 text-xs mb-3">Alta compresión post-quirúrgica</p>
+                            <p className="text-white/80 text-xs mb-3">{t('pages.home.bento.card2_desc')}</p>
                             <span className="flex items-center gap-2 text-white/90 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors">
-                                Comprar <ArrowUpRight size={16} />
+                                {t('pages.home.bento.card2_cta')} <ArrowUpRight size={16} />
                             </span>
                         </div>
                     </Link>
@@ -71,11 +74,11 @@ export function SkimsBentoGrid() {
 
                         <div className="absolute bottom-6 left-6 right-6">
                             <h3 className="text-2xl md:text-3xl font-serif text-white mb-2 leading-tight">
-                                Brasieres Post-Op
+                                {t('pages.home.bento.card3_title')}
                             </h3>
-                            <p className="text-white/80 text-xs mb-3">Soporte y Comodidad Total</p>
+                            <p className="text-white/80 text-xs mb-3">{t('pages.home.bento.card3_desc')}</p>
                             <span className="flex items-center gap-2 text-white/90 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors">
-                                Ver Colección <ArrowUpRight size={16} />
+                                {t('pages.home.bento.card3_cta')} <ArrowUpRight size={16} />
                             </span>
                         </div>
                     </Link>

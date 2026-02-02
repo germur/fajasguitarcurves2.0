@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { ArrowUpRight, ArrowRight, Shirt } from 'lucide-react';
 
 export function SiloBentoGrid() {

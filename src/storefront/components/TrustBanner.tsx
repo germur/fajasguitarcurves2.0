@@ -1,6 +1,9 @@
 import { Shield, Truck, RefreshCcw, HeartHandshake } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function TrustBanner() {
+    const { t } = useTranslation();
+
     return (
         <div className="py-16 bg-stone-50 border-t border-stone-100">
             <div className="max-w-7xl mx-auto px-6">
@@ -11,8 +14,8 @@ export function TrustBanner() {
                             <Shield size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Grado Médico</h3>
-                            <p className="text-sm text-stone-500">Compresión certificada para seguridad post-operatoria.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">{t('components.trust_banner.medical_grade')}</h3>
+                            <p className="text-sm text-stone-500">{t('components.trust_banner.medical_grade_desc')}</p>
                         </div>
                     </div>
 
@@ -22,8 +25,8 @@ export function TrustBanner() {
                             <Truck size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Envío Rápido</h3>
-                            <p className="text-sm text-stone-500">Envíos internacionales vía DHL y FedEx.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">{t('components.trust_banner.fast_shipping')}</h3>
+                            <p className="text-sm text-stone-500">{t('components.trust_banner.fast_shipping_desc')}</p>
                         </div>
                     </div>
 
@@ -33,8 +36,8 @@ export function TrustBanner() {
                             <RefreshCcw size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Talla Perfecta</h3>
-                            <p className="text-sm text-stone-500">Cambios gratis si la talla no es perfecta.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">{t('components.trust_banner.perfect_fit')}</h3>
+                            <p className="text-sm text-stone-500">{t('components.trust_banner.perfect_fit_desc')}</p>
                         </div>
                     </div>
 
@@ -44,8 +47,8 @@ export function TrustBanner() {
                             <HeartHandshake size={24} />
                         </div>
                         <div>
-                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">Soporte Experto</h3>
-                            <p className="text-sm text-stone-500">Asesoría de tallas gratis con nuestras especialistas.</p>
+                            <h3 className="font-serif font-bold text-lg text-[#2C2420] mb-1">{t('components.trust_banner.expert_support')}</h3>
+                            <p className="text-sm text-stone-500">{t('components.trust_banner.expert_support_desc')}</p>
                         </div>
                     </div>
                 </div>

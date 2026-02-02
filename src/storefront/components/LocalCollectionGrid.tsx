@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from './LocalizedLink';
 import { ShoppingBag, Loader2 } from 'lucide-react';
 import type { StoreProduct } from '../data/store-data';
 import { useSculptProducts } from '../hooks/useSculptProducts';
 import { useRecoveryProducts } from '../hooks/useRecoveryProducts';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface LocalCollectionGridProps {
     handle?: string; // e.g. 'cinturillas', 'recovery', 'sculpt'
@@ -12,6 +13,7 @@ interface LocalCollectionGridProps {
 }
 
 export function LocalCollectionGrid({ handle, productCount = 4, fallbackProducts = 'all' }: LocalCollectionGridProps) {
+    const { t } = useTranslation();
 
     // Dynamic Hook Selection
     const { products: sculptProducts, loading: loadingSculpt } = useSculptProducts();
@@ -52,7 +54,7 @@ export function LocalCollectionGrid({ handle, productCount = 4, fallbackProducts
     // For now, let's just render what we have. 
 
     if (displayProducts.length === 0) {
-        return <div className="text-center text-xs text-stone-400 py-8">Cargando colección...</div>;
+        return <div className="text-center text-xs text-stone-400 py-8">{t('components.local_collection_grid.loading')}</div>;
     }
 
     return (
@@ -74,7 +76,7 @@ export function LocalCollectionGrid({ handle, productCount = 4, fallbackProducts
                         <div className="absolute bottom-3 left-3 right-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                             <button className="w-full bg-white/90 backdrop-blur text-[#2C2420] py-2 px-4 rounded-lg font-bold text-[10px] tracking-widest uppercase hover:bg-[#2C2420] hover:text-white transition-colors shadow-sm flex items-center justify-center gap-2">
                                 <ShoppingBag size={12} />
-                                Agregar
+                                {t('components.local_collection_grid.add')}
                             </button>
                         </div>
                     </div>
@@ -82,7 +84,7 @@ export function LocalCollectionGrid({ handle, productCount = 4, fallbackProducts
                     {/* Info */}
                     <div>
                         <p className="text-[10px] font-bold tracking-[0.2em] text-[#A35944]/80 uppercase mb-1">
-                            {product.category || 'Collection'}
+                            {product.category || t('components.local_collection_grid.collection')}
                         </p>
                         <Link to={`/products/${product.handle || product.id}`}>
                             <h4 className="font-serif text-base text-[#2C2420] leading-tight mb-2 group-hover:text-[#A35944] transition-colors line-clamp-2 min-h-[2.5em]">

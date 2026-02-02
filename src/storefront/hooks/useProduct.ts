@@ -1,7 +1,10 @@
+
 import { useState, useEffect } from 'react';
 import { ShopifyMapper } from '../../lib/shopify-mapper';
+import { useTranslation } from 'react-i18next';
 
 export function useProduct(handle: string) {
+    const { i18n } = useTranslation();
     const [product, setProduct] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -18,38 +21,15 @@ export function useProduct(handle: string) {
                 const storeToken = '04c58a7586c413051625b8a9aedd0416';
                 const endpoint = `https://${storeDomain}/api/2024-01/graphql.json`;
 
-                // Query by Handle (preferred) or ID (if numeric) is trickier in standard storefront API without specific query logic
-                // But typically handle query works for handles. If we have an ID, we might need a different query.
-                // For now, let's assume we are passing a handle. IF we passed an ID (digits), we might fail if we query 'productByHandle'.
-
-                // Heuristic: Is it a numeric ID?
                 const isNumericId = /^\d+$/.test(handle);
-
-                // If it's pure numbers, it's likely an ID from our fallback.
-                // Storefront API `product` query requires a global ID (gid://...), not just numeric.
-                // But `productByHandle` requires a handle.
-                // This is the Catch-22.
-
-                // STRATEGY: 
-                // 1. Try fetching by handle first.
-                // 2. If it looks like an ID, we might need to search or reconstruct the GID?
-                // Actually, the Storefront API `node` query isn't always available publicly/easily without context.
-                // Let's rely on the fact that we fixed the handles in the previous step?
-                // But if we fell back to ID, we need to fetch by ID.
-
                 let query = '';
                 let variables = {};
+                const languageCode = (i18n.language || 'es').toUpperCase();
 
                 if (isNumericId) {
-                    // It's a numeric ID. Convert to GID for lookup?
-                    // Actually, getting a product by legacy ID is hard in Storefront API.
-                    // Better to standard browse? Or we can query `products(query: "id:...")`?
-
-                    // Let's try `product(id: ...)` but we need the GID.
                     const gid = `gid://shopify/Product/${handle}`;
-
                     query = `
-                    query getProductById($id: ID!) {
+                    query getProductById($id: ID!, $language: LanguageCode!) @inContext(language: $language) {
                         product(id: $id) {
                             id
                             title
@@ -92,12 +72,11 @@ export function useProduct(handle: string) {
                             }
                         }
                     }`;
-                    variables = { id: gid };
+                    variables = { id: gid, language: languageCode };
 
                 } else {
-                    // It's a handle string
                     query = `
-                    query getProductByHandle($handle: String!) {
+                    query getProductByHandle($handle: String!, $language: LanguageCode!) @inContext(language: $language) {
                         productByHandle(handle: $handle) {
                             id
                             title
@@ -140,7 +119,7 @@ export function useProduct(handle: string) {
                             }
                         }
                     }`;
-                    variables = { handle: handle };
+                    variables = { handle: handle, language: languageCode };
                 }
 
                 const response = await fetch(endpoint, {
@@ -161,22 +140,13 @@ export function useProduct(handle: string) {
                 const rawProduct = data?.product || data?.productByHandle;
 
                 if (!rawProduct) {
-                    // If not found, stay null
                     setProduct(null);
                 } else {
-                    // Map it using our existing mapper (we pass 'simple' or deduce logic?)
-                    const mapped = ShopifyMapper.mapProduct(rawProduct, 'standard');
-                    // Note: mapProduct expects 'description', but we fetched 'descriptionHtml'.
-                    // Let's patch the object before mapping if needed or update Mapper.
-                    // Mapper uses 'title' and 'priceRange'. It doesn't use description currently in mapProduct base?
-                    // Let's check Mapper... it returns a mapped object.
-                    // We might need to manually add description since typical catalog endpoint might not have full text?
-                    // rawProduct has descriptionHtml. 
-
+                    // Pass i18n.language here
+                    const mapped = ShopifyMapper.mapProduct(rawProduct, 'standard', i18n.language);
                     setProduct({
                         ...mapped,
                         description: rawProduct.descriptionHtml || rawProduct.description,
-                        // Ensure we carry over explicit fields if Mapper didn't
                     });
                 }
 
@@ -189,7 +159,7 @@ export function useProduct(handle: string) {
         }
 
         fetchProduct();
-    }, [handle]);
+    }, [handle, i18n.language]);
 
     return { product, loading, error };
 }

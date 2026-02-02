@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ArrowLeftRight, CheckCircle2, XCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export function PainSolutionSlider() {
+    const { t } = useTranslation();
     // 50% split by default
     const [sliderPosition, setSliderPosition] = useState(50);
     const [isDragging, setIsDragging] = useState(false);
@@ -23,19 +25,20 @@ export function PainSolutionSlider() {
         setSliderPosition((x / rect.width) * 100);
     };
 
+    const problems = t('components.pain_solution_slider.problems', { returnObjects: true }) as string[];
+
     return (
         <section className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-6">
 
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <span className="text-[#D1AB66] font-bold uppercase tracking-widest text-xs mb-2 block">La Diferencia Guitar Tech</span>
+                    <span className="text-[#D1AB66] font-bold uppercase tracking-widest text-xs mb-2 block">{t('components.pain_solution_slider.badge')}</span>
                     <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#2C2420] mb-4">
-                        El "Hueco en la Espalda" Termina Hoy.
+                        {t('components.pain_solution_slider.title')}
                     </h2>
                     <p className="text-stone-500 max-w-2xl mx-auto">
-                        ¿Cintura pequeña y caderas grandes? Las fajas normales no te entienden (y te aplastan).
-                        La tecnología GuitarTech está diseñada geométricamente para tu cuerpo.
+                        {t('components.pain_solution_slider.desc')}
                     </p>
                 </div>
 
@@ -54,7 +57,7 @@ export function PainSolutionSlider() {
                     <div className="absolute inset-0">
                         <img src={GOOD_IMAGE} alt="Guitar Curves Fit" className="w-full h-full object-cover object-center" />
                         <div className="absolute top-8 right-8 bg-[#D1AB66] text-[#2C2420] px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-lg">
-                            <CheckCircle2 size={18} /> Ajuste Guitar Tech
+                            <CheckCircle2 size={18} /> {t('components.pain_solution_slider.guitar_fit')}
                         </div>
                     </div>
 
@@ -65,16 +68,16 @@ export function PainSolutionSlider() {
                     >
                         <img src={BAD_IMAGE} alt="Faja Genérica" className="w-full h-full object-cover object-center grayscale brightness-75" />
                         <div className="absolute top-8 left-8 bg-stone-800 text-white px-4 py-2 rounded-full font-bold flex items-center gap-2 shadow-lg">
-                            <XCircle size={18} className="text-red-500" /> Faja Genérica "Tubo"
+                            <XCircle size={18} className="text-red-500" /> {t('components.pain_solution_slider.generic_faja')}
                         </div>
 
                         {/* Pain Points Overlay (Only visible on Left side) */}
                         <div className="absolute bottom-10 left-10 text-white max-w-xs md:max-w-sm drop-shadow-lg hidden md:block">
-                            <h3 className="font-bold text-2xl mb-2">El Problema</h3>
+                            <h3 className="font-bold text-2xl mb-2">{t('components.pain_solution_slider.problem_title')}</h3>
                             <ul className="space-y-1 text-sm opacity-90">
-                                <li>❌ Aplastamiento de Glúteos</li>
-                                <li>❌ Bolsa en la Espalda (Waist Gap)</li>
-                                <li>❌ Enrollamiento en la Pierna</li>
+                                {problems.map((problem, i) => (
+                                    <li key={i}>❌ {problem}</li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -94,11 +97,11 @@ export function PainSolutionSlider() {
                         className="absolute bottom-10 right-10 text-[#2C2420] max-w-xs md:max-w-sm bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl transition-opacity duration-300"
                         style={{ opacity: sliderPosition < 50 ? 1 : 0, pointerEvents: 'none' }}
                     >
-                        <h3 className="font-bold text-xl mb-2 text-[#D1AB66]">La Solución</h3>
+                        <h3 className="font-bold text-xl mb-2 text-[#D1AB66]">{t('components.pain_solution_slider.solution_title')}</h3>
                         <p className="text-sm leading-relaxed">
-                            Radio de Cintura a Cadera de 0.7. <br />
-                            Significa que la cintura es 2 tallas más pequeña que la cadera.
-                            <strong>Compresión donde la necesitas, libertad donde la quieres.</strong>
+                            {t('components.pain_solution_slider.solution_text_1')} <br />
+                            {t('components.pain_solution_slider.solution_text_2')}
+                            <strong> {t('components.pain_solution_slider.solution_emphasis')}</strong>
                         </p>
                     </div>
 

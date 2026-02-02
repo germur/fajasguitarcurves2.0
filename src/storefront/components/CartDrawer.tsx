@@ -1,9 +1,10 @@
 
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../hooks/useStoreContext';
 import { Trash2, Lock, ArrowRight, Check } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { LocalizedLink as Link } from './LocalizedLink';
 
 
 
@@ -19,6 +20,7 @@ export function CartDrawer() {
         checkout
     } = useStore();
 
+    const { t } = useTranslation();
     const [isAnimating, setIsAnimating] = useState(false);
     const freeShippingThreshold = 150;
 
@@ -62,7 +64,7 @@ export function CartDrawer() {
                             {/* BLOCK 1: HEADER "GAMIFICADO" (Free Shipping Bar) */}
                             <div className="p-6 border-b border-gray-100 bg-gray-50/50">
                                 <div className="flex justify-between items-center mb-4">
-                                    <h2 className="font-serif text-2xl text-[#3E322C]">Tu Bolsa ({cart.length})</h2>
+                                    <h2 className="font-serif text-2xl text-[#3E322C]">{t('components.cart.your_bag')} ({cart.length})</h2>
                                     <button onClick={toggleCart} className="text-gray-400 hover:text-black p-2">✕</button>
                                 </div>
 
@@ -71,10 +73,10 @@ export function CartDrawer() {
                                     <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-[#3E322C]">
                                         {isFreeShipping ? (
                                             <span className="text-green-600 flex items-center gap-1">
-                                                <Check size={14} /> ¡Envío Gratis Desbloqueado!
+                                                <Check size={14} /> {t('components.cart.free_shipping_unlocked')}
                                             </span>
                                         ) : (
-                                            <span>Faltan ${remaining.toFixed(0)} para Envío Gratis ✈️</span>
+                                            <span>{t('components.cart.remaining_for_free_shipping', { amount: remaining.toFixed(0) })}</span>
                                         )}
                                         {isFreeShipping && <span>✈️</span>}
                                     </div>
@@ -94,9 +96,9 @@ export function CartDrawer() {
                                         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
                                             <Lock className="text-gray-400" />
                                         </div>
-                                        <p className="text-gray-500">Tu bolsa está vacía.</p>
+                                        <p className="text-gray-500">{t('components.cart.bag_empty')}</p>
                                         <button onClick={toggleCart} className="text-[#3E322C] font-bold border-b border-[#3E322C]">
-                                            Explorar Colección
+                                            {t('components.cart.explore_collection')}
                                         </button>
                                     </div>
                                 ) : (
@@ -108,7 +110,7 @@ export function CartDrawer() {
                                             <div className="flex-1 flex flex-col justify-between">
                                                 <div>
                                                     <h3 className="font-medium text-gray-900 leading-tight">{item.product.title}</h3>
-                                                    <p className="text-xs text-gray-500 mt-1">Talla: {item.selectedSize}</p>
+                                                    <p className="text-xs text-gray-500 mt-1">{t('components.cart.size')}: {item.selectedSize}</p>
 
                                                     {/* Error de Talla (Simulated Logic) - If Faja is XS but Board is L? Too complex for now, but placeholder logic */}
                                                     {/* {item.selectedSize === 'XS' && <p className="text-[10px] text-orange-500 mt-1 font-bold">¿Segura de la talla?</p>} */}
@@ -152,16 +154,14 @@ export function CartDrawer() {
                                                 ⏳
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-[#2C2420] text-sm mb-1">¿Estás llevando Stage 1?</h4>
-                                                <p className="text-[10px] text-stone-500 mb-2 leading-relaxed">
-                                                    Cuando baje la inflamación (Semana 4-6), necesitarás más compresión para moldear. Ahorra 15% llevando el Kit Completo.
-                                                </p>
+                                                <h4 className="font-bold text-[#2C2420] text-sm mb-1">{t('components.cart.stage1_upsell_title')}</h4>
+                                                {t('components.cart.stage1_upsell_desc')}
                                                 <Link
                                                     to="/tools/stage1-vs-stage2"
                                                     onClick={toggleCart}
                                                     className="text-[10px] font-bold text-[#D4AF37] underline hover:text-[#2C2420] transition-colors"
                                                 >
-                                                    Ver Diferencia: Stage 1 vs Stage 2 &rarr;
+                                                    {t('components.cart.stage1_vs_stage2')} &rarr;
                                                 </Link>
                                             </div>
                                         </div>
@@ -175,13 +175,13 @@ export function CartDrawer() {
                             {cart.length > 0 && (
                                 <div className="p-6 border-t border-gray-100 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.05)] space-y-4">
                                     <div className="flex justify-between items-center text-lg font-bold text-[#3E322C]">
-                                        <span>Subtotal</span>
+                                        <span>{t('components.cart.subtotal')}</span>
                                         <span>${cartTotal.toFixed(2)}</span>
                                     </div>
 
                                     {isFreeShipping && (
                                         <p className="text-xs text-green-600 font-medium text-center bg-green-50 py-2 rounded-lg border border-green-100">
-                                            ¡Te estás ahorrando $25 de envío hoy!
+                                            {t('components.cart.savings')}
                                         </p>
                                     )}
 
@@ -190,13 +190,13 @@ export function CartDrawer() {
                                         className="w-full bg-[#3E322C] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-black transition-colors flex items-center justify-center gap-2 group shadow-xl active:scale-[0.98]"
                                     >
                                         <Lock size={16} />
-                                        FINALIZAR COMPRA
+                                        {t('components.cart.checkout')}
                                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                     </button>
 
                                     <div className="flex justify-center flex-col items-center gap-2">
                                         <p className="text-[10px] text-gray-400">
-                                            🔒 Transacción Segura SSL &bull; Envíos discretos desde Miami, FL
+                                            {t('components.cart.secure_transaction')}
                                         </p>
                                     </div>
                                 </div>

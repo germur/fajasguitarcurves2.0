@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { GranularProductGrid } from './components/GranularProductGrid';
 import { fetchProductsByTags, fetchAllProducts, fetchCollectionByHandle, fetchProductsByQuery } from '../lib/shopify-client';
-import { ShopifyMapper, SILO_DESCRIPTIONS } from '../lib/shopify-mapper';
-import { SeoHead } from '../lib/seo/SeoHead';
+import { ShopifyMapper, getSiloData } from '../lib/shopify-mapper';
+import { SeoHead } from './components/SeoHead';
 import { ArrowRight, Shield } from 'lucide-react';
 import { getSiloAsset } from '../lib/silo-assets';
 import { GranularFAQ } from './components/GranularFAQ';
 import { TrustBanner } from './components/TrustBanner';
 import { FilterSidebar } from './components/FilterSidebar';
+import { useTranslation } from 'react-i18next';
 
 interface CollectionPageProps {
     title?: string;
@@ -17,6 +18,7 @@ interface CollectionPageProps {
 }
 
 export function CollectionPage({ title: propTitle, handle: propHandle, description: propDesc }: CollectionPageProps) {
+    const { i18n } = useTranslation();
     const params = useParams();
     const location = useLocation();
 
@@ -40,7 +42,6 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     const [loading, setLoading] = useState(false);
 
     // Filter State
-    // Filter State
     const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
         stage: [],
         compression: [],
@@ -50,34 +51,55 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     });
 
     // SEO Data Construction
-    let pageTitle = propTitle || capitalize(handle || filter || 'Colección');
+    let pageTitle = propTitle || capitalize(handle || filter || (i18n.language === 'en' ? 'Collection' : 'Colección'));
 
     // Authority Descriptions Injection
-    let seoDescription = propDesc || `Explora nuestra colección ${pageTitle} en Guitar Curves.`;
+    let seoDescription = propDesc || (i18n.language === 'en' ? `Explore our ${pageTitle} collection at Guitar Curves.` : `Explora nuestra colección ${pageTitle} en Guitar Curves.`);
+
+    // Handle "All" collection with proper translations
+    if (isViewAll) {
+        pageTitle = i18n.language === 'en' ? 'All Collections' : 'Todo el Catálogo';
+        seoDescription = i18n.language === 'en'
+            ? 'Explore our entire collection of premium Colombian fajas.'
+            : 'Explora toda nuestra colección de fajas colombianas premium.';
+    }
 
     // 1. Check for Silo Match first (Most specific top-level)
+    const siloData = getSiloData(i18n.language);
+
     if (handle === 'recovery' || silo === 'recovery' || handle === 'recuperacion' || silo === 'recuperacion' || handle === 'recuperacion-postquirurgica') {
-        seoDescription = SILO_DESCRIPTIONS.RECOVERY;
+        seoDescription = siloData.descriptions.RECOVERY;
+        if (!propTitle) pageTitle = siloData.names.RECOVERY;
     }
     else if (handle === 'sculpt' || silo === 'sculpt' || handle === 'moldeo' || silo === 'moldeo' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena') {
-        seoDescription = SILO_DESCRIPTIONS.SCULPT;
+        seoDescription = siloData.descriptions.SCULPT;
+        if (!propTitle) pageTitle = siloData.names.SCULPT;
     }
     else if (handle === 'bras' || silo === 'bras' || handle === 'essentials' || handle === 'brasieres' || silo === 'brasieres' || handle === 'brasieres-y-postura') {
-        seoDescription = SILO_DESCRIPTIONS.ESSENTIALS;
+        seoDescription = siloData.descriptions.ESSENTIALS;
+        if (!propTitle) pageTitle = siloData.names.ESSENTIALS;
     }
 
     if (isGranular) {
-        // Spanish-friendly granular titles
+        // Spanish-friendly granular titles - TODO: Localize granular logic better if needed
+        // For now, capitalize filters which are URLs (mostly Spanish). 
+        // Ideally we map them.
+        const niceFilter = capitalize(filter.replace(/-/g, ' '));
+        const niceSilo = capitalize(silo);
+
         if (silo === 'recuperacion') {
-            pageTitle = `Fajas ${capitalize(filter.replace(/-/g, ' '))} - Post Quirúrgicas`;
+            pageTitle = i18n.language === 'en' ? `Fajas ${niceFilter} - Post Surgery` : `Fajas ${niceFilter} - Post Quirúrgicas`;
         } else if (silo === 'moldeo') {
-            pageTitle = `Fajas ${capitalize(filter.replace(/-/g, ' '))} - Moldeo y Uso Diario`;
+            pageTitle = i18n.language === 'en' ? `Fajas ${niceFilter} - Sculpt & Daily Use` : `Fajas ${niceFilter} - Moldeo y Uso Diario`;
         } else {
-            pageTitle = `${capitalize(filter.replace(/-/g, ' '))} - ${capitalize(silo)}`;
+            pageTitle = `${niceFilter} - ${niceSilo}`;
         }
 
-        seoDescription = `Compra las mejores opciones de ${filter.replace(/-/g, ' ')} de nuestra colección ${silo}. Alta compresión y soporte especializado para tu cuerpo.`;
+        seoDescription = i18n.language === 'en'
+            ? `Shop the best ${filter.replace(/-/g, ' ')} options from our ${silo} collection. High compression and specialized support.`
+            : `Compra las mejores opciones de ${filter.replace(/-/g, ' ')} de nuestra colección ${silo}. Alta compresión y soporte especializado para tu cuerpo.`;
     }
+
     useEffect(() => {
         setLoading(true);
         let fetchPromise;
@@ -92,8 +114,6 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             const filterTag = mapFilterToTag(filter);
 
             // SPECIAL CASE: Post Parto (Missing Tag Fix)
-            // Use smart search query: (Tag OR Title match). 
-            // Broadened to IGNORE Silo Tag because some Post Parto items lack "Post Surgery" tag too.
             if (filter === 'post-parto') {
                 const q = `tag:'Post Parto' OR title:Postparto OR title:Cesarea OR title:Maternidad`;
                 fetchPromise = fetchProductsByQuery(q);
@@ -107,40 +127,33 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
 
         fetchPromise
             .then(rawProducts => {
-                // MAPPER: Use 'universal' for View All or Standard to get full metadata, or specific matching silo logic
-                // For simplicity and richness, 'universal' is often best unless we need very specific silo fields
                 const mapperMode = isViewAll ? 'universal' : (silo === 'recovery' ? 'medical' : 'universal');
-                const mapped = rawProducts.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode));
+                // Pass current language to mapper
+                const mapped = rawProducts.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode, i18n.language));
                 setProducts(mapped);
             })
             .catch(err => console.error("Error loading products:", err))
             .finally(() => setLoading(false));
 
-    }, [silo, filter, isGranular, isViewAll, rawHandle]);
+    }, [silo, filter, isGranular, isViewAll, rawHandle, i18n.language]); // Added i18n.language dep
 
 
     // Filter Logic
     const filteredProducts = isViewAll ? products.filter(product => {
-        // Validation: If a category has filters active, product matching ONE of them is enough (OR logic within category)
-        // AND logic between categories
-
         const checkCategory = (cat: string, value: string | string[]) => {
             const active = activeFilters[cat];
             if (!active || active.length === 0) return true; // No filter = pass
 
             if (Array.isArray(value)) {
-                // Product has array of features -> check if it has ANY of the active filters
                 return value.some(v => active.includes(v));
             }
-
-            // Product has single value -> check if it is in active list
             return active.includes(value);
         };
 
         return (
             checkCategory('stage', product.stage) &&
             checkCategory('compression', product.compression) &&
-            checkCategory('category', product.category) && // NEW
+            checkCategory('category', product.category) &&
             checkCategory('occasion', product.occasion) &&
             checkCategory('features', product.features)
         );
@@ -161,20 +174,18 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
         });
     };
 
-    // Asset Data
+    // Asset Data (Could be localized if needed, keeping visual assets same)
     const { image: heroImage, subtitle: heroSubtitle } = getSiloAsset(silo || 'default');
-
-    // Pure Canonical URL (No query params, no tracking)
-    const canonicalUrl = isGranular
-        ? `https://guitarcurves.com/collections/${silo}/${filter}`
-        : `https://guitarcurves.com/collections/${handle}`;
 
     return (
         <div className="bg-white min-h-screen pb-20 pt-10 font-sans selection:bg-[#D4AF37] selection:text-white">
             <SeoHead
                 title={`${pageTitle} | Guitar Curves`}
                 description={seoDescription}
-                path={canonicalUrl.replace('https://guitarcurves.com', '')}
+            // path is handled internally by SeoHead now via useLocation, but if we pass explicit props we should be careful.
+            // The original code passed 'path'. Let's check SeoHead definition.
+            // We removed 'path' prop from SeoHead in favor of internal detection! 
+            // So we can remove it here.
             />
 
             {/* SPLIT HERO LAYOUT (Premium) */}
@@ -205,8 +216,8 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
-                            <h3 className="font-bold text-2xl font-serif">{capitalize(silo || 'Colección')}</h3>
-                            <p className="text-sm opacity-90 tracking-widest uppercase">Colección Oficial</p>
+                            <h3 className="font-bold text-2xl font-serif">{capitalize(silo || (i18n.language === 'en' ? 'Collection' : 'Colección'))}</h3>
+                            <p className="text-sm opacity-90 tracking-widest uppercase">{i18n.language === 'en' ? 'Official Collection' : 'Colección Oficial'}</p>
                         </div>
                     </div>
                 </div>
@@ -241,12 +252,12 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                                 🩺
                             </div>
                             <div>
-                                <h3 className="font-serif text-xl font-bold text-[#2C2420]">Deja de adivinar. Calcula tu etapa exacta.</h3>
-                                <p className="text-sm text-stone-500">Respondemos tus dudas post-quirúrgicas en 1 minuto.</p>
+                                <h3 className="font-serif text-xl font-bold text-[#2C2420]">{i18n.language === 'en' ? 'Stop guessing. Calculate your exact stage.' : 'Deja de adivinar. Calcula tu etapa exacta.'}</h3>
+                                <p className="text-sm text-stone-500">{i18n.language === 'en' ? 'We answer your post-op questions in 1 minute.' : 'Respondemos tus dudas post-quirúrgicas en 1 minuto.'}</p>
                             </div>
                         </div>
                         <Link to="/tools/calculator" className="whitespace-nowrap px-6 py-3 bg-[#2C2420] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#D4AF37] transition-colors shadow-lg">
-                            Usar Calculadora
+                            {i18n.language === 'en' ? 'Use Calculator' : 'Usar Calculadora'}
                         </Link>
                     </div>
                 )}
@@ -284,10 +295,10 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             {silo === 'recovery' && (
                 <div className="bg-[#2C2420] py-16 px-6 text-center">
                     <div className="max-w-2xl mx-auto">
-                        <h3 className="text-3xl font-serif text-white mb-4">¿Aún tienes dudas de tu etapa?</h3>
-                        <p className="text-stone-300 mb-8">Usa nuestra herramienta de diagnóstico post-quirúrgico para encontrar tu faja exacta.</p>
+                        <h3 className="text-3xl font-serif text-white mb-4">{i18n.language === 'en' ? 'Still have questions?' : '¿Aún tienes dudas de tu etapa?'}</h3>
+                        <p className="text-stone-300 mb-8">{i18n.language === 'en' ? 'Use our post-op diagnostic tool to find your match.' : 'Usa nuestra herramienta de diagnóstico post-quirúrgico para encontrar tu faja exacta.'}</p>
                         <Link to="/tools/calculator" className="inline-flex items-center px-8 py-3 bg-[#D4AF37] text-white font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-[#2C2420] transition-all shadow-lg text-sm">
-                            Iniciar Quiz <ArrowRight className="ml-2 w-4 h-4" />
+                            {i18n.language === 'en' ? 'Start Quiz' : 'Iniciar Quiz'} <ArrowRight className="ml-2 w-4 h-4" />
                         </Link>
                     </div>
                 </div>
@@ -304,7 +315,6 @@ function capitalize(s: string) {
 }
 
 // Map URL slugs to real Shopify Tags
-// Map URL slugs to real Shopify Tags
 function mapSiloToTag(silo: string) {
     // English (Legacy/Alias)
     if (silo === 'recovery') return 'Post Surgery';
@@ -314,15 +324,13 @@ function mapSiloToTag(silo: string) {
     // Spanish (New)
     if (silo === 'recuperacion') return 'Post Surgery';
     if (silo === 'brasieres') return 'Post-Op Bra';
-    if (silo === 'moldeo') return ''; // Uses specific filters usually, or 'Waist Trainer' if we wanted a broad tag, but 'Sculpt' logic was empty.
-
+    if (silo === 'moldeo') return '';
     return '';
 }
 
 function mapFilterToTag(filter: string) {
     if (!filter) return '';
 
-    // Precise mapping based on live store data
     // Spanish Mappings
     if (filter === 'etapa-1') return 'Stage 1';
     if (filter === 'etapa-2') return 'Stage 2';
@@ -331,7 +339,7 @@ function mapFilterToTag(filter: string) {
     if (filter === 'cinturillas' || filter === 'cinturillas-reductoras') return 'Waist Trainer';
     if (filter === 'cinturilla') return 'Waist Trainer';
 
-    if (filter === 'shorts') return 'Short'; // Same in Spanish often, or...
+    if (filter === 'shorts') return 'Short';
     if (filter === 'short') return 'Short';
 
     if (filter === 'fajas-espalda-alta' || filter === 'espalda-alta') return 'High Back';
@@ -340,13 +348,12 @@ function mapFilterToTag(filter: string) {
     if (filter === 'uso-diario') return 'Daily Use';
     if (filter === 'corrector') return 'Corrector de Postura';
 
-    if (filter === 'post-lipo' || filter === 'lipo-360') return 'Post Lipo'; // Assuming 'Post Lipo' covers 360, or 'Lipo 360' exists
+    if (filter === 'post-lipo' || filter === 'lipo-360') return 'Post Lipo';
     if (filter === 'brazos') return 'Arm Compression';
 
     if (filter === 'invisible') return 'Invisible';
     if (filter === 'levantacola') return 'Butt Lifter';
 
-    // Post Parto is handled by the Query fallback in CollectionPage, but we map here to check tags first?
     if (filter === 'post-parto' || filter === 'fajas-postparto') return 'Post Parto';
 
     // English Mappings (Keep for aliases)
@@ -362,15 +369,12 @@ function mapFilterToTag(filter: string) {
     if (filter === 'bbl') return 'BBL';
     if (filter === 'post-op-bra') return 'Post-Op Bra';
 
-    // Sub-Collection Mappings (Explicit)
     if (filter === 'waist') return 'Waist Trainer';
     if (filter === 'daily') return 'Daily Use';
 
-    // Default: try to capitalize logic for simple cases
     return capitalize(filter);
 }
 
-// Helper to bridge language gaps in URL handles
 function resolveShopifyHandle(handle: string) {
     if (handle === 'moldeo' || handle === 'sculpt' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena') return 'sculpt-studio';
     if (handle === 'recuperacion' || handle === 'recovery' || handle === 'recuperacion-postquirurgica') return 'post-quirurgica';
@@ -378,8 +382,6 @@ function resolveShopifyHandle(handle: string) {
     return handle;
 }
 
-// Helper for Virtual SEO Slugs / "Long Tail" URLs
-// Maps: "fajas-etapa-1" -> { silo: 'recuperacion', filter: 'etapa-1' }
 function resolveSeoSlug(handle: string): { silo: string; filter: string } | null {
     if (!handle) return null;
 
@@ -392,11 +394,11 @@ function resolveSeoSlug(handle: string): { silo: string; filter: string } | null
     if (handle === 'fajas-postparto') return { silo: 'recuperacion', filter: 'post-parto' };
     if (handle === 'fajas-para-lipo-360') return { silo: 'recuperacion', filter: 'lipo-360' };
 
-    // Cinturillas (Waist Trainers usually in Sculpt/Moldeo)
+    // Cinturillas
     if (handle === 'cinturillas-reductoras') return { silo: 'moldeo', filter: 'cinturillas' };
 
     // Atributos
-    if (handle === 'fajas-espalda-alta') return { silo: 'recuperacion', filter: 'espalda-alta' }; // Typically medical usage
+    if (handle === 'fajas-espalda-alta') return { silo: 'recuperacion', filter: 'espalda-alta' };
     if (handle === 'fajas-media-pierna') return { silo: 'recuperacion', filter: 'media-pierna' };
 
     return null;

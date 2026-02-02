@@ -1,60 +1,64 @@
 
 
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calculator, Ruler, Layers } from 'lucide-react';
 import { SeoHead } from '../../components/SeoHead';
-
-const TOOLS = [
-    /* {
-        id: 'recovery-calc',
-        title: "Calculadora de Recuperación",
-        description: "Descubre exactamente en qué etapa de recuperación estás y qué faja necesitas usar hoy.",
-        icon: <Activity className="w-8 h-8 text-white" />,
-        link: "/tools/recovery-timeline",
-        bgImage: "/assets/tool-recovery.png",
-        status: "Active",
-        cta: "Calcular Etapa"
-    }, */
-    {
-        id: 'guitar-ratio',
-        title: "Guitar Ratio Finder",
-        description: "¿Eres una 'Falsa S' o una 'Verdadera Guitarra'? Analiza tus medidas con nuestro algoritmo.",
-        icon: <Calculator className="w-8 h-8 text-white" />,
-        link: "/tools/guitar-ratio",
-        bgImage: "/assets/tool-ratio.jpg",
-        status: "Active",
-        cta: "Iniciar Test"
-    },
-    {
-        id: 'stage-comparator',
-        title: "Comparador Stage 1 vs 2",
-        description: "La guía visual definitiva para saber cuándo y por qué cambiar de etapa.",
-        icon: <Layers className="w-8 h-8 text-white" />,
-        link: "/tools/stage1-vs-stage2",
-        bgImage: "/assets/tool-comparator.jpg",
-        status: "Active",
-        cta: "Ver Comparativa"
-    }
-];
+import { useTranslation } from 'react-i18next';
 
 export default function ToolsHubPage() {
+    const { t } = useTranslation();
+
+    const TOOLS = [
+        /* {
+            id: 'recovery-calc',
+            title: t('tools.recovery_calc'),
+            description: "Descubre exactamente en qué etapa de recuperación estás y qué faja necesitas usar hoy.",
+            icon: <Activity className="w-8 h-8 text-white" />,
+            link: "/tools/recovery-timeline",
+            bgImage: "/assets/tool-recovery.png",
+            status: "Active",
+            cta: "Calcular Etapa"
+        }, */
+        {
+            id: 'guitar-ratio',
+            title: t('pages.tools_hub.tools.guitar_ratio.title'),
+            description: t('pages.tools_hub.tools.guitar_ratio.description'),
+            icon: <Calculator className="w-8 h-8 text-white" />,
+            link: "/tools/guitar-ratio",
+            bgImage: "/assets/tool-ratio.jpg",
+            status: "Active",
+            cta: t('pages.tools_hub.tools.guitar_ratio.cta')
+        },
+        {
+            id: 'stage-comparator',
+            title: t('pages.tools_hub.tools.stage_comparator.title'),
+            description: t('pages.tools_hub.tools.stage_comparator.description'),
+            icon: <Layers className="w-8 h-8 text-white" />,
+            link: "/tools/stage1-vs-stage2",
+            bgImage: "/assets/tool-comparator.jpg",
+            status: "Active",
+            cta: t('pages.tools_hub.tools.stage_comparator.cta')
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-[#FAF9F6] font-sans">
             <SeoHead
-                title="The Body Lab | Herramientas Fajas Guitar Curves"
-                description="Centro de tecnología y herramientas para identificar tu cuerpo y optimizar tu recuperación."
+                title={t('pages.tools_hub.seo.title')}
+                description={t('pages.tools_hub.seo.description')}
             />
 
             {/* Header */}
             <header className="pt-32 pb-16 px-6 text-center max-w-4xl mx-auto">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
-                    Technology Center
+                    {t('pages.tools_hub.header.badge')}
                 </span>
                 <h1 className="font-serif text-5xl md:text-6xl text-[#2C2420] mb-6 animate-fade-in delay-100">
-                    The Body Lab
+                    {t('pages.tools_hub.header.title')}
                 </h1>
                 <p className="text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed animate-fade-in delay-200">
-                    Herramientas de precisión diseñadas para acompañarte en cada paso de tu transformación. Sin adivinanzas, solo datos.
+                    {t('pages.tools_hub.header.description')}
                 </p>
             </header>
 
@@ -109,12 +113,12 @@ export default function ToolsHubPage() {
                         <div className="w-16 h-16 rounded-full bg-stone-200 flex items-center justify-center mb-6">
                             <Ruler className="text-stone-400" />
                         </div>
-                        <h3 className="font-serif text-2xl text-stone-400 mb-2">Quiz de Fibrosis</h3>
+                        <h3 className="font-serif text-2xl text-stone-400 mb-2">{t('pages.tools_hub.tools.fibrosis_quiz.title')}</h3>
                         <p className="text-sm text-stone-400 max-w-xs">
-                            Herramienta de diagnóstico avanzado para detectar irregularidades post-quirúrgicas.
+                            {t('pages.tools_hub.tools.fibrosis_quiz.description')}
                         </p>
                         <span className="mt-6 px-4 py-1.5 bg-stone-200 text-stone-500 text-[10px] font-bold uppercase tracking-widest rounded-full">
-                            Próximamente
+                            {t('pages.tools_hub.tools.fibrosis_quiz.badge')}
                         </span>
                     </div>
                 </div>
@@ -122,3 +126,4 @@ export default function ToolsHubPage() {
         </div>
     );
 }
+

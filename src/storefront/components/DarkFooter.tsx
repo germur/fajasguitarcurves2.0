@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+
+import { LocalizedLink as Link } from './LocalizedLink';
 import { ArrowRight, Instagram, Globe, CreditCard, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function DarkFooter() {
+    const { t } = useTranslation();
     const [isSeoOpen, setIsSeoOpen] = useState(false);
 
     return (
@@ -21,7 +24,7 @@ export function DarkFooter() {
                             <img src="/assets/logo-guitar-curves-final.png" alt="Guitar Curves" className="h-12 w-auto object-contain brightness-0 invert opacity-90" />
                         </div>
                         <p className="text-xs leading-relaxed text-gray-400 font-medium tracking-wide max-w-xs">
-                            Ingeniería textil colombiana diseñada para la recuperación post-quirúrgica y el moldeo diario de alto nivel.
+                            {t('footer.description')}
                         </p>
                         <div className="flex gap-4">
                             <a href="https://www.instagram.com/fajasguitarrascurves/?igsh=bDJ6ZGx4YTgyNXV4#" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-all duration-300">
@@ -38,26 +41,26 @@ export function DarkFooter() {
 
                     {/* COL 2: SHOP (The Silos) */}
                     <div>
-                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">Explora</h3>
+                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">{t('footer.explore')}</h3>
                         <ul className="space-y-4 text-sm font-medium">
                             <li>
-                                <Link to="/nuestra-historia" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Nuestra Historia
+                                <Link to="/nosotros" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                    {t('nav.our_story')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/colecciones/recuperacion-postquirurgica" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Postquirúrgicas (Recuperación)
+                                    {t('collections.recovery')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/colecciones/moldeo-y-estetica" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Moldeo (Reloj de Arena)
+                                    {t('collections.sculpt')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/colecciones/brasieres-y-postura" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Brasieres & Accesorios
+                                    {t('collections.bras')}
                                 </Link>
                             </li>
                             <li className="pt-2">
@@ -76,27 +79,27 @@ export function DarkFooter() {
 
                     {/* COL 3: SUPPORT (Help Center) */}
                     <div>
-                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">Soporte</h3>
+                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">{t('footer.support')}</h3>
                         <ul className="space-y-4 text-sm font-medium">
 
                             <li>
                                 <Link to="/devoluciones" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Cambios y Devoluciones
+                                    {t('footer.links.returns')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/calculadora-de-tallas" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Guía de Tallas (AI)
+                                    {t('footer.links.fit_finder')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/pages/wholesale" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Programa Mayoristas
+                                    {t('footer.links.wholesale')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/contacto" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
-                                    Contáctanos
+                                    {t('footer.links.contact')}
                                 </Link>
                             </li>
                         </ul>
@@ -104,21 +107,21 @@ export function DarkFooter() {
 
                     {/* COL 4: THE CLUB (Community) */}
                     <div>
-                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">Únete al Club</h3>
+                        <h3 className="text-white font-bold mb-8 uppercase tracking-[0.2em] text-[10px] text-[#A35944]">{t('footer.join_club')}</h3>
                         <p className="text-xs text-gray-500 mb-4 leading-relaxed">
-                            Recibe tips de recuperación de expertos y acceso anticipado a lanzamientos.
+                            {t('footer.newsletter_desc')}
                         </p>
                         <form className="relative" onSubmit={(e) => e.preventDefault()}>
                             <input
                                 type="email"
-                                placeholder="Tu mejor email"
+                                placeholder={t('footer.email_placeholder')}
                                 className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-[#D4AF37] transition-colors"
                             />
                             <button type="submit" className="absolute right-2 top-2 p-1.5 bg-[#D4AF37] rounded text-[#3E322C] hover:bg-white transition-colors">
                                 <ArrowRight size={16} />
                             </button>
                         </form>
-                        <p className="text-[10px] text-gray-600 mt-3">*No hacemos spam. Solo curvas.</p>
+                        <p className="text-[10px] text-gray-600 mt-3">{t('footer.no_spam')}</p>
                     </div>
 
                 </div>
@@ -129,12 +132,12 @@ export function DarkFooter() {
                         onClick={() => setIsSeoOpen(!isSeoOpen)}
                         className="flex items-center gap-2 text-white font-bold text-sm uppercase tracking-widest mb-4 hover:text-[#D4AF37] transition-colors w-full text-left"
                     >
-                        Expertos en Fajas Colombianas en USA
+                        {t('footer.seo_title')}
                         <ChevronDown size={14} className={`transition-transform duration-300 ${isSeoOpen ? 'rotate-180' : ''}`} />
                     </button>
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isSeoOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-50'}`}>
                         <p className="text-xs text-gray-500 text-justify leading-relaxed max-w-4xl">
-                            Guitar Curves es la marca líder en <strong>Fajas Colombianas en Estados Unidos</strong>, especializadas en la silueta de reloj de arena y la recuperación post-quirúrgica de procedimientos como <strong>BBL (Brazilian Butt Lift)</strong>, Lipo 360 y Tummy Tuck. A diferencia de las fajas genéricas, nuestra tecnología de moldes ofrece una diferencia de 2 tallas entre cintura y cadera, asegurando una compresión de grado médico Stage 2 en el torso sin aplanar los glúteos. Todas nuestras prendas son 100% Made in Colombia, fabricadas con Powernet de alta gama y microcápsulas de Vitamina E para proteger tu piel. Realizamos envíos rápidos desde nuestras bodegas en USA a todo el país y Puerto Rico.
+                            {t('footer.seo_text')}
                         </p>
                     </div>
                 </div>
@@ -142,10 +145,10 @@ export function DarkFooter() {
                 {/* BOTTOM BAR: LEGAL & PAYMENT */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
                     <div className="flex flex-col md:flex-row gap-6 items-center text-[11px] text-gray-600 font-medium">
-                        <span>&copy; 2026 Guitar Curves LLC.</span>
+                        <span>{t('footer.rights')}</span>
                         <div className="flex gap-4">
-                            <Link to="/privacidad" className="hover:text-gray-400 transition-colors">Política de Privacidad</Link>
-                            <Link to="/terminos" className="hover:text-gray-400 transition-colors">Términos de Servicio</Link>
+                            <Link to="/privacidad" className="hover:text-gray-400 transition-colors">{t('footer.privacy')}</Link>
+                            <Link to="/terminos" className="hover:text-gray-400 transition-colors">{t('footer.terms')}</Link>
                         </div>
                     </div>
 
@@ -153,7 +156,7 @@ export function DarkFooter() {
                         {/* Simulated Payment Icons using Text/Divs for now, or could use generic CreditCard icon */}
                         <div className="flex gap-2 items-center text-white/40">
                             <CreditCard size={18} />
-                            <span className="text-[10px] tracking-widest uppercase">Pago Seguro</span>
+                            <span className="text-[10px] tracking-widest uppercase">{t('footer.secure_payment')}</span>
                         </div>
                         <div className="h-4 w-px bg-white/10 mx-2"></div>
                         <div className="flex gap-2 items-center text-white/40">

@@ -1,11 +1,13 @@
+
 import { useState, useEffect } from 'react';
-// import { shopifyClient } from '../../lib/shopify-client';
 import { ShopifyMapper } from '../../lib/shopify-mapper';
+import { useTranslation } from 'react-i18next';
 
 
 const SILO_HANDLE = 'sculpt-studio'; // Primary collection for this silo
 
 export function useSculptProducts() {
+    const { i18n } = useTranslation();
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -70,7 +72,6 @@ export function useSculptProducts() {
 
                 if (!data?.collectionByHandle) {
                     console.warn(`[useSculptProducts] Collection '${SILO_HANDLE}' not found. Using Fallback.`);
-                    // useFallback(); 
                     return;
                 }
 
@@ -78,15 +79,11 @@ export function useSculptProducts() {
 
                 if (edges.length === 0) {
                     console.warn(`[useSculptProducts] Collection '${SILO_HANDLE}' is empty. Using Fallback.`);
-                    // useFallback();
                     return;
                 }
 
-                // useFallback(); // REMOVED per user request for real data only
-                // return; // REMOVED to allow mapping
-
                 const mapped = edges
-                    .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'sculpt'))
+                    .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'sculpt', i18n.language))
                     .filter((p: any) =>
                         p.stage === 'Stage 3' ||
                         p.stage === 'Etapa 3' ||
@@ -96,17 +93,13 @@ export function useSculptProducts() {
             } catch (err: any) {
                 console.error('[useSculptProducts] Error fetching products:', err);
                 setError(err.message);
-                // On error, DO NOT use fallback. 
-                // setProducts([]); // Optional: clear products if you want strict non-mock
             } finally {
                 setLoading(false);
             }
         }
 
-        // function useFallback() { ... } // Removed
-
         fetchProducts();
-    }, []);
+    }, [i18n.language]);
 
     return { products, loading, error };
 }

@@ -11,13 +11,19 @@ const InfiniteMarquee = lazy(() => import('./components/home/InfiniteMarquee').t
 // const BeforeAfterSlider = lazy(() => import('./components/home/BeforeAfterSlider').then(module => ({ default: module.BeforeAfterSlider })));
 const SocialProofWall = lazy(() => import('./components/home/SocialProofWall').then(module => ({ default: module.SocialProofWall })));
 
+import { useTranslation } from 'react-i18next';
+
+// ... (lazy imports remain the same)
+
 export function HomePage() {
+    const { t } = useTranslation();
+
     return (
         <div className="animate-fade-in font-sans">
             {/* 1. SEO METADATA */}
             <SeoHead
-                title="Fajas Colombianas Guitar Curves | Cintura de Avispa & Post-Op"
-                description="La única faja con 'Guitar Cut' diseñada para BBL y Lipo. Ingeniería colombiana que moldea tu cintura sin aplanar tus caderas. Envíos desde USA."
+                title={t('pages.home.seo.title')}
+                description={t('pages.home.seo.description')}
                 schema={{
                     type: 'organization',
                     data: {

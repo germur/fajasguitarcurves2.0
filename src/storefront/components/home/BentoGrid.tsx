@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { ArrowRight } from 'lucide-react';
 
 const GRID_ITEMS = [

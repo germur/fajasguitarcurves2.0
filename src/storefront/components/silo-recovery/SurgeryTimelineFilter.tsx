@@ -1,47 +1,51 @@
+import { useTranslation } from 'react-i18next';
+
 interface SurgeryTimelineFilterProps {
     activeStage: string;
     onStageChange: (stage: string) => void;
 }
 
 export function SurgeryTimelineFilter({ activeStage, onStageChange }: SurgeryTimelineFilterProps) {
+    const { t } = useTranslation();
+
     const filters = [
         {
             id: 'etapa2',
-            label: 'Etapa 2',
-            subLabel: 'Alta Compresión',
-            badge: '🛡️ Recuperación'
+            label: t('components.timeline_filter.etapa2.label'),
+            subLabel: t('components.timeline_filter.etapa2.sub'),
+            badge: t('components.timeline_filter.etapa2.badge')
         },
         {
             id: 'etapa3',
-            label: 'Etapa 3',
-            subLabel: 'Mantenimiento',
-            badge: '⏳ Uso Diario'
+            label: t('components.timeline_filter.etapa3.label'),
+            subLabel: t('components.timeline_filter.etapa3.sub'),
+            badge: t('components.timeline_filter.etapa3.badge')
         },
         {
             id: 'post-lipo',
-            label: 'Post Lipo',
-            subLabel: 'Lipo 360 / Abdo',
-            badge: '💉 Cirugía'
+            label: t('components.timeline_filter.post_lipo.label'),
+            subLabel: t('components.timeline_filter.post_lipo.sub'),
+            badge: t('components.timeline_filter.post_lipo.badge')
         },
         {
             id: 'bbl',
-            label: 'BBL',
-            subLabel: 'Brazilian Butt Lift',
-            badge: '🍑 Glúteos'
+            label: t('components.timeline_filter.bbl.label'),
+            subLabel: t('components.timeline_filter.bbl.sub'),
+            badge: t('components.timeline_filter.bbl.badge')
         },
         {
             id: 'reloj-arena',
-            label: 'Reloj de Arena',
-            subLabel: 'Cintura de Avispa',
-            badge: '⌛ Moldeo'
+            label: t('components.timeline_filter.reloj.label'),
+            subLabel: t('components.timeline_filter.reloj.sub'),
+            badge: t('components.timeline_filter.reloj.badge')
         }
-    ] as const;
+    ];
 
     return (
         <div className="w-full py-8 bg-[#F9F8F6]">
             <div className="max-w-6xl mx-auto px-4">
                 <p className="text-center text-xs font-bold tracking-widest text-[#3E322C]/60 uppercase mb-8">
-                    ¿Qué buscas lograr hoy?
+                    {t('components.timeline_filter.title')}
                 </p>
 
                 {/* Grid Layout instead of Timeline */}

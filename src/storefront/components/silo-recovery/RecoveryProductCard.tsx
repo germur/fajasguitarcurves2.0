@@ -1,5 +1,6 @@
 import { ChevronRight, Stethoscope, Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
+import { useTranslation } from 'react-i18next';
 
 interface ProductData {
     id: string;
@@ -18,6 +19,7 @@ interface RecoveryProductCardProps {
 }
 
 export function RecoveryProductCard({ product, onAddToCart }: RecoveryProductCardProps) {
+    const { t } = useTranslation();
     const productHandle = product.handle || product.id.split('/').pop();
 
     return (
@@ -41,7 +43,7 @@ export function RecoveryProductCard({ product, onAddToCart }: RecoveryProductCar
                 {/* Badge: Feature Médico (Verde Salud suave / Sage Green) */}
                 <div className="absolute top-4 right-4 bg-[#E0E5DF] text-[#3E322C] text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
                     <Stethoscope size={12} />
-                    Surgeon Approved
+                    {t('components.recovery_card.surgeon_approved')}
                 </div>
 
                 {/* Quick Add Button (Aparece y sube en Hover) */}
@@ -50,7 +52,7 @@ export function RecoveryProductCard({ product, onAddToCart }: RecoveryProductCar
                     className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 w-11/12 bg-white/95 backdrop-blur text-[#3E322C] font-bold text-xs uppercase tracking-widest py-3 rounded-xl shadow-lg hover:bg-[#3E322C] hover:text-white flex items-center justify-center gap-2"
                 >
                     <Plus size={14} />
-                    Añadir Rápido — {product.price}
+                    {t('components.recovery_card.quick_add')} — {product.price}
                 </button>
             </div>
 
@@ -80,7 +82,7 @@ export function RecoveryProductCard({ product, onAddToCart }: RecoveryProductCar
                     </div>
                     <span className="font-mono text-sm font-bold text-[#3E322C] md:hidden">{product.price}</span>
                     <Link to={`/products/${productHandle}`} className="text-xs font-bold text-[#3E322C] flex items-center gap-1 hover:gap-2 transition-all md:hidden">
-                        Ver Detalles <ChevronRight size={12} />
+                        {t('components.recovery_card.view_details')} <ChevronRight size={12} />
                     </Link>
                 </div>
             </div>

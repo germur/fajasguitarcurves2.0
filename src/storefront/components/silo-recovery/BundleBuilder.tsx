@@ -1,9 +1,12 @@
 import { Plus } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { useRecoveryProducts } from '../../hooks/useRecoveryProducts';
 import { useStore } from '../../hooks/useStoreContext';
+import { useTranslation } from 'react-i18next';
 
 export function BundleBuilder() {
+    const { t } = useTranslation();
     // Reusing the hook but we should ideally filter for 'Accessories' or specific tags
     // For now, let's grab everything and filter by 'Accesorios' or specific product types if available.
     // If not, we can try to find products that look like accessories based on title.
@@ -42,12 +45,12 @@ export function BundleBuilder() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                     <div>
-                        <span className="text-xs font-bold tracking-widest text-[#A35944] uppercase mb-2 block">Post-Op Essentials</span>
-                        <h2 className="text-3xl font-serif text-[#3E322C] mb-2">Doctor's Orders: The Kit</h2>
-                        <p className="text-sm text-gray-500">Los cirujanos recomiendan complementar tu faja con estos accesorios.</p>
+                        <span className="text-xs font-bold tracking-widest text-[#A35944] uppercase mb-2 block">{t('components.bundle_builder.badge')}</span>
+                        <h2 className="text-3xl font-serif text-[#3E322C] mb-2">{t('components.bundle_builder.title')}</h2>
+                        <p className="text-sm text-gray-500">{t('components.bundle_builder.desc')}</p>
                     </div>
                     <Link to="/pages/bbl-recovery-kit" className="hidden md:flex items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border-b border-[#3E322C] pb-1">
-                        Ver todo el Kit <Plus size={16} />
+                        {t('components.bundle_builder.view_kit')} <Plus size={16} />
                     </Link>
                 </div>
 
@@ -61,13 +64,13 @@ export function BundleBuilder() {
                                 <div className="flex justify-between items-start mb-2">
                                     <h3 className="font-bold text-[#3E322C] leading-tight text-lg">{item.title}</h3>
                                 </div>
-                                <p className="text-xs text-gray-400 mb-4">{item.description || 'Accesorio esencial'}</p>
+                                <p className="text-xs text-gray-400 mb-4">{item.description || t('components.bundle_builder.essential_accessory')}</p>
                                 <div className="flex justify-between items-center">
                                     <span className="font-mono text-sm font-bold text-[#A35944]">${item.price}</span>
                                     <button
                                         onClick={() => handleAdd(item)}
                                         className="bg-[#3E322C] text-white p-2.5 rounded-full hover:bg-[#A35944] transition-colors shadow-lg active:scale-90 transform"
-                                        title="Agregar al carrito"
+                                        title={t('components.bundle_builder.add_to_cart')}
                                     >
                                         <Plus size={16} />
                                     </button>
@@ -78,7 +81,7 @@ export function BundleBuilder() {
                 </div>
 
                 <Link to="/pages/bbl-recovery-kit" className="md:hidden mt-12 w-full flex justify-center items-center gap-2 text-[#3E322C] font-bold text-xs uppercase tracking-widest hover:text-[#A35944] transition-colors border border-[#3E322C]/20 py-4 rounded-xl">
-                    Ver todo el Kit <Plus size={16} />
+                    {t('components.bundle_builder.view_kit')} <Plus size={16} />
                 </Link>
             </div>
         </div>

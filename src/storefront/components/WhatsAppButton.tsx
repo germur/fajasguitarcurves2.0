@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function WhatsAppButton() {
+    const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -10,7 +12,7 @@ export function WhatsAppButton() {
     }, []);
 
     const phoneNumber = "14077585862";
-    const message = "Hola, me gustaría recibir asesoría sobre mi talla.";
+    const message = t('components.whatsapp_button.message');
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     return (
@@ -51,7 +53,7 @@ export function WhatsAppButton() {
                 opacity-0 group-hover:opacity-100 transition-opacity duration-300
                 pointer-events-none
             ">
-                ¿Necesitas ayuda?
+                {t('components.whatsapp_button.tooltip')}
             </span>
         </a>
     );

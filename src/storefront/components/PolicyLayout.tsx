@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface PolicyLayoutProps {
     title: string;
@@ -8,6 +9,7 @@ interface PolicyLayoutProps {
 }
 
 export function PolicyLayout({ title, lastUpdated, children }: PolicyLayoutProps) {
+    const { t } = useTranslation();
     return (
         <div className="bg-white min-h-screen pb-20 font-sans text-stone-900">
             {/* Header */}
@@ -15,14 +17,14 @@ export function PolicyLayout({ title, lastUpdated, children }: PolicyLayoutProps
                 <div className="max-w-3xl mx-auto text-center">
                     <div className="inline-flex items-center gap-2 text-[#D1AB66] font-bold uppercase tracking-widest text-xs mb-4">
                         <ShieldCheck className="w-4 h-4" />
-                        <span>Official Policy</span>
+                        <span>{t('components.policy_layout.official')}</span>
                     </div>
                     <h1 className="font-serif text-4xl md:text-5xl font-bold text-[#2C2420] mb-4">
                         {title}
                     </h1>
                     {lastUpdated && (
                         <p className="text-stone-500 text-sm">
-                            Last Updated: {lastUpdated}
+                            {t('components.policy_layout.updated')} {lastUpdated}
                         </p>
                     )}
                 </div>

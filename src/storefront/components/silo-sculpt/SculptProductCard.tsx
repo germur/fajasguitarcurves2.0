@@ -1,6 +1,5 @@
 
-
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 
 interface SculptProductCardProps {
     product: {

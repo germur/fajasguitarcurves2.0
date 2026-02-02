@@ -32,16 +32,22 @@ function validateProduct(product: any) {
  * Fetches products that match ALL provided tags (Intersection).
  * This enables Granular SEO Collections (e.g. "Recovery" + "Stage 2").
  */
-export async function fetchProductsByTags(tags: string[]) {
+/**
+ * Fetches products that match ALL provided tags (Intersection).
+ * This enables Granular SEO Collections (e.g. "Recovery" + "Stage 2").
+ */
+export async function fetchProductsByTags(tags: string[], lang: 'es' | 'en' = 'es') {
   // Construct Query: tag:A AND tag:B
   const queryTags = tags.map(t => `tag:${t}`).join(' AND ');
 
   // Safety check
   if (!queryTags) return [];
 
+  const languageCode = lang.toUpperCase(); // 'ES' or 'EN'
+
   const query = `
-    {
-      products(first: 50, sortKey: BEST_SELLING, query: "${queryTags}") {
+    query getProductsByTags($query: String!, $language: LanguageCode!) @inContext(language: $language) {
+      products(first: 50, sortKey: BEST_SELLING, query: $query) {
         edges {
           node {
             id
@@ -101,7 +107,10 @@ export async function fetchProductsByTags(tags: string[]) {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': storefrontAccessToken
       },
-      body: JSON.stringify({ query })
+      body: JSON.stringify({
+        query,
+        variables: { query: queryTags, language: languageCode }
+      })
     });
 
     const json = await response.json();
@@ -131,12 +140,14 @@ export async function fetchProductsByTags(tags: string[]) {
  * Fetches products using a raw Shopify Search Query.
  * Useful for Title searches when tags are missing (e.g. "title:Postparto")
  */
-export async function fetchProductsByQuery(queryString: string) {
+export async function fetchProductsByQuery(queryString: string, lang: 'es' | 'en' = 'es') {
   if (!queryString) return [];
 
+  const languageCode = lang.toUpperCase();
+
   const query = `
-    {
-      products(first: 50, sortKey: BEST_SELLING, query: "${queryString}") {
+    query getProductsByQuery($query: String!, $language: LanguageCode!) @inContext(language: $language) {
+      products(first: 50, sortKey: BEST_SELLING, query: $query) {
         edges {
           node {
             id
@@ -196,9 +207,12 @@ export async function fetchProductsByQuery(queryString: string) {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': storefrontAccessToken
       },
-      body: JSON.stringify({ query })
+      body: JSON.stringify({
+        query,
+        variables: { query: queryString, language: languageCode }
+      })
     });
-
+    // ... rest of function logic remains same logic but updated fetch body
     const json = await response.json();
 
     if (!json.data || !json.data.products) {
@@ -226,10 +240,15 @@ export async function fetchProductsByQuery(queryString: string) {
  * Fetches all products (up to 250) for the 'View All' page.
  * Applies strict data hygiene.
  */
-export async function fetchAllProducts() {
+/**
+ * Fetches all products (up to 250) for the 'View All' page.
+ * Applies strict data hygiene.
+ */
+export async function fetchAllProducts(lang: 'es' | 'en' = 'es') {
   try {
+    const languageCode = lang.toUpperCase();
     const query = `
-          {
+          query getAllProducts($language: LanguageCode!) @inContext(language: $language) {
             products(first: 250, sortKey: BEST_SELLING) {
               edges {
                 node {
@@ -290,7 +309,10 @@ export async function fetchAllProducts() {
         'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token': storefrontAccessToken
       },
-      body: JSON.stringify({ query })
+      body: JSON.stringify({
+        query,
+        variables: { language: languageCode }
+      })
     });
 
     const json = await response.json();
@@ -322,11 +344,13 @@ export async function fetchAllProducts() {
  * Fetches products for a specific collection handle.
  * Applies data hygiene (validates images/variants).
  */
-export async function fetchCollectionByHandle(handle: string, strict = true) {
+export async function fetchCollectionByHandle(handle: string, strict = true, lang: 'es' | 'en' = 'es') {
   if (!handle) return [];
 
+  const languageCode = lang.toUpperCase();
+
   const query = `
-    query getCollection($handle: String!) {
+    query getCollection($handle: String!, $language: LanguageCode!) @inContext(language: $language) {
       collectionByHandle(handle: $handle) {
         products(first: 250, sortKey: BEST_SELLING) {
           edges {
@@ -391,7 +415,7 @@ export async function fetchCollectionByHandle(handle: string, strict = true) {
       },
       body: JSON.stringify({
         query,
-        variables: { handle }
+        variables: { handle, language: languageCode }
       })
     });
 

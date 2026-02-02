@@ -3,8 +3,10 @@ import { Ruler, Info, ArrowRight, RotateCcw, AlertCircle, ChevronLeft } from 'lu
 import type { Unit, Recommendation, Measurements } from './types';
 import { SIZE_DATA } from './constants';
 import ProgressBar from './ProgressBar';
+import { useTranslation } from 'react-i18next';
 
 const GuitarFitFinder: React.FC = () => {
+    const { t } = useTranslation();
     // 0:Intro, 1:Cintura, 2:Cadera, 3:Resultado
     const [step, setStep] = useState(0);
     const [measurements, setMeasurements] = useState<Measurements>({ waist: '', hip: '' });
@@ -34,12 +36,12 @@ const GuitarFitFinder: React.FC = () => {
             if (w < 23) return {
                 size: '', displayLabel: '', line: '', description: '', badgeText: '', badgeColor: '', borderColor: '',
                 type: 'underflow',
-                msg: 'Para cinturas menores a 23", contáctanos para nuestra línea Petite exclusiva.'
+                msg: t('components.guitar_fit_finder.logic.underflow_msg')
             };
             if (w > 51) return {
                 size: '', displayLabel: '', line: '', description: '', badgeText: '', badgeColor: '', borderColor: '',
                 type: 'overflow',
-                msg: 'Para medidas superiores a 51", explora nuestra colección Plus Size personalizada.'
+                msg: t('components.guitar_fit_finder.logic.overflow_msg')
             };
             return null;
         }
@@ -51,9 +53,9 @@ const GuitarFitFinder: React.FC = () => {
         let result: Recommendation = {
             size: baseSize.label,
             displayLabel: baseSize.label,
-            line: 'Línea Uso Diario (Standard Fit)',
-            description: `Tu medida de cadera (${h.toFixed(1)}") entra en el rango estándar para tu cintura. Tu silueta es balanceada.`,
-            badgeText: 'Ajuste Estándar',
+            line: t('components.guitar_fit_finder.logic.standard_line'),
+            description: t('components.guitar_fit_finder.logic.standard_desc', { hip: h.toFixed(1) }),
+            badgeText: t('components.guitar_fit_finder.logic.standard_badge'),
             badgeColor: 'bg-stone-200 text-stone-700',
             borderColor: 'border-stone-300',
             image: '/assets/shape-pear.png'
@@ -61,10 +63,10 @@ const GuitarFitFinder: React.FC = () => {
 
         if (isGuitar) {
             // Guitar Curves Detected
-            result.line = 'Línea Guitar Curves (Reloj de Arena)';
+            result.line = t('components.guitar_fit_finder.logic.guitar_line');
             result.displayLabel = baseSize.dualLabel || baseSize.label;
-            result.description = `Tu cadera (${h.toFixed(1)}") excede el promedio estándar (${baseSize.stdHipMax}"). Necesitas el corte curvo Guitar Tech para evitar aplastamiento en glúteos.`;
-            result.badgeText = '✨ Fit Guitarra Detectado';
+            result.description = t('components.guitar_fit_finder.logic.guitar_desc', { hip: h.toFixed(1), max: baseSize.stdHipMax });
+            result.badgeText = t('components.guitar_fit_finder.logic.guitar_badge');
             result.badgeColor = 'bg-[#D1AB66]/10 text-[#A35944] border-[#D1AB66]/30';
             result.borderColor = 'border-[#D1AB66]';
             result.isGuitar = true;
@@ -72,17 +74,17 @@ const GuitarFitFinder: React.FC = () => {
         } else if ((h - w) <= 6) {
             // Apple Shape Detected (Less than 6 inch difference)
             result.image = '/assets/shape-apple.png';
-            result.description = `Tu silueta tiende a ser recta (Manzana). El ajuste estándar te proporcionará máximo soporte abdominal y definirá tu cintura.`;
+            result.description = t('components.guitar_fit_finder.logic.apple_desc');
         }
 
         return result;
-    }, [measurements, unit]);
+    }, [measurements, unit, t]);
 
     const changeStep = (direction: number) => {
         setError(null);
         if (direction === 1) {
-            if (step === 1 && !measurements.waist) { setError('Por favor ingresa tu cintura.'); return; }
-            if (step === 2 && !measurements.hip) { setError('Por favor ingresa tu cadera.'); return; }
+            if (step === 1 && !measurements.waist) { setError(t('components.guitar_fit_finder.steps.error_waist')); return; }
+            if (step === 2 && !measurements.hip) { setError(t('components.guitar_fit_finder.steps.error_hip')); return; }
         }
 
         setIsAnimating(true);
@@ -104,7 +106,7 @@ const GuitarFitFinder: React.FC = () => {
                 <button onClick={() => changeStep(-1)} className="p-2 hover:bg-stone-100 rounded-full transition-colors text-stone-400">
                     <ChevronLeft size={24} />
                 </button>
-                <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">{type === 'waist' ? 'Paso 1' : 'Paso 2'}</span>
+                <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">{type === 'waist' ? t('components.guitar_fit_finder.steps.prev') : t('components.guitar_fit_finder.steps.next')}</span>
                 <div className="w-10"></div>
             </div>
 
@@ -121,7 +123,7 @@ const GuitarFitFinder: React.FC = () => {
                     type="number"
                     value={measurements[type]}
                     onChange={(e) => setMeasurements({ ...measurements, [type]: e.target.value })}
-                    placeholder={unit === 'in' ? (type === 'waist' ? '30' : '40') : (type === 'waist' ? '76' : '102')}
+                    placeholder={unit === 'in' ? (type === 'waist' ? t('components.guitar_fit_finder.steps.placeholder_waist_in') : t('components.guitar_fit_finder.steps.placeholder_hip_in')) : (type === 'waist' ? t('components.guitar_fit_finder.steps.placeholder_waist_cm') : t('components.guitar_fit_finder.steps.placeholder_hip_cm'))}
                     className="w-full text-center text-7xl font-black py-4 border-b-4 border-stone-200 bg-transparent focus:outline-none focus:border-[#D1AB66] placeholder-stone-200 text-[#2C2420] transition-colors"
                     autoFocus
                 />
@@ -134,7 +136,7 @@ const GuitarFitFinder: React.FC = () => {
                 onClick={() => changeStep(1)}
                 className="w-full bg-[#2C2420] text-[#F5EDDF] font-bold py-5 rounded-2xl mt-auto shadow-lg hover:bg-black transition-all flex justify-center items-center gap-2"
             >
-                Continuar <ArrowRight size={18} />
+                {t('components.guitar_fit_finder.steps.continue')} <ArrowRight size={18} />
             </button>
         </div>
     );
@@ -145,8 +147,8 @@ const GuitarFitFinder: React.FC = () => {
 
                 {/* Header Branding */}
                 <div className="bg-[#2C2420] p-4 text-center">
-                    <h2 className="text-[#F5EDDF] text-xs font-bold tracking-[0.3em] uppercase">Guitar Curves</h2>
-                    <p className="text-[#D1AB66] text-[9px] font-bold uppercase tracking-widest mt-0.5">Calculadora de Talla</p>
+                    <h2 className="text-[#F5EDDF] text-xs font-bold tracking-[0.3em] uppercase">{t('components.guitar_fit_finder.header.brand')}</h2>
+                    <p className="text-[#D1AB66] text-[9px] font-bold uppercase tracking-widest mt-0.5">{t('components.guitar_fit_finder.header.subtitle')}</p>
                 </div>
 
                 <div className="p-6 md:p-8 flex-1 flex flex-col items-center">
@@ -161,26 +163,26 @@ const GuitarFitFinder: React.FC = () => {
                                     <Ruler size={40} className="text-[#D1AB66]" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-serif font-bold text-[#2C2420] mb-3">Tu Talla Perfecta</h3>
+                                    <h3 className="text-2xl font-serif font-bold text-[#2C2420] mb-3">{t('components.guitar_fit_finder.intro.title')}</h3>
                                     <p className="text-stone-500 text-sm px-2 leading-relaxed">
-                                        Analizamos la diferencia entre cintura y cadera para recomendarte el ajuste exacto.
+                                        {t('components.guitar_fit_finder.intro.desc')}
                                     </p>
                                 </div>
 
                                 <div className="flex flex-col items-center gap-3 w-full">
-                                    <p className="text-[10px] uppercase tracking-widest text-stone-400 font-bold">Elige tus unidades</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-stone-400 font-bold">{t('components.guitar_fit_finder.intro.units_label')}</p>
                                     <div className="flex bg-stone-50 p-1.5 rounded-full w-full border border-stone-100">
                                         <button
                                             onClick={() => setUnit('cm')}
                                             className={`flex-1 py-3 rounded-full text-xs font-bold transition-all ${unit === 'cm' ? 'bg-[#2C2420] text-white shadow-md' : 'text-stone-400 hover:text-[#2C2420]'}`}
                                         >
-                                            CM
+                                            {t('components.guitar_fit_finder.intro.unit_cm')}
                                         </button>
                                         <button
                                             onClick={() => setUnit('in')}
                                             className={`flex-1 py-3 rounded-full text-xs font-bold transition-all ${unit === 'in' ? 'bg-[#2C2420] text-white shadow-md' : 'text-stone-400 hover:text-[#2C2420]'}`}
                                         >
-                                            Pulgadas
+                                            {t('components.guitar_fit_finder.intro.unit_in')}
                                         </button>
                                     </div>
                                 </div>
@@ -189,16 +191,16 @@ const GuitarFitFinder: React.FC = () => {
                                     onClick={() => changeStep(1)}
                                     className="w-full bg-[#D1AB66] hover:bg-[#c49a4a] text-[#2C2420] font-bold py-5 rounded-2xl shadow-xl hover:shadow-2xl transform transition hover:-translate-y-1 flex items-center justify-center gap-3 mt-auto"
                                 >
-                                    CALCULAR MI TALLA <ArrowRight size={20} />
+                                    {t('components.guitar_fit_finder.intro.cta')} <ArrowRight size={20} />
                                 </button>
                             </div>
                         )}
 
                         {/* STEP 1: WAIST */}
-                        {step === 1 && renderMeasurementInput('waist', 'Mide tu Cintura', 'Pasa la cinta por encima del ombligo, justo donde se hace el pliegue al inclinarte.')}
+                        {step === 1 && renderMeasurementInput('waist', t('components.guitar_fit_finder.steps.waist_label'), t('components.guitar_fit_finder.steps.waist_info'))}
 
                         {/* STEP 2: HIP */}
-                        {step === 2 && renderMeasurementInput('hip', 'Mide tu Cadera', 'Encuentra la parte más ancha de tus glúteos. No aprietes la cinta.')}
+                        {step === 2 && renderMeasurementInput('hip', t('components.guitar_fit_finder.steps.hip_label'), t('components.guitar_fit_finder.steps.hip_info'))}
 
                         {/* STEP 3: RESULTS */}
                         {step === 3 && recommendation && !recommendation.type && (
@@ -216,7 +218,7 @@ const GuitarFitFinder: React.FC = () => {
                                     </div>
                                 )}
 
-                                <h3 className="text-stone-400 text-xs font-bold uppercase tracking-widest mb-2">Tu Talla Recomendada</h3>
+                                <h3 className="text-stone-400 text-xs font-bold uppercase tracking-widest mb-2">{t('components.guitar_fit_finder.results.recommended_label')}</h3>
                                 <div className="text-6xl font-black text-[#2C2420] mb-2 tracking-tighter">
                                     {recommendation.displayLabel}
                                 </div>
@@ -232,14 +234,14 @@ const GuitarFitFinder: React.FC = () => {
 
                                 <div className="space-y-4 mt-auto">
                                     <button className="w-full bg-[#2C2420] hover:bg-black text-[#F5EDDF] font-bold py-5 rounded-2xl shadow-xl transition-all hover:scale-[1.02] flex justify-center items-center gap-2 active:scale-95">
-                                        AGREGAR AL CARRITO - $110 <ArrowRight size={20} />
+                                        {t('components.guitar_fit_finder.results.add_to_cart')} <ArrowRight size={20} />
                                     </button>
 
                                     <button
                                         onClick={handleRestart}
                                         className="flex items-center justify-center gap-2 w-full py-3 text-stone-400 text-[10px] font-bold uppercase tracking-widest hover:text-[#2C2420] transition-colors"
                                     >
-                                        <RotateCcw size={14} /> Calcular de nuevo
+                                        <RotateCcw size={14} /> {t('components.guitar_fit_finder.results.restart')}
                                     </button>
                                 </div>
                             </div>
@@ -249,13 +251,13 @@ const GuitarFitFinder: React.FC = () => {
                         {step === 3 && recommendation?.type && (
                             <div className="text-center py-12 px-6 flex-1 flex flex-col justify-center items-center animate-fade-in">
                                 <AlertCircle size={64} className="text-stone-200 mb-6" />
-                                <h3 className="text-2xl font-serif font-bold text-[#362904] mb-4">Fuera de Rango Estándar</h3>
+                                <h3 className="text-2xl font-serif font-bold text-[#362904] mb-4">{t('components.guitar_fit_finder.results.out_of_range_title')}</h3>
                                 <p className="text-stone-500 text-sm mb-10 leading-relaxed">{recommendation.msg}</p>
                                 <button
                                     onClick={handleRestart}
                                     className="w-full bg-[#362904] text-white font-bold py-5 rounded-2xl shadow-lg"
                                 >
-                                    Intentar de nuevo
+                                    {t('components.guitar_fit_finder.results.retry')}
                                 </button>
                             </div>
                         )}

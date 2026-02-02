@@ -6,23 +6,47 @@
  */
 
 // Lógica de traducción interna
-export const SILO_NAMES = {
-    RECOVERY: "Postquirúrgicas",
-    SCULPT: "Reloj de Arena",
-    ESSENTIALS: "Brasieres"
+const SILO_DATA = {
+    es: {
+        names: {
+            RECOVERY: "Postquirúrgicas",
+            SCULPT: "Reloj de Arena",
+            ESSENTIALS: "Brasieres"
+        },
+        descriptions: {
+            RECOVERY: "Acelera tu recuperación con ingeniería textil colombiana de grado médico. Diseñadas específicamente para procesos de Etapa 2 y Etapa 3, nuestras fajas ofrecen la compresión exacta para reducir la inflamación, prevenir la fibrosis y proteger tus resultados de Lipo 360, BBL o Tummy Tuck. Sin oprimir glúteos ni caderas, solo el soporte que tu cirujano recomienda.",
+            SCULPT: "Moldea una silueta de impacto con nuestras cinturillas y fajas de alta compresión. Diseñadas para el Cuerpo Guitarra, estas prendas logran una reducción máxima de cintura mientras realzan tus curvas naturales sin aplastarlas. El equilibrio perfecto entre una cintura de avispa y la comodidad que necesitas para destacar tu figura todos los días.",
+            ESSENTIALS: "El soporte profesional que tu busto y espalda necesitan. Desde brasieres postoperatorios con corrector de postura hasta complementos esenciales para tu faja, cada prenda está fabricada con telas hipoalergénicas que cuidan tu piel. Soporte diario, estabilidad y descanso sin sacrificar la discreción bajo tu ropa."
+        }
+    },
+    en: {
+        names: {
+            RECOVERY: "Post-Surgery",
+            SCULPT: "Hourglass Sculpt",
+            ESSENTIALS: "Bras & Essentials"
+        },
+        descriptions: {
+            RECOVERY: "Accelerate your recovery with medical-grade Colombian textile engineering. Designed specifically for Stage 2 and Stage 3 processes, our fajas offer the exact compression needed to reduce inflammation, prevent fibrosis, and protect your Lipo 360, BBL, or Tummy Tuck results. No flattening of glutes or hips, just the support your surgeon recommends.",
+            SCULPT: "Sculpt a stunning silhouette with our waist trainers and high-compression fajas. Designed for the Guitar Body, these garments achieve maximum waist reduction while enhancing your natural curves without flattening them. The perfect balance between a wasp waist and the comfort you need to stand out every day.",
+            ESSENTIALS: "The professional support your bust and back need. From post-op bras with posture correctors to essential add-ons for your faja, every garment is made with hypoallergenic fabrics that care for your skin. Daily support, stability, and rest without sacrificing discretion under your clothes."
+        }
+    }
 };
 
-export const SILO_DESCRIPTIONS = {
-    RECOVERY: "Acelera tu recuperación con ingeniería textil colombiana de grado médico. Diseñadas específicamente para procesos de Etapa 2 y Etapa 3, nuestras fajas ofrecen la compresión exacta para reducir la inflamación, prevenir la fibrosis y proteger tus resultados de Lipo 360, BBL o Tummy Tuck. Sin oprimir glúteos ni caderas, solo el soporte que tu cirujano recomienda.",
-    SCULPT: "Moldea una silueta de impacto con nuestras cinturillas y fajas de alta compresión. Diseñadas para el Cuerpo Guitarra, estas prendas logran una reducción máxima de cintura mientras realzan tus curvas naturales sin aplastarlas. El equilibrio perfecto entre una cintura de avispa y la comodidad que necesitas para destacar tu figura todos los días.",
-    ESSENTIALS: "El soporte profesional que tu busto y espalda necesitan. Desde brasieres postoperatorios con corrector de postura hasta complementos esenciales para tu faja, cada prenda está fabricada con telas hipoalergénicas que cuidan tu piel. Soporte diario, estabilidad y descanso sin sacrificar la discreción bajo tu ropa."
+export const getSiloData = (lang: string = 'es') => {
+    return SILO_DATA[lang as keyof typeof SILO_DATA] || SILO_DATA['es'];
 };
+
+// Backwards compatibility (Deprecated but kept to prevent immediate breakages until updated)
+export const SILO_NAMES = SILO_DATA.es.names;
+export const SILO_DESCRIPTIONS = SILO_DATA.es.descriptions;
+
 
 export class ShopifyMapper {
     /**
      * Maps a raw Shopify Product Node to our specific Section Data schema
      */
-    static mapProduct(shopifyProduct: any, siloType = 'standard') {
+    static mapProduct(shopifyProduct: any, siloType = 'standard', lang = 'es') {
         const tags = shopifyProduct.tags || [];
         const title = shopifyProduct.title;
 
@@ -39,7 +63,6 @@ export class ShopifyMapper {
         if (isNaN(price)) price = 0; // Final safety net
 
         // IMAGE MAPPING (Robust)
-        // UPDATED: Return objects with { url, altText } instead of just strings to enable Alt Matching
         let images: { url: string; altText: string }[] | string[] = [];
         if (shopifyProduct.images?.edges) {
             // Raw GraphQL
@@ -78,11 +101,10 @@ export class ShopifyMapper {
             id: shopifyProduct.id,
             title: title,
             price: price, // Number
-            // Primary Image: Prefer URL string for compatibility, but keep objects in array
+            // Primary Image: Prefer URL string for compatibility
             image: (images[0] as any)?.url || images[0] || '',
             images: images,         // Now contains objects { url, altText }
 
-            // Compatibility for SculptProductCard
             // Compatibility for SculptProductCard
             imageProduct: (images[0] as any)?.url || images[0] || '',
             imageResult: (images[1] as any)?.url || images[1] || (images[0] as any)?.url || images[0] || '',
@@ -98,17 +120,17 @@ export class ShopifyMapper {
         if (siloType === 'medical') {
             return {
                 ...mapped,
-                stage: this.getRecoveryStage(tags),
-                compression: this.getCompressionLevel(tags),
-                occasion: this.getOccasion(tags), // Added to populate Usage filters
+                stage: this.getRecoveryStage(tags, lang),
+                compression: this.getCompressionLevel(tags, lang),
+                occasion: this.getOccasion(tags, lang),
                 features: this.getFeaturesFromTags(tags, ['Cierre', 'Broches', 'Espalda Alta', 'Strapless', 'Short', 'Levanta Cola'])
             };
         } else if (siloType === 'sculpt') {
             return {
                 ...mapped,
-                stage: this.getRecoveryStage(tags), // Added for consistency
-                compression: this.getCompressionLevel(tags),
-                occasion: this.getOccasion(tags),
+                stage: this.getRecoveryStage(tags, lang),
+                compression: this.getCompressionLevel(tags, lang),
+                occasion: this.getOccasion(tags, lang),
                 features: this.getFeaturesFromTags(tags, ['Strapless', 'Levanta Cola', 'Latex', 'Invisible', 'Cierre', 'Broches'])
             };
         }
@@ -116,9 +138,9 @@ export class ShopifyMapper {
         if (siloType === 'guitar') {
             return {
                 ...mapped,
-                buttLift: this.getButtLiftLevel(tags),
-                bodyType: tags.includes('Plus Size') ? 'Plus Size' : 'Guitar/BBL',
-                compression: this.getCompressionLevel(tags),
+                buttLift: this.getButtLiftLevel(tags, lang),
+                bodyType: tags.includes('Plus Size') ? 'Plus Size' : (lang === 'en' ? 'Guitar/BBL' : 'Guitar/BBL'),
+                compression: this.getCompressionLevel(tags, lang),
                 techView: '',
                 tags: tags.filter((t: string) => ['Espalda Alta', 'Silicone Lace'].includes(t))
             };
@@ -127,10 +149,10 @@ export class ShopifyMapper {
         if (siloType === 'universal') {
             return {
                 ...mapped,
-                stage: this.getRecoveryStage(tags),
-                compression: this.getCompressionLevel(tags),
-                category: this.getCategory(tags), // RESTORED: ProductType is empty, must infer from tags
-                occasion: this.getOccasion(tags),
+                stage: this.getRecoveryStage(tags, lang),
+                compression: this.getCompressionLevel(tags, lang),
+                category: this.getCategory(tags, lang),
+                occasion: this.getOccasion(tags, lang),
                 features: this.getFeaturesFromTags(tags, [])
             };
         }
@@ -138,10 +160,10 @@ export class ShopifyMapper {
         if (siloType === 'essentials') {
             return {
                 ...mapped,
-                badge: tags.includes('Corrector de Postura') ? 'Corrector Postura' : 'Soporte Médico', // Dynamic Badge
-                benefit: this.getEssentialsBenefit(tags),
-                stage: this.getRecoveryStage(tags),
-                compression: this.getCompressionLevel(tags),
+                badge: tags.includes('Corrector de Postura') ? (lang === 'en' ? 'Posture Corrector' : 'Corrector Postura') : (lang === 'en' ? 'Medical Support' : 'Soporte Médico'),
+                benefit: this.getEssentialsBenefit(tags, lang),
+                stage: this.getRecoveryStage(tags, lang),
+                compression: this.getCompressionLevel(tags, lang),
                 features: this.getFeaturesFromTags(tags, ['Espalda Alta', 'Mangas', 'Cierre Frontal', 'Soporte'])
             };
         }
@@ -151,130 +173,120 @@ export class ShopifyMapper {
 
     // --- Helper Logic (The "Brain") ---
 
-    // RESTORED & PROPERLY DYNAMIC: Extract Exact Category Tag
-    static getCategory(tags: string[]) {
-        const lowerTags = tags.map(t => t.toLowerCase());
+    static getCategory(tags: string[], lang = 'es') {
+
 
         // Helper to find original tag by lower match
+
+        // Note: We return the raw tag usually, but for i18n we might want to map it?
+        // Current logic returns the Shopify tag found.
+        // If we want to translate the CATEGORY name displayed to user:
+        // We really should return a generic key and translate in UI, OR map here.
+        // Let's try basic mapping if specific tags found.
+
+        // For now, returning the raw tag is risky if the tag is mixed language. 
+        // But assumed tags are standardized. 
+        // Let's implement basic translation based on detection.
+
+        const match = this.detectCategory(tags);
+        if (lang === 'en' && match) {
+            // Map common Spanish tags to English
+            const map: Record<string, string> = {
+                'Cinturilla': 'Waist Trainer',
+                'Faja Short': 'Short Faja',
+                'Faja Etapa 2': 'Stage 2 Faja',
+                'Faja Etapa 1': 'Stage 1 Faja',
+                'Brasier': 'Bra',
+                'Tabla': 'Board',
+                'Espuma': 'Foam',
+                'Chaleco': 'Vest'
+            };
+            // flexible matching for the returned string
+            const key = Object.keys(map).find(k => match.includes(k));
+            if (key) return map[key];
+        }
+
+        return match || (lang === 'en' ? 'Various' : 'Varios');
+    }
+
+    static detectCategory(tags: string[]) {
+        const lowerTags = tags.map(t => t.toLowerCase());
         const findTag = (keyword: string) => {
             const index = lowerTags.findIndex(t => t.includes(keyword));
             return index !== -1 ? tags[index] : null;
         };
 
-        // 1. HIGH SPECIFICITY (Return exact tag like "Faja Etapa 3")
         const tier1 = [
             'faja etapa', 'faja post', 'faja chaleco', 'faja short',
             'cinturilla', 'corset', 'chaleco', 'body moldeador',
             'mallas', 'faja de mantenimiento', 'faja con brasier',
-            'full body shaper' // Map this -> 'Faja Completa' if we want, but better to skip if user hates English.
-            // REMOVED: 'body' (too broad, catches 'Full Body'), 'leggings', 'set'
+            'full body shaper'
         ];
 
-        // Anti-Pattern: If we match "Full Body", we strictly ignore it so we don't display it
-        // actually, logic below ignores checks keywords. If I don't check for 'full body', it won't return it.
-
         for (const k of tier1) {
-            const match = findTag(k);
-            if (match) {
-                // Double check: If the matched tag is PURELY English, ignore it?
-                // No, just don't include English keywords in Tier 1.
-                // "body" matched "Full Body". Removing "body" fixes it.
-                return match;
-            }
-        }
-
-        // 2. GENERIC TYPES
-        const tier2 = ['faja', 'short', 'brasier', 'tabla'];
-        // REMOVED: 'bra' (use 'brasier')
-
-        for (const k of tier2) {
             const match = findTag(k);
             if (match) return match;
         }
 
-        return 'Varios';
+        const tier2 = ['faja', 'short', 'brasier', 'tabla'];
+        for (const k of tier2) {
+            const match = findTag(k);
+            if (match) return match;
+        }
+        return null;
     }
 
-    static getRecoveryStage(tags: string[]) {
-        if (tags.some(t => t === 'Stage 1' || t.includes('Etapa 1'))) return 'Etapa 1';
-        if (tags.some(t => t === 'Stage 2' || t.includes('Etapa 2'))) return 'Etapa 2';
-        if (tags.some(t => t === 'Stage 3' || t.includes('Etapa 3'))) return 'Etapa 3';
-        return ''; // No default if not found
+    static getRecoveryStage(tags: string[], lang = 'es') {
+        if (tags.some(t => t === 'Stage 1' || t.includes('Etapa 1'))) return lang === 'en' ? 'Stage 1' : 'Etapa 1';
+        if (tags.some(t => t === 'Stage 2' || t.includes('Etapa 2'))) return lang === 'en' ? 'Stage 2' : 'Etapa 2';
+        if (tags.some(t => t === 'Stage 3' || t.includes('Etapa 3'))) return lang === 'en' ? 'Stage 3' : 'Etapa 3';
+        return '';
     }
 
-    static getOccasion(tags: string[]) {
-        // 1. GOLDEN LIST (Official Spanish Tags from CSV)
-        if (tags.some(t => t === 'Uso Deportivo' || t.includes('Deportivo'))) return 'Uso Deportivo';
-        if (tags.some(t => t === 'Uso Diario' || t.includes('Cintura de Avispa'))) return 'Uso Diario';
-        if (tags.some(t => t === 'Faja Invisible' || t === 'Strapless' || t.includes('Invisible'))) return 'Vestido / Invisible';
-        if (tags.some(t => t === 'Faja Postoperatoria' || t.includes('Post-Op') || t.includes('BBL') || t.includes('Post-Quirúrgico'))) return 'Post-Op / BBL';
-        if (tags.some(t => t === 'Oficina' || t.includes('Soporte de Espalda'))) return 'Oficina';
+    static getOccasion(tags: string[], lang = 'es') {
+        // GOLDEN LIST
+        if (tags.some(t => t === 'Uso Deportivo' || t.includes('Deportivo') || t.includes('Gym'))) return lang === 'en' ? 'Sports / Gym' : 'Uso Deportivo';
+        if (tags.some(t => t === 'Uso Diario' || t.includes('Cintura de Avispa'))) return lang === 'en' ? 'Daily Use' : 'Uso Diario';
+        if (tags.some(t => t === 'Faja Invisible' || t === 'Strapless' || t.includes('Invisible'))) return lang === 'en' ? 'Dress / Invisible' : 'Vestido / Invisible';
+        if (tags.some(t => t === 'Faja Postoperatoria' || t.includes('Post-Op') || t.includes('BBL') || t.includes('Post-Quirúrgico'))) return lang === 'en' ? 'Post-Op / BBL' : 'Post-Op / BBL';
+        if (tags.some(t => t === 'Oficina' || t.includes('Soporte de Espalda'))) return lang === 'en' ? 'Office Support' : 'Oficina';
 
-        // 2. FALLBACK (Legacy/English cleanup)
+        // FALLBACK
         const lowerTags = tags.map(t => t.toLowerCase());
-        if (lowerTags.includes('gym') || lowerTags.includes('workout')) return 'Uso Deportivo';
-        if (lowerTags.includes('wedding') || lowerTags.includes('boda') || lowerTags.includes('novia')) return 'Vestido / Invisible';
-        if (lowerTags.includes('daily')) return 'Uso Diario';
+        if (lowerTags.includes('daily')) return lang === 'en' ? 'Daily Use' : 'Uso Diario';
 
-        return ''; // NO DEFAULT - Hide if not found
+        return '';
     }
 
-    static getCompressionLevel(tags: string[]) {
-        if (tags.some(t => t === 'Alta Compresión' || t === 'High Compression')) return 'Alta';
-        if (tags.some(t => t === 'Baja Compresión' || t === 'Light Compression')) return 'Baja';
-        if (tags.some(t => t === 'Media Compresión' || t === 'Medium Compression')) return 'Media';
-        return ''; // NO DEFAULT
+    static getCompressionLevel(tags: string[], lang = 'es') {
+        if (tags.some(t => t === 'Alta Compresión' || t === 'High Compression')) return lang === 'en' ? 'High' : 'Alta';
+        if (tags.some(t => t === 'Baja Compresión' || t === 'Light Compression')) return lang === 'en' ? 'Low' : 'Baja';
+        if (tags.some(t => t === 'Media Compresión' || t === 'Medium Compression')) return lang === 'en' ? 'Medium' : 'Media';
+        return '';
     }
 
-    static getButtLiftLevel(tags: string[]) {
+    static getButtLiftLevel(tags: string[], lang = 'es') {
         const lowerTags = tags.map(t => t.toLowerCase());
-        if (lowerTags.some(t => t.includes('ultra realce') || t.includes('butt lifter'))) return 'Ultra Realce';
+        if (lowerTags.some(t => t.includes('ultra realce') || t.includes('butt lifter'))) return lang === 'en' ? 'Ultra Lift' : 'Ultra Realce';
         if (lowerTags.some(t => t.includes('natural'))) return 'Natural';
-        return 'Invisible';
+        return lang === 'en' ? 'Invisible' : 'Invisible';
     }
 
-    static getOccasionFromTags(tags: string[]) {
-        if (tags.some(t => t.match(/novia/i) || t.match(/wedding/i))) return 'wedding';
-        if (tags.some(t => t.match(/postura/i) || t.match(/office/i))) return 'office';
-        return 'date_night'; // Default fallback
-    }
-
-    static getUsageDuration(tags: string[]) {
-        if (tags.some(t => t.match(/daily/i) || t.match(/diario/i))) return '8-12 Hours (Office)';
-        if (tags.some(t => t.match(/event/i))) return '4-6 Hours (Event)';
-        return '24 Hours (Second Skin)';
-    }
-
-    static getComfortScore(tags: string[]) {
-        // Inverse to compression usually
-        if (this.getCompressionLevel(tags) === 'Alta') return 60;
-        if (this.getCompressionLevel(tags) === 'Media') return 85;
-        return 95;
-    }
-
-    static getEssentialsBenefit(tags: string[]) {
-        if (tags.some(t => t.toLowerCase().includes('postura'))) return "Corrige tu postura y alivia el dolor de espalda inmediatamente.";
-        if (tags.some(t => t.toLowerCase().includes('mangas'))) return "Control total de brazos y espalda con máxima suavidad.";
-        return "Soporte médico certificado y descanso para tu busto.";
+    static getEssentialsBenefit(tags: string[], lang = 'es') {
+        if (tags.some(t => t.toLowerCase().includes('postura')))
+            return lang === 'en' ? "Corrects posture and relieves back pain instantly." : "Corrige tu postura y alivia el dolor de espalda inmediatamente.";
+        if (tags.some(t => t.toLowerCase().includes('mangas')))
+            return lang === 'en' ? "Total arm and back control with maximum softness." : "Control total de brazos y espalda con máxima suavidad.";
+        return lang === 'en' ? "Certified medical support and rest for your bust." : "Soporte médico certificado y descanso para tu busto.";
     }
 
     static getFeaturesFromTags(tags: string[], _keywords: string[]) {
-        // dynamic BLACKLIST approach:
-        // We want to show ALL unique tags from the inventory as features, 
-        // EXCEPT for those we have already categorized into 'Category', 'Stage', 'Compression', 'Occasion'.
-        // and internal system tags.
-
         const LOWER_SYSTEM_TAGS = [
-            // Internal / Status (Keep these blocked)
             'best seller', 'más vendido', 'new arrival', 'nuevo', 'sale', 'oferta',
-
-            // LEGACY / GARBAGE TO HIDE (User Explicit Request)
             'gym', 'activewear', 'arm shaper', 'body moldeador', 'lipo 360',
             'full body', 'guitar shape', 'bbl', 'special occasion',
             'daily use', 'workout', 'post op', 'surgery', 'leggings',
             'butt lifter', 'levanta cola', 'invisible', 'seamless', 'powernet', 'strapless',
-
-            // NEWLY IDENTIFIED LEAKS (From Browser Inspection)
             'full body shaper', 'high back', 'high compression', 'light compression', 'medium compression',
             'knee length', 'post lipo', 'stage 1', 'stage 2', 'stage 3', 'waist trainer', 'daily use',
             'braquioplastia', 'post-op', 'post surgery'
@@ -282,10 +294,7 @@ export class ShopifyMapper {
 
         return tags.filter(tag => {
             const t = tag.toLowerCase();
-            // Filter out system tags
             if (LOWER_SYSTEM_TAGS.some(sys => t === sys || t.includes(sys))) return false;
-
-            // Keep everything else as a "Feature"
             return true;
         });
     }

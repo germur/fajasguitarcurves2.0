@@ -1,19 +1,21 @@
+
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Search, ShoppingBag, Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LocalizedLink as Link } from './LocalizedLink';
+import { Search, ShoppingBag, Menu, X, ChevronDown, ArrowRight, Globe } from 'lucide-react';
 import { useStore } from '../hooks/useStoreContext';
-
-// Define the interface for menu items
-
-
+import { useTranslation } from 'react-i18next';
+import { translatePathToEnglish, translatePathToSpanish } from '../../lib/routeTranslations';
 
 export function GlassNavbar() {
+    const { t, i18n } = useTranslation();
     const { cartCount, toggleCart, toggleSearch } = useStore();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // 'shop' or null
     const [announcementIndex, setAnnouncementIndex] = useState(0);
     const location = useLocation();
+    const navigate = useNavigate();
 
     // Scroll Logic
     useEffect(() => {
@@ -31,6 +33,8 @@ export function GlassNavbar() {
     }, [location]);
 
     // Announcement Slider Logic
+    const announcements = t('nav.announcements', { returnObjects: true }) as string[];
+
     useEffect(() => {
         const interval = setInterval(() => {
             setAnnouncementIndex(prev => (prev === 0 ? 1 : 0));
@@ -38,13 +42,34 @@ export function GlassNavbar() {
         return () => clearInterval(interval);
     }, []);
 
-    const announcements = [
-        "🇺🇸 Envíos Gratis en todo Estados Unidos",
-        "💬 Asesoría de Talla por Expertas en WhatsApp"
-    ];
 
 
+    const toggleLanguage = () => {
+        const targetLang = i18n.language === 'en' ? 'es' : 'en';
+        const currentPath = location.pathname;
+        const search = location.search;
 
+        let newPath = currentPath;
+
+        if (targetLang === 'en') {
+            // Switch to English: Translate path segments + add /en prefix
+            // Note: translatePathToEnglish handles logic to add /en internally? 
+            // Wait, looking at routeTranslations.ts:
+            // translatePathToEnglish returns just the translated path (e.g. /collections/all)
+            // So we need to prepend /en manually if it's not root
+
+            const translated = translatePathToEnglish(currentPath);
+            newPath = `/en${translated === '/' ? '' : translated}`;
+        } else {
+            // Switch to Spanish: Translate path segments (input is /en/foo/bar)
+            // translatePathToSpanish expects /en prefix?
+            // routeTranslations.ts says: "Remove /en prefix if present"
+
+            newPath = translatePathToSpanish(currentPath);
+        }
+
+        navigate(newPath + search);
+    };
 
     return (
         <>
@@ -57,7 +82,7 @@ export function GlassNavbar() {
                     key={announcementIndex}
                     className="text-[10px] md:text-xs font-mono tracking-widest uppercase animate-fade-in text-center px-4"
                 >
-                    {announcements[announcementIndex]}
+                    {announcements[announcementIndex] || announcements[0]}
                 </p>
             </div>
 
@@ -80,25 +105,25 @@ export function GlassNavbar() {
                                 onMouseEnter={() => setActiveDropdown('shop')}
                             >
                                 <span className="flex items-center gap-1 font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                    TIENDA <ChevronDown size={14} />
+                                    {t('nav.store')} <ChevronDown size={14} />
                                 </span>
                             </div>
 
                             {/* NEW TOP LEVEL LINK */}
                             <Link to="/colecciones/todo" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase flex items-center gap-1">
-                                <span className="text-[#D4AF37]">✨</span> Ver Todo
+                                <span className="text-[#D4AF37]">✨</span> {t('nav.view_all')}
                             </Link>
 
                             {/* OTHER LINKS */}
-                            <Link to="/nuestra-historia" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                Nuestra Historia
+                            <Link to="/nosotros" className="font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
+                                {t('nav.our_story')}
                             </Link>
                             <div
                                 className="h-full flex items-center cursor-pointer group relative"
                                 onMouseEnter={() => setActiveDropdown('tools')}
                             >
                                 <span className="flex items-center gap-1 font-bold text-xs tracking-[0.15em] hover:text-[#D4AF37] transition-colors uppercase">
-                                    HERRAMIENTAS <ChevronDown size={14} />
+                                    {t('nav.tools')} <ChevronDown size={14} />
                                 </span>
                                 {/* Tools Dropdown (Mini) */}
                                 <div className={`
@@ -106,14 +131,11 @@ export function GlassNavbar() {
                                     transform transition-all duration-300 origin-top
                                     ${activeDropdown === 'tools' ? 'opacity-100 visible scale-y-100' : 'opacity-0 invisible scale-y-95'}
                                 `}>
-                                    {/* <Link to="/tools/recovery-timeline" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
-                                        Recovery Calculator
-                                    </Link> */}
-                                    <Link to="/herramientas/ratio-guitarra" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
-                                        Test Ratio Guitarra
+                                    <Link to="/herramientas/calculadora-reloj-de-arena" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        {t('tools.ratio_test')}
                                     </Link>
-                                    <Link to="/herramientas/etapa1-vs-etapa2" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
-                                        Etapa 1 vs Etapa 2
+                                    <Link to="/herramientas/comparador-de-etapas" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                        {t('tools.stage_compare')}
                                     </Link>
                                 </div>
                             </div>
@@ -143,8 +165,16 @@ export function GlassNavbar() {
 
                         {/* 3. Right (Actions) */}
                         <div className="hidden md:flex items-center space-x-6">
+                            <button
+                                onClick={toggleLanguage}
+                                className="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase hover:text-[#D4AF37] transition-colors"
+                            >
+                                <Globe size={16} />
+                                <span>{i18n.language === 'en' ? 'EN' : 'ES'}</span>
+                            </button>
+
                             <Link to="/calculadora-de-tallas" className="hidden lg:flex bg-[#D4AF37] text-white text-[10px] font-bold tracking-widest uppercase px-5 py-2 rounded-full hover:bg-[#B49286] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 whitespace-nowrap">
-                                ENCUENTRA TU TALLA 📐
+                                {t('nav.find_size')} 📐
                             </Link>
                             <button
                                 onClick={toggleSearch}
@@ -167,6 +197,9 @@ export function GlassNavbar() {
 
                         {/* Mobile Actions (Right) */}
                         <div className="flex md:hidden items-center space-x-4">
+                            <button onClick={toggleLanguage} className="text-stone-900 font-bold text-xs">
+                                {i18n.language === 'en' ? 'EN' : 'ES'}
+                            </button>
                             <button onClick={toggleSearch} className="text-stone-900">
                                 <Search className="w-5 h-5" />
                             </button>
@@ -196,7 +229,7 @@ export function GlassNavbar() {
                         <div className="grid grid-cols-12 gap-8">
 
                             <div className="col-span-3 border-r border-stone-100 pr-8">
-                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Colección</h4>
+                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">{t('collections.by_collection')}</h4>
                                 <ul className="space-y-6">
                                     <li className="group/item">
                                         <Link to="/colecciones/recuperacion-postquirurgica" className="flex items-center gap-4 cursor-pointer" onClick={() => setActiveDropdown(null)}>
@@ -204,8 +237,8 @@ export function GlassNavbar() {
                                                 <img src="/assets/recovery-hands.png" className="w-full h-full object-cover" alt="Recovery" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Postquirúrgicas</p>
-                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Post-Quirúrgico & Médico</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">{t('collections.recovery')}</p>
+                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">{t('collections.recovery_sub')}</p>
                                             </div>
                                         </Link>
                                     </li>
@@ -215,8 +248,8 @@ export function GlassNavbar() {
                                                 <img src="/assets/sculpt-nav-menu.jpg" className="w-full h-full object-cover" alt="Sculpt" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Reloj de Arena</p>
-                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Uso Diario & Estético</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">{t('collections.sculpt')}</p>
+                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">{t('collections.sculpt_sub')}</p>
                                             </div>
                                         </Link>
                                     </li>
@@ -226,8 +259,8 @@ export function GlassNavbar() {
                                                 <img src="/assets/essentials-flatlay.jpg" className="w-full h-full object-cover" alt="Bras" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">Brasieres</p>
-                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">Complementos</p>
+                                                <p className="font-bold text-sm text-[#2C2420] group-hover/item:text-[#D4AF37] transition-colors">{t('collections.bras')}</p>
+                                                <p className="text-[10px] text-stone-400 uppercase tracking-wide">{t('collections.bras_sub')}</p>
                                             </div>
                                         </Link>
                                     </li>
@@ -236,17 +269,17 @@ export function GlassNavbar() {
 
                             {/* COL 2: BY GOAL (Solutions) */}
                             <div className="col-span-3 border-r border-stone-100 pr-8 pl-4">
-                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">Por Objetivo</h4>
+                                <h4 className="font-serif text-lg mb-6 text-stone-400 italic">{t('collections.by_goal')}</h4>
                                 <ul className="space-y-3">
                                     {[
-                                        { label: 'Etapa 2 (Alta Compresión)', href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+2' },
-                                        { label: 'Etapa 3 (Mantenimiento)', href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+3' },
-                                        { label: 'Post-Op / BBL', href: '/colecciones/recuperacion-postquirurgica?tag=Post-Op' },
-                                        { label: 'Realce Glúteo', href: '/colecciones/moldeo-y-estetica?tag=Realce' },
-                                        { label: 'Cintura de Avispa', href: '/colecciones/moldeo-y-estetica?tag=Cinturilla' },
-                                        { label: 'Strapless / Invisible', href: '/colecciones/moldeo-y-estetica?tag=Strapless' },
-                                        { label: 'Shorts y Bodys', href: '/colecciones/moldeo-y-estetica?tag=Shorts' },
-                                        { label: 'Media Pierna', href: '/colecciones/recuperacion-postquirurgica?tag=Media+Pierna' }
+                                        { label: t('nav.goals.stage2'), href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+2' },
+                                        { label: t('nav.goals.stage3'), href: '/colecciones/recuperacion-postquirurgica?tag=Etapa+3' },
+                                        { label: t('nav.goals.postop'), href: '/colecciones/recuperacion-postquirurgica?tag=Post-Op' },
+                                        { label: t('nav.goals.glute'), href: '/colecciones/moldeo-y-estetica?tag=Realce' },
+                                        { label: t('nav.goals.waist'), href: '/colecciones/moldeo-y-estetica?tag=Cinturilla' },
+                                        { label: t('nav.goals.strapless'), href: '/colecciones/moldeo-y-estetica?tag=Strapless' },
+                                        { label: t('nav.goals.shorts'), href: '/colecciones/moldeo-y-estetica?tag=Shorts' },
+                                        { label: t('nav.goals.midthigh'), href: '/colecciones/recuperacion-postquirurgica?tag=Media+Pierna' }
                                     ].map((item) => (
                                         <li key={item.label}>
                                             <Link
@@ -261,7 +294,7 @@ export function GlassNavbar() {
                                 </ul>
                                 <div className="mt-8 pt-6 border-t border-stone-100">
                                     <Link to="/calculadora-de-tallas" className="flex items-center gap-2 text-xs font-bold text-[#D4AF37] hover:underline uppercase tracking-wider" onClick={() => setActiveDropdown(null)}>
-                                        HACER QUIZ DE TALLA <ArrowRight size={12} />
+                                        {t('nav.quiz_cta')} <ArrowRight size={12} />
                                     </Link>
                                 </div>
 
@@ -274,7 +307,7 @@ export function GlassNavbar() {
                                 <Link to="/colecciones/moldeo-y-estetica" className="relative h-48 bg-stone-100 rounded-xl overflow-hidden group cursor-pointer" onClick={() => setActiveDropdown(null)}>
                                     <img src="/assets/sewing-detail.png" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="New In" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
-                                        <span className="text-white text-xs font-bold uppercase tracking-widest mb-1">Lo Nuevo</span>
+                                        <span className="text-white text-xs font-bold uppercase tracking-widest mb-1">{t('nav.new_in')}</span>
                                         <p className="text-white font-serif text-xl">The Guitar Cut™</p>
                                     </div>
                                 </Link>
@@ -282,10 +315,10 @@ export function GlassNavbar() {
                                 {/* Visual Card 2: Sale */}
                                 <Link to="/colecciones/moldeo-y-estetica" className="relative h-48 bg-[#F5F3F0] rounded-xl overflow-hidden group cursor-pointer flex items-center justify-center p-6 text-center" onClick={() => setActiveDropdown(null)}>
                                     <div>
-                                        <h5 className="font-serif text-2xl text-[#2C2420] mb-2">Ofertas</h5>
-                                        <p className="text-xs text-stone-500 mb-4">Hasta 40% OFF en referencias seleccionadas</p>
+                                        <h5 className="font-serif text-2xl text-[#2C2420] mb-2">{t('nav.offers')}</h5>
+                                        <p className="text-xs text-stone-500 mb-4">{t('nav.sale_desc')}</p>
                                         <span className="inline-block bg-[#2C2420] text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#D4AF37] transition-colors">
-                                            Ver Ofertas
+                                            {t('nav.view_offers')}
                                         </span>
                                     </div>
                                 </Link>
@@ -316,30 +349,30 @@ export function GlassNavbar() {
 
                         {/* 1. SHOP SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Tienda</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">{t('common.cart').replace('Cart', 'Shop') /* hack or use key */}{t('nav.store')}</h4>
                             <div className="space-y-4 pl-2 border-l-2 border-stone-100">
                                 <Link to="/colecciones/todo" className="block p-2 bg-stone-50 rounded-lg transition-colors border border-stone-100" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#D4AF37] flex items-center gap-2">✨ Ver Todo</div>
-                                    <div className="text-xs text-stone-500">Catálogo Completo</div>
+                                    <div className="font-bold text-base text-[#D4AF37] flex items-center gap-2">✨ {t('nav.view_all')}</div>
+                                    <div className="text-xs text-stone-500">{t('nav.full_catalog')}</div>
                                 </Link>
                                 <Link to="/colecciones/recuperacion-postquirurgica" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Postquirúrgicas</div>
-                                    <div className="text-xs text-stone-500">Post-Quirúrgico & Etapa 1, 2, 3</div>
+                                    <div className="font-bold text-base text-[#2C2420]">{t('collections.recovery')}</div>
+                                    <div className="text-xs text-stone-500">{t('collections.recovery_sub')}</div>
                                 </Link>
                                 <Link to="/colecciones/moldeo-y-estetica" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Reloj de Arena</div>
-                                    <div className="text-xs text-stone-500">Fajas de Uso Diario & Cinturillas</div>
+                                    <div className="font-bold text-base text-[#2C2420]">{t('collections.sculpt')}</div>
+                                    <div className="text-xs text-stone-500">{t('collections.sculpt_sub')}</div>
                                 </Link>
                                 <Link to="/colecciones/brasieres-y-postura" className="block p-2 hover:bg-stone-50 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <div className="font-bold text-base text-[#2C2420]">Brasieres</div>
-                                    <div className="text-xs text-stone-500">Brasieres, Tablas y Espumas</div>
+                                    <div className="font-bold text-base text-[#2C2420]">{t('collections.bras')}</div>
+                                    <div className="text-xs text-stone-500">{t('collections.bras_sub')}</div>
                                 </Link>
 
                             </div>
 
                             {/* MOBILE TAGS CLOUD */}
                             <div className="mt-4 pt-4 border-t border-stone-100">
-                                <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">Filtrar por Etiqueta</p>
+                                <p className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">{t('nav.filter_tag')}</p>
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { label: 'Etapa 2', tag: 'Etapa 2' },
@@ -364,26 +397,26 @@ export function GlassNavbar() {
 
                         {/* 2. TOOLS SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Herramientas</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">{t('nav.tools')}</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                <Link to="/herramientas/ratio-guitarra" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Test Ratio Guitarra
+                                <Link to="/herramientas/calculadora-reloj-de-arena" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {t('tools.ratio_test')}
                                 </Link>
-                                <Link to="/herramientas/etapa1-vs-etapa2" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Etapa 1 vs Etapa 2
+                                <Link to="/herramientas/comparador-de-etapas" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {t('tools.stage_compare')}
                                 </Link>
                             </div>
                         </div>
 
                         {/* 3. BRAND SECTION */}
                         <div>
-                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">Marca</h4>
+                            <h4 className="font-serif text-2xl text-[#2C2420] mb-4">{t('nav.brand')}</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                <Link to="/nuestra-historia" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Nuestra Historia
+                                <Link to="/nosotros" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                    {t('nav.our_story')}
                                 </Link>
                                 <Link to="/pages/faq" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
-                                    Preguntas Frecuentes
+                                    {t('nav.faq')}
                                 </Link>
                             </div>
                         </div>
@@ -394,7 +427,7 @@ export function GlassNavbar() {
                                 className="w-full bg-[#D4AF37] text-white font-bold uppercase tracking-widest text-xs py-4 rounded-full flex items-center justify-center gap-2 hover:bg-[#B49286] transition-colors"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                Encuentra tu Talla <ArrowRight size={16} />
+                                {t('nav.find_size')} <ArrowRight size={16} />
                             </Link>
                         </div>
 

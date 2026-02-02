@@ -1,8 +1,10 @@
 import { MessageSquare, Mail, Clock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactPage() {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     return (
         <div className="bg-[#FAF9F6] min-h-screen font-sans pb-20">
@@ -10,13 +12,13 @@ export default function ContactPage() {
             <div className="bg-[#2C2420] text-[#F5EDDF] pt-24 pb-32 px-6 relative overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <span className="inline-block px-3 py-1 bg-white/10 text-[#D1AB66] text-xs font-bold uppercase tracking-widest rounded-full mb-6">
-                        Centro de Soporte
+                        {t('pages.contact.badge')}
                     </span>
                     <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6">
-                        Estamos Aquí para Ti.
+                        {t('pages.contact.title')}
                     </h1>
                     <p className="text-stone-300 text-lg max-w-2xl mx-auto">
-                        Ya sea que estés buscando tu talla o rastreando un pedido, nuestro equipo de especialistas está listo para ayudarte.
+                        {t('pages.contact.desc')}
                     </p>
                 </div>
                 {/* Background Pattern */}
@@ -31,15 +33,15 @@ export default function ContactPage() {
                         <div className="w-16 h-16 bg-[#FFF8F0] rounded-full flex items-center justify-center text-[#D1AB66] mb-6">
                             <MessageSquare className="w-8 h-8" />
                         </div>
-                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">Chatea con una Experta</h3>
+                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">{t('pages.contact.chat_title')}</h3>
                         <p className="text-stone-500 text-sm mb-8 leading-relaxed">
-                            Respuestas inmediatas sobre tallas, etapas y envíos. Nuestro Asistente IA está disponible 24/7.
+                            {t('pages.contact.chat_desc')}
                         </p>
                         <button
-                            onClick={() => navigate('/store/solutions')}
+                            onClick={() => navigate('/solutions')}
                             className="mt-auto w-full py-4 bg-[#2C2420] text-[#F5EDDF] rounded-xl font-bold hover:bg-[#D1AB66] hover:text-[#2C2420] transition-colors flex items-center justify-center gap-2"
                         >
-                            Iniciar Chat <ArrowRight className="w-4 h-4" />
+                            {t('pages.contact.chat_btn')} <ArrowRight className="w-4 h-4" />
                         </button>
                     </div>
 
@@ -48,9 +50,9 @@ export default function ContactPage() {
                         <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center text-[#2C2420] mb-6">
                             <Mail className="w-8 h-8" />
                         </div>
-                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">Escríbenos</h3>
+                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">{t('pages.contact.email_title')}</h3>
                         <p className="text-stone-500 text-sm mb-8 leading-relaxed">
-                            Para modificaciones de pedidos, devoluciones o alianzas comerciales. Respondemos en 24 horas.
+                            {t('pages.contact.email_desc')}
                         </p>
                         <a href="mailto:support@guitarcurves.com" className="mt-auto w-full py-4 bg-stone-100 text-[#2C2420] rounded-xl font-bold hover:bg-stone-200 transition-colors text-center block">
                             support@guitarcurves.com
@@ -62,12 +64,12 @@ export default function ContactPage() {
                         <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center text-[#2C2420] mb-6">
                             <Clock className="w-8 h-8" />
                         </div>
-                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">Asesoría de Talla Manual</h3>
+                        <h3 className="font-bold text-xl text-[#2C2420] mb-2">{t('pages.contact.fit_title')}</h3>
                         <p className="text-stone-500 text-sm mb-8 leading-relaxed">
-                            Envíanos tus medidas y una foto (opcional) y una especialista te asignará tu talla ideal.
+                            {t('pages.contact.fit_desc')}
                         </p>
                         <button className="mt-auto w-full py-4 bg-stone-100 text-[#2C2420] rounded-xl font-bold hover:bg-stone-200 transition-colors">
-                            Solicitar Asesoría
+                            {t('pages.contact.fit_btn')}
                         </button>
                     </div>
 
@@ -76,9 +78,9 @@ export default function ContactPage() {
 
             {/* Hours */}
             <div className="text-center mt-20 text-stone-400 text-sm">
-                <p className="font-bold mb-1">Horario de Atención</p>
-                <p>Lun - Vie: 9am - 6pm EST</p>
-                <p>Sáb: 10am - 4pm EST</p>
+                <p className="font-bold mb-1">{t('pages.contact.hours_title')}</p>
+                <p>{t('pages.contact.hours_week')}</p>
+                <p>{t('pages.contact.hours_sat')}</p>
             </div>
 
         </div>

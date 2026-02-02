@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { MoveHorizontal } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 export function BeforeAfterSlider() {
+    const { t } = useTranslation();
     const [sliderPosition, setSliderPosition] = useState(50);
     const containerRef = useRef<HTMLDivElement>(null);
     const isDragging = useRef(false);
@@ -32,6 +34,8 @@ export function BeforeAfterSlider() {
         return () => window.removeEventListener('mouseup', handleWindowUp);
     }, []);
 
+    const benefits = t('components.before_after_slider.benefits', { returnObjects: true }) as string[];
+
     return (
         <section className="py-24 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
@@ -41,20 +45,16 @@ export function BeforeAfterSlider() {
                     {/* Text Context */}
                     <div className="w-full md:w-1/3 order-2 md:order-1">
                         <span className="text-[#A35944] font-bold tracking-widest text-xs uppercase mb-4 block">
-                            Transformación Real
+                            {t('components.before_after_slider.badge')}
                         </span>
                         <h2 className="font-serif text-4xl md:text-5xl text-[#2C2420] font-bold mb-6 leading-tight">
-                            No es magia, es <br />Ingeniería Textil.
+                            {t('components.before_after_slider.title_part1')} <br />{t('components.before_after_slider.title_part2')}
                         </h2>
                         <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-                            Olvídate del "Hip Dip" y la flacidez. Nuestra tecnología de alta compresión redistribuye el tejido para crear una silueta de reloj de arena instantánea, sin cirugía.
+                            {t('components.before_after_slider.desc')}
                         </p>
                         <ul className="space-y-4 mb-10">
-                            {[
-                                "Corrige Hip Dips al instante",
-                                "Aplana el abdomen bajo (FUPA)",
-                                "Levanta los glúteos naturalmente"
-                            ].map((item, i) => (
+                            {benefits.map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 font-medium text-[#2C2420]">
                                     <div className="w-1.5 h-1.5 rounded-full bg-[#D1AB66]" />
                                     {item}
@@ -62,7 +62,7 @@ export function BeforeAfterSlider() {
                             ))}
                         </ul>
                         <Link to="/colecciones/moldeo-y-estetica" className="inline-block px-8 py-4 bg-[#2C2420] text-[#F5EDDF] rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all">
-                            Descubrir Sculpt Studio
+                            {t('components.before_after_slider.cta')}
                         </Link>
                     </div>
 
@@ -80,7 +80,7 @@ export function BeforeAfterSlider() {
                             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                         />
                         <div className="absolute top-6 right-6 bg-[#2C2420] text-[#F5EDDF] px-3 py-1 text-xs font-bold rounded uppercase">
-                            Con Faja
+                            {t('components.before_after_slider.with_faja')}
                         </div>
 
                         {/* Image: Before (Clipped) */}
@@ -95,7 +95,7 @@ export function BeforeAfterSlider() {
                                 className="absolute inset-0 w-full h-full object-cover object-center"
                             />
                             <div className="absolute top-6 left-6 bg-white/80 text-stone-600 px-3 py-1 text-xs font-bold rounded uppercase backdrop-blur-sm">
-                                Sin Faja
+                                {t('components.before_after_slider.without_faja')}
                             </div>
                         </div>
 

@@ -1,9 +1,12 @@
+
 import { useState, useEffect } from 'react';
 import { ShopifyMapper } from '../../lib/shopify-mapper';
+import { useTranslation } from 'react-i18next';
 
 const SILO_HANDLE = 'post-quirurgica'; // Updated to match likely real handle
 
 export function useRecoveryProducts() {
+    const { i18n } = useTranslation();
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -69,7 +72,7 @@ export function useRecoveryProducts() {
                     console.log('✅ Shopify Data Fetched (Recovery):', data.collectionByHandle.products.edges.length, 'items');
                     // Map raw Shopify nodes to our "Medical Product" schema
                     const mappedProducts = data.collectionByHandle.products.edges
-                        .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'medical'))
+                        .map((edge: any) => ShopifyMapper.mapProduct(edge.node, 'medical', i18n.language))
                         .filter((p: any) => {
                             const t = p.tags ? p.tags.join(' ').toLowerCase() : '';
                             return t.includes('stage 1') || t.includes('etapa 1') ||
@@ -93,7 +96,7 @@ export function useRecoveryProducts() {
         }
 
         fetchProducts();
-    }, []);
+    }, [i18n.language]);
 
     return { products, loading };
 }

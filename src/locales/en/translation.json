@@ -1,0 +1,1416 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "search": "Search",
+        "cart": "Cart"
+    },
+    "nav": {
+        "store": "SHOP",
+        "view_all": "View All",
+        "full_catalog": "Full Catalog",
+        "our_story": "Our Story",
+        "tools": "TOOLS",
+        "find_size": "FIND YOUR SIZE",
+        "quiz_cta": "TAKE SIZE QUIZ",
+        "announcements": [
+            "🇺🇸 Free Shipping within the US",
+            "💬 Expert Sizing Support via WhatsApp"
+        ],
+        "brand": "Brand",
+        "faq": "FAQ",
+        "filter_tag": "Filter by Tag",
+        "new_in": "New In",
+        "offers": "Offers",
+        "view_offers": "View Offers",
+        "sale_desc": "Up to 40% OFF on selected items",
+        "goals": {
+            "stage2": "Stage 2 (High Compression)",
+            "stage3": "Stage 3 (Maintenance)",
+            "postop": "Post-Op / BBL",
+            "glute": "Butt Lift",
+            "waist": "Wasp Waist",
+            "strapless": "Strapless / Invisible",
+            "shorts": "Shorts & Bodysuits",
+            "midthigh": "Mid-Thigh"
+        }
+    },
+    "collections": {
+        "recovery": "Post-Surgery",
+        "recovery_sub": "Post-Op & Medical",
+        "sculpt": "Hourglass Sculpt",
+        "sculpt_sub": "Daily Use & Aesthetic",
+        "bras": "Bras & Accessories",
+        "bras_sub": "Bras, Boards & Foams",
+        "by_collection": "By Collection",
+        "by_goal": "By Goal"
+    },
+    "tools": {
+        "ratio_test": "Guitar Ratio Test",
+        "stage_compare": "Stage 1 vs Stage 2",
+        "recovery_calc": "Recovery Calculator"
+    },
+    "footer": {
+        "description": "Colombian textile engineering designed for post-surgical recovery and high-level daily sculpting.",
+        "explore": "Explore",
+        "support": "Support",
+        "join_club": "Join the Club",
+        "newsletter_desc": "Get recovery tips from experts and early access to drops.",
+        "email_placeholder": "Your best email",
+        "no_spam": "*We don't spam. Only curves.",
+        "secure_payment": "Secure Payment",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "seo_title": "Experts in Colombian Fajas in USA",
+        "seo_text": "Guitar Curves is the leading brand for Colombian Fajas in the United States, specialized in hourglass silhouettes and post-surgical recovery...",
+        "links": {
+            "returns": "Returns & Exchanges",
+            "fit_finder": "Size Guide (AI)",
+            "wholesale": "Wholesale Program",
+            "contact": "Contact Us"
+        }
+    },
+    "pages": {
+        "our_story": {
+            "seo": {
+                "title": "Our Story: Textile Engineering from Medellín | Guitar Curves",
+                "description": "Discover the origin of Guitar Curves. Not Fast Fashion, but Colombian craftsmanship designed by Nelly Perez for real curves."
+            },
+            "hero": {
+                "title": "The Engineering<1>Behind the Curve</1>",
+                "subtitle": "Heritage & Engineering"
+            },
+            "founder": {
+                "quote": "\"We design for real women, <1>not for mannequins.</1>\"",
+                "p1": "Guitar Curves was born in the textile workshops of Medellín, Colombia, the world capital of fajas. While the mass industry tried to fit Latin bodies into standard molds, we did the opposite: we studied the anatomy of the woman with real curves (small waist, wide hips) and created a pattern that respects it.",
+                "p2": "We are not 'Fast Fashion'; we are artisanal heritage transmitted by expert hands that have been sewing confidence for over 20 years.",
+                "name": "Nelly Perez",
+                "role": "Founder & Master Pattern Maker"
+            },
+            "badge": {
+                "title": "Guaranteed Authenticity",
+                "desc": "We reject 'Fast Fashion'. Each of our garments is made in Colombia under ethical standards, using certified medical-grade Powernet. When you buy Guitar Curves, you don't just buy a faja, you invest in quality that lasts for years."
+            },
+            "secret": {
+                "title": "The Secret of the \"Guitar Cut\"",
+                "desc": "The secret is not just in the fabric, but in the tension. We use Medical Grade Powernet with intelligent memory: a bidirectional fabric that firmly compresses where you need control (abdomen and back) but yields gently where you need volume (glutes and hips). No flattening, no suffocating. Each seam is flat and reinforced with Vitamin E to nourish your skin while you recover.",
+                "fit_title": "The \"Guitar Fit\"",
+                "fit_desc": "Unique patterns with expanded waist-to-hip ratio.",
+                "med_title": "Medical Grade",
+                "med_desc": "Certified compression for post-surgical recovery.",
+                "skin_title": "Skin Care",
+                "skin_desc": "Fabrics infused with Vitamin E and Aloe Vera."
+            },
+            "cta": {
+                "title": "You know our story.",
+                "desc": "Now start writing yours with your new body.",
+                "button": "FIND MY PERFECT FAJA"
+            }
+        },
+        "contact": {
+            "badge": "Support Center",
+            "title": "We Are Here for You.",
+            "desc": "Whether you're looking for your size or tracking an order, our team of specialists is ready to help.",
+            "chat_title": "Chat with an Expert",
+            "chat_desc": "Immediate answers about sizing, stages, and shipping. Our AI Assistant is available 24/7.",
+            "chat_btn": "Start Chat",
+            "email_title": "Email Us",
+            "email_desc": "For order modifications, returns, or business partnerships. We respond within 24 hours.",
+            "fit_title": "Manual Size Assessment",
+            "fit_desc": "Send us your measurements and a photo (optional) and a specialist will assign your ideal size.",
+            "fit_btn": "Request Assessment",
+            "hours_title": "Business Hours",
+            "hours_week": "Mon - Fri: 9am - 6pm EST",
+            "hours_sat": "Sat: 10am - 4pm EST"
+        },
+        "shipping": {
+            "seo": {
+                "title": "Fast & Secure Shipping | Guitar Curves Fajas",
+                "description": "Shipping from USA in 24 hours. Receive your faja in 3-5 days without customs delays."
+            },
+            "title": "Shipping Policy",
+            "lead": "We know that when you order your faja, you need it NOW! Whether your surgery is approaching or you just want to show off your curves. That's why all our logistics are centralized in the United States.",
+            "highlight": "🚀 All our orders ship from our warehouse in [City Example]. Forget about waiting for customs or international shipments for weeks.",
+            "processing_title": "⏱️ Processing Times",
+            "processing_desc": "We move fast. Orders placed before 2:00 PM EST are processed and shipped the same day (Monday to Friday). Orders placed after this time or on weekends are processed the next business day.",
+            "options_title": "🚚 Options and Transit Times",
+            "options_desc": "We work mainly with USPS and UPS to ensure the best coverage.",
+            "tracking_title": "📦 Tracking Your Order",
+            "tracking_desc": "As soon as your package leaves our warehouse, you will receive an email with your Tracking Number. Please allow up to 24 hours for the carrier system to update the location.",
+            "issues_title": "⚠️ Delivery Issues",
+            "issues_lost": "<0>Lost Packages:</0> Although very rare, if your package appears as \"Delivered\" but you don't have it, wait 24 hours (sometimes they scan before delivery). If it still doesn't appear, contact us.",
+            "issues_address": "<0>Incorrect Address:</0> We are not responsible for packages sent to addresses entered incorrectly by the customer. Please check your address twice before paying.",
+            "table": {
+                "type": "Shipping Type",
+                "time": "Estimated Time",
+                "cost": "Cost",
+                "standard": "Standard Shipping",
+                "standard_time": "3-5 Business Days",
+                "free": "FREE (Orders +$200)",
+                "express": "Express / Priority",
+                "express_time": "1-2 Business Days"
+            }
+        },
+        "returns": {
+            "seo": {
+                "title": "Fit Guarantee & Returns | Guitar Curves Fajas",
+                "description": "Free size exchanges on your first purchase. Perfect fit guarantee for 30 days."
+            },
+            "title": "Perfect Fit Guarantee & Return Policy",
+            "lead": "We want you to feel spectacular and confident. We know that buying a Colombian faja online can generate doubts. Will it close at the waist? Will it fit my hips? We understand that your body is unique, specially if you are in a post-surgical process or have our \"Guitar Shape\".",
+            "guarantee": "That's why, at Guitar Curves, we eliminate the risk of your purchase with our <0>Perfect Fit Guarantee</0>.",
+            "promise_title": "✨ Our Promise: First Exchange is FREE",
+            "promise_desc": "If you receive your faja and it's not your correct size, we cover the shipping cost to exchange it for the size you need (valid for the first exchange within the US). We want to ensure you get that \"snatched\" effect and adequate medical compression without costing you more.",
+            "hygiene_title": "⚠️ Hygiene Rules (READ BEFORE TRYING ON)",
+            "hygiene_intro": "Due to strict health regulations and to ensure the safety of all our customers, we are inflexible with hygiene. Our garments are intimate use. For an exchange or return to be accepted, the garment must strictly comply with the following:",
+            "hygiene_list": [
+                "<0>TRY IT ON OVER YOUR UNDERWEAR:</0> Never try on the faja directly on your skin.",
+                "<0>NO STAINS OR FLUIDS:</0> We will not accept garments with deodorant stains, makeup, body lotions, body fluids, or blood.",
+                "<0>NO ODORS:</0> The garment must not smell of perfume, cigarette smoke, detergent, or softener.",
+                "<0>ORIGINAL CONDITION:</0> Must have all tags attached and its original packaging intact."
+            ],
+            "hygiene_warning": "🛑 IMPORTANT: If we receive a garment that does not meet these conditions, it will be rejected immediately and returned at your expense. We cannot resell a used garment due to biological risk. Thank you for your understanding.",
+            "how_to_title": "🔄 How to Request an Exchange or Return",
+            "how_to_desc": "You have <0>30 days</0> from the delivery date to start your process.",
+            "how_to_steps": [
+                "<0>Start Your Request:</0> Send an email to <1>support@guitarcurves.com</1> with your Order Number and the reason.",
+                "<0>Approval:</0> Our team will review your request and send you a Pre-paid Shipping Label (for size exchanges).",
+                "<0>Ship:</0> Pack the faja in its original bag, stick the label, and drop it off at the nearest post office.",
+                "<0>Receive Your New Faja:</0> Once we receive your package and verify it meets hygiene rules, we will send your new size in 24-48 business hours."
+            ],
+            "non_returnable_title": "❌ Non-Returnable Items (Final Sale)",
+            "non_returnable_intro": "For safety and hygiene, the following items are final sale and cannot be exchanged or returned:",
+            "non_returnable_list": [
+                "Creams, Gels, and Soaps (if seal is broken).",
+                "Abdominal Boards and Lipo Foams that have been removed from protective plastic.",
+                "Clearance items.",
+                "Underwear (Panties) that are not fajas."
+            ],
+            "refund_title": "📦 Refund Times",
+            "refund_intro": "If you prefer a refund instead of a size exchange:",
+            "refund_list": [
+                "You will be refunded the value of the garment minus the return shipping label cost ($9.99 USD).",
+                "Original shipping costs are non-refundable.",
+                "The refund will appear in your bank account between 5 to 10 business days after we inspect the garment."
+            ],
+            "help_title": "Doubts about your size before shipping?",
+            "help_desc": "Don't guess! If you are going to make an exchange, contact us first. Send us a photo of your current measurements (waist and hip) and our Guitar Tech experts will tell you exactly what size to order.",
+            "help_btn": "Contact Support"
+        },
+        "faq": {
+            "seo": {
+                "title": "Help Center & FAQ | Guitar Curves",
+                "description": "Resolve your doubts about sizing, shipping, and garment care. Expert advice for your safe purchase."
+            },
+            "hero_title": "Help Center",
+            "hero_desc": "We are here to resolve your doubts before, during, and after your purchase.",
+            "search_placeholder": "Doubts about your size or shipping?",
+            "cards": {
+                "size": {
+                    "title": "Size & Fit",
+                    "desc": "Find your perfect Fit and learn how to measure yourself correctly.",
+                    "btn": "View Guide"
+                },
+                "shipping": {
+                    "title": "Shipping & Returns",
+                    "desc": "Delivery times, tracking, and our satisfaction guarantee.",
+                    "btn": "Read Policy"
+                },
+                "medical": {
+                    "title": "Medical Questions",
+                    "desc": "Stage 1 vs Stage 2, board usage, and post-op recovery.",
+                    "btn": "Consult"
+                },
+                "care": {
+                    "title": "Garment Care",
+                    "desc": "How to wash and care for your faja to maintain compression.",
+                    "btn": "View Tips"
+                }
+            },
+            "cta_title": "Didn't find what you were looking for?",
+            "cta_desc": "Our team of faja experts is available via WhatsApp.",
+            "cta_btn": "Chat with an Expert"
+        },
+        "wholesale": {
+            "hero": {
+                "badge": "Certified Partner Program",
+                "title": "Turn Recovery <br /> into Your Best Business",
+                "desc": "Offer your clients the Colombian quality they demand and get industry-leading profit margins.",
+                "btn": "REQUEST CATALOG"
+            },
+            "stats": {
+                "clinics": "Allied Clinics",
+                "made_in": "Made in Colombia",
+                "dispatch": "Priority Dispatch",
+                "minima": "Minimum Order"
+            },
+            "benefits": {
+                "title": "Why Choose Guitar Curves",
+                "quality_title": "Quality that Protects Your Reputation",
+                "quality_desc": "High-end Powernet that doesn't break or yield. Your patients will love you for the comfort and superior post-surgical results.",
+                "profit_title": "Real Profitability",
+                "profit_desc": "Structured pricing so you double your investment (100% ROI) in direct sales. Margins designed for growth.",
+                "content_title": "Content Ready to Use",
+                "content_desc": "Access our professional image bank so you can sell on your Instagram without spending on photo shoots."
+            },
+            "testimonial": {
+                "quote": "\"My patients' favorite faja\"",
+                "author": "Dr. Partners Network"
+            },
+            "form": {
+                "title": "Apply to Program",
+                "desc": "Complete your details. We will contact you via WhatsApp or Email in less than 24h.",
+                "name_label": "Contact Name",
+                "business_label": "Business Name",
+                "type_label": "Business Type",
+                "social_label": "Instagram / Website",
+                "submit_btn": "SEND APPLICATION"
+            }
+        },
+        "privacy": {
+            "seo": {
+                "title": "Privacy Policy | Guitar Curves Fajas",
+                "description": "Your privacy and data are sacred to us."
+            },
+            "title": "Privacy Policy",
+            "intro": "At Guitar Curves, we understand that privacy is not just a legal requirement, it's a matter of trust. When you share your body measurements, photos for assessment, or health data (recovery stage), you are trusting us with sensitive information. We take that responsibility very seriously.",
+            "personalization_title": "🔒 Use of Personalization Data",
+            "personalization_desc": "<strong>Your Measurements are Yours Alone:</strong> The information you provide about your measurements (waist, hip, torso) and recovery stage is used <strong>solely</strong> to recommend your perfect size and personalize your shopping experience.<br/><br/>We never sell, rent, or share your biometric or health data with third-party advertisers.",
+            "collection_title": "Information Collection",
+            "collection_desc": "We collect information when you make a purchase, register on our site, or participate in a size assessment. This includes name, shipping address, email, and payment data (processed securely through Shopify Payments).",
+            "cookies_title": "Cookies and Tracking Technologies",
+            "cookies_desc": "We use cookies to improve your experience in our store. For example, cookies allow us to remember what items you have in your cart so you don't lose them if you leave the page. They also help us understand how you interact with our site to improve it.",
+            "security_title": "Security",
+            "security_desc": "Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.",
+            "rights_title": "Your Rights",
+            "rights_desc": "You have the right to access, correct, or delete your personal information at any time. If you wish to exercise these rights, contact us at <a href=\"mailto:privacy@guitarcurves.com\">privacy@guitarcurves.com</a>."
+        },
+        "terms": {
+            "seo": {
+                "title": "Terms of Service | Guitar Curves Fajas",
+                "description": "Terms of use and medical disclaimers."
+            },
+            "title": "Terms of Service",
+            "intro": "Welcome to Guitar Curves. By accessing or purchasing from our site, you agree to the following terms and conditions.",
+            "disclaimer_title": "⚕️ Medical Disclaimer",
+            "disclaimer_desc": "Our garments are for aesthetic and post-surgical support, designed with high quality standards. However, <strong>they do not substitute the advice of your medical professional.</strong>",
+            "disclaimer_note": "Every recovery is unique. You must always follow your plastic surgeon's specific indications regarding compression level (Stage 1 vs Stage 2), daily usage time, and the right moment to start wearing a faja. Guitar Curves is not responsible for complications derived from incorrect or premature use of compression garments without medical authorization.",
+            "ip_title": "Intellectual Property",
+            "ip_desc": "All content on this site, including but not limited to text, graphics, logos, images, and code, is the property of Guitar Curves and is protected by copyright laws. Unauthorized use of our brand \"Guitar Curves\" or our images for commercial purposes is strictly prohibited.",
+            "payments_title": "Payments and Billing",
+            "payments_desc": "We reserve the right to refuse any order you place with us. We accept major credit cards and payment platforms. You are charged at the moment you confirm your order.",
+            "accuracy_title": "Accuracy of Information",
+            "accuracy_desc": "We strive to be as accurate as possible in our product descriptions and size charts. However, we do not warrant that product descriptions or other content of this site is accurate, complete, reliable, current, or error-free.",
+            "changes_title": "Changes to Terms",
+            "changes_desc": "You can review the most current version of the Terms of Service at any time on this page. We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website."
+        },
+        "recovery": {
+            "seo": {
+                "title": "Recovery Room: Post-Surgery Fajas Stage 1 & 2 | Guitar Curves",
+                "description": "Specialized collection for BBL and Lipo. Certified medical compression for safe recovery without fibrosis."
+            },
+            "hero": {
+                "badge": "Certified Stage 2",
+                "title_line1": "Medical Grade",
+                "title_line2": "Precision",
+                "desc": "Designed in Colombia to maximize skin retraction for BBL, Lipo 360, and Tummy Tuck. <1>No burns, no marks, just safety.</1>",
+                "trust_compression": "Uniform Compression (25-30 mmHg)",
+                "trust_vitamin": "Vitamin E Microcapsules",
+                "caption_title": "The Sanctuary",
+                "caption_sub": "Recover in peace"
+            },
+            "titles": {
+                "stage1": "Just Operated (Stage 1 / Post-Partum)",
+                "stage2": "High Compression (Stage 2)",
+                "stage3": "Max Sculpting (Stage 3)",
+                "bbl": "BBL Special (Guitar Shape)",
+                "default": "Clinically proven results.",
+                "filtered": "Filtered:",
+                "showing_tag": "Showing results for tag",
+                "count": "Items"
+            },
+            "pain_points": {
+                "box1": {
+                    "title": "Smart Compression",
+                    "desc": "Design that supports safe recovery."
+                },
+                "box2": {
+                    "title": "True 'Guitar' Fit",
+                    "desc": "The only pattern that compresses the waist but frees the hips to avoid flattening your BBL."
+                },
+                "box3": {
+                    "title": "Infused Vitamin E",
+                    "desc": "Our textiles nourish your skin while it heals, improving elasticity."
+                }
+            }
+        },
+        "home": {
+            "seo": {
+                "title": "Colombian Fajas Guitar Curves | Snatch Waist & Post-Op",
+                "description": "The only faja with 'Guitar Cut' designed for BBL and Lipo. Colombian engineering that molds your waist without flattening your hips. Shipping from USA."
+            },
+            "hero": {
+                "recover_btn": "Recover",
+                "sculpt_btn": "Sculpt",
+                "recover_title_line1": "Specialized",
+                "recover_title_line2": "Recovery",
+                "sculpt_title_line1": "The Ultimate",
+                "sculpt_title_line2": "Guitar Silhouette",
+                "recover_desc": "Textile engineering designed to protect your surgical investment (BBL & Lipo). Safe Stage 2 compression.",
+                "sculpt_desc": "Sculpt your waist and enhance your natural curves with invisible high compression technology.",
+                "cta_recover": "Explore Stage 2 Kit",
+                "cta_sculpt": "Shop Hourglass Collection",
+                "cta_calc": "Calculate My Size",
+                "trust_recover": "Premium Quality",
+                "trust_sculpt": "Trending Now",
+                "quote_recover": "\"It is vital to maintain constant compression during the first 8 weeks to avoid seromas.\"",
+                "quote_sculpt": "\"The hourglass effect is instant and the comfort allows you to wear it all day.\"",
+                "cta_recover_link": "/collections/recovery"
+            },
+            "marquee": {
+                "shipping": "Free US Shipping 🇺🇸",
+                "certified": "Certified Stage 2",
+                "returns": "Stress-Free Returns",
+                "design": "Colombian Design",
+                "payment": "Pay in 4 Installments"
+            },
+            "bento": {
+                "card1_badge": "Collection",
+                "card1_title": "Guitar Curves Fajas",
+                "card1_cta": "View Collection",
+                "card2_badge": "Best Seller",
+                "card2_title": "Stage 2 Fajas",
+                "card2_desc": "High post-surgical compression",
+                "card2_cta": "Shop Now",
+                "card3_title": "Post-Op Bras",
+                "card3_desc": "Total Support & Comfort",
+                "card3_cta": "View Collection"
+            },
+            "showcase": {
+                "badge": "Trending",
+                "title": "Your Curves, Redefined",
+                "subtitle": "Discover the collection designed to enhance your natural guitar silhouette.",
+                "cta": "View Collection",
+                "cta_mobile": "View Full Collection"
+            },
+            "social": {
+                "badge": "Real Results",
+                "title": "Wall of Curves",
+                "desc": "Join thousands of women showing their results on TikTok.",
+                "cta": "See more on TikTok"
+            }
+        },
+        "checkout": {
+            "title": "Checkout",
+            "secure": "Secure 256-bit Encryption",
+            "contact": {
+                "title": "Contact",
+                "email_label": "Email Address",
+                "placeholder": "isabella@example.com",
+                "no_account": "No account needed. Used for order updates only.",
+                "newsletter": "Email me with new faja drops & recovery tips."
+            },
+            "shipping": {
+                "title": "Shipping",
+                "name": "Full Name",
+                "address": "Address",
+                "city": "City",
+                "zip": "Zip Code"
+            },
+            "payment": {
+                "title": "Payment",
+                "note": "Payment processing is handled securely via Stripe/Shopify.",
+                "pay_button": "Pay",
+                "processing": "Processing..."
+            },
+            "summary": {
+                "title": "Order Summary",
+                "subtotal": "Subtotal",
+                "shipping": "Shipping",
+                "total": "Total",
+                "free": "FREE"
+            }
+        },
+        "dashboard": {
+            "hello": "Hello,",
+            "silhouette": "Your silhouette is currently:",
+            "sign_out": "Sign Out",
+            "fit_profile": {
+                "title": "Fit Profile",
+                "edit": "Edit",
+                "waist": "Waist",
+                "hips": "Hips",
+                "torso": "Torso",
+                "recommendation": "Based on your measurements, your ideal size for",
+                "stage2": "Stage 2",
+                "is": "is"
+            },
+            "orders": {
+                "title": "Recent Orders",
+                "view_all": "View All Orders",
+                "delivered": "Delivered",
+                "order_number": "Order #"
+            },
+            "recovery": {
+                "title": "Recovery Status",
+                "week": "Week",
+                "goal": "Goal",
+                "weeks": "Weeks",
+                "status_text": "You are in the <strong>Inflammation Phase</strong>. Keep your compression consistent (23h/day) to prevent seromas.",
+                "manual_cta": "View Recovery Manual"
+            },
+            "quick_buy": {
+                "title": "Recommended for You"
+            }
+        },
+        "cart": {
+            "title": "Shopping Cart",
+            "empty": {
+                "title": "Your cart is empty",
+                "message": "Looks like you haven't found your perfect fit yet. Explore our collections to find your ideal curve.",
+                "cta": "Return to Shop"
+            },
+            "item": {
+                "size": "Size:",
+                "total": "Total",
+                "remove": "Remove"
+            },
+            "summary": {
+                "title": "Order Summary",
+                "subtotal": "Subtotal",
+                "shipping": "Shipping",
+                "shipping_note": "Calculated at checkout",
+                "total": "Total",
+                "checkout_cta": "CHECKOUT NOW",
+                "security": "Secure SSL Encryption",
+                "returns": "Free 30-Day Returns"
+            }
+        },
+        "bbl_kit": {
+            "seo": {
+                "title": "BBL Recovery Survival Kit | Faja Stage 2 + Bra Bundle",
+                "description": "The essential duo for your surgery: Hourglass faja and post-op bra. Buy the bundle and save 15%."
+            },
+            "hero": {
+                "badge_overlay": "The Post-Op Duo",
+                "badge_limited": "Limited Bundle",
+                "title_line1": "Protect your investment.",
+                "title_line2": "Top and Bottom.",
+                "description": "Your faja molds your waist, but your bra protects your posture and implants. The essential duo for a painless recovery.",
+                "checklist_1": "Stage 2 Faja: Medical compression for your waist.",
+                "checklist_2": "Post-Op Bra: Back support and wireless.",
+                "checklist_3": "Save 15% buying together.",
+                "cta": "BUY THE DUO (15% OFF)"
+            }
+        },
+        "essentials": {
+            "seo": {
+                "title": "Post-Surgical Bras and Boards | Guitar Curves",
+                "description": "Certified medical support for your recovery. Wireless bras and abdominal boards designed to prevent fibrosis."
+            },
+            "hero": {
+                "badge": "Post-Surgical Support",
+                "title_line1": "Post-Surgical Support and",
+                "title_line2": "Posture Correction.",
+                "description": "Designed to hold your bust and correct your posture while you sleep. No wires, no uncomfortable seams.",
+                "cta": "View Bras",
+                "grade": "Medical Grade",
+                "usage": "Post-Op and Daily Use"
+            },
+            "showcase": {
+                "title": "Essentials Collection",
+                "filtered": "Filtered:",
+                "description": "Curated selection for a painless recovery.",
+                "showing_tag": "Showing products with tag",
+                "count": "Available Models",
+                "loading": "Loading essentials...",
+                "empty": "Empty Collection"
+            },
+            "bundle": {
+                "badge": "Complete your Kit",
+                "title_line1": "Smart",
+                "title_line2": "Recovery",
+                "text": "Combine your bra with a Stage 2 faja and get an automatic 15% discount.",
+                "cta": "View Stage 2 Fajas"
+            }
+        },
+        "hourglass": {
+            "seo": {
+                "title": "The Sculpt Collection | Hourglass Fajas & Waist Trainers",
+                "description": "Invisible engineering to enhance your curves. Explore our line of daily use fajas, waist trainers, and butt-lifting shorts."
+            },
+            "hero": {
+                "badge": "Invisible Engineering",
+                "title": "The Sculpt Collection",
+                "description": "Invisible engineering to enhance your curves. The ultimate hourglass silhouette.",
+                "cta_guide": "Size Guide",
+                "caption_title": "Sculpt",
+                "caption_desc": "Signature Collection"
+            },
+            "sub_collection": {
+                "shorts": "Shorts",
+                "waist_trainer": "Waist Trainers",
+                "strapless": "Strapless",
+                "high_compression": "High Compression"
+            },
+            "error": {
+                "title": "Error Loading Products",
+                "hint": "Please check Shopify Storefront API permissions."
+            },
+            "empty": {
+                "message": "No products found for this selection.",
+                "reset_filters": "Clear Filters"
+            }
+        },
+        "tools_hub": {
+            "seo": {
+                "title": "The Body Lab | Guitar Curves Tech Tools",
+                "description": "Technology center and tools to identify your body type and optimize your recovery."
+            },
+            "header": {
+                "badge": "Technology Center",
+                "title": "The Body Lab",
+                "description": "Precision tools designed to accompany you at every step of your transformation. No guessing, just data."
+            },
+            "tools": {
+                "guitar_ratio": {
+                    "title": "Guitar Ratio Finder",
+                    "description": "Are you a 'Fake S' or a 'True Guitar'? Analyze your measurements with our algorithm.",
+                    "cta": "Start Test"
+                },
+                "stage_comparator": {
+                    "title": "Stage 1 vs Stage 2 Comparator",
+                    "description": "The definitive visual guide to know when and why to change stages.",
+                    "cta": "View Comparison"
+                },
+                "fibrosis_quiz": {
+                    "title": "Fibrosis Quiz",
+                    "description": "Advanced diagnostic tool to detect post-surgical irregularities.",
+                    "badge": "Coming Soon"
+                }
+            }
+        },
+        "guitar_ratio_quiz": {
+            "seo": {
+                "title": "Guitar Ratio Finder | Silhouette Diagnosis",
+                "description": "Analyze your measurements and discover if you are a true Guitar."
+            },
+            "intro": {
+                "badge": "Diagnostic Tool",
+                "title_line1": "Are you a Fake S or a",
+                "title_highlight": "True Guitar",
+                "title_line2": "?",
+                "description": "Forget generic sizing. Discover your unique <strong>\"Guitar Ratio\"</strong> and understand why traditional fajas have never fit you well.",
+                "cta": "Discover my Silhouette",
+                "stats": {
+                    "accuracy": {
+                        "value": "97%",
+                        "label": "Accuracy"
+                    },
+                    "duration": {
+                        "value": "2min",
+                        "label": "Duration"
+                    },
+                    "analyzed": {
+                        "value": "+5k",
+                        "label": "Analyzed"
+                    }
+                }
+            },
+            "modal": {
+                "title": "What is your Real Size?",
+                "description": "Use our manual biometric scan technology to find your perfect fit in 30 seconds.",
+                "cta": "Start Diagnosis",
+                "stats_line": "⏱ 1 Minute 🎯 98% Accuracy"
+            },
+            "measure": {
+                "ratio_label": "Current Ratio:",
+                "your_measurements": "Your Measurements",
+                "adjust_sliders": "Adjust sliders to match your real body.",
+                "waist": "1. Waist",
+                "hips": "2. Hips",
+                "error_hip": "Hips must be larger",
+                "continue": "Continue"
+            },
+            "questions": {
+                "title": "Quick Diagnosis",
+                "q3": {
+                    "label": "Common Issue:",
+                    "text": "Do they fit well on your hips but are loose on your waist?",
+                    "options": [
+                        "Always happens",
+                        "Frequently",
+                        "Sometimes",
+                        "Rarely"
+                    ]
+                },
+                "q4": {
+                    "label": "Main Goal:",
+                    "text": "Are you looking to enhance and lift your glutes?",
+                    "options": [
+                        "Yes, absolutely!",
+                        "Yes, but I'm scared",
+                        "No, just compression",
+                        "Reduce hips"
+                    ]
+                },
+                "cta": "Calculate Result"
+            },
+            "calculating": "Analyzing...",
+            "gate": {
+                "title": "Result Ready!",
+                "description": "Enter your email to unlock your personalized size recommendation.",
+                "placeholder": "Your email...",
+                "cta": "See My Size"
+            },
+            "results": {
+                "ratio_label": "Ratio",
+                "ideal_size_label": "Ideal Size",
+                "apply_size": "Apply Size",
+                "cancel": "Cancel and close",
+                "buy_cta": "Buy this Faja",
+                "compare_link": "View Stage 1 vs 2 Comparison",
+                "restart": "Restart",
+                "back": "Back",
+                "types": {
+                    "true_guitar": {
+                        "title": "You are a True Guitar! (Size {{size}}) 🎸",
+                        "description": "Your waist is significantly smaller than your hips (Golden Ratio). Based on your waist of {{waist}}\", your ideal size is {{size}}, but you need the 'Signature Guitar' cut to accommodate your hips of {{hips}}\".",
+                        "rec_title": "Hourglass Stage 3 Faja"
+                    },
+                    "potential_guitar": {
+                        "title": "You are a Potential Guitar (Size {{size}}) ⏳",
+                        "description": "You have natural curves. Your base size is {{size}}. You are a 'Fake S': small in front, but need space in the back. With proper waist compression, you will reach the Guitar Ratio.",
+                        "rec_title": "Extreme Hourglass Waist Trainer"
+                    },
+                    "athletic": {
+                        "title": "Athletic Silhouette (Size {{size}}) 📏",
+                        "description": "You have a balanced figure. Your high compression size is {{size}}. Your goal is to create the illusion of curves through High Compression.",
+                        "rec_title": "Wasp Waist Trainer"
+                    }
+                }
+            }
+        },
+        "stage_comparator": {
+            "seo": {
+                "title": "Stage 1 vs Stage 2: Visual Comparator | Guitar Curves",
+                "description": "Visually discover the difference between Stage 1 (Swelling) and Stage 2 (Sculpting) Fajas."
+            },
+            "hero": {
+                "badge": "Recovery Guide",
+                "title": "Stage 1 vs. Stage 2 Faja",
+                "description": "When to transition? Visually discover which faja you need to optimize your post-surgical results.",
+                "cta_visual": "View Visual Comparison",
+                "cta_quiz": "Am I ready for Stage 2?"
+            },
+            "slider": {
+                "badge": "Slide to Compare",
+                "title": "The True Difference",
+                "description": "Drag the slider to see the transformation.",
+                "label_stage1": "STAGE 1",
+                "label_stage2": "STAGE 2"
+            },
+            "tech": {
+                "badge": "Textile Engineering",
+                "title": "Details that Matter",
+                "items": [
+                    {
+                        "title": "High Elongation (Stage 1)",
+                        "desc": "Softness and elasticity to accommodate severe swelling without cutting circulation."
+                    },
+                    {
+                        "title": "Invisible Perineal Zipper",
+                        "desc": "Hygienic easy-access design that doesn't rub or discomfort sensitive areas."
+                    },
+                    {
+                        "title": "Glute Mesh vs. Powernet",
+                        "desc": "Micro-mesh rear panel that protects transferred fat (BBL) without compressing it."
+                    }
+                ]
+            },
+            "table": {
+                "title": "Comparison Specifications",
+                "headers": [
+                    "Feature",
+                    "Stage 1",
+                    "Stage 2"
+                ],
+                "rows": [
+                    {
+                        "label": "Compression",
+                        "s1": "Uniform and Medium (20-25 mmHg)",
+                        "s2": "Targeted and High (30+ mmHg)"
+                    },
+                    {
+                        "label": "Main Material",
+                        "s1": "Triconet / Bidirectional Lycra",
+                        "s2": "High Density Powernet"
+                    },
+                    {
+                        "label": "Closure System",
+                        "s1": "External Hooks (Adjustable)",
+                        "s2": "Internal / Invisible Zipper"
+                    },
+                    {
+                        "label": "Goal",
+                        "s1": "Drainage and Edema Reduction",
+                        "s2": "Semi-permanent Waist Sculpting"
+                    }
+                ]
+            },
+            "quiz": {
+                "badge": "Quick Test",
+                "title": "Are you ready for Stage 2?",
+                "description": "Answer honestly to protect your results.",
+                "questions": [
+                    "Does your Stage 1 faja fit loose even on the tightest hooks?",
+                    "Have at least 3 weeks passed since your surgery?",
+                    "Do you feel the swelling has gone down significantly?"
+                ],
+                "options": {
+                    "yes": "Yes",
+                    "no": "No"
+                },
+                "result_ready": {
+                    "title": "YES! Your body is ready.",
+                    "desc": "It is time to switch to Stage 2 to start sculpting that waist.",
+                    "cta": "View Stage 2 Collection"
+                },
+                "result_wait": {
+                    "title": "Wait a little longer.",
+                    "desc": "Your body still needs the rigid containment of Stage 1 to avoid fibrosis. Do not rush.",
+                    "cta": "Renew my Stage 1"
+                }
+            },
+            "shoppable": {
+                "stage1": {
+                    "title": "Stage 1 Essentials",
+                    "subtitle": "Maximum medical security.",
+                    "card": {
+                        "badge": "Post-Surgical",
+                        "title": "Full Post-Surgical Faja",
+                        "desc": "Certified medical support.",
+                        "cta": "View Full Collection"
+                    }
+                },
+                "stage2": {
+                    "title": "Stage 2 Favorites",
+                    "subtitle": "Aggressive waist sculpting.",
+                    "card": {
+                        "badge": "Best Seller",
+                        "title": "Hourglass Stage 3",
+                        "desc": "The favorite for defining waist.",
+                        "cta": "View Sculpting Collection"
+                    }
+                }
+            }
+        },
+        "fit_finder": {
+            "seo": {
+                "title": "Perfect Fit Calculator | Fajas Guitar Curves",
+                "description": "Find your exact size in 30 seconds. Specialized algorithm for guitar and BBL body types that analyzes your waist/hip ratio."
+            },
+            "hero": {
+                "badge": "Anti-Waisting Technology",
+                "title_line1": "Find Your Size for",
+                "title_highlight": "\"Guitar Body\"",
+                "title_line2": "in 30 Seconds.",
+                "subtitle": "Our technology analyzes the difference between your waist and hips to recommend the exact faja for you."
+            },
+            "social_proof": {
+                "quote": "\"I was scared because I'm M in waist and XL in hips, but the calculator suggested the L from Guitar Curves and it fit perfectly. It doesn't squeeze my legs.\"",
+                "author": "Maria G.",
+                "label": "Verified Purchase • Recommended Size: L"
+            },
+            "footer_note": "Not medical advice. For recent post-op patients (0-2 weeks), consider sizing up due to inflammation or consult your surgeon."
+        },
+        "blog": {
+            "fibrosis": {
+                "badge": "Medical Guide",
+                "title": "The Fibrosis Bible: Everything You Need to Know",
+                "description": "Prevent post-surgical hardening with these essential recovery keys.",
+                "content": {
+                    "p1": "Fibrosis is one of the most common and feared complications after liposuction. It manifests as hardening of tissues and painful lumps under the skin.",
+                    "p2_prefix": "To prevent it, it is crucial to use",
+                    "p2_bold": "medical-grade compression",
+                    "p2_suffix": "constantly during the first few weeks.",
+                    "solution": {
+                        "title": "The Right Solution",
+                        "desc": "Not all fajas work for this stage. You need specific materials that offer uniform support without cutting circulation.",
+                        "cta": "View Anti-Fibrosis Fajas"
+                    },
+                    "p3": "In addition to the right garment, ensure you perform manual lymphatic drainage with a certified professional to mobilize retained fluids."
+                }
+            },
+            "anatomy": {
+                "title": "Anatomy of a BBL Faja",
+                "objective": "Educate on 'Guitar Cut' vs Generic"
+            },
+            "inflammation": {
+                "title": "Inflammation Timeline",
+                "objective": "Manage expectations and sell by stages"
+            },
+            "template": {
+                "badge": "Recovery Guide",
+                "title": "5 Tips to Avoid Fibrosis After Your Lipo",
+                "author": "By: Guitar Curves Team",
+                "read_time": "5 min read",
+                "intro": "Fibrosis is not \"bad luck\", it's a lack of proper compression. Here we explain how to use your ab board correctly to sculpt perfect results.",
+                "tips": [
+                    {
+                        "title": "1. Constant pressure is key",
+                        "desc": "Imagine your skin is \"floating\" above the muscle after surgery. If empty space remains, the body fills it with disorganized scar tissue (fibrosis). The secret is not to squeeze until you suffocate, but to maintain <strong>uniform and flat</strong> pressure."
+                    },
+                    {
+                        "title": "2. Hydration with Vitamin E",
+                        "desc": "Traumatized skin needs nutrition. Our fajas' high compression fabric is no ordinary cloth; it is infused with microcapsules of Vitamin E, Ginkgo Biloba, and Seaweed. Upon contact with your body heat, these capsules break and release nutrients directly into your skin while you wear it."
+                    },
+                    {
+                        "title": "3. Stage 2 is crucial",
+                        "desc": "Many patients make the mistake of staying with the post-surgical faja (Stage 1) for 3 months. Error! At 2-3 weeks, when inflammation goes down, that faja will be too big. You need to move to a <strong>High Compression Faja (Stage 2)</strong> to continue sculpting the waist. If the faja doesn't squeeze you, it's not working."
+                    },
+                    {
+                        "title": "4. Use Foam (Lipo Foam)",
+                        "desc": "The board is rigid, but the foam is soft. Use foam under the board to protect your skin from marks and ensure compression reaches every corner."
+                    },
+                    {
+                        "title": "5. Lymphatic Drainage",
+                        "desc": "Don't skip your massages. They help remove retained fluid that the faja is mobilizing."
+                    }
+                ],
+                "quote": "\"70% of a lipo result depends on post-operative care, not the surgery itself.\" — Dr. Plastic Surgeon",
+                "sidebar": {
+                    "calc_title": "Doubts with your size?",
+                    "calc_desc": "Don't guess. Use our AI calculator in 30 seconds.",
+                    "calc_cta": "CALCULATE NOW",
+                    "rec_title": "Recommended for you",
+                    "rec_product": "Hourglass Faja"
+                }
+            }
+        },
+        "recovery_calc": {
+            "title": "Recovery Calculator",
+            "objective": "Capture leads (Surgery Date + Email)"
+        },
+        "about": {
+            "hero": {
+                "badge": "Our Manifesto",
+                "title_line1": "The Engineering",
+                "title_line2": "of Curves.",
+                "description": "Why we stopped designing \"fajas\" and started building surgical-grade body architecture."
+            },
+            "problem": {
+                "box_title": "The Gap.",
+                "box_subtitle": "Why 90% of fajas roll down.",
+                "badge": "Industry Failure",
+                "title": "Designed for Cylinders, Not Hourglasses.",
+                "text": "Standard manufacturing uses \"The Tube Method\". It is cheaper to sew a straight tube of elastic fabric. But your body is not a tube. When a curvy woman puts on a tube, physics fights back. The fabric rolls at the waist and cuts into the hips. It's not you. It's geometry.",
+                "list": [
+                    "Waist Gap",
+                    "Rolls Down",
+                    "Hip Dips",
+                    "Chafing"
+                ]
+            },
+            "solution": {
+                "badge": "Our Innovation",
+                "title": "Guitar Tech™ Architecture",
+                "features": [
+                    {
+                        "title": "Golden Ratio Sizing",
+                        "desc": "We added the \"Ratio\" variable. We calculate the difference between waist and hip ratio, creating a garment that is usually 14 inches smaller in the waist than in the hips."
+                    },
+                    {
+                        "title": "Comfort Zones",
+                        "desc": "High compression where you need sculpting (Red Zone). Zero compression where you need volume (Green Zone). No more smashed BBLs."
+                    },
+                    {
+                        "title": "Community Tested",
+                        "desc": "Every prototype is tested not on mannequins, but on real post-op patients in various stages of recovery."
+                    }
+                ]
+            },
+            "stats": {
+                "sculpted": "Waists Sculpted",
+                "chafing": "Faja Chafing",
+                "retention": "Retention Rate",
+                "support": "Support Available"
+            },
+            "footer": {
+                "title": "Ready to feel the difference?",
+                "cta": "VIEW SIGNATURE COLLECTION"
+            }
+        },
+        "404": {
+            "seo_title": "Page Not Found | Fajas Guitar Curves",
+            "title": "This page got lost...<br />but your waist shouldn't.",
+            "description": "You got lost, but don't lose your figure. Calculate your exact size while we fix this.",
+            "cta_shop": "Back to Shop",
+            "cta_calc": "Calculate My Size"
+        }
+    },
+    "components": {
+        "cart": {
+            "your_bag": "Your Bag",
+            "free_shipping_unlocked": "Free Shipping Unlocked!",
+            "remaining_for_free_shipping": "${{amount}} away from Free Shipping ✈️",
+            "bag_empty": "Your bag is empty.",
+            "explore_collection": "Explore Collection",
+            "size": "Size",
+            "are_you_sure_size": "Are you sure about the size?",
+            "stage1_upsell_title": "Getting Stage 1?",
+            "stage1_upsell_desc": "When swelling goes down (Week 4-6), you'll need more compression to sculpt. Save 15% with the Complete Kit.",
+            "stage1_vs_stage2": "See Difference: Stage 1 vs Stage 2",
+            "subtotal": "Subtotal",
+            "savings": "You're saving $25 on shipping today!",
+            "checkout": "PROCEED TO CHECKOUT",
+            "secure_transaction": "🔒 Secure SSL Transaction • Discreet shipping from Miami, FL"
+        },
+        "product_detail": {
+            "add": "Add",
+            "select": "Select",
+            "home": "Home",
+            "collection": "Collection",
+            "product_not_found": "Product not found",
+            "product_not_found_desc": "The product you're looking for doesn't exist.",
+            "back_home": "Back to Home",
+            "reviews": "Reviews",
+            "in_stock": "In Stock",
+            "installments": "Pay in installments of",
+            "no_interest": "interest-free",
+            "color": "Color",
+            "size": "Size",
+            "select_size": "Select",
+            "size_help": "Don't know your size? Calculate here",
+            "select_size_warning": "* Select a size to continue",
+            "add_to_cart": "Add to Cart",
+            "choose_option": "Choose an option",
+            "stage_compare_title": "Afraid of choosing the wrong stage?",
+            "stage_compare_link": "See Visual Comparison: Stage 1 vs Stage 2",
+            "engineering": "Detailed Engineering",
+            "read_less": "Read less",
+            "read_more": "Read detailed description and benefits (+)",
+            "default_benefit": "This garment combines Colombian textile engineering with daily comfort. Designed to sculpt without suffocating.",
+            "tech_specs": "Technical Specifications",
+            "spec_powernet": "High Compression Powernet (Medical Grade).",
+            "spec_lining": "Internal Lycra lining with Vitamin E microcapsules.",
+            "spec_seams": "Flat invisible seams (Seamless Technology).",
+            "spec_closure": "Perineal closure system.",
+            "faq_title": "Frequently Asked Questions",
+            "faq_size_q": "How do I know my size?",
+            "faq_size_a": "Use our Size Guide and measure your waist and hips. If you're post-op, consider your swelling.",
+            "faq_wash_q": "How do I wash the garment?",
+            "faq_wash_a": "Hand wash with mild soap and cold water. Do not use dryer or wring to avoid damaging the Powernet.",
+            "faq_returns_q": "Do you accept returns?",
+            "faq_returns_a": "Yes, we accept the first exchange free within 30 days if the garment is in perfect condition.",
+            "faq_all": "See all frequently asked questions",
+            "related_products": "You might also like",
+            "view_all": "View All",
+            "trust_guarantee": "Guarantee",
+            "trust_guarantee_sub": "Certified Material",
+            "trust_shipping": "Fast Shipping",
+            "trust_shipping_sub": "Ships in 24h",
+            "trust_returns": "Returns",
+            "trust_returns_sub": "First exchange free",
+            "please_select_color": "Please select a color",
+            "size_selected": "Size {{size}} automatically selected!"
+        },
+        "granular_faq": {
+            "support_center": "Support Center",
+            "title": "Frequently Asked Questions",
+            "faqs": [
+                {
+                    "question": "How do I know my correct size?",
+                    "answer": "Our fajas are medical grade and have very high compression. We recommend using our 'Guitar Ratio' calculator or the size chart. If you're between two sizes, always choose the larger one for initial comfort."
+                },
+                {
+                    "question": "Can I wear this garment daily?",
+                    "answer": "Yes, most of our Sculpt collection is designed to be invisible under daily clothing. Recovery Stage 2 garments can also be worn daily once your doctor authorizes it (usually after week 6)."
+                },
+                {
+                    "question": "Do you ship internationally?",
+                    "answer": "Yes, we ship worldwide from our main distribution center. Shipping times vary between 3-7 business days depending on your location."
+                },
+                {
+                    "question": "What is your exchange policy?",
+                    "answer": "We offer a 'Perfect Fit' satisfaction guarantee. If your faja doesn't fit, you have 30 days to exchange it for another size, as long as the garment is in its original packaging and unused (for hygiene)."
+                }
+            ]
+        },
+        "essentials_faq": {
+            "education_hub": "Education Hub",
+            "title": "Recovery Frequently Asked Questions",
+            "faqs": [
+                {
+                    "question": "Why do I need a special bra after my surgery?",
+                    "answer": "After a mammoplasty or lift, your tissues need constant support to prevent sagging while they heal. Our medical-grade bras provide the exact compression to reduce inflammation, prevent fluid retention, and ensure your implants settle in the correct position."
+                },
+                {
+                    "question": "How long should I wear the post-surgical bra?",
+                    "answer": "Most surgeons recommend continuous wear (24/7) for the first 6 weeks. After this period, you can switch to wearing it during the day or night per medical recommendation. Our designs are so comfortable that many clients continue using them as daily bras for the back support they offer."
+                },
+                {
+                    "question": "How does it help with posture?",
+                    "answer": "The weight of implants can cause back pain and hunched shoulders. Our bras feature an 'X' reinforcement or high back support that gently forces you to keep your shoulders back and spine aligned, relieving tension immediately."
+                },
+                {
+                    "question": "Do the bras have underwires?",
+                    "answer": "No. During recovery, underwires (metal hoops) are prohibited because they can hurt incisions or alter the shape of the implant. Our 'Wireless Support' technology lifts and supports the bust using smart cuts in high compression fabric, without the need for uncomfortable metals."
+                }
+            ]
+        },
+        "medical_accordions": {
+            "knowledge_base": "Medical Knowledge Base",
+            "title": "Recovery Frequently Asked Questions",
+            "faqs": [
+                {
+                    "question": "WHAT IS THE DIFFERENCE BETWEEN STAGE 1 AND STAGE 2 FAJAS?",
+                    "answer": "Stage 1 is low compression for the first 7-10 days of swelling. Stage 2 (our specialty) is high compression and is mandatory from week 2 to sculpt the figure and adhere the skin."
+                },
+                {
+                    "question": "HOW DO I KNOW MY SIZE IF MY WAIST IS SWOLLEN?",
+                    "answer": "Don't buy your pants size. Measure your current waist and hips. If you're between two sizes in Stage 2, choose the larger one or use extenders. Visit our Size Guide."
+                },
+                {
+                    "question": "WHY DO I NEED A PERINEAL OPENING OR ZIPPER?",
+                    "answer": "The first days of recovery are difficult. Our perineal closure and bottom zipper system is designed to allow you to go to the bathroom without having to remove the entire faja, which would be painful and complicated."
+                },
+                {
+                    "question": "HOW TO AVOID FIBROSIS?",
+                    "answer": "Constant use of a high compression faja (Stage 2) helps maintain uniform pressure on the skin, preventing irregular fluid accumulation that causes fibrosis."
+                }
+            ]
+        },
+        "bundle_builder": {
+            "badge": "Post-Op Essentials",
+            "title": "Doctor's Orders: The Kit",
+            "desc": "Surgeons recommend complementing your faja with these accessories.",
+            "view_kit": "View Full Kit",
+            "essential_accessory": "Essential accessory",
+            "add_to_cart": "Add to cart"
+        },
+        "trust_banner": {
+            "medical_grade": "Medical Grade",
+            "medical_grade_desc": "Certified compression for post-operative safety.",
+            "fast_shipping": "Fast Shipping",
+            "fast_shipping_desc": "International shipping via DHL and FedEx.",
+            "perfect_fit": "Perfect Fit",
+            "perfect_fit_desc": "Free exchanges if the size isn't perfect.",
+            "expert_support": "Expert Support",
+            "expert_support_desc": "Free sizing advice from our specialists."
+        },
+        "curve_calculator": {
+            "badge": "Guitar Tech™ Sizing",
+            "title": "Afraid it won't fit over your hips?",
+            "desc": "We understand the problem: XS Waist, XL Hips. Use our specialized calculator to find your exact size in our \"Guitar\" fit.",
+            "cta": "Calculate My Guitar Fit"
+        },
+        "whatsapp_button": {
+            "message": "Hello, I'd like to receive sizing advice.",
+            "tooltip": "Need help?"
+        },
+        "bra_card": {
+            "default_benefit": "Certified medical support and immediate posture correction.",
+            "add": "Add"
+        },
+        "local_collection_grid": {
+            "loading": "Loading collection...",
+            "add": "Add",
+            "collection": "Collection"
+        },
+        "before_after_slider": {
+            "badge": "Real Transformation",
+            "title_part1": "It's not magic, it's",
+            "title_part2": "Textile Engineering.",
+            "desc": "Forget about \"Hip Dip\" and sagging. Our high compression technology redistributes tissue to create an instant hourglass silhouette, without surgery.",
+            "benefits": [
+                "Corrects Hip Dips instantly",
+                "Flattens lower abdomen (FUPA)",
+                "Lifts glutes naturally"
+            ],
+            "cta": "Discover Sculpt Studio",
+            "with_faja": "With Faja",
+            "without_faja": "Without Faja"
+        },
+        "pain_solution_slider": {
+            "badge": "The Guitar Tech Difference",
+            "title": "The \"Back Gap\" Ends Today.",
+            "desc": "Small waist and big hips? Regular fajas don't understand you (and they crush you). GuitarTech technology is designed geometrically for your body.",
+            "guitar_fit": "Guitar Tech Fit",
+            "generic_faja": "Generic \"Tube\" Faja",
+            "problem_title": "The Problem",
+            "problems": [
+                "Glute Crushing",
+                "Back Gap (Waist Gap)",
+                "Leg Rolling"
+            ],
+            "solution_title": "The Solution",
+            "solution_text_1": "Waist to Hip Ratio of 0.7.",
+            "solution_text_2": "Means the waist is 2 sizes smaller than the hips.",
+            "solution_emphasis": "Compression where you need it, freedom where you want it."
+        },
+        "seo_accordion": {
+            "title": "The Ultimate Guide to Colombian Fajas in USA",
+            "intro": "Welcome to <strong>Fajas Guitar Curves</strong>, the leading brand in medical-grade compression garments designed specifically for bodies with Latin curves (BBL, Liposuction and hourglass genetics). We understand that finding the right faja in the United States can be difficult.",
+            "stages_title": "What stage do I need?",
+            "stage_1": "<strong>Stage 1 (Immediate):</strong> 24/7 use during the first 2 weeks post-op. Low compression, high elasticity to accommodate swelling.",
+            "stage_2": "<strong>Stage 2 (Sculpting):</strong> From week 3 onwards. High compression (Powernet) to sculpt the waist while protecting grafted glutes.",
+            "stage_3": "<strong>Stage 3 (Maintenance):</strong> For daily use and events. Invisible under clothing.",
+            "shipping_title": "Local Shipping",
+            "shipping_text": "Forget waiting weeks for international shipping. Our centralized warehouse in the USA guarantees fast deliveries to <strong>Houston, Miami, New York, Los Angeles</strong> and beyond.",
+            "keywords": "Keywords: Colombian Fajas, BBL Shapewear, Stage 2 Faja, Waist Trainer, High Compression Garments, Post Surgery Supplies."
+        },
+        "trust_section": {
+            "title": "Why choose Guitar Curves for your recovery?",
+            "subtitle": "We're not just fashion. We are engineering applied to post-surgical recovery and extreme sculpting.",
+            "bbl_safe_title": "BBL Safe Design",
+            "bbl_safe_desc": "\"Doesn't compress transferred fat in the glutes\"",
+            "medical_title": "Medical Compression",
+            "medical_desc": "\"Helps adhere skin to muscle (Stage 2)\"",
+            "fit_title": "Guaranteed Fit",
+            "fit_desc": "\"If it doesn't fit, we exchange it for free\""
+        },
+        "anatomy_recovery": {
+            "title_line1": "The Anatomy of",
+            "title_line2": "Perfect Support",
+            "description": "Your bust and back need as much attention as your waist. Discover why our bras are essential for your recovery.",
+            "hotspots": [
+                {
+                    "label": "Cervical Correction",
+                    "desc": "Improves your posture instantly."
+                },
+                {
+                    "label": "Underarm Coverage",
+                    "desc": "Total control of side bulges."
+                },
+                {
+                    "label": "Lumbar Support",
+                    "desc": "Relief without uncomfortable wires."
+                }
+            ]
+        },
+        "bbl_survival_kit": {
+            "title": "The Recovery Duo",
+            "subtitle_prefix": "Add the Bra to your Faja and get an",
+            "subtitle_suffix": "immediate.",
+            "items": [
+                {
+                    "name": "Guitar Curves Stage 2 Faja",
+                    "desc": "The foundation of your shaping."
+                },
+                {
+                    "name": "Post-Op Bra (Back Support)",
+                    "desc": "Protects your posture and secures your implants."
+                }
+            ],
+            "warning_title": "⚠️ Medical Warning:",
+            "warning_desc": "Do not sit directly on the toilet or sofa for 8 weeks. Use the BBL Pillow or your fat transfer could die from pressure.",
+            "summary": {
+                "title": "Your BBL Kit",
+                "subtotal": "Subtotal",
+                "discount": "Discount (15%)",
+                "total": "Total",
+                "cta": "ADD TO CART",
+                "shipping": "*Priority shipping included today.",
+                "protocols": "Based on recovery protocols from Miami and Colombia."
+            }
+        },
+        "essentials_faq": {
+            "badge": "Education Hub",
+            "title": "Recovery FAQ",
+            "items": [
+                {
+                    "question": "Why do I need a special bra after my surgery?",
+                    "answer": "After a mammoplasty or lift, your tissues need constant support to prevent sagging while they heal. Our medical-grade bras provide the exact compression to reduce inflammation, avoid fluid retention, and ensure your implants settle in the correct position."
+                },
+                {
+                    "question": "How long should I wear the post-surgical bra?",
+                    "answer": "Most surgeons recommend continuous use (24/7) for the first 6 weeks. After this period, you can switch to wearing it during the day or night according to medical advice. Our designs are so comfortable that many clients continue to wear them as a daily bra for the back support they offer."
+                },
+                {
+                    "question": "How does it help with posture?",
+                    "answer": "The weight of implants can cause back pain and hunched shoulders. Our bras feature an 'X' reinforcement or high back support that gently forces you to keep your shoulders back and spine aligned, relieving tension immediately."
+                },
+                {
+                    "question": "Do the bras have underwires?",
+                    "answer": "No. During recovery, underwires (metal rings) are forbidden because they can hurt incisions or alter the implant shape. Our 'Wireless Support' technology lifts and holds the bust using intelligent cuts in high-compression fabric, without need for uncomfortable metals."
+                }
+            ]
+        },
+        "filter_sidebar": {
+            "mobile_button": "Filter Results",
+            "title": "Filters",
+            "clear_all": "Clear all filters",
+            "label_category": "Garment Type",
+            "label_occasion": "Use / Activity",
+            "label_compression": "Compression Level",
+            "label_stage": "Post-Op Stage",
+            "label_features": "Features"
+        },
+        "policy_layout": {
+            "official": "Official Policy",
+            "updated": "Last Updated:"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "subtitle": "Clear answers for confident decisions.",
+            "items": [
+                {
+                    "question": "How do I know if I need a Stage 1 or Stage 2 Faja?",
+                    "answer": "Stage 1 is low compression, ideal for the first post-op week when you are very swollen. Stage 2 (our specialty) is high compression and is used starting from week 2 or 3 to mold and adhere skin to muscle."
+                },
+                {
+                    "question": "Does the Guitar Curves model work if I haven't had surgery?",
+                    "answer": "Yes! If your body is natural but you have a small waist and wide hips, our fajas will prevent back rolls or digging into your thighs too much."
+                },
+                {
+                    "question": "How do I go to the bathroom with the faja on?",
+                    "answer": "All our Stage 2 and 3 fajas feature a perineal zipper or an anatomical opening designed so you don't have to take it off every time you go to the bathroom."
+                },
+                {
+                    "question": "If I am S in waist but XL in hips, what size do I order?",
+                    "answer": "This is Guitar Curves' specialty. Our 'Guitar' size is designed specifically for this proportion. If you select a regular size, it will be loose at the waist. In our Size Guide check for 'Guitar' or 'BBL' options which have a 2-size difference between waist and hip."
+                },
+                {
+                    "question": "When will my order ship?",
+                    "answer": "Orders placed before 2:00 PM EST ship the same day. Standard shipping takes 3-5 business days within the USA. We offer Express options if you need it urgent for your surgery."
+                }
+            ]
+        },
+        "returns_policy": {
+            "title": "Exchange Policy",
+            "subtitle": "We designed the following policies to provide a quick and simple solution in case you need to make an exchange",
+            "no_refund": "(we do not refund)",
+            "recommendations_title": "Important Recommendations",
+            "recommendations_desc": "It is important to follow the following recommendations when trying on your faja so that your purchase is not damaged and remains eligible for return or exchange.",
+            "recommendations_list": [
+                "Wear underwear, keep your body free of body lotions, deodorants, oils, powders, perfumes, makeup, or beauty products that could transfer to the garment.",
+                "Avoid pulling the garment from thin areas like the glute area and silicone lace.",
+                "Do not use jewelry, be careful with long nails or any sharp instruments that help close or adjust the garment.",
+                "If you are in the post-surgical or postpartum recovery stage, remember to adequately cover any part of your body that underwent surgery to avoid stains or discoloration."
+            ],
+            "time_window_title": "Time Window",
+            "time_window_desc": "To request an exchange, it is necessary to do so within the first <1>7 days</1> after receiving your garment.",
+            "time_window_note": "It must be in excellent condition with its original tags and packaging.",
+            "limit_title": "Exchange Limit",
+            "limit_desc": "The maximum number of exchanges is <1>ONLY one (1) time</1> from the original purchase.",
+            "hygiene_title": "Hygiene Note:",
+            "hygiene_desc": "Any garment that arrives with odors, stains, or without tags will be rejected immediately and returned to the sender (the customer will cover shipping costs).",
+            "cta_btn": "START EXCHANGE PROCESS",
+            "cta_note": "By clicking you confirm that you have read and accept our terms."
+        },
+        "recovery_card": {
+            "surgeon_approved": "Surgeon Approved",
+            "quick_add": "Quick Add",
+            "view_details": "View Details"
+        },
+        "timeline_filter": {
+            "title": "What is your goal today?",
+            "etapa2": {
+                "label": "Stage 2",
+                "sub": "High Compression",
+                "badge": "🛡️ Recovery"
+            },
+            "etapa3": {
+                "label": "Stage 3",
+                "sub": "Maintenance",
+                "badge": "⏳ Daily Use"
+            },
+            "post_lipo": {
+                "label": "Post Lipo",
+                "sub": "Lipo 360 / Abdo",
+                "badge": "💉 Surgery"
+            },
+            "bbl": {
+                "label": "BBL",
+                "sub": "Brazilian Butt Lift",
+                "badge": "🍑 Glutes"
+            },
+            "reloj": {
+                "label": "Hourglass",
+                "sub": "Wasp Waist",
+                "badge": "⌛ Sculpting"
+            }
+        },
+        "waist_training_lab": {
+            "science_title": "The Science of Curves",
+            "title_line1": "Extreme Waist Trainer:",
+            "title_line2": "Hourglass",
+            "description": "Designed with <strong>14 steel bones</strong> and premium latex to sculpt your figure instantly. Reinforced lumbar support and smart compression where you need it most.",
+            "feature_1": "Flexible Bones",
+            "feature_2": "Premium Latex",
+            "points": [
+                {
+                    "label": "14 Flexible Bones",
+                    "desc": "Spiral steel that won't dig in."
+                },
+                {
+                    "label": "Thermal Latex",
+                    "desc": "Increases localized sweating."
+                },
+                {
+                    "label": "3 Rows",
+                    "desc": "Progressive adjustment as you shrink."
+                }
+            ]
+        },
+        "guitar_fit_finder": {
+            "header": {
+                "brand": "Guitar Curves",
+                "subtitle": "Size Calculator"
+            },
+            "intro": {
+                "title": "Your Perfect Size",
+                "desc": "We analyze the difference between waist and hips to recommend the exact fit.",
+                "units_label": "Choose your units",
+                "unit_cm": "CM",
+                "unit_in": "Inches",
+                "cta": "CALCULATE MY SIZE"
+            },
+            "steps": {
+                "prev": "Step 1",
+                "next": "Step 2",
+                "waist_label": "Measure your Waist",
+                "waist_info": "Place tape above belly button, at the fold when you bend.",
+                "hip_label": "Measure your Hips",
+                "hip_info": "Find the widest part of your glutes. Do not tighten the tape.",
+                "placeholder_waist_in": "30",
+                "placeholder_waist_cm": "76",
+                "placeholder_hip_in": "40",
+                "placeholder_hip_cm": "102",
+                "error_waist": "Please enter your waist.",
+                "error_hip": "Please enter your hips.",
+                "continue": "Continue"
+            },
+            "results": {
+                "recommended_label": "Your Recommended Size",
+                "add_to_cart": "ADD TO CART - $110",
+                "restart": "Calculate again",
+                "out_of_range_title": "Outside Standard Range",
+                "retry": "Try again"
+            },
+            "logic": {
+                "underflow_msg": "For waists under 23\", contact us for our exclusive Petite line.",
+                "overflow_msg": "For measurements over 51\", explore our custom Plus Size collection.",
+                "standard_line": "Daily Use Line (Standard Fit)",
+                "standard_desc": "Your hip measurement ({{hip}}\") falls within the standard range for your waist. Your silhouette is balanced.",
+                "standard_badge": "Standard Fit",
+                "guitar_line": "Guitar Curves Line (Hourglass)",
+                "guitar_desc": "Your hip ({{hip}}\") exceeds the standard average ({{max}}\"). You need the Guitar Tech curved cut to avoid flattening your glutes.",
+                "guitar_badge": "✨ Guitar Fit Detected",
+                "apple_desc": "Your silhouette tends to be straight (Apple). The standard fit will provide maximum abdominal support and define your waist."
+            }
+        },
+        "faq_accordion": {
+            "title": "Doubts on how to measure?",
+            "video_cta": "Play Video",
+            "intro": "How to measure correctly: Forget your pant size. Colombian fajas are engineering garments and require exact measurements.",
+            "waist_label": "WAIST:",
+            "waist_text": "Place the tape measure just above your belly button (narrowest part of torso).",
+            "waist_tip": "Pro Tip: Tighten tape slightly, just how you'd like the faja to hug you.",
+            "hip_label": "HIPS:",
+            "hip_text": "Feet together, pass tape around the fullest part of your glutes.",
+            "note": "If your measurements put you between sizes, always choose the larger one (especially if you are Stage 1 or swollen)."
+        }
+    }
+}

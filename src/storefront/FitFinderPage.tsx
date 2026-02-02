@@ -2,13 +2,16 @@ import GuitarFitFinder from './components/calculator/GuitarFitFinder';
 import { SeoHead } from './components/SeoHead';
 import { Star, ChevronDown, PlayCircle } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function FitFinderPage() {
+    const { t } = useTranslation();
+
     return (
         <div className="min-h-screen bg-[#FAF9F6] pb-20">
             <SeoHead
-                title="Calculadora de Talla Perfecta | Fajas Guitar Curves"
-                description="Encuentra tu talla exacta en 30 segundos. Algoritmo especializado para cuerpos tipo guitarra y BBL que analiza tu proporción cintura/cadera."
+                title={t('pages.fit_finder.seo.title')}
+                description={t('pages.fit_finder.seo.description')}
                 schema={{
                     "@context": "https://schema.org",
                     "@type": "SoftwareApplication",
@@ -32,17 +35,17 @@ export function FitFinderPage() {
                 <div className="max-w-xl mx-auto px-6 relative z-10 text-center">
                     <div className="inline-flex items-center gap-2 bg-[#D1AB66]/20 border border-[#D1AB66]/30 px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
                         <span className="w-2 h-2 rounded-full bg-[#D1AB66] animate-pulse"></span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#D1AB66]">Tecnología Anti-Waisting</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#D1AB66]">{t('pages.fit_finder.hero.badge')}</span>
                     </div>
 
                     <h1 className="font-serif text-3xl md:text-5xl font-bold mb-4 leading-tight">
-                        Encuentra tu Talla de <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D1AB66] to-[#F5EDDF]">"Cuerpo Guitarra"</span> <br />
-                        en 30 Segundos.
+                        {t('pages.fit_finder.hero.title_line1')} <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D1AB66] to-[#F5EDDF]">{t('pages.fit_finder.hero.title_highlight')}</span> <br />
+                        {t('pages.fit_finder.hero.title_line2')}
                     </h1>
 
                     <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-sm mx-auto mb-8">
-                        Nuestra tecnología analiza la diferencia entre tu cintura y tus caderas para recomendarte la faja exacta.
+                        {t('pages.fit_finder.hero.subtitle')}
                     </p>
 
 
@@ -61,13 +64,13 @@ export function FitFinderPage() {
                         {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" />)}
                     </div>
                     <p className="text-sm text-[#2C2420] leading-relaxed italic mb-4">
-                        "Tenía miedo porque soy M de cintura y XL de cadera, pero la calculadora me sugirió la L de Guitar Curves y me quedó perfecta. No me aprieta las piernas."
+                        {t('pages.fit_finder.social_proof.quote')}
                     </p>
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center font-bold text-xs text-stone-500">MG</div>
                         <div>
-                            <p className="text-xs font-bold text-[#2C2420]">María G.</p>
-                            <p className="text-[10px] text-stone-400 uppercase tracking-wider">Compra Verificada • Talla Recomendada: L</p>
+                            <p className="text-xs font-bold text-[#2C2420]">{t('pages.fit_finder.social_proof.author')}</p>
+                            <p className="text-[10px] text-stone-400 uppercase tracking-wider">{t('pages.fit_finder.social_proof.label')}</p>
                         </div>
                     </div>
                 </div>
@@ -80,13 +83,14 @@ export function FitFinderPage() {
 
             {/* Footer Note */}
             <div className="text-center text-stone-300 text-[10px] mt-8 px-6 max-w-lg mx-auto pb-10">
-                <p>No es consejo médico. Para pacientes post-operatorios recientes (0-2 semanas), considera una talla más grande por inflamación o consulta a tu cirujano.</p>
+                <p>{t('pages.fit_finder.footer_note')}</p>
             </div>
         </div>
     );
 }
 
 function FAQAccordion() {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -97,7 +101,7 @@ function FAQAccordion() {
             >
                 <div className="flex items-center gap-3">
                     <PlayCircle size={20} className="text-[#D1AB66]" />
-                    <span className="font-bold text-sm text-[#2C2420]">¿Dudas de cómo medirte?</span>
+                    <span className="font-bold text-sm text-[#2C2420]">{t('components.faq_accordion.title')}</span>
                 </div>
                 <ChevronDown size={20} className={`text-stone-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -107,21 +111,21 @@ function FAQAccordion() {
                     <div className="aspect-video bg-stone-200 rounded-lg mb-4 flex items-center justify-center relative group cursor-pointer overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1544435216-7788c03531b7?q=80&w=400" className="w-full h-full object-cover opacity-60" />
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold border border-white/30">Reproducir Video</span>
+                            <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold border border-white/30">{t('components.faq_accordion.video_cta')}</span>
                         </div>
                     </div>
                     <div className="space-y-4">
                         <p className="text-sm text-stone-600 font-bold">
-                            Cómo medirte correctamente: Olvida tu talla de pantalón. Las fajas colombianas son prendas de ingeniería y requieren medidas exactas en pulgadas (in).
+                            {t('components.faq_accordion.intro')}
                         </p>
                         <div className="text-sm text-stone-500 bg-white p-3 rounded-lg border border-stone-100">
-                            <strong>CINTURA:</strong> Ubica la cinta métrica justo encima de tu ombligo (la parte más estrecha de tu torso). <em>Tip Pro: Aprieta la cinta ligeramente, tal como te gustaría que te abrace la faja.</em>
+                            <strong>{t('components.faq_accordion.waist_label')}</strong> {t('components.faq_accordion.waist_text')} <em>{t('components.faq_accordion.waist_tip')}</em>
                         </div>
                         <div className="text-sm text-stone-500 bg-white p-3 rounded-lg border border-stone-100">
-                            <strong>CADERA:</strong> Junta los pies y pasa la cinta por la parte más prominente de tus glúteos.
+                            <strong>{t('components.faq_accordion.hip_label')}</strong> {t('components.faq_accordion.hip_text')}
                         </div>
                         <p className="text-xs text-stone-400 italic">
-                            Si tus medidas te ubican entre dos tallas, elige siempre la más grande (especialmente si estás en Stage 1 o inflamada).
+                            {t('components.faq_accordion.note')}
                         </p>
                     </div>
                 </div>

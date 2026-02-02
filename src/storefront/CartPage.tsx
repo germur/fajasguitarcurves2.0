@@ -1,8 +1,10 @@
 import { Trash2, Plus, Minus, Lock, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useStore } from './hooks/useStoreContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function CartPage() {
+    const { t } = useTranslation();
     const {
         cart,
         removeFromCart,
@@ -22,7 +24,7 @@ export function CartPage() {
                     >
                         <ArrowLeft className="w-6 h-6" />
                     </button>
-                    <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-bold">Carrito de Compras</h1>
+                    <h1 className="font-serif text-3xl md:text-4xl text-[#2C2420] font-bold">{t('pages.cart.title')}</h1>
                 </div>
 
                 {cart.length === 0 ? (
@@ -30,15 +32,15 @@ export function CartPage() {
                         <div className="w-20 h-20 bg-stone-100 rounded-full mx-auto mb-6 flex items-center justify-center">
                             <Lock className="w-10 h-10 text-stone-300" />
                         </div>
-                        <h2 className="text-xl font-bold text-[#2C2420] mb-2">Tu carrito está vacío</h2>
+                        <h2 className="text-xl font-bold text-[#2C2420] mb-2">{t('pages.cart.empty.title')}</h2>
                         <p className="text-stone-500 mb-8 max-w-md mx-auto">
-                            Parece que aún no has encontrado tu ajuste perfecto. Explora nuestras colecciones para encontrar tu curva ideal.
+                            {t('pages.cart.empty.message')}
                         </p>
                         <Link
                             to="/"
                             className="inline-block bg-[#2C2420] text-white px-8 py-3 rounded-full font-bold hover:bg-[#A35944] transition-colors"
                         >
-                            Volver a la Tienda
+                            {t('pages.cart.empty.cta')}
                         </Link>
                     </div>
                 ) : (
@@ -61,7 +63,7 @@ export function CartPage() {
                                         <div className="flex justify-between items-start">
                                             <div>
                                                 <h3 className="font-bold text-lg text-[#2C2420] mb-1">{item.product.title}</h3>
-                                                <p className="text-sm text-stone-500">Talla: {item.selectedSize}</p>
+                                                <p className="text-sm text-stone-500">{t('pages.cart.item.size')} {item.selectedSize}</p>
                                             </div>
                                             <button
                                                 onClick={() => removeFromCart(item.product.id, item.selectedSize)}
@@ -89,7 +91,7 @@ export function CartPage() {
                                                 </button>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-xs text-stone-400 mb-1">Total</p>
+                                                <p className="text-xs text-stone-400 mb-1">{t('pages.cart.item.total')}</p>
                                                 <p className="font-bold text-xl text-[#2C2420]">
                                                     ${(item.product.price * item.quantity).toFixed(2)}
                                                 </p>
@@ -103,19 +105,19 @@ export function CartPage() {
                         {/* Order Summary */}
                         <div className="lg:col-span-1">
                             <div className="bg-white p-8 rounded-2xl shadow-sm sticky top-24">
-                                <h2 className="font-serif text-xl font-bold text-[#2C2420] mb-6">Resumen del Pedido</h2>
+                                <h2 className="font-serif text-xl font-bold text-[#2C2420] mb-6">{t('pages.cart.summary.title')}</h2>
 
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between text-stone-600">
-                                        <span>Subtotal</span>
+                                        <span>{t('pages.cart.summary.subtotal')}</span>
                                         <span className="font-medium">${cartTotal.toFixed(2)}</span>
                                     </div>
                                     <div className="flex justify-between text-stone-600">
-                                        <span>Envío</span>
-                                        <span className="text-sm italic">Calculado en el checkout</span>
+                                        <span>{t('pages.cart.summary.shipping')}</span>
+                                        <span className="text-sm italic">{t('pages.cart.summary.shipping_note')}</span>
                                     </div>
                                     <div className="pt-4 border-t border-stone-100 flex justify-between items-center">
-                                        <span className="font-bold text-lg text-[#2C2420]">Total</span>
+                                        <span className="font-bold text-lg text-[#2C2420]">{t('pages.cart.summary.total')}</span>
                                         <span className="font-bold text-2xl text-[#2C2420]">${cartTotal.toFixed(2)}</span>
                                     </div>
                                 </div>
@@ -124,7 +126,7 @@ export function CartPage() {
                                     onClick={checkout}
                                     className="w-full bg-[#A35944] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#D1AB66] transition-colors shadow-lg shadow-[#A35944]/20 flex items-center justify-center gap-2 mb-6"
                                 >
-                                    PAGAR AHORA
+                                    {t('pages.cart.summary.checkout_cta')}
                                     <ArrowRight className="w-5 h-5" />
                                 </button>
 
@@ -133,13 +135,13 @@ export function CartPage() {
                                         <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center shrink-0">
                                             <Lock className="w-3 h-3 text-[#B49286]" />
                                         </div>
-                                        <span>Encriptación SSL Segura</span>
+                                        <span>{t('pages.cart.summary.security')}</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-xs text-stone-500">
                                         <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center shrink-0">
                                             <ArrowRight className="w-3 h-3 text-[#B49286]" />
                                         </div>
-                                        <span>Devoluciones Gratis por 30 Días</span>
+                                        <span>{t('pages.cart.summary.returns')}</span>
                                     </div>
                                 </div>
                             </div>

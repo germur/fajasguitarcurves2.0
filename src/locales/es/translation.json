@@ -1,0 +1,1415 @@
+{
+    "common": {
+        "loading": "Cargando...",
+        "error": "Ocurrió un error",
+        "search": "Buscar",
+        "cart": "Carrito"
+    },
+    "nav": {
+        "store": "TIENDA",
+        "view_all": "Ver Todo",
+        "full_catalog": "Catálogo Completo",
+        "our_story": "Nuestra Historia",
+        "tools": "HERRAMIENTAS",
+        "find_size": "ENCUENTRA TU TALLA",
+        "quiz_cta": "HACER QUIZ DE TALLA",
+        "announcements": [
+            "🇺🇸 Envíos Gratis en todo Estados Unidos",
+            "💬 Asesoría de Talla por Expertas en WhatsApp"
+        ],
+        "brand": "Marca",
+        "faq": "Preguntas Frecuentes",
+        "filter_tag": "Filtrar por Etiqueta",
+        "new_in": "Lo Nuevo",
+        "offers": "Ofertas",
+        "view_offers": "Ver Ofertas",
+        "sale_desc": "Hasta 40% OFF en referencias seleccionadas",
+        "goals": {
+            "stage2": "Etapa 2 (Alta Compresión)",
+            "stage3": "Etapa 3 (Mantenimiento)",
+            "postop": "Post-Op / BBL",
+            "glute": "Realce Glúteo",
+            "waist": "Cintura de Avispa",
+            "strapless": "Strapless / Invisible",
+            "shorts": "Shorts y Bodys",
+            "midthigh": "Media Pierna"
+        }
+    },
+    "collections": {
+        "recovery": "Postquirúrgicas",
+        "recovery_sub": "Post-Quirúrgico & Médico",
+        "sculpt": "Reloj de Arena",
+        "sculpt_sub": "Uso Diario & Estético",
+        "bras": "Brasieres",
+        "bras_sub": "Brasieres, Tablas y Espumas",
+        "by_collection": "Por Colección",
+        "by_goal": "Por Objetivo"
+    },
+    "tools": {
+        "ratio_test": "Test Ratio Guitarra",
+        "stage_compare": "Etapa 1 vs Etapa 2",
+        "recovery_calc": "Calculadora de Recuperación"
+    },
+    "footer": {
+        "description": "Ingeniería textil colombiana diseñada para la recuperación post-quirúrgica y el moldeo diario de alto nivel.",
+        "explore": "Explora",
+        "support": "Soporte",
+        "join_club": "Únete al Club",
+        "newsletter_desc": "Recibe tips de recuperación de expertos y acceso anticipado a lanzamientos.",
+        "email_placeholder": "Tu mejor email",
+        "no_spam": "*No hacemos spam. Solo curvas.",
+        "secure_payment": "Pago Seguro",
+        "privacy": "Política de Privacidad",
+        "terms": "Términos de Servicio",
+        "seo_title": "Expertos en Fajas Colombianas en USA",
+        "seo_text": "Guitar Curves es la marca líder en Fajas Colombianas en Estados Unidos, especializadas en la silueta de reloj de arena y la recuperación post-quirúrgica...",
+        "links": {
+            "returns": "Cambios y Devoluciones",
+            "fit_finder": "Guía de Tallas (AI)",
+            "wholesale": "Programa Mayoristas",
+            "contact": "Contáctanos"
+        }
+    },
+    "pages": {
+        "our_story": {
+            "seo": {
+                "title": "Nuestra Historia: Ingeniería Textil de Medellín | Guitar Curves",
+                "description": "Conoce el origen de Guitar Curves. No es Fast Fashion, es artesanía colombiana diseñada por Nelly Perez para curvas reales."
+            },
+            "hero": {
+                "title": "La Ingeniería<1>Detrás de la Curva</1>",
+                "subtitle": "Heritage & Engineering"
+            },
+            "founder": {
+                "quote": "\"No diseñamos para maniquíes. <1>Diseñamos para mujeres reales.</1>\"",
+                "p1": "Guitar Curves nació en los talleres textiles de Medellín, Colombia, la capital mundial de la faja. Mientras la industria masiva intentaba encajar cuerpos latinos en moldes estándar, nosotros hicimos lo contrario: estudiamos la anatomía de la mujer con curvas reales (cintura pequeña, cadera amplia) y creamos un patrón que la respeta.",
+                "p2": "No somos 'Fast Fashion'; somos herencia artesanal transmitida por manos expertas que llevan más de 20 años cosiendo confianza.",
+                "name": "Nelly Perez",
+                "role": "Fundadora & Master Pattern Maker"
+            },
+            "badge": {
+                "title": "Autenticidad Garantizada",
+                "desc": "Rechazamos el \"Fast Fashion\". Cada una de nuestras prendas es confeccionada en Colombia bajo estándares éticos, utilizando Powernet de grado médico certificado. Cuando compras Guitar Curves, no solo compras una faja, inviertes en calidad que dura años."
+            },
+            "secret": {
+                "title": "El Secreto del \"Guitar Cut\"",
+                "desc": "El secreto no está solo en la tela, sino en la tensión. Utilizamos Powernet de Grado Médico con memoria inteligente: una tela bidireccional que comprime firmemente donde necesitas control (abdomen y espalda) pero cede suavemente donde necesitas volumen (glúteos y cadera). Sin aplanar, sin asfixiar. Cada costura es plana y está reforzada con Vitamina E para nutrir tu piel mientras te recuperas.",
+                "fit_title": "El \"Guitar Fit\"",
+                "fit_desc": "Patrones únicos con radio cintura-cadera ampliado.",
+                "med_title": "Grado Médico",
+                "med_desc": "Compresión certificada para recuperación post-quirúrgica.",
+                "skin_title": "Cuidado de la Piel",
+                "skin_desc": "Tejidos infundidos con Vitamina E y Aloe Vera."
+            },
+            "cta": {
+                "title": "Ya conoces nuestra historia.",
+                "desc": "Ahora empieza a escribir la tuya con tu nuevo cuerpo.",
+                "button": "ENCONTRAR MI FAJA IDEAL"
+            }
+        },
+        "contact": {
+            "badge": "Centro de Soporte",
+            "title": "Estamos Aquí para Ti.",
+            "desc": "Ya sea que estés buscando tu talla o rastreando un pedido, nuestro equipo de especialistas está listo para ayudarte.",
+            "chat_title": "Chatea con una Experta",
+            "chat_desc": "Respuestas inmediatas sobre tallas, etapas y envíos. Nuestro Asistente IA está disponible 24/7.",
+            "chat_btn": "Iniciar Chat",
+            "email_title": "Escríbenos",
+            "email_desc": "Para modificaciones de pedidos, devoluciones o alianzas comerciales. Respondemos en 24 horas.",
+            "fit_title": "Asesoría de Talla Manual",
+            "fit_desc": "Envíanos tus medidas y una foto (opcional) y una especialista te asignará tu talla ideal.",
+            "fit_btn": "Solicitar Asesoría",
+            "hours_title": "Horario de Atención",
+            "hours_week": "Lun - Vie: 9am - 6pm EST",
+            "hours_sat": "Sáb: 10am - 4pm EST"
+        },
+        "shipping": {
+            "seo": {
+                "title": "Envíos Rápidos y Seguros | Fajas Guitar Curves",
+                "description": "Envíos desde USA en 24 horas. Recibe tu faja en 3-5 días sin aduanas."
+            },
+            "title": "Política de Envíos",
+            "lead": "Sabemos que cuando pides tu faja, ¡la necesitas YA! Ya sea que tu cirugía se acerque o simplemente quieras estrenar tus curvas. Por eso, toda nuestra logística está centralizada en Estados Unidos.",
+            "highlight": "🚀 Todos nuestros pedidos se envían desde nuestro almacén en [Ciudad de Ejemplo]. Olvídate de esperar aduanas o envíos internacionales de semanas.",
+            "processing_title": "⏱️ Tiempos de Procesamiento",
+            "processing_desc": "Nos movemos rápido. Los pedidos realizados antes de las 2:00 PM EST se procesan y envían el mismo día (de lunes a viernes). Los pedidos realizados después de esta hora o en fines de semana se procesan el siguiente día hábil.",
+            "options_title": "🚚 Opciones y Tiempos de Tránsito",
+            "options_desc": "Trabajamos principalmente con USPS y UPS para garantizar la mejor cobertura.",
+            "tracking_title": "📦 Seguimiento de tu Pedido",
+            "tracking_desc": "Tan pronto como tu paquete salga de nuestro almacén, recibirás un correo electrónico con tu número de rastreo (Tracking Number). Por favor, permite hasta 24 horas para que el sistema de la transportadora actualice la ubicación.",
+            "issues_title": "⚠️ Problemas con la Entrega",
+            "issues_lost": "<0>Paquetes Perdidos:</0> Aunque es muy raro, si tu paquete aparece como \"Entregado\" pero no lo tienes, espera 24 horas (a veces los escanean antes). Si sigue sin aparecer, contáctanos.",
+            "issues_address": "<0>Dirección Incorrecta:</0> No nos hacemos responsables por paquetes enviados a direcciones ingresadas incorrectamente por el cliente. Por favor verifica tu dirección dos veces antes de pagar.",
+            "table": {
+                "type": "Tipo de Envío",
+                "time": "Tiempo Estimado",
+                "cost": "Costo",
+                "standard": "Envío Estándar",
+                "standard_time": "3-5 Días Hábiles",
+                "free": "GRATIS (Pedidos +$200)",
+                "express": "Express / Prioritario",
+                "express_time": "1-2 Días Hábiles"
+            }
+        },
+        "returns": {
+            "seo": {
+                "title": "Garantía de Ajuste y Cambios | Fajas Guitar Curves",
+                "description": "Cambios de talla gratis en tu primera compra. Garantía de ajuste perfecto por 30 días."
+            },
+            "title": "Garantía de Ajuste Perfecto & Política de Cambios",
+            "lead": "Queremos que te sientas espectacular y segura. Sabemos que comprar una faja colombiana por internet puede generar dudas. ¿Me cerrará en la cintura? ¿Me entrará en las caderas? Entendemos que tu cuerpo es único, especialmente si estás en un proceso post-quirúrgico o tienes nuestras curvas \"Guitar Shape\".",
+            "guarantee": "Por eso, en Guitar Curves, eliminamos el riesgo de tu compra con nuestra <0>Garantía de Ajuste Perfecto</0>.",
+            "promise_title": "✨ Nuestra Promesa: El Primer Cambio es GRATIS",
+            "promise_desc": "Si recibes tu faja y no es tu talla correcta, nosotros cubrimos el costo de envío para cambiártela por la talla que necesitas (válido para el primer cambio dentro de EE. UU.). Queremos asegurarnos de que obtengas ese efecto \"snatched\" y la compresión médica adecuada sin que te cueste más.",
+            "hygiene_title": "⚠️ Reglas de Higiene (LEER ANTES DE PROBAR)",
+            "hygiene_intro": "Por regulaciones de salud estrictas y para garantizar la seguridad de todas nuestras clientas, somos inflexibles con la higiene. Nuestras prendas son de uso íntimo. Para que un cambio o devolución sea aceptado, la prenda debe cumplir estrictamente con lo siguiente:",
+            "hygiene_list": [
+                "<0>PRUÉBATELA SOBRE TU ROPA INTERIOR:</0> Nunca te pruebes la faja directamente sobre la piel.",
+                "<0>SIN MANCHAS NI FLUIDOS:</0> No aceptaremos prendas con manchas de desodorante, maquillaje, lociones corporales, fluidos corporales o sangre.",
+                "<0>SIN OLORES:</0> La prenda no debe oler a perfume, humo de cigarrillo, detergente o suavizante.",
+                "<0>ESTADO ORIGINAL:</0> Debe tener todas las etiquetas pegadas y su empaque original intacto."
+            ],
+            "hygiene_warning": "🛑 IMPORTANTE: Si recibimos una prenda que no cumple con estas condiciones, será rechazada inmediatamente y te la devolveremos a tu cargo. No podemos revender una prenda usada por riesgo biológico. Gracias por tu comprensión.",
+            "how_to_title": "🔄 Cómo realizar un cambio o devolución",
+            "how_to_desc": "Tienes <0>30 días</0> a partir de la fecha de entrega para iniciar tu proceso.",
+            "how_to_steps": [
+                "<0>Inicia tu Solicitud:</0> Envía un correo a <1>soporte@guitarcurves.com</1> con tu Número de Orden y el motivo.",
+                "<0>Aprobación:</0> Nuestro equipo revisará tu solicitud y te enviará una Etiqueta de Envío Pre-pagada (para cambios de talla).",
+                "<0>Envío:</0> Empaca la faja en su bolsa original, pega la etiqueta y déjala en la oficina de correo más cercana.",
+                "<0>Recibe tu Nueva Faja:</0> Una vez recibamos tu paquete y verifiquemos que cumple con las reglas de higiene, te enviaremos tu nueva talla en 24-48 horas hábiles."
+            ],
+            "non_returnable_title": "❌ Artículos que NO tienen devolución (Venta Final)",
+            "non_returnable_intro": "Por seguridad e higiene, los siguientes artículos son venta final y no pueden cambiarse ni devolverse:",
+            "non_returnable_list": [
+                "Cremas, Geles y Jabones (si el sello está roto).",
+                "Tablas Abdominales y Espumas (Lipo Foams) que hayan sido sacadas de su plástico protector.",
+                "Prendas de la sección \"Liquidación\" (Clearance).",
+                "Ropa interior (Panties) que no sea faja."
+            ],
+            "refund_title": "📦 Tiempos de Reembolso",
+            "refund_intro": "Si prefieres un reembolso en lugar de un cambio de talla:",
+            "refund_list": [
+                "Se te devolverá el valor de la prenda menos el costo de la etiqueta de envío de retorno ($9.99 USD).",
+                "Los costos de envío originales no son reembolsables.",
+                "El reembolso aparecerá en tu cuenta bancaria entre 5 a 10 días hábiles después de que inspeccionemos la prenda."
+            ],
+            "help_title": "¿Dudas con tu talla antes de enviar?",
+            "help_desc": "¡No adivines! Si vas a realizar un cambio, contáctanos primero. Envíanos una foto de tus medidas actuales (cintura y cadera) y nuestras expertas en Guitar Tech te dirán exactamente qué talla pedir.",
+            "help_btn": "Contactar Soporte"
+        },
+        "faq": {
+            "seo": {
+                "title": "Centro de Ayuda y Preguntas Frecuentes | Guitar Curves",
+                "description": "Resuelve tus dudas sobre tallas, envíos y cuidados de tu faja. Asesoría experta para tu compra segura."
+            },
+            "hero_title": "Centro de Ayuda",
+            "hero_desc": "Estamos aquí para resolver tus dudas antes, durante y después de tu compra.",
+            "search_placeholder": "¿Tienes dudas sobre tu talla o envío?",
+            "cards": {
+                "size": {
+                    "title": "Talla y Ajuste",
+                    "desc": "Encuentra tu Fit perfecto y aprende a medirte correctamente.",
+                    "btn": "Ver Guía"
+                },
+                "shipping": {
+                    "title": "Envíos y Cambios",
+                    "desc": "Tiempos de entrega, rastreo y nuestra garantía de satisfacción.",
+                    "btn": "Leer Política"
+                },
+                "medical": {
+                    "title": "Dudas Médicas",
+                    "desc": "Stage 1 vs Stage 2, uso de tablas y recuperación post-op.",
+                    "btn": "Consultar"
+                },
+                "care": {
+                    "title": "Cuidado de Prenda",
+                    "desc": "Cómo lavar y cuidar tu faja para mantener la compresión.",
+                    "btn": "Ver Tips"
+                }
+            },
+            "cta_title": "¿No encontraste lo que buscabas?",
+            "cta_desc": "Nuestro equipo de expertas en fajas está disponible por WhatsApp.",
+            "cta_btn": "Chatear con Experta"
+        },
+        "wholesale": {
+            "hero": {
+                "badge": "Programa de Partners Certificados",
+                "title": "Convierte la Recuperación <br /> en tu Mejor Negocio",
+                "desc": "Ofrece a tus clientes la calidad colombiana que exigen y obtén márgenes de ganancia líderes en la industria.",
+                "btn": "SOLICITAR CATÁLOGO"
+            },
+            "stats": {
+                "clinics": "Clínicas Aliadas",
+                "made_in": "Hecho en Colombia",
+                "dispatch": "Despacho Priority",
+                "minima": "Mínimos de Compra"
+            },
+            "benefits": {
+                "title": "Por qué elegir Guitar Curves",
+                "quality_title": "Calidad que Protege tu Reputación",
+                "quality_desc": "Powernet de alta gama que no se rompe ni cede. Tus pacientes te amarán por la comodidad y los resultados post-quirúrgicos superiores.",
+                "profit_title": "Rentabilidad Real",
+                "profit_desc": "Precios estructurados para que dupliques tu inversión (ROI 100%) en venta directa. Márgenes diseñados para el crecimiento.",
+                "content_title": "Contenido Listo para Usar",
+                "content_desc": "Acceso a nuestro banco de imágenes profesional para que vendas en tu Instagram sin gastar en sesiones de fotos."
+            },
+            "testimonial": {
+                "quote": "\"La faja favorita de mis pacientes\"",
+                "author": "Dr. Partners Network"
+            },
+            "form": {
+                "title": "Aplica al Programa",
+                "desc": "Completa tus datos. Te contactaremos vía WhatsApp o Email en menos de 24h.",
+                "name_label": "Nombre de Contacto",
+                "business_label": "Nombre del Negocio",
+                "type_label": "Tipo de Negocio",
+                "social_label": "Instagram / Website",
+                "submit_btn": "ENVIAR SOLICITUD"
+            }
+        },
+        "privacy": {
+            "seo": {
+                "title": "Política de Privacidad | Fajas Guitar Curves",
+                "description": "Tu privacidad y tus datos son sagrados para nosotros."
+            },
+            "title": "Política de Privacidad",
+            "intro": "En Fajas Guitar Curves, entendemos que la privacidad no es solo un requisito legal, es una cuestión de confianza. Cuando compartes tus medidas corporales, fotos para evaluación o datos de salud (etapa de recuperación), nos estás confiando información sensible. Nos tomamos esa responsabilidad muy en serio.",
+            "personalization_title": "🔒 Uso de Datos de Personalización",
+            "personalization_desc": "<strong>Tus Medidas son Solo Tuyas:</strong> La información que proporcionas sobre tus medidas (cintura, cadera, torso) y tu etapa de recuperación se utiliza <strong>únicamente</strong> para recomendarte la talla perfecta y personalizar tu experiencia de compra.<br/><br/>Nunca vendemos, alquilamos ni compartimos tus datos biométricos o de salud con terceros anunciantes.",
+            "collection_title": "Recopilación de Información",
+            "collection_desc": "Recopilamos información cuando realizas una compra, te registras en nuestro sitio, o participas en una evaluación de talla. Esto incluye nombre, dirección de envío, correo electrónico y datos de pago (procesados de forma segura a través de Shopify Payments).",
+            "cookies_title": "Cookies y Tecnologías de Rastreo",
+            "cookies_desc": "Utilizamos cookies para mejorar tu experiencia en nuestra tienda. Por ejemplo, las cookies nos permiten recordar qué artículos tienes en tu carrito para que no los pierdas si sales de la página. También nos ayudan a entender cómo interactúas con nuestro sitio para mejorarlo.",
+            "security_title": "Seguridad",
+            "security_desc": "Tu información personal está contenida en redes seguras y solo es accesible por un número limitado de personas que tienen derechos especiales de acceso a dichos sistemas y están obligadas a mantener la información confidencial. Además, toda la información confidencial/crediticia que suministras se cifra mediante la tecnología Secure Socket Layer (SSL).",
+            "rights_title": "Tus Derechos",
+            "rights_desc": "Tienes derecho a acceder, corregir o eliminar tu información personal en cualquier momento. Si deseas ejercer estos derechos, contáctanos en <a href=\"mailto:privacy@guitarcurves.com\">privacy@guitarcurves.com</a>."
+        },
+        "terms": {
+            "seo": {
+                "title": "Términos del Servicio | Fajas Guitar Curves",
+                "description": "Condiciones de uso y descargos de responsabilidad médica."
+            },
+            "title": "Términos del Servicio",
+            "intro": "Bienvenido a Fajas Guitar Curves. Al acceder o comprar en nuestro sitio, aceptas los siguientes términos y condiciones.",
+            "disclaimer_title": "⚕️ Descargo de Responsabilidad Médico (Disclaimer)",
+            "disclaimer_desc": "Nuestras prendas son de soporte estético y post-quirúrgico, diseñadas con altos estándares de calidad. Sin embargo, <strong>no sustituyen el consejo de tu médico profesional.</strong>",
+            "disclaimer_note": "Cada recuperación es única. Siempre debes seguir las indicaciones específicas de tu cirujano plástico respecto al nivel de compresión (Etapa 1 vs Etapa 2), el tiempo de uso diario y el momento adecuado para empezar a usar una faja. Fajas Guitar Curves no se hace responsable por complicaciones derivadas del uso incorrecto o prematuro de prendas de compresión sin autorización médica.",
+            "ip_title": "Propiedad Intelectual",
+            "ip_desc": "Todo el contenido de este sitio, incluyendo pero no limitado a textos, gráficos, logotipos, imágenes y código, es propiedad de Fajas Guitar Curves y está protegido por las leyes de derechos de autor. El uso no autorizado de nuestra marca \"Guitar Curves\" o nuestras imágenes para fines comerciales está estrictamente prohibido.",
+            "payments_title": "Pagos y Facturación",
+            "payments_desc": "Nos reservamos el derecho de rechazar cualquier pedido que realices con nosotros. Aceptamos las principales tarjetas de crédito y plataformas de pago. El cobro se realiza en el momento en que confirmas tu orden.",
+            "accuracy_title": "Exactitud de la Información",
+            "accuracy_desc": "Nos esforzamos por ser lo más precisos posible en las descripciones de nuestros productos y tablas de tallas. Sin embargo, no garantizamos que las descripciones de los productos u otro contenido de este sitio sean exactos, completos, fiables, actuales o libres de errores.",
+            "changes_title": "Cambios en los Términos",
+            "changes_desc": "Puedes revisar la versión más actual de los Términos del Servicio en cualquier momento en esta página. Nos reservamos el derecho, a nuestra sola discreción, de actualizar, cambiar o reemplazar cualquier parte de estos Términos del Servicio mediante la publicación de actualizaciones y cambios en nuestro sitio web."
+        },
+        "recovery": {
+            "seo": {
+                "title": "Recovery Room: Fajas Post-Quirúrgicas Stage 1 & 2 | Guitar Curves",
+                "description": "Colección especializada para BBL y Lipo. Compresión médica certificada para una recuperación segura y sin fibrosis."
+            },
+            "hero": {
+                "badge": "Etapa 2 Certificada",
+                "title_line1": "Precisión",
+                "title_line2": "de Grado Médico",
+                "desc": "Diseñadas en Colombia para maximizar la retracción de piel en BBL, Lipo 360 y Abdominoplastia. <1>Sin quemaduras, sin marcas, solo seguridad.</1>",
+                "trust_compression": "Compresión Uniforme (25-30 mmHg)",
+                "trust_vitamin": "Microcápsulas de Vitamina E",
+                "caption_title": "El Santuario",
+                "caption_sub": "Recupérate en paz"
+            },
+            "titles": {
+                "stage1": "Recién Operada (Stage 1 / Post-Parto)",
+                "stage2": "Alta Compresión (Stage 2)",
+                "stage3": "Max Moldeo (Stage 3)",
+                "bbl": "Especial BBL (Guitar Shape)",
+                "default": "Resultados clínicos comprobados.",
+                "filtered": "Filtrado:",
+                "showing_tag": "Mostrando resultados para etiqueta",
+                "count": "Artículos"
+            },
+            "pain_points": {
+                "box1": {
+                    "title": "Compresión Inteligente",
+                    "desc": "Diseño que apoya tu recuperación segura."
+                },
+                "box2": {
+                    "title": "Fit 'Guitarra' Real",
+                    "desc": "El único patrón que comprime la cintura pero libera la cadera para no aplastar tu BBL."
+                },
+                "box3": {
+                    "title": "Vitamina E Infundida",
+                    "desc": "Nuestros textiles nutren tu piel mientras sana, mejorando la elasticidad."
+                }
+            }
+        },
+        "home": {
+            "seo": {
+                "title": "Fajas Colombianas Guitar Curves | Cintura de Avispa & Post-Op",
+                "description": "La única faja con 'Guitar Cut' diseñada para BBL y Lipo. Ingeniería colombiana que moldea tu cintura sin aplanar tus caderas. Envíos desde USA."
+            },
+            "hero": {
+                "recover_btn": "Recuperar",
+                "sculpt_btn": "Moldear",
+                "recover_title_line1": "Recuperación",
+                "recover_title_line2": "Especializada",
+                "sculpt_title_line1": "La Silueta",
+                "sculpt_title_line2": "Guitarra Definitiva",
+                "recover_desc": "Ingeniería textil diseñada para proteger tu inversión quirúrgica (BBL & Lipo). Compresión segura Stage 2.",
+                "sculpt_desc": "Esculpe tu cintura y realza tus curvas naturales con tecnología invisible de alta compresión.",
+                "cta_recover": "Explorar Kit Stage 2",
+                "cta_sculpt": "Ver Colección Hourglass",
+                "cta_calc": "Calcular mi Talla",
+                "trust_recover": "Calidad Premium",
+                "trust_sculpt": "En Tendencia",
+                "quote_recover": "\"Es vital mantener la compresión constante durante las primeras 8 semanas para evitar seromas.\"",
+                "quote_sculpt": "\"El efecto de reloj de arena es instantáneo y la comodidad permite usarla todo el día.\""
+            },
+            "marquee": {
+                "shipping": "Envíos Gratis USA 🇺🇸",
+                "certified": "Certified Stage 2",
+                "returns": "Cambios sin Estrés",
+                "design": "Diseño Colombiano",
+                "payment": "Pago en 4 cuotas"
+            },
+            "bento": {
+                "card1_badge": "Colección",
+                "card1_title": "Fajas Guitar Curves",
+                "card1_cta": "Ver Colección",
+                "card2_badge": "Más Vendido",
+                "card2_title": "Fajas Stage 2",
+                "card2_desc": "Alta compresión post-quirúrgica",
+                "card2_cta": "Comprar",
+                "card3_title": "Brasieres Post-Op",
+                "card3_desc": "Soporte y Comodidad Total",
+                "card3_cta": "Ver Colección"
+            },
+            "showcase": {
+                "badge": "En Tendencia",
+                "title": "Tus Curvas, Redefinidas",
+                "subtitle": "Descubre la colección diseñada para realzar tu silueta de guitarra natural.",
+                "cta": "Ver Colección",
+                "cta_mobile": "Ver Colección Completa"
+            },
+            "social": {
+                "badge": "Resultados Reales",
+                "title": "Muro de Curvas",
+                "desc": "Únete a miles de mujeres mostrando sus resultados en TikTok.",
+                "cta": "Ver más en TikTok"
+            }
+        },
+        "checkout": {
+            "title": "Finalizar Compra",
+            "secure": "Encriptación Segura de 256-bit",
+            "contact": {
+                "title": "Contacto",
+                "email_label": "Correo Electrónico",
+                "placeholder": "isabella@ejemplo.com",
+                "no_account": "No necesitas cuenta. Solo para actualizaciones del pedido.",
+                "newsletter": "Envíame correos con nuevos lanzamientos y tips de recuperación."
+            },
+            "shipping": {
+                "title": "Envío",
+                "name": "Nombre Completo",
+                "address": "Dirección",
+                "city": "Ciudad",
+                "zip": "Código Postal"
+            },
+            "payment": {
+                "title": "Pago",
+                "note": "El procesamiento del pago se maneja de forma segura a través de Stripe/Shopify.",
+                "pay_button": "Pagar",
+                "processing": "Procesando..."
+            },
+            "summary": {
+                "title": "Resumen del Pedido",
+                "subtotal": "Subtotal",
+                "shipping": "Envío",
+                "total": "Total",
+                "free": "GRATIS"
+            }
+        },
+        "dashboard": {
+            "hello": "Hola,",
+            "silhouette": "Tu silueta es actualmente:",
+            "sign_out": "Cerrar Sesión",
+            "fit_profile": {
+                "title": "Perfil de Ajuste",
+                "edit": "Editar",
+                "waist": "Cintura",
+                "hips": "Caderas",
+                "torso": "Torso",
+                "recommendation": "Basado en tus medidas, tu talla ideal para",
+                "stage2": "Etapa 2",
+                "is": "es"
+            },
+            "orders": {
+                "title": "Pedidos Recientes",
+                "view_all": "Ver Todos los Pedidos",
+                "delivered": "Entregado",
+                "order_number": "Pedido #"
+            },
+            "recovery": {
+                "title": "Estado de Recuperación",
+                "week": "Semana",
+                "goal": "Meta",
+                "weeks": "Semanas",
+                "status_text": "Estás en la <strong>Fase de Inflamación</strong>. Mantén tu compresión constante (23h/día) para prevenir seromas.",
+                "manual_cta": "Ver Manual de Recuperación"
+            },
+            "quick_buy": {
+                "title": "Recomendado para Ti"
+            }
+        },
+        "cart": {
+            "title": "Carrito de Compras",
+            "empty": {
+                "title": "Tu carrito está vacío",
+                "message": "Parece que aún no has encontrado tu ajuste perfecto. Explora nuestras colecciones para encontrar tu curva ideal.",
+                "cta": "Volver a la Tienda"
+            },
+            "item": {
+                "size": "Talla:",
+                "total": "Total",
+                "remove": "Eliminar"
+            },
+            "summary": {
+                "title": "Resumen del Pedido",
+                "subtotal": "Subtotal",
+                "shipping": "Envío",
+                "shipping_note": "Calculado en el checkout",
+                "total": "Total",
+                "checkout_cta": "PAGAR AHORA",
+                "security": "Encriptación SSL Segura",
+                "returns": "Devoluciones Gratis por 30 Días"
+            }
+        },
+        "bbl_kit": {
+            "seo": {
+                "title": "BBL Recovery Survival Kit | Faja Stage 2 + Brasier Bundle",
+                "description": "El dúo esencial para tu cirugía: Faja reloj de arena y brasier post-operatorio. Compra el bundle y ahorra 15%."
+            },
+            "hero": {
+                "badge_overlay": "El Dúo Post-Op",
+                "badge_limited": "Bundle Limitado",
+                "title_line1": "Protege tu inversión.",
+                "title_line2": "Arriba y Abajo.",
+                "description": "Tu faja moldea tu cintura, pero tu brasier protege tu postura y tus implantes. El dúo esencial para una recuperación sin dolor.",
+                "checklist_1": "Faja Etapa 2: Compresión médica para tu cintura.",
+                "checklist_2": "Brasier Post-Op: Soporte de espalda y sin aros.",
+                "checklist_3": "Ahorra 15% comprando juntos.",
+                "cta": "COMPRAR EL DÚO (-15% OFF)"
+            }
+        },
+        "essentials": {
+            "seo": {
+                "title": "Brasieres Post-Quirúrgicos y Tablas | Guitar Curves",
+                "description": "Soporte médico certificado para tu recuperación. Brasieres sin aros y tablas abdominales diseñadas para evitar fibrosis."
+            },
+            "hero": {
+                "badge": "Soporte Post-Quirúrgico",
+                "title_line1": "Soporte Post-Quirúrgico y",
+                "title_line2": "Corrección de Postura.",
+                "description": "Diseñados para sostener tu busto y corregir tu postura mientras duermes. Sin aros, sin costuras molestas.",
+                "cta": "Ver Brasieres",
+                "grade": "Grado Médico",
+                "usage": "Post-Op y Uso Diario"
+            },
+            "showcase": {
+                "title": "Colección Esencial",
+                "filtered": "Filtrado:",
+                "description": "Selección curada para una recuperación sin dolor.",
+                "showing_tag": "Mostrando productos con etiqueta",
+                "count": "Modelos Disponibles",
+                "loading": "Cargando esenciales...",
+                "empty": "Colección Vacía"
+            },
+            "bundle": {
+                "badge": "Completa tu Kit",
+                "title_line1": "Recuperación",
+                "title_line2": "Inteligente",
+                "text": "Combina tu brasier con una faja Stage 2 y obtén un 15% de descuento automático.",
+                "cta": "Ver Fajas Stage 2"
+            }
+        },
+        "hourglass": {
+            "seo": {
+                "title": "The Sculpt Collection | Fajas Reloj de Arena & Cinturillas",
+                "description": "Ingeniería invisible para realzar tus curvas. Explora nuestra línea de fajas de uso diario, waist trainers y shorts levanta cola."
+            },
+            "hero": {
+                "badge": "Ingeniería Invisible",
+                "title": "La Colección de Moldeo",
+                "description": "Ingeniería invisible para realzar tus curvas. La silueta de reloj de arena definitiva.",
+                "cta_guide": "Guía de Tallas",
+                "caption_title": "Moldeo",
+                "caption_desc": "Colección Insignia"
+            },
+            "sub_collection": {
+                "shorts": "Shorts",
+                "waist_trainer": "Cinturillas",
+                "strapless": "Strapless",
+                "high_compression": "Alta Compresión"
+            },
+            "error": {
+                "title": "Error Cargando Productos",
+                "hint": "Por favor verifica los permisos del API de Shopify Storefront."
+            },
+            "empty": {
+                "message": "No se encontraron productos para esta selección.",
+                "reset_filters": "Limpiar Filtros"
+            }
+        },
+        "tools_hub": {
+            "seo": {
+                "title": "The Body Lab | Herramientas Fajas Guitar Curves",
+                "description": "Centro de tecnología y herramientas para identificar tu cuerpo y optimizar tu recuperación."
+            },
+            "header": {
+                "badge": "Centro de Tecnología",
+                "title": "The Body Lab",
+                "description": "Herramientas de precisión diseñadas para acompañarte en cada paso de tu transformación. Sin adivinanzas, solo datos."
+            },
+            "tools": {
+                "guitar_ratio": {
+                    "title": "Guitar Ratio Finder",
+                    "description": "¿Eres una 'Falsa S' o una 'Verdadera Guitarra'? Analiza tus medidas con nuestro algoritmo.",
+                    "cta": "Iniciar Test"
+                },
+                "stage_comparator": {
+                    "title": "Comparador Stage 1 vs 2",
+                    "description": "La guía visual definitiva para saber cuándo y por qué cambiar de etapa.",
+                    "cta": "Ver Comparativa"
+                },
+                "fibrosis_quiz": {
+                    "title": "Quiz de Fibrosis",
+                    "description": "Herramienta de diagnóstico avanzado para detectar irregularidades post-quirúrgicas.",
+                    "badge": "Próximamente"
+                }
+            }
+        },
+        "guitar_ratio_quiz": {
+            "seo": {
+                "title": "Guitar Ratio Finder | Diagnóstico de Silueta",
+                "description": "Analiza tus medidas y descubre si eres una verdadera Guitarra."
+            },
+            "intro": {
+                "badge": "Herramienta de Diagnóstico",
+                "title_line1": "¿Eres una Falsa S o una",
+                "title_highlight": "Verdadera Guitarra",
+                "title_line2": "?",
+                "description": "Olvídate de las tallas genéricas. Descubre tu <strong>\"Guitar Ratio\"</strong> único y entiende por qué las fajas tradicionales nunca te han quedado bien.",
+                "cta": "Descubrir mi Silueta",
+                "stats": {
+                    "accuracy": {
+                        "value": "97%",
+                        "label": "Precisión"
+                    },
+                    "duration": {
+                        "value": "2min",
+                        "label": "Duración"
+                    },
+                    "analyzed": {
+                        "value": "+5k",
+                        "label": "Analizadas"
+                    }
+                }
+            },
+            "modal": {
+                "title": "¿Cuál es tu Talla Real?",
+                "description": "Usa nuestra tecnología de escaneo biométrico manual para encontrar tu ajuste perfecto en 30 segundos.",
+                "cta": "Comenzar Diagnóstico",
+                "stats_line": "⏱ 1 Minuto 🎯 98% Precisión"
+            },
+            "measure": {
+                "ratio_label": "Ratio Actual:",
+                "your_measurements": "Tus Medidas",
+                "adjust_sliders": "Ajusta los deslizadores para coincidir con tu cuerpo real.",
+                "waist": "1. Cintura",
+                "hips": "2. Cadera",
+                "error_hip": "La cadera debe ser mayor",
+                "continue": "Continuar"
+            },
+            "questions": {
+                "title": "Diagnóstico Rápido",
+                "q3": {
+                    "label": "Problema frecuente:",
+                    "text": "¿Te quedan bien de cadera pero grandes de cintura?",
+                    "options": [
+                        "Siempre me pasa",
+                        "Frecuentemente",
+                        "A veces",
+                        "Rara vez"
+                    ]
+                },
+                "q4": {
+                    "label": "Objetivo Principal:",
+                    "text": "¿Buscas realzar y levantar tus glúteos?",
+                    "options": [
+                        "Sí, ¡absolutamente!",
+                        "Sí, pero me da miedo",
+                        "No, solo compresión",
+                        "Reducir caderas"
+                    ]
+                },
+                "cta": "Calcular Resultado"
+            },
+            "calculating": "Analizando...",
+            "gate": {
+                "title": "¡Resultado Listo!",
+                "description": "Ingresa tu email para desbloquear tu recomendación de talla personalizada.",
+                "placeholder": "Tu email...",
+                "cta": "Ver Mi Talla"
+            },
+            "results": {
+                "ratio_label": "Ratio",
+                "ideal_size_label": "Talla Ideal",
+                "apply_size": "Aplicar Talla",
+                "cancel": "Cancelar y cerrar",
+                "buy_cta": "Comprar esta Faja",
+                "compare_link": "Ver Comparativa Stage 1 vs 2",
+                "restart": "Reiniciar",
+                "back": "Volver",
+                "types": {
+                    "true_guitar": {
+                        "title": "¡Eres una Verdadera Guitarra! (Talla {{size}}) 🎸",
+                        "description": "Tu cintura es significativamente más pequeña que tus caderas (Ratio de Oro). Según tu cintura de {{waist}}\", tu talla ideal es {{size}}, pero necesitas el corte 'Signature Guitar' para acomodar tus caderas de {{hips}}\".",
+                        "rec_title": "Faja Reloj de Arena Stage 3"
+                    },
+                    "potential_guitar": {
+                        "title": "Eres una Potencial Guitarra (Talla {{size}}) ⏳",
+                        "description": "Tienes curvas naturales. Tu talla base es {{size}}. Eres una 'Falsa S': pequeña de frente, pero necesitas espacio atrás. Con la compresión adecuada en cintura, alcanzarás el Ratio Guitarra.",
+                        "rec_title": "Cinturilla Extrema Reloj de Arena"
+                    },
+                    "athletic": {
+                        "title": "Silueta Atlética (Talla {{size}}) 📏",
+                        "description": "Tienes una figura balanceada. Tu talla para alta compresión es {{size}}. Tu objetivo es crear la ilusión de curva mediante High Compression.",
+                        "rec_title": "Faja Cinturilla de Avispa"
+                    }
+                }
+            }
+        },
+        "stage_comparator": {
+            "seo": {
+                "title": "Stage 1 vs Stage 2: Comparador Visual | Guitar Curves",
+                "description": "Descubre visualmente la diferencia entre Fajas Stage 1 (Inflamación) y Stage 2 (Moldeo)."
+            },
+            "hero": {
+                "badge": "Guía de Recuperación",
+                "title": "Faja Stage 1 vs. Stage 2",
+                "description": "¿Cuándo hacer la transición? Descubre visualmente qué faja necesitas para optimizar tus resultados post-quirúrgicos.",
+                "cta_visual": "Ver Comparativa Visual",
+                "cta_quiz": "¿Estoy lista para Stage 2?"
+            },
+            "slider": {
+                "badge": "Desliza para Comparar",
+                "title": "La Verdadera Diferencia",
+                "description": "Arrastra el divisor central para ver la transformación.",
+                "label_stage1": "STAGE 1",
+                "label_stage2": "STAGE 2"
+            },
+            "tech": {
+                "badge": "Ingeniería Textil",
+                "title": "Detalles que Importan",
+                "items": [
+                    {
+                        "title": "Alta Elongación (Stage 1)",
+                        "desc": "Suavidad y elasticidad para acomodar la inflamación severa sin cortar la circulación."
+                    },
+                    {
+                        "title": "Zipper Invisible Perineal",
+                        "desc": "Diseño higiénico de fácil acceso que no roza ni incomoda en zonas sensibles."
+                    },
+                    {
+                        "title": "Mesh Glúteo vs. Powernet",
+                        "desc": "Panel trasero de micro-red que protege la grasa transferida (BBL) sin comprimirla."
+                    }
+                ]
+            },
+            "table": {
+                "title": "Tabla de Especificaciones",
+                "headers": [
+                    "Característica",
+                    "Stage 1",
+                    "Stage 2"
+                ],
+                "rows": [
+                    {
+                        "label": "Compresión",
+                        "s1": "Uniforme y Media (20-25 mmHg)",
+                        "s2": "Focalizada y Alta (30+ mmHg)"
+                    },
+                    {
+                        "label": "Material Principal",
+                        "s1": "Triconet / Lycra Bidireccional",
+                        "s2": "Powernet de Alta Densidad"
+                    },
+                    {
+                        "label": "Sistema de Cierre",
+                        "s1": "Broches Externos (Ajustable)",
+                        "s2": "Cierre Interno / Invisible"
+                    },
+                    {
+                        "label": "Objetivo",
+                        "s1": "Drenaje y Reducción de Edema",
+                        "s2": "Moldeado de Cintura Semipermanente"
+                    }
+                ]
+            },
+            "quiz": {
+                "badge": "Test Rápido",
+                "title": "¿Estás lista para Stage 2?",
+                "description": "Responde con honestidad para cuidar tus resultados.",
+                "questions": [
+                    "¿Tu faja Stage 1 ya te queda holgada incluso en los broches más ajustados?",
+                    "¿Han pasado al menos 3 semanas desde tu cirugía?",
+                    "¿Sientes que la inflamación ha bajado considerablemente?"
+                ],
+                "options": {
+                    "yes": "Sí",
+                    "no": "No"
+                },
+                "result_ready": {
+                    "title": "¡SÍ! Tu cuerpo está listo.",
+                    "desc": "Es momento de cambiar a Stage 2 para empezar a moldear esa cintura.",
+                    "cta": "Ver Colección Stage 2"
+                },
+                "result_wait": {
+                    "title": "Espera un poco más.",
+                    "desc": "Tu cuerpo aún necesita la contención rígida de Stage 1 para evitar fibrosis. No te apresures.",
+                    "cta": "Renovar mi Stage 1"
+                }
+            },
+            "shoppable": {
+                "stage1": {
+                    "title": "Esenciales Stage 1",
+                    "subtitle": "Máxima seguridad médica.",
+                    "card": {
+                        "badge": "Post-Quirúrgica",
+                        "title": "Faja Post-Quirúrgica Completa",
+                        "desc": "Soporte médico certificado.",
+                        "cta": "Ver Colección Completa"
+                    }
+                },
+                "stage2": {
+                    "title": "Favoritos Stage 2",
+                    "subtitle": "Moldeado de cintura agresivo.",
+                    "card": {
+                        "badge": "Más Vendido",
+                        "title": "Reloj de Arena Stage 3",
+                        "desc": "La favorita para definir cintura.",
+                        "cta": "Ver Colección Moldeadora"
+                    }
+                }
+            }
+        },
+        "fit_finder": {
+            "seo": {
+                "title": "Calculadora de Talla Perfecta | Fajas Guitar Curves",
+                "description": "Encuentra tu talla exacta en 30 segundos. Algoritmo especializado para cuerpos tipo guitarra y BBL que analiza tu proporción cintura/cadera."
+            },
+            "hero": {
+                "badge": "Tecnología Anti-Waisting",
+                "title_line1": "Encuentra tu Talla de",
+                "title_highlight": "\"Cuerpo Guitarra\"",
+                "title_line2": "en 30 Segundos.",
+                "subtitle": "Nuestra tecnología analiza la diferencia entre tu cintura y tus caderas para recomendarte la faja exacta."
+            },
+            "social_proof": {
+                "quote": "\"Tenía miedo porque soy M de cintura y XL de cadera, pero la calculadora me sugirió la L de Guitar Curves y me quedó perfecta. No me aprieta las piernas.\"",
+                "author": "María G.",
+                "label": "Compra Verificada • Talla Recomendada: L"
+            },
+            "footer_note": "No es consejo médico. Para pacientes post-operatorios recientes (0-2 semanas), considera una talla más grande por inflamación o consulta a tu cirujano."
+        },
+        "blog": {
+            "fibrosis": {
+                "badge": "Guía Médica",
+                "title": "La Biblia de la Fibrosis: Todo lo que debes saber",
+                "description": "Evita el endurecimiento post-quirúrgico con estas claves esenciales de recuperación.",
+                "content": {
+                    "p1": "La fibrosis es una de las complicaciones más comunes y temidas después de una liposucción. Se manifiesta como un endurecimiento de los tejidos y bultos dolorosos bajo la piel.",
+                    "p2_prefix": "Para prevenirla, es crucial utilizar",
+                    "p2_bold": "compresión de grado médico",
+                    "p2_suffix": "constante durante las primeras semanas.",
+                    "solution": {
+                        "title": "La Solución Correcta",
+                        "desc": "No todas las fajas sirven para esta etapa. Necesitas materiales específicos que ofrezcan soporte uniforme sin cortar la circulación.",
+                        "cta": "Ver Fajas Anti-Fibrosis"
+                    },
+                    "p3": "Además de la prenda correcta, asegúrate de realizar drenajes linfáticos manuales con un profesional certificado para movilizar los fluidos retenidos."
+                }
+            },
+            "anatomy": {
+                "title": "Anatomía de una Faja BBL",
+                "objective": "Educar sobre 'Corte Guitarra' vs Genérico"
+            },
+            "inflammation": {
+                "title": "Cronología de la Inflamación",
+                "objective": "Gestionar expectativas y vender por etapas"
+            },
+            "template": {
+                "badge": "Guía de Recuperación",
+                "title": "5 Trucos para Evitar la Fibrosis después de tu Lipo",
+                "author": "Por: Equipo Guitar Curves",
+                "read_time": "5 min de lectura",
+                "intro": "La fibrosis no es \"mala suerte\", es falta de compresión adecuada. Aquí te explicamos cómo usar tu tabla abdominal correctamente para esculpir resultados perfectos.",
+                "tips": [
+                    {
+                        "title": "1. La presión constante es clave",
+                        "desc": "Imagina que tu piel está \"flotando\" sobre el músculo después de la cirugía. Si queda espacio vacío, el cuerpo lo llena con tejido cicatrizal desorganizado (fibrosis). El secreto no es apretar hasta asfixiar, sino mantener una presión <strong>uniforme y plana</strong>."
+                    },
+                    {
+                        "title": "2. Hidratación con Vitamina E",
+                        "desc": "La piel traumatizada necesita nutrición. El tejido de alta compresión de nuestras fajas no es tela común; está infusionado con microcápsulas de Vitamina E, Ginkgo Biloba y Algas Marinas. Al contacto con tu calor corporal, estas cápsulas se rompen y liberan nutrientes directamente en tu piel mientras la usas."
+                    },
+                    {
+                        "title": "3. La Etapa 2 es crucial",
+                        "desc": "Muchas pacientes cometen el error de quedarse con la faja post-quirúrgica (Stage 1) por 3 meses. ¡Error! A las 2-3 semanas, cuando la inflamación baja, esa faja te quedará grande. Necesitas pasar a una <strong>Faja de Alta Compresión (Stage 2)</strong> para seguir moldeando la cintura. Si la faja no te aprieta, no está trabajando."
+                    },
+                    {
+                        "title": "4. Usa la Espuma (Lipo Foam)",
+                        "desc": "La tabla es rígida, pero la espuma es suave. Usa la espuma debajo de la tabla para proteger tu piel de marcas y asegurar que la compresión llegue a cada rincón."
+                    },
+                    {
+                        "title": "5. Drenajes Linfáticos",
+                        "desc": "No te saltes tus masajes. Ayudan a sacar el líquido retenido que la faja está movilizando."
+                    }
+                ],
+                "quote": "\"El 70% del resultado de una lipo depende de los cuidados post-operatorios, no de la cirugía en sí.\" — Dr. Plastic Surgeon",
+                "sidebar": {
+                    "calc_title": "¿Dudas con tu talla?",
+                    "calc_desc": "No adivines. Usa nuestra calculadora con IA en 30 segundos.",
+                    "calc_cta": "CALCULAR AHORA",
+                    "rec_title": "Recomendados para ti",
+                    "rec_product": "Faja Reloj de Arena"
+                }
+            }
+        },
+        "recovery_calc": {
+            "title": "Calculadora de Recuperación",
+            "objective": "Capturar leads (Fecha Cx + Email)"
+        },
+        "about": {
+            "hero": {
+                "badge": "Nuestro Manifiesto",
+                "title_line1": "La Ingeniería",
+                "title_line2": "de las Curvas.",
+                "description": "Por qué dejamos de diseñar \"fajas\" y empezamos a construir arquitectura corporal de grado quirúrgico."
+            },
+            "problem": {
+                "box_title": "El Hueco.",
+                "box_subtitle": "Por qué el 90% de las fajas se enrollan.",
+                "badge": "El Fallo de la Industria",
+                "title": "Diseñadas para Cilindros, No para Relojes de Arena.",
+                "text": "La manufactura estándar usa \"El Método del Tubo\". Es más barato coser un tubo recto de tela elástica. Pero tu cuerpo no es un tubo. Cuando una mujer con curvas se pone un tubo, la física contraataca. La tela se enrolla en la cintura y corta las caderas. No eres tú. Es la geometría.",
+                "list": [
+                    "Hueco en Cintura",
+                    "Se Enrolla",
+                    "Hip Dips",
+                    "Rozaduras"
+                ]
+            },
+            "solution": {
+                "badge": "Nuestra Innovación",
+                "title": "Arquitectura Guitar Tech™",
+                "features": [
+                    {
+                        "title": "Tallaje por Ratio Dorado",
+                        "desc": "Agregamos la variable \"Ratio\". Calculamos la diferencia entre el radio de cintura y cadera, creando una prenda que es usualmente 14 pulgadas más pequeña en la cintura que en las caderas."
+                    },
+                    {
+                        "title": "Zonas de Confort",
+                        "desc": "Alta compresión donde necesitas moldear (Zona Roja). Cero compresión donde necesitas volumen (Zona Verde). No más BBLs aplastados."
+                    },
+                    {
+                        "title": "Probado en Comunidad",
+                        "desc": "Cada prototipo se prueba no en maniquíes, sino en pacientes reales post-operadas en varias etapas de recuperación."
+                    }
+                ]
+            },
+            "stats": {
+                "sculpted": "Cinturas Esculpidas",
+                "chafing": "Rozaduras de Faja",
+                "retention": "Tasa de Retención",
+                "support": "Soporte Disponible"
+            },
+            "footer": {
+                "title": "¿Lista para sentir la diferencia?",
+                "cta": "VER LA COLECCIÓN SIGNATURE"
+            }
+        },
+        "404": {
+            "seo_title": "Página No Encontrada | Fajas Guitar Curves",
+            "title": "Esta página se perdió...<br />pero tu cintura no debería.",
+            "description": "Te perdiste, pero no pierdas tu figura. Calcula tu talla exacta mientras arreglamos esto.",
+            "cta_shop": "Volver a la Tienda",
+            "cta_calc": "Calcular mi Talla"
+        }
+    },
+    "components": {
+        "cart": {
+            "your_bag": "Tu Bolsa",
+            "free_shipping_unlocked": "¡Envío Gratis Desbloqueado!",
+            "remaining_for_free_shipping": "Faltan ${{amount}} para Envío Gratis ✈️",
+            "bag_empty": "Tu bolsa está vacía.",
+            "explore_collection": "Explorar Colección",
+            "size": "Talla",
+            "are_you_sure_size": "¿Segura de la talla?",
+            "stage1_upsell_title": "¿Estás llevando Stage 1?",
+            "stage1_upsell_desc": "Cuando baje la inflamación (Semana 4-6), necesitarás más compresión para moldear. Ahorra 15% llevando el Kit Completo.",
+            "stage1_vs_stage2": "Ver Diferencia: Stage 1 vs Stage 2",
+            "subtotal": "Subtotal",
+            "savings": "¡Te estás ahorrando $25 de envío hoy!",
+            "checkout": "FINALIZAR COMPRA",
+            "secure_transaction": "🔒 Transacción Segura SSL • Envíos discretos desde Miami, FL"
+        },
+        "product_detail": {
+            "add": "Agregar",
+            "select": "Seleccionar",
+            "home": "Inicio",
+            "collection": "Colección",
+            "product_not_found": "Producto no encontrado",
+            "product_not_found_desc": "El producto que buscas no existe.",
+            "back_home": "Volver al Inicio",
+            "reviews": "Reseñas",
+            "in_stock": "En Stock",
+            "installments": "Paga en cuotas de",
+            "no_interest": "sin interés",
+            "color": "Color",
+            "size": "Talla",
+            "select_size": "Seleccionar",
+            "size_help": "¿No sabes tu talla? Calcular aquí",
+            "select_size_warning": "* Selecciona una talla para continuar",
+            "add_to_cart": "Agregar al Carrito",
+            "choose_option": "Elige una opción",
+            "stage_compare_title": "¿Miedo a equivocarte de etapa?",
+            "stage_compare_link": "Ver Comparativa Visual: Stage 1 vs Stage 2",
+            "engineering": "Ingeniería Detallada",
+            "read_less": "Leer menos",
+            "read_more": "Leer descripción detallada y beneficios (+)",
+            "default_benefit": "Esta prenda combina ingeniería textil colombiana con comodidad diaria. Diseñada para moldear sin asfixiar.",
+            "tech_specs": "Especificaciones Técnicas",
+            "spec_powernet": "Powernet de Alta Compresión (Grado Médico).",
+            "spec_lining": "Forro interno de Lycra con microcápsulas de Vitamina E.",
+            "spec_seams": "Costuras planas imperceptibles (Tecnología Seamless).",
+            "spec_closure": "Sistema de cierre perineal.",
+            "faq_title": "Preguntas Frecuentes",
+            "faq_size_q": "¿Cómo sé mi talla?",
+            "faq_size_a": "Usa nuestra Guía de Tallas y mídete cintura y cadera. Si estás en post-op, considera tu inflamación.",
+            "faq_wash_q": "¿Cómo lavo la prenda?",
+            "faq_wash_a": "Lavar a mano con jabón suave y agua fría. No usar secadora ni exprimir para no dañar el Powernet.",
+            "faq_returns_q": "¿Aceptan cambios?",
+            "faq_returns_a": "Sí, aceptamos el primer cambio gratis dentro de los 30 días si la prenda está en perfecto estado.",
+            "faq_all": "Ver todas las preguntas frecuentes",
+            "related_products": "También te podría gustar",
+            "view_all": "Ver Todo",
+            "trust_guarantee": "Garantía",
+            "trust_guarantee_sub": "Material Certificado",
+            "trust_shipping": "Envío Rápido",
+            "trust_shipping_sub": "Despacho en 24h",
+            "trust_returns": "Cambios",
+            "trust_returns_sub": "Primer cambio gratis",
+            "please_select_color": "Por favor selecciona un color",
+            "size_selected": "¡Talla {{size}} seleccionada automáticamente!"
+        },
+        "granular_faq": {
+            "support_center": "Centro de Soporte",
+            "title": "Preguntas Frecuentes",
+            "faqs": [
+                {
+                    "question": "¿Cómo sé cuál es mi talla correcta?",
+                    "answer": "Nuestras fajas son de grado médico y tienen una compresión muy alta. Te recomendamos usar nuestra calculadora 'Guitar Ratio' o la tabla de medidas. Si estás entre dos tallas, siempre elige la más grande para tu comodidad inicial."
+                },
+                {
+                    "question": "¿Esta prenda sirve para uso diario?",
+                    "answer": "Sí, la mayoría de nuestra colección Sculpt está diseñada para ser invisible bajo la ropa diaria. Las prendas de Recovery Stage 2 también pueden usarse diariamente una vez que tu doctor lo autorice (generalmente después de la semana 6)."
+                },
+                {
+                    "question": "¿Hacen envíos internacionales?",
+                    "answer": "Sí, enviamos a todo el mundo desde nuestro centro de distribución principal. Los tiempos de envío varían entre 3-7 días hábiles dependiendo de tu ubicación."
+                },
+                {
+                    "question": "¿Cuál es la política de cambios?",
+                    "answer": "Ofrecemos garantía de satisfacción 'Perfect Fit'. Si tu faja no te queda, tienes 30 días para cambiarla por otra talla, siempre que la prenda esté en su empaque original y sin uso (por higiene)."
+                }
+            ]
+        },
+        "essentials_faq": {
+            "education_hub": "Education Hub",
+            "title": "Preguntas Frecuentes de Recuperación",
+            "faqs": [
+                {
+                    "question": "¿Por qué necesito un brasier especial después de mi cirugía?",
+                    "answer": "Después de una mamoplastia o levantamiento, tus tejidos necesitan soporte constante para evitar la flacidez mientras sanan. Nuestros brasieres de grado médico proporcionan la compresión exacta para reducir la inflamación, evitar la retención de líquidos y asegurar que tus implantes se asienten en la posición correcta."
+                },
+                {
+                    "question": "¿Cuánto tiempo debo usar el brasier post-quirúrgico?",
+                    "answer": "La mayoría de los cirujanos recomiendan el uso continuo (24/7) durante las primeras 6 semanas. Después de este periodo, puedes pasar a usarlo durante el día o la noche según la recomendación médica. Nuestros diseños son tan cómodos que muchas clientes los siguen usando como brasier diario por el soporte de espalda que ofrecen."
+                },
+                {
+                    "question": "¿Cómo ayuda con la postura?",
+                    "answer": "El peso de los implantes puede causar dolor de espalda y hombros encorvados. Nuestros brasieres cuentan con un refuerzo en 'X' o soporte alto en la espalda que te obliga suavemente a mantener los hombros atrás y la columna alineada, aliviando la tensión inmediatamente."
+                },
+                {
+                    "question": "¿Los brasieres tienen varillas?",
+                    "answer": "No. Durante la recuperación, las varillas (aros metálicos) están prohibidas porque pueden lastimar las incisiones o alterar la forma del implante. Nuestra tecnología 'Wireless Support' levanta y sostiene el busto usando cortes inteligentes en la tela de alta compresión, sin necesidad de metales incómodos."
+                }
+            ]
+        },
+        "medical_accordions": {
+            "knowledge_base": "Medical Knowledge Base",
+            "title": "Preguntas Frecuentes de Recuperación",
+            "faqs": [
+                {
+                    "question": "¿CUÁL ES LA DIFERENCIA ENTRE FAJA STAGE 1 Y STAGE 2?",
+                    "answer": "La Stage 1 es de baja compresión para los primeros 7-10 días de inflamación. La Stage 2 (nuestra especialidad) es de alta compresión y es obligatoria desde la semana 2 para moldear la figura y adherir la piel."
+                },
+                {
+                    "question": "¿CÓMO SÉ MI TALLA SI TENGO LA CINTURA INFLAMADA?",
+                    "answer": "No compres tu talla de pantalón. Mídete la cintura y cadera actual. Si estás entre dos tallas en Stage 2, elige la más grande o usa extensores. Visita nuestra Guía de Tallas."
+                },
+                {
+                    "question": "¿POR QUÉ NECESITO UN ORIFICIO PERINEAL O ZIPPER?",
+                    "answer": "Los primeros días de recuperación son difíciles. Nuestro sistema de cierre perineal y zipper inferior está diseñado para permitirte ir al baño sin necesidad de quitarte la faja completa, lo que sería doloroso y complicado."
+                },
+                {
+                    "question": "¿CÓMO EVITAR LA FIBROSIS?",
+                    "answer": "El uso constante de una faja de alta compresión (Stage 2) ayuda a mantener una presión uniforme sobre la piel, evitando la acumulación irregular de líquidos que causa la fibrosis."
+                }
+            ]
+        },
+        "bundle_builder": {
+            "badge": "Post-Op Essentials",
+            "title": "Doctor's Orders: The Kit",
+            "desc": "Los cirujanos recomiendan complementar tu faja con estos accesorios.",
+            "view_kit": "Ver todo el Kit",
+            "essential_accessory": "Accesorio esencial",
+            "add_to_cart": "Agregar al carrito"
+        },
+        "trust_banner": {
+            "medical_grade": "Grado Médico",
+            "medical_grade_desc": "Compresión certificada para seguridad post-operatoria.",
+            "fast_shipping": "Envío Rápido",
+            "fast_shipping_desc": "Envíos internacionales vía DHL y FedEx.",
+            "perfect_fit": "Talla Perfecta",
+            "perfect_fit_desc": "Cambios gratis si la talla no es perfecta.",
+            "expert_support": "Soporte Experto",
+            "expert_support_desc": "Asesoría de tallas gratis con nuestras especialistas."
+        },
+        "curve_calculator": {
+            "badge": "Guitar Tech™ Sizing",
+            "title": "¿Miedo a que no suba de las caderas?",
+            "desc": "Entendemos el problema: Cintura XS, Cadera XL. Usa nuestra calculadora especializada para encontrar tu talla exacta en nuestra horma \"Guitarra\".",
+            "cta": "Calcular mi Fit Guitarra"
+        },
+        "whatsapp_button": {
+            "message": "Hola, me gustaría recibir asesoría sobre mi talla.",
+            "tooltip": "¿Necesitas ayuda?"
+        },
+        "bra_card": {
+            "default_benefit": "Soporte médico certificado y corrección de postura inmediata.",
+            "add": "Añadir"
+        },
+        "local_collection_grid": {
+            "loading": "Cargando colección...",
+            "add": "Agregar",
+            "collection": "Colección"
+        },
+        "before_after_slider": {
+            "badge": "Transformación Real",
+            "title_part1": "No es magia, es",
+            "title_part2": "Ingeniería Textil.",
+            "desc": "Olvídate del \"Hip Dip\" y la flacidez. Nuestra tecnología de alta compresión redistribuye el tejido para crear una silueta de reloj de arena instantánea, sin cirugía.",
+            "benefits": [
+                "Corrige Hip Dips al instante",
+                "Aplana el abdomen bajo (FUPA)",
+                "Levanta los glúteos naturalmente"
+            ],
+            "cta": "Descubrir Sculpt Studio",
+            "with_faja": "Con Faja",
+            "without_faja": "Sin Faja"
+        },
+        "pain_solution_slider": {
+            "badge": "La Diferencia Guitar Tech",
+            "title": "El \"Hueco en la Espalda\" Termina Hoy.",
+            "desc": "¿Cintura pequeña y caderas grandes? Las fajas normales no te entienden (y te aplastan). La tecnología GuitarTech está diseñada geométricamente para tu cuerpo.",
+            "guitar_fit": "Ajuste Guitar Tech",
+            "generic_faja": "Faja Genérica \"Tubo\"",
+            "problem_title": "El Problema",
+            "problems": [
+                "Aplastamiento de Glúteos",
+                "Bolsa en la Espalda (Waist Gap)",
+                "Enrollamiento en la Pierna"
+            ],
+            "solution_title": "La Solución",
+            "solution_text_1": "Radio de Cintura a Cadera de 0.7.",
+            "solution_text_2": "Significa que la cintura es 2 tallas más pequeña que la cadera.",
+            "solution_emphasis": "Compresión donde la necesitas, libertad donde la quieres."
+        },
+        "seo_accordion": {
+            "title": "La Guía Definitiva de Fajas Colombianas en USA",
+            "intro": "Bienvenida a <strong>Fajas Guitar Curves</strong>, la marca líder en prendas de compresión de grado médico diseñada específicamente para cuerpos con curvas latinas (BBL, Lipoescultura y genética de reloj de arena). Entendemos que encontrar la faja correcta en Estados Unidos puede ser difícil.",
+            "stages_title": "¿Qué etapa necesito?",
+            "stage_1": "<strong>Etapa 1 (Inmediata):</strong> Uso 24/7 durante las primeras 2 semanas post-op. Baja compresión, alta elasticidad para acomodar la inflamación.",
+            "stage_2": "<strong>Etapa 2 (Moldeo):</strong> A partir de la semana 3. Alta compresión (Powernet) para esculpir la cintura mientras proteges los glúteos injertados.",
+            "stage_3": "<strong>Etapa 3 (Mantenimiento):</strong> Para uso diario y eventos. Invisible bajo la ropa.",
+            "shipping_title": "Envíos Locales",
+            "shipping_text": "Olvídate de esperar semanas por un envío internacional. Nuestro almacén centralizado en USA garantiza entregas rápidas a <strong>Houston, Miami, New York, Los Angeles</strong> y más allá.",
+            "keywords": "Keywords: Fajas Colombianas, BBL Shapewear, Stage 2 Faja, Waist Trainer, High Compression Garments, Post Surgery Supplies."
+        },
+        "trust_section": {
+            "title": "¿Por qué elegir Guitar Curves para tu recuperación?",
+            "subtitle": "No somos solo moda. Somos ingeniería aplicada a la recuperación post-quirúrgica y el moldeo extremo.",
+            "bbl_safe_title": "Diseño BBL Safe",
+            "bbl_safe_desc": "\"No comprime la grasa transferida en los glúteos\"",
+            "medical_title": "Compresión Médica",
+            "medical_desc": "\"Ayuda a pegar la piel al músculo (Etapa 2)\"",
+            "fit_title": "Fit Garantizado",
+            "fit_desc": "\"Si no te queda, la cambiamos gratis\""
+        },
+        "anatomy_recovery": {
+            "title_line1": "La Anatomía del",
+            "title_line2": "Soporte Perfecto",
+            "description": "Tu busto y espalda necesitan tanta atención como tu cintura. Descubre por qué nuestros brasieres son esenciales para tu recuperación.",
+            "hotspots": [
+                {
+                    "label": "Corrección Cervical",
+                    "desc": "Mejora tu postura al instante."
+                },
+                {
+                    "label": "Cobertura de Axila",
+                    "desc": "Control total de gorditos."
+                },
+                {
+                    "label": "Soporte Lumbar",
+                    "desc": "Alivio sin varillas incómodas."
+                }
+            ]
+        },
+        "bbl_survival_kit": {
+            "title": "El Dúo de Recuperación",
+            "subtitle_prefix": "Agrega el Brasier a tu Faja y obtén un",
+            "subtitle_suffix": "inmediato.",
+            "items": [
+                {
+                    "name": "Faja Stage 2 Guitar Curves",
+                    "desc": "La base de tu moldeamiento."
+                },
+                {
+                    "name": "Brasier Post-Operatorio (Soporte Espalda)",
+                    "desc": "Protege tu postura y asegura tus implantes."
+                }
+            ],
+            "warning_title": "⚠️ Advertencia Médica:",
+            "warning_desc": "No te sientes directamente en el inodoro o sofá durante 8 semanas. Usa el Cojín BBL o tu transferencia de grasa podría morir por la presión.",
+            "summary": {
+                "title": "Tu Kit BBL",
+                "subtotal": "Subtotal",
+                "discount": "Descuento (15%)",
+                "total": "Total",
+                "cta": "AGREGAR AL CARRITO",
+                "shipping": "*Envío prioritario incluido hoy.",
+                "protocols": "Basado en protocolos de recuperación de Miami y Colombia."
+            }
+        },
+        "essentials_faq": {
+            "badge": "Centro Educativo",
+            "title": "Preguntas Frecuentes de Recuperación",
+            "items": [
+                {
+                    "question": "¿Por qué necesito un brasier especial después de mi cirugía?",
+                    "answer": "Después de una mamoplastia o levantamiento, tus tejidos necesitan soporte constante para evitar la flacidez mientras sanan. Nuestros brasieres de grado médico proporcionan la compresión exacta para reducir la inflamación, evitar la retención de líquidos y asegurar que tus implantes se asienten en la posición correcta."
+                },
+                {
+                    "question": "¿Cuánto tiempo debo usar el brasier post-quirúrgico?",
+                    "answer": "La mayoría de los cirujanos recomiendan el uso continuo (24/7) durante las primeras 6 semanas. Después de este periodo, puedes pasar a usarlo durante el día o la noche según la recomendación médica. Nuestros diseños son tan cómodos que muchas clientes los siguen usando como brasier diario por el soporte de espalda que ofrecen."
+                },
+                {
+                    "question": "¿Cómo ayuda con la postura?",
+                    "answer": "El peso de los implantes puede causar dolor de espalda y hombros encorvados. Nuestros brasieres cuentan con un refuerzo en 'X' o soporte alto en la espalda que te obliga suavemente a mantener los hombros atrás y la columna alineada, aliviando la tensión inmediatamente."
+                },
+                {
+                    "question": "¿Los brasieres tienen varillas?",
+                    "answer": "No. Durante la recuperación, las varillas (aros metálicos) están prohibidas porque pueden lastimar las incisiones o alterar la forma del implante. Nuestra tecnología 'Wireless Support' levanta y sostiene el busto usando cortes inteligentes en la tela de alta compresión, sin necesidad de metales incómodos."
+                }
+            ]
+        },
+        "filter_sidebar": {
+            "mobile_button": "Filtrar Resultados",
+            "title": "Filtros",
+            "clear_all": "Limpiar todos los filtros",
+            "label_category": "Tipo de Prenda",
+            "label_occasion": "Uso / Actividad",
+            "label_compression": "Nivel de Compresión",
+            "label_stage": "Etapa Post-Op",
+            "label_features": "Características"
+        },
+        "policy_layout": {
+            "official": "Official Policy",
+            "updated": "Last Updated:"
+        },
+        "faq": {
+            "title": "Preguntas Frecuentes",
+            "subtitle": "Respuestas claras para decisiones seguras.",
+            "items": [
+                {
+                    "question": "¿Cómo sé si necesito una Faja Stage 1 o Stage 2?",
+                    "answer": "La Stage 1 es de baja compresión, ideal para la primera semana post-op cuando estás muy inflamada. La Stage 2 (nuestra especialidad) es de alta compresión y se usa a partir de la semana 2 o 3 para moldear y pegar la piel al músculo."
+                },
+                {
+                    "question": "¿El modelo Guitar Curves sirve si no me he operado?",
+                    "answer": "¡Sí! Si tu cuerpo es natural pero tienes cintura pequeña y caderas anchas, nuestras fajas evitarán que se te hagan bolsas en la espalda o que te aprieten demasiado en los muslos."
+                },
+                {
+                    "question": "¿Cómo voy al baño con la faja puesta?",
+                    "answer": "Todas nuestras fajas Stage 2 y 3 cuentan con un cierre perineal (zipper) o una abertura anatómica diseñada para que no tengas que quitártela cada vez que vas al baño."
+                },
+                {
+                    "question": "¿Si soy S de cintura pero XL de cadera, qué talla pido?",
+                    "answer": "Esta es la especialidad de Guitar Curves. Nuestra talla 'Guitar' está diseñada específicamente para esta proporción. Si seleccionas una talla regular, te quedará grande de cintura. En nuestra Guía de Tallas busca las opciones 'Guitar' o 'BBL' que tienen 2 tallas de diferencia entre cintura y cadera."
+                },
+                {
+                    "question": "¿Cuándo envían mi pedido?",
+                    "answer": "Los pedidos realizados antes de las 2:00 PM EST se envían el mismo día. El envío estándar toma 3-5 días hábiles dentro de USA. Ofrecemos opciones Express si lo necesitas urgente para tu cirugía."
+                }
+            ]
+        },
+        "returns_policy": {
+            "title": "Póliza de Cambio",
+            "subtitle": "Nos enfocamos en diseñar las siguientes políticas buscando una solución rápida y sencilla en caso de que necesites realizar un cambio",
+            "no_refund": "(no hacemos refund)",
+            "recommendations_title": "Recomendaciones Importantes",
+            "recommendations_desc": "Es importante seguir las siguientes recomendaciones al momento de probarte tu faja para que tu compra no tenga ningún daño y siga siendo elegible para devolución o cambio.",
+            "recommendations_list": [
+                "Usar ropa interior, tener el cuerpo libre de lociones corporales, desodorantes, aceites, polvos, perfumes, maquillaje o productos de belleza que puedan transferirse a la prenda.",
+                "Evite tirar de la prenda desde zonas delgadas como la zona de los glúteos y los cordones de silicona.",
+                "Es necesario no utilizar joyas, tener cuidado con las uñas largas o cualquier instrumento punzante que ayude a cerrar o ajustar la prenda.",
+                "Si te encuentras en la etapa de recuperación posquirúrgica o posparto, recuerda cubrir adecuadamente cualquier parte de tu cuerpo que fue sometida a la operación para evitar manchas o decoloración."
+            ],
+            "time_window_title": "Ventana de Tiempo",
+            "time_window_desc": "Para solicitar un cambio es necesario hacerlo dentro de los primeros <1>7 días</1> después de recibir tu prenda.",
+            "time_window_note": "Debe estar en excelentes condiciones con sus etiquetas originales y empaque.",
+            "limit_title": "Límite de Cambios",
+            "limit_desc": "El número máximo de cambios es <1>SÓLO una (1) vez</1> desde la compra original.",
+            "hygiene_title": "Nota de Higiene:",
+            "hygiene_desc": "Cualquier prenda que llegue con olores, manchas, o sin etiquetas será rechazada inmediatamente y devuelta al remitente (el cliente cubrirá los gastos de envío).",
+            "cta_btn": "INICIAR PROCESO DE CAMBIO",
+            "cta_note": "Al hacer clic confirmas que has leído y aceptas nuestros términos."
+        },
+        "recovery_card": {
+            "surgeon_approved": "Cirujano Aprobado",
+            "quick_add": "Añadir Rápido",
+            "view_details": "Ver Detalles"
+        },
+        "timeline_filter": {
+            "title": "¿Qué buscas lograr hoy?",
+            "etapa2": {
+                "label": "Etapa 2",
+                "sub": "Alta Compresión",
+                "badge": "🛡️ Recuperación"
+            },
+            "etapa3": {
+                "label": "Etapa 3",
+                "sub": "Mantenimiento",
+                "badge": "⏳ Uso Diario"
+            },
+            "post_lipo": {
+                "label": "Post Lipo",
+                "sub": "Lipo 360 / Abdo",
+                "badge": "💉 Cirugía"
+            },
+            "bbl": {
+                "label": "BBL",
+                "sub": "Brazilian Butt Lift",
+                "badge": "🍑 Glúteos"
+            },
+            "reloj": {
+                "label": "Reloj de Arena",
+                "sub": "Cintura de Avispa",
+                "badge": "⌛ Moldeo"
+            }
+        },
+        "waist_training_lab": {
+            "science_title": "The Science of Curves",
+            "title_line1": "Cinturilla Extrema:",
+            "title_line2": "Reloj de Arena",
+            "description": "Diseñada con <strong>14 varillas de acero</strong> y látex de máxima calidad para esculpir tu figura al instante. Soporte lumbar reforzado y compresión inteligente donde más la necesitas.",
+            "feature_1": "Varillas Flexibles",
+            "feature_2": "Látex Premium",
+            "points": [
+                {
+                    "label": "14 Varillas Flexibles",
+                    "desc": "Acero espiral que no se entierra."
+                },
+                {
+                    "label": "Látex Térmico",
+                    "desc": "Aumenta la sudoración localizada."
+                },
+                {
+                    "label": "3 Hileras",
+                    "desc": "Ajuste progresivo mientras reduces."
+                }
+            ]
+        },
+        "guitar_fit_finder": {
+            "header": {
+                "brand": "Guitar Curves",
+                "subtitle": "Calculadora de Talla"
+            },
+            "intro": {
+                "title": "Tu Talla Perfecta",
+                "desc": "Analizamos la diferencia entre cintura y cadera para recomendarte el ajuste exacto.",
+                "units_label": "Elige tus unidades",
+                "unit_cm": "CM",
+                "unit_in": "Pulgadas",
+                "cta": "CALCULAR MI TALLA"
+            },
+            "steps": {
+                "prev": "Paso 1",
+                "next": "Paso 2",
+                "waist_label": "Mide tu Cintura",
+                "waist_info": "Pasa la cinta por encima del ombligo, justo donde se hace el pliegue al inclinarte.",
+                "hip_label": "Mide tu Cadera",
+                "hip_info": "Encuentra la parte más ancha de tus glúteos. No aprietes la cinta.",
+                "placeholder_waist_in": "30",
+                "placeholder_waist_cm": "76",
+                "placeholder_hip_in": "40",
+                "placeholder_hip_cm": "102",
+                "error_waist": "Por favor ingresa tu cintura.",
+                "error_hip": "Por favor ingresa tu cadera.",
+                "continue": "Continuar"
+            },
+            "results": {
+                "recommended_label": "Tu Talla Recomendada",
+                "add_to_cart": "AGREGAR AL CARRITO - $110",
+                "restart": "Calcular de nuevo",
+                "out_of_range_title": "Fuera de Rango Estándar",
+                "retry": "Intentar de nuevo"
+            },
+            "logic": {
+                "underflow_msg": "Para cinturas menores a 23\", contáctanos para nuestra línea Petite exclusiva.",
+                "overflow_msg": "Para medidas superiores a 51\", explora nuestra colección Plus Size personalizada.",
+                "standard_line": "Línea Uso Diario (Standard Fit)",
+                "standard_desc": "Tu medida de cadera ({{hip}}\") entra en el rango estándar para tu cintura. Tu silueta es balanceada.",
+                "standard_badge": "Ajuste Estándar",
+                "guitar_line": "Línea Guitar Curves (Reloj de Arena)",
+                "guitar_desc": "Tu cadera ({{hip}}\") excede el promedio estándar ({{max}}\"). Necesitas el corte curvo Guitar Tech para evitar aplastamiento en glúteos.",
+                "guitar_badge": "✨ Fit Guitarra Detectado",
+                "apple_desc": "Tu silueta tiende a ser recta (Manzana). El ajuste estándar te proporcionará máximo soporte abdominal y definirá tu cintura."
+            }
+        },
+        "faq_accordion": {
+            "title": "¿Dudas de cómo medirte?",
+            "video_cta": "Reproducir Video",
+            "intro": "Cómo medirte correctamente: Olvida tu talla de pantalón. Las fajas colombianas son prendas de ingeniería y requieren medidas exactas en pulgadas (in).",
+            "waist_label": "CINTURA:",
+            "waist_text": "Ubica la cinta métrica justo encima de tu ombligo (la parte más estrecha de tu torso).",
+            "waist_tip": "Tip Pro: Aprieta la cinta ligeramente, tal como te gustaría que te abrace la faja.",
+            "hip_label": "CADERA:",
+            "hip_text": "Junta los pies y pasa la cinta por la parte más prominente de tus glúteos.",
+            "note": "Si tus medidas te ubican entre dos tallas, elige siempre la más grande (especialmente si estás en Stage 1 o inflamada)."
+        }
+    }
+}

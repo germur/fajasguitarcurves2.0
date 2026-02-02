@@ -2,16 +2,18 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../../lib/seo/SeoHead';
+import { useTranslation, Trans } from 'react-i18next';
 
 export default function OurStoryPage() {
+    const { t } = useTranslation();
     return (
         <div className="bg-[#FAF9F6] font-sans text-[#3E322C]">
             <SeoHead
-                title="Nuestra Historia: Ingeniería Textil de Medellín | Guitar Curves"
-                description="Conoce el origen de Guitar Curves. No es Fast Fashion, es artesanía colombiana diseñada por Nelly Perez para curvas reales."
+                title={t('pages.our_story.seo.title')}
+                description={t('pages.our_story.seo.description')}
                 path="/pages/our-story"
                 schema={{
-                    type: 'article', // Using article as a proxy for AboutPage content for now
+                    type: 'article',
                     data: {
                         name: "Nuestra Historia - Guitar Curves",
                         description: "La historia de ingeniería textil detrás de Guitar Curves."
@@ -42,9 +44,11 @@ export default function OurStoryPage() {
                         transition={{ duration: 1 }}
                         className="font-serif text-5xl md:text-7xl mb-4"
                     >
-                        La Ingeniería<br />Detrás de la Curva
+                        <Trans i18nKey="pages.our_story.hero.title">
+                            La Ingeniería<br />Detrás de la Curva
+                        </Trans>
                     </motion.h1>
-                    <p className="text-xl font-light tracking-widest uppercase">Heritage & Engineering</p>
+                    <p className="text-xl font-light tracking-widest uppercase">{t('pages.our_story.hero.subtitle')}</p>
                 </div>
             </section>
 
@@ -69,17 +73,19 @@ export default function OurStoryPage() {
 
                 <div className="space-y-6">
                     <h2 className="font-serif text-4xl leading-tight">
-                        "No diseñamos para maniquíes. <span className="italic text-[#D4AF37]">Diseñamos para mujeres reales.</span>"
+                        <Trans i18nKey="pages.our_story.founder.quote">
+                            "No diseñamos para maniquíes. <span className="italic text-[#D4AF37]">Diseñamos para mujeres reales.</span>"
+                        </Trans>
                     </h2>
                     <p className="text-lg leading-relaxed text-gray-600">
-                        Guitar Curves nació en los talleres textiles de Medellín, Colombia, la capital mundial de la faja. Mientras la industria masiva intentaba encajar cuerpos latinos en moldes estándar, nosotros hicimos lo contrario: estudiamos la anatomía de la mujer con curvas reales (cintura pequeña, cadera amplia) y creamos un patrón que la respeta.
+                        {t('pages.our_story.founder.p1')}
                     </p>
                     <p className="text-lg leading-relaxed text-gray-600">
-                        No somos 'Fast Fashion'; somos herencia artesanal transmitida por manos expertas que llevan más de 20 años cosiendo confianza.
+                        {t('pages.our_story.founder.p2')}
                     </p>
                     <div className="pt-4">
-                        <p className="font-serif text-2xl italic text-[#D4AF37]">Nelly Perez</p>
-                        <p className="text-xs uppercase tracking-widest text-gray-400">Fundadora & Master Pattern Maker</p>
+                        <p className="font-serif text-2xl italic text-[#D4AF37]">{t('pages.our_story.founder.name')}</p>
+                        <p className="text-xs uppercase tracking-widest text-gray-400">{t('pages.our_story.founder.role')}</p>
                     </div>
                 </div>
             </section>
@@ -90,9 +96,9 @@ export default function OurStoryPage() {
                     <div className="flex justify-center mb-8">
                         <span className="text-6xl">🇨🇴</span>
                     </div>
-                    <h3 className="font-serif text-3xl mb-6">Autenticidad Garantizada</h3>
+                    <h3 className="font-serif text-3xl mb-6">{t('pages.our_story.badge.title')}</h3>
                     <p className="text-xl font-light leading-relaxed opacity-90">
-                        Rechazamos el "Fast Fashion". Cada una de nuestras prendas es confeccionada en Colombia bajo estándares éticos, utilizando Powernet de grado médico certificado. Cuando compras Guitar Curves, no solo compras una faja, inviertes en calidad que dura años.
+                        {t('pages.our_story.badge.desc')}
                     </p>
                 </div>
             </section>
@@ -101,27 +107,27 @@ export default function OurStoryPage() {
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="font-serif text-4xl text-[#3E322C]">El Secreto del "Guitar Cut"</h2>
+                        <h2 className="font-serif text-4xl text-[#3E322C]">{t('pages.our_story.secret.title')}</h2>
                         <p className="text-gray-500 mt-4 max-w-3xl mx-auto leading-relaxed">
-                            El secreto no está solo en la tela, sino en la tensión. Utilizamos Powernet de Grado Médico con memoria inteligente: una tela bidireccional que comprime firmemente donde necesitas control (abdomen y espalda) pero cede suavemente donde necesitas volumen (glúteos y cadera). Sin aplanar, sin asfixiar. Cada costura es plana y está reforzada con Vitamina E para nutrir tu piel mientras te recuperas.
+                            {t('pages.our_story.secret.desc')}
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-12 text-center">
                         <div className="space-y-4">
                             <div className="w-16 h-16 bg-[#F2F2F2] rounded-full mx-auto flex items-center justify-center text-2xl">⏳</div>
-                            <h4 className="font-bold text-xl">El "Guitar Fit"</h4>
-                            <p className="text-sm text-gray-500">Patrones únicos con radio cintura-cadera ampliado.</p>
+                            <h4 className="font-bold text-xl">{t('pages.our_story.secret.fit_title')}</h4>
+                            <p className="text-sm text-gray-500">{t('pages.our_story.secret.fit_desc')}</p>
                         </div>
                         <div className="space-y-4">
                             <div className="w-16 h-16 bg-[#F2F2F2] rounded-full mx-auto flex items-center justify-center text-2xl">🩺</div>
-                            <h4 className="font-bold text-xl">Grado Médico</h4>
-                            <p className="text-sm text-gray-500">Compresión certificada para recuperación post-quirúrgica.</p>
+                            <h4 className="font-bold text-xl">{t('pages.our_story.secret.med_title')}</h4>
+                            <p className="text-sm text-gray-500">{t('pages.our_story.secret.med_desc')}</p>
                         </div>
                         <div className="space-y-4">
                             <div className="w-16 h-16 bg-[#F2F2F2] rounded-full mx-auto flex items-center justify-center text-2xl">🌿</div>
-                            <h4 className="font-bold text-xl">Cuidado de la Piel</h4>
-                            <p className="text-sm text-gray-500">Tejidos infundidos con Vitamina E y Aloe Vera.</p>
+                            <h4 className="font-bold text-xl">{t('pages.our_story.secret.skin_title')}</h4>
+                            <p className="text-sm text-gray-500">{t('pages.our_story.secret.skin_desc')}</p>
                         </div>
                     </div>
                 </div>
@@ -140,10 +146,10 @@ export default function OurStoryPage() {
 
             {/* 6. CTA FINAL */}
             <section className="py-24 bg-[#F9F8F6] text-center">
-                <h2 className="font-serif text-4xl mb-6">Ya conoces nuestra historia.</h2>
-                <p className="text-xl text-gray-600 mb-8">Ahora empieza a escribir la tuya con tu nuevo cuerpo.</p>
+                <h2 className="font-serif text-4xl mb-6">{t('pages.our_story.cta.title')}</h2>
+                <p className="text-xl text-gray-600 mb-8">{t('pages.our_story.cta.desc')}</p>
                 <Link to="/fit-finder" className="inline-block bg-[#D4AF37] text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase hover:bg-[#B49286] transition-colors shadow-lg">
-                    ENCONTRAR MI FAJA IDEAL
+                    {t('pages.our_story.cta.button')}
                 </Link>
             </section>
 

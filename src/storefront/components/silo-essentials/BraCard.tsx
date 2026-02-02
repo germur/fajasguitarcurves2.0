@@ -1,14 +1,15 @@
 import { ShoppingBag } from 'lucide-react';
 import type { StoreProduct } from '../../data/store-data';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
+import { useStore } from '../../hooks/useStoreContext';
+import { useTranslation } from 'react-i18next';
 
 interface BraCardProps {
     product: StoreProduct;
 }
 
-import { useStore } from '../../hooks/useStoreContext';
-
 export function BraCard({ product }: BraCardProps) {
+    const { t } = useTranslation();
     const { title, price, image, badge, benefit, handle } = product;
     const { addToCart, toggleCart } = useStore();
     // Fallback optimization: If handle is missing, use the numeric ID from the GID to avoid URL crashes
@@ -16,7 +17,7 @@ export function BraCard({ product }: BraCardProps) {
 
     // Fallback if no badge/benefit provided (though we just added them to store-data)
     const displayBadge = badge || "Best Seller";
-    const displayBenefit = benefit || "Soporte médico certificado y corrección de postura inmediata.";
+    const displayBenefit = benefit || t('components.bra_card.default_benefit');
 
     // UI FIX: Force "Brasier" instead of "Sujetador" in displayed text per user request
     const formatText = (text: string) => text.replace(/Sujetador/gi, "Brasier");
@@ -88,7 +89,7 @@ export function BraCard({ product }: BraCardProps) {
                         className="bg-[#2C2420] text-white px-6 py-3 rounded-xl text-xs font-bold tracking-widest uppercase hover:bg-[#D4AF37] transition-colors flex items-center gap-2 group-hover:shadow-lg active:scale-95"
                     >
                         <ShoppingBag size={14} />
-                        Añadir
+                        {t('components.bra_card.add')}
                     </button>
                 </div>
             </div>

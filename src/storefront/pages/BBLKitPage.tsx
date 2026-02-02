@@ -2,28 +2,31 @@
 import { BBLSurvivalKit } from '../components/BBLSurvivalKit';
 import { Check } from 'lucide-react';
 import { SeoHead } from '../../lib/seo/SeoHead';
+import { useTranslation } from 'react-i18next';
 
 export default function BBLKitPage() {
+    const { t } = useTranslation();
+
     return (
         <div className="bg-[#FAF9F6] min-h-screen font-sans selection:bg-[#3E322C] selection:text-white">
 
             {/* SEO METADATA */}
             <SeoHead
-                title="BBL Recovery Survival Kit | Faja Stage 2 + Brasier Bundle"
-                description="El dúo esencial para tu cirugía: Faja reloj de arena y brasier post-operatorio. Compra el bundle y ahorra 15%."
+                title={t('pages.bbl_kit.seo.title')}
+                description={t('pages.bbl_kit.seo.description')}
                 path="/pages/bbl-recovery-kit"
                 image="/assets/bbl-kit-hero.jpg"
                 schema={{
                     type: 'product',
                     data: {
                         title: "BBL Recovery Survival Kit",
-                        description: "Faja Stage 2 + Brasier Post-Quirúrgico Bundle",
+                        description: t('pages.bbl_kit.seo.description'),
                         images: [{ src: "https://guitarcurves.com/assets/bbl-kit-hero.jpg" }],
                         priceRange: { minVariantPrice: { amount: "150.00", currencyCode: "USD" } },
                         availableForSale: true
                     },
                     breadcrumbs: [
-                        { name: 'Home', item: '/' },
+                        { name: t('nav.home'), item: '/' },
                         { name: 'BBL Kit', item: '/pages/bbl-recovery-kit' }
                     ]
                 }}
@@ -42,38 +45,38 @@ export default function BBLKitPage() {
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 left-8 bg-white/80 backdrop-blur px-6 py-3 rounded-full text-xs font-bold tracking-widest uppercase border border-white">
-                            The Post-Op Duo
+                            {t('pages.bbl_kit.hero.badge_overlay')}
                         </div>
                     </div>
 
                     {/* Copy */}
                     <div className="space-y-8">
-                        <span className="text-[#D4AF37] font-bold tracking-widest text-sm uppercase">Limited Bundle</span>
+                        <span className="text-[#D4AF37] font-bold tracking-widest text-sm uppercase">{t('pages.bbl_kit.hero.badge_limited')}</span>
                         <h2 className="text-4xl lg:text-6xl font-serif text-[#3E322C] leading-[1.1]">
-                            Protege tu inversión. <br />
-                            <span className="italic text-gray-400">Arriba y Abajo.</span>
+                            {t('pages.bbl_kit.hero.title_line1')} <br />
+                            <span className="italic text-gray-400">{t('pages.bbl_kit.hero.title_line2')}</span>
                         </h2>
                         <p className="text-xl text-gray-600 font-light border-l-4 border-[#3E322C] pl-6">
-                            Tu faja moldea tu cintura, pero tu brasier protege tu postura y tus implantes. El dúo esencial para una recuperación sin dolor.
+                            {t('pages.bbl_kit.hero.description')}
                         </p>
 
                         <div className="flex flex-col gap-4 text-sm text-gray-500">
                             <div className="flex items-center gap-3">
                                 <Check className="text-[#3E322C]" size={18} />
-                                <span>Faja Etapa 2: Compresión médica para tu cintura.</span>
+                                <span>{t('pages.bbl_kit.hero.checklist_1')}</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <Check className="text-[#3E322C]" size={18} />
-                                <span>Brasier Post-Op: Soporte de espalda y sin aros.</span>
+                                <span>{t('pages.bbl_kit.hero.checklist_2')}</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <Check className="text-[#3E322C]" size={18} />
-                                <span>Ahorra 15% comprando juntos.</span>
+                                <span>{t('pages.bbl_kit.hero.checklist_3')}</span>
                             </div>
                         </div>
 
                         <a href="#bundle-builder" className="inline-block bg-[#3E322C] text-white px-10 py-5 rounded-full font-bold tracking-widest text-sm hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-                            COMPRAR EL DÚO (-15% OFF)
+                            {t('pages.bbl_kit.hero.cta')}
                         </a>
                     </div>
                 </div>

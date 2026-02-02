@@ -1,42 +1,33 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-const faqs = [
-    {
-        question: "¿Por qué necesito un brasier especial después de mi cirugía?",
-        answer: "Después de una mamoplastia o levantamiento, tus tejidos necesitan soporte constante para evitar la flacidez mientras sanan. Nuestros brasieres de grado médico proporcionan la compresión exacta para reducir la inflamación, evitar la retención de líquidos y asegurar que tus implantes se asienten en la posición correcta."
-    },
-    {
-        question: "¿Cuánto tiempo debo usar el brasier post-quirúrgico?",
-        answer: "La mayoría de los cirujanos recomiendan el uso continuo (24/7) durante las primeras 6 semanas. Después de este periodo, puedes pasar a usarlo durante el día o la noche según la recomendación médica. Nuestros diseños son tan cómodos que muchas clientes los siguen usando como brasier diario por el soporte de espalda que ofrecen."
-    },
-    {
-        question: "¿Cómo ayuda con la postura?",
-        answer: "El peso de los implantes puede causar dolor de espalda y hombros encorvados. Nuestros brasieres cuentan con un refuerzo en 'X' o soporte alto en la espalda que te obliga suavemente a mantener los hombros atrás y la columna alineada, aliviando la tensión inmediatamente."
-    },
-    {
-        question: "¿Los brasieres tienen varillas?",
-        answer: "No. Durante la recuperación, las varillas (aros metálicos) están prohibidas porque pueden lastimar las incisiones o alterar la forma del implante. Nuestra tecnología 'Wireless Support' levanta y sostiene el busto usando cortes inteligentes en la tela de alta compresión, sin necesidad de metales incómodos."
-    }
-];
+interface FAQItem {
+    question: string;
+    answer: string;
+}
 
 export function EssentialsFAQ() {
+    const { t } = useTranslation();
     const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
+    // Get FAQs from translations
+    const faqs = t('components.essentials_faq.faqs', { returnObjects: true }) as FAQItem[];
 
     return (
         <section className="py-24 bg-white max-w-4xl mx-auto px-6">
             <div className="mb-16 text-center">
                 <span className="text-xs font-bold tracking-[0.2em] text-[#D4AF37] uppercase mb-4 block">
-                    Education Hub
+                    {t('components.essentials_faq.education_hub')}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-serif text-[#3E322C]">
-                    Preguntas Frecuentes de Recuperación
+                    {t('components.essentials_faq.title')}
                 </h2>
             </div>
 
             <div className="space-y-4">
-                {faqs.map((faq, index) => (
+                {Array.isArray(faqs) && faqs.map((faq, index) => (
                     <div
                         key={index}
                         className="border-b border-gray-100 last:border-0"

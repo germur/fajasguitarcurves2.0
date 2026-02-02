@@ -1,4 +1,5 @@
 import { TikTokEmbed } from 'react-social-media-embed';
+import { useTranslation } from 'react-i18next';
 
 const TIKTOK_VIDEOS = [
     "https://www.tiktok.com/@guitarcurvesfajas/video/7575416353687915790",
@@ -7,18 +8,20 @@ const TIKTOK_VIDEOS = [
 ];
 
 export function SocialProofWall() {
+    const { t } = useTranslation();
+
     return (
         <section className="py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
                     <span className="text-[#A35944] font-bold tracking-widest text-xs uppercase mb-4 block">
-                        Resultados Reales
+                        {t('pages.home.social.badge')}
                     </span>
                     <h2 className="font-serif text-3xl md:text-5xl text-[#2C2420] font-bold mb-4">
-                        Muro de Curvas
+                        {t('pages.home.social.title')}
                     </h2>
                     <p className="text-stone-500 max-w-2xl mx-auto">
-                        Únete a miles de mujeres mostrando sus resultados en TikTok.
+                        {t('pages.home.social.desc')}
                     </p>
                 </div>
 
@@ -37,7 +40,7 @@ export function SocialProofWall() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#2C2420] text-white px-8 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-stone-800 transition-all"
                     >
-                        Ver más en TikTok
+                        {t('pages.home.social.cta')}
                     </a>
                 </div>
 

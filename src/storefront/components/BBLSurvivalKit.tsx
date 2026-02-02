@@ -1,15 +1,26 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-// Datos de los productos del Kit
-// Datos de los productos del Kit (Updated for Faja + Bra Strategy)
-const essentials = [
-    { id: 1, name: "Faja Stage 2 Guitar Curves", price: 120, required: true, desc: "La base de tu moldeamiento." },
-    { id: 2, name: "Brasier Post-Operatorio (Soporte Espalda)", price: 55, required: false, desc: "Protege tu postura y asegura tus implantes." },
-];
+interface EssentialItem {
+    id: number;
+    name: string;
+    price: number;
+    required: boolean;
+    desc: string;
+}
 
 export function BBLSurvivalKit() {
+    const { t } = useTranslation();
+
+    // Get essentials from translations
+    const essentialsData = t('components.bbl_survival_kit.items', { returnObjects: true }) as { name: string; desc: string }[];
+
+    const essentials: EssentialItem[] = [
+        { id: 1, name: essentialsData[0]?.name || "Faja Stage 2 Guitar Curves", price: 120, required: true, desc: essentialsData[0]?.desc || "" },
+        { id: 2, name: essentialsData[1]?.name || "Brasier Post-Operatorio (Soporte Espalda)", price: 55, required: false, desc: essentialsData[1]?.desc || "" },
+    ];
+
     // Estado inicial: Todos seleccionados para maximizar venta (Nesting Instinct)
     const [selectedItems, setSelectedItems] = useState(essentials.map(i => i.id));
 
@@ -35,8 +46,8 @@ export function BBLSurvivalKit() {
 
             {/* Header SEO */}
             <div className="text-center mb-12">
-                <h2 className="font-serif text-4xl text-[#3E322C] mb-4">El Dúo de Recuperación</h2>
-                <p className="text-gray-500">Agrega el Brasier a tu Faja y obtén un <span className="text-[#D4AF37] font-bold">15% OFF</span> inmediato.</p>
+                <h2 className="font-serif text-4xl text-[#3E322C] mb-4">{t('components.bbl_survival_kit.title')}</h2>
+                <p className="text-gray-500">{t('components.bbl_survival_kit.subtitle_prefix')} <span className="text-[#D4AF37] font-bold">15% OFF</span> {t('components.bbl_survival_kit.subtitle_suffix')}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -71,10 +82,10 @@ export function BBLSurvivalKit() {
 
                     <div className="bg-red-50 p-4 rounded-lg mt-6 border border-red-100">
                         <p className="text-xs text-red-800 font-bold">
-                            ⚠️ Advertencia Médica:
+                            {t('components.bbl_survival_kit.warning_title')}
                         </p>
                         <p className="text-xs text-red-700 leading-tight mt-1">
-                            No te sientes directamente en el inodoro o sofá durante 8 semanas. Usa el Cojín BBL o tu transferencia de grasa podría morir por la presión.
+                            {t('components.bbl_survival_kit.warning_desc')}
                         </p>
                     </div>
                 </div>
@@ -82,34 +93,34 @@ export function BBLSurvivalKit() {
                 {/* COLUMNA DERECHA: El Resumen Sticky */}
                 <div className="relative">
                     <div className="sticky top-24 bg-[#3E322C] text-white p-6 rounded-2xl shadow-2xl">
-                        <h3 className="font-serif text-xl mb-6 border-b border-white/20 pb-4">Tu Kit BBL</h3>
+                        <h3 className="font-serif text-xl mb-6 border-b border-white/20 pb-4">{t('components.bbl_survival_kit.summary.title')}</h3>
 
                         <div className="space-y-2 mb-6 text-sm">
                             <div className="flex justify-between text-gray-300">
-                                <span>Subtotal</span>
+                                <span>{t('components.bbl_survival_kit.summary.subtotal')}</span>
                                 <span>${total.toFixed(0)}</span>
                             </div>
                             {discount > 0 && (
                                 <div className="flex justify-between text-[#D4AF37] font-bold">
-                                    <span>Descuento (15%)</span>
+                                    <span>{t('components.bbl_survival_kit.summary.discount')}</span>
                                     <span>-${(total * discount).toFixed(0)}</span>
                                 </div>
                             )}
                             <div className="flex justify-between text-xl font-bold pt-4 border-t border-white/20">
-                                <span>Total</span>
+                                <span>{t('components.bbl_survival_kit.summary.total')}</span>
                                 <span>${finalPrice.toFixed(0)}</span>
                             </div>
                         </div>
 
                         <button className="w-full bg-white text-[#3E322C] py-4 rounded-xl font-bold tracking-widest hover:bg-[#D4AF37] hover:text-white transition-colors">
-                            AGREGAR AL CARRITO
+                            {t('components.bbl_survival_kit.summary.cta')}
                         </button>
 
                         <p className="text-center text-[10px] text-gray-400 mt-4">
-                            *Envío prioritario incluido hoy.
+                            {t('components.bbl_survival_kit.summary.shipping')}
                         </p>
                         <p className="text-center text-[10px] text-gray-500 mt-2 italic">
-                            Basado en protocolos de recuperación de Miami y Colombia.
+                            {t('components.bbl_survival_kit.summary.protocols')}
                         </p>
                     </div>
                 </div>

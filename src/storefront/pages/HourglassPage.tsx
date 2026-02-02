@@ -10,9 +10,11 @@ import { useSculptProducts } from '../hooks/useSculptProducts';
 import { FilterSidebar } from '../components/FilterSidebar';
 import { SeoHead } from '../../lib/seo/SeoHead';
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Version: 1.0.3 - Fixed Component Structure & Imports
 export default function HourglassPage() {
+    const { t } = useTranslation();
     const { products, loading, error } = useSculptProducts();
 
     // Filter State (Advanced)
@@ -62,19 +64,19 @@ export default function HourglassPage() {
     return (
         <div className="bg-white min-h-screen font-sans selection:bg-[#D4AF37] selection:text-white">
             <SeoHead
-                title="The Sculpt Collection | Fajas Reloj de Arena & Cinturillas"
-                description="Ingeniería invisible para realzar tus curvas. Explora nuestra línea de fajas de uso diario, waist trainers y shorts levanta cola."
+                title={t('pages.hourglass.seo.title')}
+                description={t('pages.hourglass.seo.description')}
                 path="/colecciones/moldeo"
                 image="/assets/hourglass-hero-bg.jpg"
                 schema={{
                     type: 'collection',
                     data: {
                         name: 'The Sculpt Collection',
-                        description: 'Colección de fajas moldeadoras y waist trainers.'
+                        description: t('pages.hourglass.seo.description')
                     },
                     breadcrumbs: [
-                        { name: 'Inicio', item: '/' },
-                        { name: 'Moldeo', item: '/colecciones/moldeo' }
+                        { name: t('nav.home'), item: '/' },
+                        { name: t('nav.sculpt'), item: '/colecciones/moldeo' }
                     ]
                 }}
             />
@@ -88,20 +90,20 @@ export default function HourglassPage() {
                     <div className="space-y-6">
                         <div className="inline-flex items-center gap-2 bg-[#F5EDDF] text-[#A35944] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                             <span className="text-xs">🛡️</span>
-                            Ingeniería Invisible
+                            {t('pages.hourglass.hero.badge')}
                         </div>
 
                         <h1 className="text-4xl lg:text-6xl font-serif font-bold text-[#2C2420] leading-tight capitalize">
-                            La Colección de Moldeo
+                            {t('pages.hourglass.hero.title')}
                         </h1>
 
                         <p className="text-xl text-stone-500 font-light border-l-4 border-[#D4AF37] pl-4">
-                            Ingeniería invisible para realzar tus curvas. La silueta de reloj de arena definitiva.
+                            {t('pages.hourglass.hero.description')}
                         </p>
 
                         <div className="flex gap-4 pt-2">
                             <Link to="/calculadora-de-tallas" className="px-8 py-3 bg-[#2C2420] text-white uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] transition-all duration-300 shadow-lg cursor-pointer rounded-lg">
-                                Guía de Tallas
+                                {t('pages.hourglass.hero.cta_guide')}
                             </Link>
                         </div>
                     </div>
@@ -115,8 +117,8 @@ export default function HourglassPage() {
                         />
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="absolute bottom-8 right-8 text-white text-right">
-                            <h3 className="font-bold text-2xl font-serif">Moldeo</h3>
-                            <p className="text-sm opacity-90 tracking-widest uppercase">Colección Insignia</p>
+                            <h3 className="font-bold text-2xl font-serif">{t('pages.hourglass.hero.caption_title')}</h3>
+                            <p className="text-sm opacity-90 tracking-widest uppercase">{t('pages.hourglass.hero.caption_desc')}</p>
                         </div>
                     </div>
                 </div>
@@ -132,7 +134,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        Shorts
+                        {t('pages.hourglass.sub_collection.shorts')}
                     </button>
 
                     <button
@@ -142,7 +144,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        Cinturillas
+                        {t('pages.hourglass.sub_collection.waist_trainer')}
                     </button>
 
                     <button
@@ -152,7 +154,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        Strapless
+                        {t('pages.hourglass.sub_collection.strapless')}
                     </button>
 
                     <button
@@ -162,7 +164,7 @@ export default function HourglassPage() {
                             : 'bg-stone-100 text-stone-600 hover:bg-[#D4AF37] hover:text-white'
                             }`}
                     >
-                        Alta Compresión
+                        {t('pages.hourglass.sub_collection.high_compression')}
                     </button>
                 </div>
             </div>
@@ -189,9 +191,9 @@ export default function HourglassPage() {
                                 </div>
                             ) : error ? (
                                 <div className="py-20 text-center text-red-500">
-                                    <p className="text-xl font-bold">Error Cargando Productos</p>
+                                    <p className="text-xl font-bold">{t('pages.hourglass.error.title')}</p>
                                     <p className="text-sm mt-2">{error}</p>
-                                    <p className="text-xs text-gray-500 mt-4">Por favor verifica los permisos del API de Shopify Storefront.</p>
+                                    <p className="text-xs text-gray-500 mt-4">{t('pages.hourglass.error.hint')}</p>
                                 </div>
                             ) : (
                                 <>
@@ -210,9 +212,9 @@ export default function HourglassPage() {
                                     </div>
                                     {filteredProducts.length === 0 && (
                                         <div className="py-20 text-center text-gray-400">
-                                            <p>No se encontraron productos para esta selección.</p>
+                                            <p>{t('pages.hourglass.empty.message')}</p>
                                             <button onClick={() => setActiveFilters({ stage: [], compression: [], occasion: [], features: [] })} className="mt-4 text-[#D4AF37] underline">
-                                                Limpiar Filtros
+                                                {t('pages.hourglass.empty.reset_filters')}
                                             </button>
                                         </div>
                                     )}

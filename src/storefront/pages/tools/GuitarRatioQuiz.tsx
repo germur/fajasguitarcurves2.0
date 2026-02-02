@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
+import { useTranslation, Trans } from 'react-i18next';
 
 // --- TYPES & LOGIC ---
 
@@ -9,12 +10,11 @@ type BodyType = 'TRUE_GUITAR' | 'POTENTIAL_GUITAR' | 'ATHLETIC_CURVE' | null;
 
 interface ShapeResult {
     type: BodyType;
-    title: string;
-    description: string;
     recommendedProductId: string;
-    recommendationTitle: string;
     productImage: string;
     size: string;
+    waist: number;
+    hips: number;
 }
 
 // Logic provided by USER
@@ -48,32 +48,29 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
     if (ratio < 0.65) {
         return {
             type: "TRUE_GUITAR",
-            title: `¡Eres una Verdadera Guitarra! (Talla ${size}) 🎸`,
-            description: `Tu cintura es significativamente más pequeña que tus caderas (Ratio de Oro). Según tu cintura de ${waist.toFixed(1)}", tu talla ideal es ${size}, pero necesitas el corte 'Signature Guitar' para acomodar tus caderas de ${hips.toFixed(1)}".`,
             recommendedProductId: "cinturilla-extrema-con-cremallera-y-clips-14-varillas",
-            recommendationTitle: "Faja Reloj de Arena Stage 3",
             productImage: "/assets/quiz-result-guitar.jpg",
-            size: size
+            size: size,
+            waist: waist,
+            hips: hips
         };
     } else if (ratio >= 0.65 && ratio <= 0.75) {
         return {
             type: "POTENTIAL_GUITAR",
-            title: `Eres una Potencial Guitarra (Talla ${size}) ⏳`,
-            description: `Tienes curvas naturales. Tu talla base es ${size}. Eres una 'Falsa S': pequeña de frente, pero necesitas espacio atrás. Con la compresión adecuada en cintura, alcanzarás el Ratio Guitarra.`,
             recommendedProductId: "faja-etapa-2-con-mangas-y-bra",
-            recommendationTitle: "Cinturilla Extrema Reloj de Arena",
             productImage: "/assets/essentials-flatlay.jpg",
-            size: size
+            size: size,
+            waist: waist,
+            hips: hips
         };
     } else {
         return {
             type: "ATHLETIC_CURVE",
-            title: `Silueta Atlética (Talla ${size}) 📏`,
-            description: `Tienes una figura balanceada. Tu talla para alta compresión es ${size}. Tu objetivo es crear la ilusión de curva mediante High Compression.`,
             recommendedProductId: "leggins-deportivo-ideal-para-uso-diario",
-            recommendationTitle: "Faja Cinturilla de Avispa",
             productImage: "/assets/essentials-flatlay.jpg",
-            size: size
+            size: size,
+            waist: waist,
+            hips: hips
         };
     }
 };
@@ -82,8 +79,6 @@ const calculateShape = (waist: number, hips: number): ShapeResult | null => {
 
 const DynamicSilhouette = ({ waist, hips }: { waist: number, hips: number }) => {
     // Normalize logic for visualization ensuring hips are wider
-    // Base width 100px. Hips fixed at 80px visual width? 
-    // Let's make it relative.
     // Base width 100px. Hips fixed at 80px visual width? 
     // Let's make it relative.
 
@@ -138,6 +133,7 @@ interface QuizProps {
 }
 
 export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClose }: QuizProps) {
+    const { t } = useTranslation();
     const [step, setStep] = useState<QuizStep>('INTRO');
 
     // ... (rest of state remains)
@@ -201,20 +197,19 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
             return (
                 <div className="text-center space-y-6 animate-fade-in py-4">
                     <h2 className="font-serif text-2xl text-[#2C2420]">
-                        ¿Cuál es tu Talla Real?
+                        {t('pages.guitar_ratio_quiz.modal.title')}
                     </h2>
                     <p className="text-sm text-stone-600">
-                        Usa nuestra tecnología de escaneo biométrico manual para encontrar tu ajuste perfecto en 30 segundos.
+                        {t('pages.guitar_ratio_quiz.modal.description')}
                     </p>
                     <button
                         onClick={() => setStep('MEASURE')}
                         className="w-full py-4 bg-[#2C2420] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#D4AF37] transition-all"
                     >
-                        Comenzar Diagnóstico
+                        {t('pages.guitar_ratio_quiz.modal.cta')}
                     </button>
                     <div className="flex justify-center gap-6 text-[10px] text-stone-400 uppercase tracking-widest border-t border-stone-100 pt-4">
-                        <span>⏱ 1 Minuto</span>
-                        <span>🎯 98% Precisión</span>
+                        {t('pages.guitar_ratio_quiz.modal.stats_line')}
                     </div>
                 </div>
             );
@@ -225,35 +220,35 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
             <div className="text-center space-y-8 animate-fade-in max-w-2xl mx-auto">
                 {/* ... existing standard intro code ... */}
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-bold tracking-widest uppercase mb-4">
-                    Herramienta de Diagnóstico
+                    {t('pages.guitar_ratio_quiz.intro.badge')}
                 </span>
                 <h1 className="font-serif text-4xl md:text-5xl text-[#2C2420] leading-tight">
-                    ¿Eres una Falsa S o una <span className="italic text-[#D4AF37]">Verdadera Guitarra</span>?
+                    {t('pages.guitar_ratio_quiz.intro.title_line1')} <span className="italic text-[#D4AF37]">{t('pages.guitar_ratio_quiz.intro.title_highlight')}</span>{t('pages.guitar_ratio_quiz.intro.title_line2')}
                 </h1>
                 <p className="text-lg text-stone-600 leading-relaxed max-w-xl mx-auto">
-                    Olvídate de las tallas genéricas. Descubre tu <strong>"Guitar Ratio"</strong> único y entiende por qué las fajas tradicionales nunca te han quedado bien.
+                    <Trans i18nKey="pages.guitar_ratio_quiz.intro.description" components={{ strong: <strong /> }} />
                 </p>
 
                 <button
                     onClick={() => setStep('MEASURE')}
                     className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-[#2C2420] px-10 font-medium text-white transition-all duration-300 hover:bg-[#D4AF37] hover:w-64 hover:justify-between"
                 >
-                    <span className="mr-0 font-bold tracking-widest uppercase text-xs group-hover:mr-4">Descubrir mi Silueta</span>
+                    <span className="mr-0 font-bold tracking-widest uppercase text-xs group-hover:mr-4">{t('pages.guitar_ratio_quiz.intro.cta')}</span>
                     <ArrowRight className="ml-2 h-4 w-4 transition-all group-hover:translate-x-1" />
                 </button>
 
                 <div className="pt-12 grid grid-cols-3 gap-4 border-t border-stone-100 max-w-lg mx-auto">
                     <div className="text-center">
-                        <p className="text-2xl font-serif text-[#D4AF37]">97%</p>
-                        <p className="text-[10px] uppercase tracking-wide text-stone-500">Precisión</p>
+                        <p className="text-2xl font-serif text-[#D4AF37]">{t('pages.guitar_ratio_quiz.intro.stats.accuracy.value')}</p>
+                        <p className="text-[10px] uppercase tracking-wide text-stone-500">{t('pages.guitar_ratio_quiz.intro.stats.accuracy.label')}</p>
                     </div>
                     <div className="text-center border-l border-stone-100">
-                        <p className="text-2xl font-serif text-[#D4AF37]">2min</p>
-                        <p className="text-[10px] uppercase tracking-wide text-stone-500">Duración</p>
+                        <p className="text-2xl font-serif text-[#D4AF37]">{t('pages.guitar_ratio_quiz.intro.stats.duration.value')}</p>
+                        <p className="text-[10px] uppercase tracking-wide text-stone-500">{t('pages.guitar_ratio_quiz.intro.stats.duration.label')}</p>
                     </div>
                     <div className="text-center border-l border-stone-100">
-                        <p className="text-2xl font-serif text-[#D4AF37]">+5k</p>
-                        <p className="text-[10px] uppercase tracking-wide text-stone-500">Analizadas</p>
+                        <p className="text-2xl font-serif text-[#D4AF37]">{t('pages.guitar_ratio_quiz.intro.stats.analyzed.value')}</p>
+                        <p className="text-[10px] uppercase tracking-wide text-stone-500">{t('pages.guitar_ratio_quiz.intro.stats.analyzed.label')}</p>
                     </div>
                 </div>
             </div>
@@ -266,7 +261,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
             <div className={`bg-stone-100 rounded-[2rem] p-6 flex flex-col items-center justify-center relative ${mode === 'modal' ? 'h-[250px]' : 'min-h-[400px]'}`}>
                 {/* ... (Keep existing visualization logic) ... */}
                 <div className="absolute top-6 left-6 bg-white/80 backdrop-blur px-4 py-2 rounded-lg text-xs font-mono text-stone-500">
-                    Ratio Actual: <span className="text-[#2C2420] font-bold text-lg">{(waist / hips).toFixed(2)}</span>
+                    {t('pages.guitar_ratio_quiz.measure.ratio_label')} <span className="text-[#2C2420] font-bold text-lg">{(waist / hips).toFixed(2)}</span>
                 </div>
                 <DynamicSilhouette waist={waist} hips={hips} />
             </div>
@@ -275,8 +270,8 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
             <div className="space-y-6">
                 {/* ... (Controls logic remains mostly same, maybe tighter spacing) ... */}
                 <div>
-                    <h2 className="font-serif text-2xl text-[#2C2420] mb-2">Tus Medidas</h2>
-                    {mode === 'standalone' && <p className="text-stone-500 text-sm">Ajusta los deslizadores para coincidir con tu cuerpo real.</p>}
+                    <h2 className="font-serif text-2xl text-[#2C2420] mb-2">{t('pages.guitar_ratio_quiz.measure.your_measurements')}</h2>
+                    {mode === 'standalone' && <p className="text-stone-500 text-sm">{t('pages.guitar_ratio_quiz.measure.adjust_sliders')}</p>}
                 </div>
 
                 {/* Unit Selector */}
@@ -288,7 +283,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                 {/* Range Sliders (Simplified for brevity in diff, keep logic) */}
                 <div>
                     <div className="flex justify-between mb-2">
-                        <span className="font-bold text-xs uppercase">1. Cintura</span>
+                        <span className="font-bold text-xs uppercase">{t('pages.guitar_ratio_quiz.measure.waist')}</span>
                         <span className="font-serif text-xl text-[#D4AF37]">{waist} <span className="text-[10px] text-stone-400">{unit}</span></span>
                     </div>
                     <input type="range" min={unit === 'IN' ? 20 : 50} max={unit === 'IN' ? 50 : 130} value={waist} onChange={(e) => setWaist(Number(e.target.value))} className="w-full h-2 bg-stone-200 rounded-lg accent-[#2C2420]" />
@@ -296,7 +291,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
 
                 <div>
                     <div className="flex justify-between mb-2">
-                        <span className="font-bold text-xs uppercase">2. Cadera</span>
+                        <span className="font-bold text-xs uppercase">{t('pages.guitar_ratio_quiz.measure.hips')}</span>
                         <span className="font-serif text-xl text-[#D4AF37]">{hips} <span className="text-[10px] text-stone-400">{unit}</span></span>
                     </div>
                     <input type="range" min={unit === 'IN' ? 30 : 80} max={unit === 'IN' ? 70 : 180} value={hips} onChange={(e) => setHips(Number(e.target.value))} className="w-full h-2 bg-stone-200 rounded-lg accent-[#2C2420]" />
@@ -308,7 +303,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                         disabled={hips <= waist}
                         className="w-full py-4 bg-[#2C2420] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {hips <= waist ? 'La cadera debe ser mayor' : 'Continuar'}
+                        {hips <= waist ? t('pages.guitar_ratio_quiz.measure.error_hip') : t('pages.guitar_ratio_quiz.measure.continue')}
                     </button>
                 </div>
             </div>
@@ -316,47 +311,53 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
     );
 
     // ... (renderQuestions and renderCalculating remain similar, just ensuring container fits) ...
-    const renderQuestions = () => (
-        <div className="max-w-xl mx-auto animate-fade-in space-y-6">
-            <h2 className="font-serif text-2xl text-center text-[#2C2420]">Diagnóstico Rápido</h2>
+    const renderQuestions = () => {
+        const q3Options = t('pages.guitar_ratio_quiz.questions.q3.options', { returnObjects: true }) as string[];
+        const q4Options = t('pages.guitar_ratio_quiz.questions.q4.options', { returnObjects: true }) as string[];
 
-            {/* Q3 */}
-            <div className={`bg-white ${mode === 'modal' ? 'p-4' : 'p-6'} rounded-2xl shadow-sm border border-stone-100`}>
-                <p className="font-bold text-[#2C2420] mb-2 text-sm">Problema frecuente:</p>
-                <p className="text-stone-600 text-xs mb-4">¿Te quedan bien de cadera pero grandes de cintura?</p>
-                <div className="space-y-2">
-                    {['Siempre me pasa', 'Frecuentemente', 'A veces', 'Rara vez'].map(opt => (
-                        <button key={opt} onClick={() => setQ3(opt)} className={`w-full text-left px-4 py-2 rounded-lg border text-xs transition-all ${q3 === opt ? 'border-[#D4AF37] bg-[#D4AF37]/5 font-bold' : 'border-stone-200 text-stone-500'}`}>{opt}</button>
-                    ))}
+        return (
+            <div className="max-w-xl mx-auto animate-fade-in space-y-6">
+                <h2 className="font-serif text-2xl text-center text-[#2C2420]">{t('pages.guitar_ratio_quiz.questions.title')}</h2>
+
+                {/* Q3 */}
+                <div className={`bg-white ${mode === 'modal' ? 'p-4' : 'p-6'} rounded-2xl shadow-sm border border-stone-100`}>
+                    <p className="font-bold text-[#2C2420] mb-2 text-sm">{t('pages.guitar_ratio_quiz.questions.q3.label')}</p>
+                    <p className="text-stone-600 text-xs mb-4">{t('pages.guitar_ratio_quiz.questions.q3.text')}</p>
+                    <div className="space-y-2">
+                        {q3Options.map(opt => (
+                            <button key={opt} onClick={() => setQ3(opt)} className={`w-full text-left px-4 py-2 rounded-lg border text-xs transition-all ${q3 === opt ? 'border-[#D4AF37] bg-[#D4AF37]/5 font-bold' : 'border-stone-200 text-stone-500'}`}>{opt}</button>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            {/* Q4 (Simplified for modal if needed, but keeping for logic) */}
-            <div className={`bg-white ${mode === 'modal' ? 'p-4' : 'p-6'} rounded-2xl shadow-sm border border-stone-100`}>
-                <p className="font-bold text-[#2C2420] mb-2 text-sm">Objetivo Principal:</p>
-                <p className="text-stone-600 text-xs mb-4">¿Buscas realzar y levantar tus glúteos?</p>
-                <div className="space-y-2">
-                    {['Sí, ¡absolutamente!', 'Sí, pero me da miedo', 'No, solo compresión', 'Reducir caderas'].map(opt => (
-                        <button key={opt} onClick={() => setQ4(opt)} className={`w-full text-left px-4 py-2 rounded-lg border text-xs transition-all ${q4 === opt ? 'border-[#D4AF37] bg-[#D4AF37]/5 font-bold' : 'border-stone-200 text-stone-500'}`}>{opt}</button>
-                    ))}
+                {/* Q4 (Simplified for modal if needed, but keeping for logic) */}
+                <div className={`bg-white ${mode === 'modal' ? 'p-4' : 'p-6'} rounded-2xl shadow-sm border border-stone-100`}>
+                    <p className="font-bold text-[#2C2420] mb-2 text-sm">{t('pages.guitar_ratio_quiz.questions.q4.label')}</p>
+                    <p className="text-stone-600 text-xs mb-4">{t('pages.guitar_ratio_quiz.questions.q4.text')}</p>
+                    <div className="space-y-2">
+                        {q4Options.map(opt => (
+                            <button key={opt} onClick={() => setQ4(opt)} className={`w-full text-left px-4 py-2 rounded-lg border text-xs transition-all ${q4 === opt ? 'border-[#D4AF37] bg-[#D4AF37]/5 font-bold' : 'border-stone-200 text-stone-500'}`}>{opt}</button>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <button
-                onClick={handleCalculate}
-                disabled={!q3 || !q4}
-                className="w-full py-4 bg-[#2C2420] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#D4AF37] transition-all disabled:opacity-50"
-            >
-                Calcular Resultado
-            </button>
-        </div>
-    );
+                <button
+                    onClick={handleCalculate}
+                    disabled={!q3 || !q4}
+                    className="w-full py-4 bg-[#2C2420] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#D4AF37] transition-all disabled:opacity-50"
+                >
+                    {t('pages.guitar_ratio_quiz.questions.cta')}
+
+                </button>
+            </div>
+        );
+    };
 
     // ... renderCalculating() same logic ...
     const renderCalculating = () => (
         <div className="min-h-[300px] flex flex-col items-center justify-center animate-fade-in text-center">
             <Loader2 className="w-12 h-12 text-[#D4AF37] animate-spin mb-6" />
-            <h3 className="font-serif text-xl text-[#2C2420] mb-2">Analizando...</h3>
+            <h3 className="font-serif text-xl text-[#2C2420] mb-2">{t('pages.guitar_ratio_quiz.calculating')}</h3>
         </div>
     );
 
@@ -365,15 +366,15 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
         <div className="max-w-xl mx-auto animate-fade-in relative">
             <div className="absolute inset-0 bg-white/90 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 text-center rounded-2xl border border-white/50">
                 <CheckCircle2 className="w-12 h-12 text-green-500 mb-4" />
-                <h2 className="font-serif text-2xl text-[#2C2420] mb-2">¡Resultado Listo!</h2>
+                <h2 className="font-serif text-2xl text-[#2C2420] mb-2">{t('pages.guitar_ratio_quiz.gate.title')}</h2>
                 <p className="text-sm text-stone-600 mb-6 max-w-xs mx-auto">
-                    Ingresa tu email para desbloquear tu recomendación de talla personalizada.
+                    {t('pages.guitar_ratio_quiz.gate.description')}
                 </p>
 
                 <form onSubmit={handleUnlockResult} className="w-full max-w-sm space-y-3">
                     <input
                         type="email"
-                        placeholder="Tu email..."
+                        placeholder={t('pages.guitar_ratio_quiz.gate.placeholder')}
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -383,7 +384,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                         type="submit"
                         className="w-full py-3 bg-[#2C2420] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#D4AF37] transition-all"
                     >
-                        Ver Mi Talla
+                        {t('pages.guitar_ratio_quiz.gate.cta')}
                     </button>
                 </form>
             </div>
@@ -400,16 +401,23 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
         if (!result) return null;
         const calculatedSize = result.size;
 
+        const resultTypeKey = result.type === 'TRUE_GUITAR' ? 'true_guitar' :
+            result.type === 'POTENTIAL_GUITAR' ? 'potential_guitar' :
+                'athletic';
+
+        const resultTitle = t(`pages.guitar_ratio_quiz.results.types.${resultTypeKey}.title`, { size: calculatedSize });
+        const resultDesc = t(`pages.guitar_ratio_quiz.results.types.${resultTypeKey}.description`, { size: calculatedSize, waist: result.waist.toFixed(1), hips: result.hips.toFixed(1) });
+
         return (
             <div className="animate-slide-up">
                 {/* Result Header */}
                 <div className="text-center mb-8">
                     <h1 className="font-serif text-3xl text-[#2C2420] mb-4 leading-tight">
-                        {result.title}
+                        {resultTitle}
                     </h1>
                     <div className="inline-block p-4 bg-[#F9F4E8] rounded-xl border border-[#D4AF37]/20">
                         <p className="text-sm text-stone-700 italic">
-                            "{result.description}"
+                            "{resultDesc}"
                         </p>
                     </div>
                 </div>
@@ -419,11 +427,11 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
 
                     <div className="flex w-full justify-between items-center mb-8 bg-stone-50 p-4 rounded-xl">
                         <div className="text-left">
-                            <p className="text-[10px] uppercase tracking-wide text-stone-400">Ratio</p>
+                            <p className="text-[10px] uppercase tracking-wide text-stone-400">{t('pages.guitar_ratio_quiz.results.ratio_label')}</p>
                             <p className="text-2xl font-serif text-[#2C2420]">{(waist / hips).toFixed(2)}</p>
                         </div>
                         <div className="text-right">
-                            <p className="text-[10px] uppercase tracking-wide text-stone-400">Talla Ideal</p>
+                            <p className="text-[10px] uppercase tracking-wide text-stone-400">{t('pages.guitar_ratio_quiz.results.ideal_size_label')}</p>
                             <p className="text-4xl font-serif text-[#D4AF37] font-bold">{calculatedSize}</p>
                         </div>
                     </div>
@@ -435,10 +443,10 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                                 onClick={() => onComplete && onComplete(calculatedSize)}
                                 className="w-full py-4 bg-[#D4AF37] text-white font-bold tracking-[0.2em] text-sm uppercase rounded-xl hover:bg-[#2C2420] transition-transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-2"
                             >
-                                <CheckCircle2 size={18} /> Aplicar Talla {calculatedSize}
+                                <CheckCircle2 size={18} /> {t('pages.guitar_ratio_quiz.results.apply_size')} {calculatedSize}
                             </button>
                             <button onClick={onClose} className="text-xs text-stone-400 underline hover:text-[#2C2420]">
-                                Cancelar y cerrar
+                                {t('pages.guitar_ratio_quiz.results.cancel')}
                             </button>
                         </div>
                     ) : (
@@ -448,13 +456,13 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                                 to={`/products/${result.recommendedProductId}`}
                                 className="w-full py-4 bg-[#D4AF37] text-white font-bold tracking-widest uppercase rounded-xl hover:bg-[#2C2420] transition-all shadow-xl flex items-center justify-center gap-3"
                             >
-                                Comprar esta Faja <ArrowRight size={18} />
+                                {t('pages.guitar_ratio_quiz.results.buy_cta')} <ArrowRight size={18} />
                             </Link>
                             <Link
                                 to="/tools/stage1-vs-stage2"
                                 className="block text-xs font-bold text-[#2C2420] underline mt-4"
                             >
-                                Ver Comparativa Stage 1 vs 2
+                                {t('pages.guitar_ratio_quiz.results.compare_link')}
                             </Link>
                         </div>
                     )}
@@ -471,7 +479,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                 {step !== 'RESULT' && step !== 'INTRO' && (
                     <div className="flex justify-between items-center mb-6 border-b border-stone-100 pb-4">
                         <button onClick={() => setStep('INTRO')} className="text-xs font-bold text-stone-400 hover:text-[#2C2420] uppercase tracking-widest flex items-center gap-2">
-                            &larr; Reiniciar
+                            &larr; {t('pages.guitar_ratio_quiz.results.restart')}
                         </button>
                         <div className="flex gap-2">
                             {[1, 2, 3].map(i => (
@@ -485,7 +493,7 @@ export default function GuitarRatioQuiz({ mode = 'standalone', onComplete, onClo
                 {mode === 'standalone' && step !== 'RESULT' && step === 'INTRO' && (
                     <div className="flex justify-between items-center mb-12 border-b border-stone-200 pb-6">
                         <Link to="/" className="text-xs font-bold text-stone-400 hover:text-[#2C2420] transition-colors uppercase tracking-widest flex items-center gap-2">
-                            <ChevronRight className="rotate-180" size={14} /> Volver
+                            <ChevronRight className="rotate-180" size={14} /> {t('pages.guitar_ratio_quiz.results.back')}
                         </Link>
                     </div>
                 )}

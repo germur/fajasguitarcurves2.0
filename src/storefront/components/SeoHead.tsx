@@ -1,4 +1,7 @@
-import { useEffect } from 'react';
+
+import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface SeoProps {
     title: string;
@@ -9,64 +12,50 @@ interface SeoProps {
 }
 
 export function SeoHead({ title, description, type = 'website', image, schema }: SeoProps) {
-    useEffect(() => {
-        // Update Title
-        document.title = title;
+    const { i18n } = useTranslation();
+    const location = useLocation();
 
-        // Helper to update or create meta tag
-        const updateMeta = (name: string, content: string) => {
-            let element = document.querySelector(`meta[name="${name}"]`);
-            if (!element) {
-                element = document.createElement('meta');
-                element.setAttribute('name', name);
-                document.head.appendChild(element);
-            }
-            element.setAttribute('content', content);
-        };
+    // current language
+    const currentLang = i18n.language;
+    const isEn = currentLang === 'en';
 
-        const updateOgMeta = (property: string, content: string) => {
-            let element = document.querySelector(`meta[property="${property}"]`);
-            if (!element) {
-                element = document.createElement('meta');
-                element.setAttribute('property', property);
-                document.head.appendChild(element);
-            }
-            element.setAttribute('content', content);
-        };
+    // Path logic for Canonical and Hreflang
+    // Remove /en prefix if present to get the "clean" path (which maps to Spanish root)
+    const cleanPath = location.pathname.replace(/^\/en/, '') || '/';
 
-        // Update Meta Description
-        if (description) {
-            updateMeta('description', description);
-            updateOgMeta('og:description', description);
-        }
+    // Domain hardcoded for now (could be env var)
+    const baseUrl = 'https://guitarcurves.com';
+    const esUrl = `${baseUrl}${cleanPath}`;
+    const enUrl = `${baseUrl}/en${cleanPath === '/' ? '' : cleanPath}`;
 
-        // Update OG Tags
-        updateOgMeta('og:title', title);
-        updateOgMeta('og:type', type);
-        if (image) {
-            updateOgMeta('og:image', image);
-        }
+    // Canonical is the current page's definitive URL
+    const canonicalUrl = isEn ? enUrl : esUrl;
 
-        // Update JSON-LD Schema (with unique ID for reliable updates)
-        if (schema) {
-            const schemaId = 'gc-product-schema';
-            let script = document.getElementById(schemaId) as HTMLScriptElement | null;
-            if (!script) {
-                script = document.createElement('script');
-                script.setAttribute('id', schemaId);
-                script.setAttribute('type', 'application/ld+json');
-                document.head.appendChild(script);
-            }
-            script.textContent = JSON.stringify(schema);
-            console.log('[SEO] Product schema injected:', schema['@type']);
-        }
+    return (
+        <Helmet>
+            {/* Basic Meta */}
+            <html lang={currentLang} />
+            <title>{title}</title>
+            <meta name="description" content={description} />
 
-        // Cleanup function (optional, but good practice to reset if needed)
-        return () => {
-            // We might typically reset to a default title, but for SPA navigation, 
-            // the next page will overwrite this effect immediately.
-        };
-    }, [title, description, type, image, schema]);
+            {/* OG Tags */}
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={description} />
+            <meta property="og:type" content={type} />
+            {image && <meta property="og:image" content={image} />}
 
-    return null; // This component handles side effects only
+            {/* i18n & Canonical */}
+            <link rel="canonical" href={canonicalUrl} />
+            <link rel="alternate" href={esUrl} hrefLang="es" />
+            <link rel="alternate" href={enUrl} hrefLang="en" />
+            <link rel="alternate" href={esUrl} hrefLang="x-default" />
+
+            {/* Schema JSON-LD */}
+            {schema && (
+                <script type="application/ld+json">
+                    {JSON.stringify(schema)}
+                </script>
+            )}
+        </Helmet>
+    );
 }
