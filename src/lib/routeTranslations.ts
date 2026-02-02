@@ -82,7 +82,7 @@ export function translatePathToEnglish(path: string): string {
 
     // Remove /es or /en prefix if present to get clean path
     const cleanPath = path.replace(/^\/(es|en)/, '');
-    if (!cleanPath || cleanPath === '/') return path;
+    if (!cleanPath || cleanPath === '/') return '/';
 
     const segments = cleanPath.split('/').filter(Boolean);
     const translated = segments.map(seg => esEnMap[seg] || seg);

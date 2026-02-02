@@ -10,16 +10,35 @@ import { translatePathToEnglish } from '@/lib/routeTranslations';
 
 /**
  * Translates a Spanish path to English and adds the /en prefix.
- * Source paths are expected to be in Spanish (the canonical form).
  */
 function localizePathForEnglish(path: string): string {
     if (!path || path.startsWith('http') || path.startsWith('/en')) {
         return path;
     }
-
-    // Translate Spanish slugs to English
     const englishPath = translatePathToEnglish(path);
     return `/en${englishPath === '/' ? '' : englishPath}`;
+}
+
+/**
+ * Ensures path has /es prefix for Spanish context if internal.
+ */
+function localizePathForSpanish(path: string): string {
+    if (!path || path.startsWith('http') || path.startsWith('#') || path.startsWith('mailto:')) {
+        return path;
+    }
+    // If it already has /es or /en (switching lang manually?), leave it.
+    // Wait, if it has /en but we want /es? 
+    // This function is for "I am in Spanish mode, and I want to link to X".
+    // If X is '/en/something', it's an explicit link to English, so leave it.
+    if (path.startsWith('/es') || path.startsWith('/en')) {
+        return path;
+    }
+
+    // Otherwise prepend /es
+    // Handle root carefully
+    if (path === '/') return '/es';
+
+    return `/es${path.startsWith('/') ? '' : '/'}${path}`;
 }
 
 export const LocalizedLink = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -27,22 +46,18 @@ export const LocalizedLink = forwardRef<HTMLAnchorElement, LinkProps>(
         const location = useLocation();
         const isEn = location.pathname.startsWith('/en');
 
-        // Handle string paths
+        let finalTo = to;
+
         if (typeof to === 'string') {
-            const localizedTo = isEn ? localizePathForEnglish(to) : to;
-            return <Link ref={ref} to={localizedTo} {...props} />;
-        }
-
-        // Handle object paths (e.g., { pathname: '/foo', search: '?bar=1' })
-        if (typeof to === 'object' && to.pathname) {
-            const localizedTo = {
+            finalTo = isEn ? localizePathForEnglish(to) : localizePathForSpanish(to);
+        } else if (typeof to === 'object' && to.pathname) {
+            finalTo = {
                 ...to,
-                pathname: isEn ? localizePathForEnglish(to.pathname) : to.pathname
+                pathname: isEn ? localizePathForEnglish(to.pathname) : localizePathForSpanish(to.pathname)
             };
-            return <Link ref={ref} to={localizedTo} {...props} />;
         }
 
-        return <Link ref={ref} to={to} {...props} />;
+        return <Link ref={ref} to={finalTo} {...props} />;
     }
 );
 

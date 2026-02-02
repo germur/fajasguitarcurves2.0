@@ -62,10 +62,9 @@ export function GlassNavbar() {
             newPath = `/en${translated === '/' ? '' : translated}`;
         } else {
             // Switch to Spanish: Translate path segments (input is /en/foo/bar)
-            // translatePathToSpanish expects /en prefix?
             // routeTranslations.ts says: "Remove /en prefix if present"
-
-            newPath = translatePathToSpanish(currentPath);
+            const translated = translatePathToSpanish(currentPath);
+            newPath = `/es${translated === '/' ? '' : translated}`;
         }
 
         navigate(newPath + search);
