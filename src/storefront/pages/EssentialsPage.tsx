@@ -7,7 +7,7 @@ import { EssentialsFAQ } from '../components/silo-essentials/EssentialsFAQ';
 import { AnatomyOfRecovery } from '../components/silo-essentials/AnatomyOfRecovery';
 import { useTranslation } from 'react-i18next';
 
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 
 export default function EssentialsPage() {
     const { t } = useTranslation();
@@ -25,7 +25,7 @@ export default function EssentialsPage() {
             <SeoHead
                 title={t('pages.essentials.seo.title')}
                 description={t('pages.essentials.seo.description')}
-                path="/colecciones/brasieres-y-postura"
+
                 image="/assets/essentials-flatlay.jpg"
                 schema={{
                     type: 'collection',

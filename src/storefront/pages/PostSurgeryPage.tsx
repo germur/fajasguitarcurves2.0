@@ -8,7 +8,7 @@ import { BundleBuilder } from '../components/silo-recovery/BundleBuilder';
 import { MedicalAccordions } from '../components/silo-recovery/MedicalAccordions';
 import { ShieldCheck, Activity, ArrowDown } from 'lucide-react';
 
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 
 export default function PostSurgeryPage() {
     const { t } = useTranslation();
@@ -103,7 +103,7 @@ export default function PostSurgeryPage() {
             <SeoHead
                 title={t('pages.recovery.seo.title')}
                 description={t('pages.recovery.seo.description')}
-                path="/colecciones/recuperacion"
+
                 image="/assets/recovery-hands.png"
                 schema={{
                     type: 'collection',

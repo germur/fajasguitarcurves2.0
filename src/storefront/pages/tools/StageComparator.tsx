@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SeoHead } from '../../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { useTranslation } from 'react-i18next';
 import {
     CheckCircle2,
@@ -347,7 +347,7 @@ export default function StageComparator() {
                 title={t('pages.stage_comparator.seo.title')}
                 description={t('pages.stage_comparator.seo.description')}
                 image="/assets/comparator/stage1-vs-stage2-social.jpg"
-                path="/tools/stage1-vs-stage2"
+
                 type="article"
                 schema={{
                     type: 'tool',

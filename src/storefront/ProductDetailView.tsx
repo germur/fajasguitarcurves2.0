@@ -9,7 +9,7 @@ import { ShoppingBag, Star, Check, ShieldCheck, Truck, Loader2, Ruler, ChevronDo
 import { ProductFeatureGrid } from './components/ProductFeatureGrid';
 // Tools imports for Smart Modal
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
-import { SeoHead } from '../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { generateMetaTags } from '../lib/seo/generators';
 import { fetchCollectionByHandle } from '../lib/shopify-client';
 import { GranularProductGrid } from './components/GranularProductGrid';
@@ -327,7 +327,7 @@ export function ProductDetailView() {
                 description={seoDescription}
                 type="product"
                 image={typeof displayImage === 'string' ? displayImage : (displayImage as any).url}
-                path={`/products/${product.handle || id}`}
+
                 schema={{ type: 'product', data: product }}
             />
             {/* --- MOBILE STICKY BAR (New Feature) --- */}

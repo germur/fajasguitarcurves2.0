@@ -80,7 +80,11 @@ export const enEsMap: Record<string, string> = Object.fromEntries(
 export function translatePathToEnglish(path: string): string {
     if (!path || path === '/') return path;
 
-    const segments = path.split('/').filter(Boolean);
+    // Remove /es or /en prefix if present to get clean path
+    const cleanPath = path.replace(/^\/(es|en)/, '');
+    if (!cleanPath || cleanPath === '/') return path;
+
+    const segments = cleanPath.split('/').filter(Boolean);
     const translated = segments.map(seg => esEnMap[seg] || seg);
     return '/' + translated.join('/');
 }
@@ -91,8 +95,8 @@ export function translatePathToEnglish(path: string): string {
 export function translatePathToSpanish(path: string): string {
     if (!path || path === '/') return path;
 
-    // Remove /en prefix if present
-    const cleanPath = path.replace(/^\/en/, '');
+    // Remove /en or /es prefix if present
+    const cleanPath = path.replace(/^\/(en|es)/, '');
     if (!cleanPath || cleanPath === '/') return '/';
 
     const segments = cleanPath.split('/').filter(Boolean);
@@ -110,6 +114,10 @@ export function getLocalizedPath(path: string, isEnglish: boolean): string {
         // Translate path to English and add /en prefix
         const englishPath = translatePathToEnglish(path);
         return `/en${englishPath === '/' ? '' : englishPath}`;
+    } else {
+        // Assume Spanish context
+        const spanishPath = translatePathToSpanish(path);
+        return `/es${spanishPath === '/' ? '' : spanishPath}`;
     }
     return path;
 }

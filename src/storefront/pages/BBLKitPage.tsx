@@ -1,7 +1,7 @@
 
 import { BBLSurvivalKit } from '../components/BBLSurvivalKit';
 import { Check } from 'lucide-react';
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { useTranslation } from 'react-i18next';
 
 export default function BBLKitPage() {
@@ -14,7 +14,7 @@ export default function BBLKitPage() {
             <SeoHead
                 title={t('pages.bbl_kit.seo.title')}
                 description={t('pages.bbl_kit.seo.description')}
-                path="/pages/bbl-recovery-kit"
+
                 image="/assets/bbl-kit-hero.jpg"
                 schema={{
                     type: 'product',

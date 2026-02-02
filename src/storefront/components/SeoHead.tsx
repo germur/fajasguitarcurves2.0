@@ -23,10 +23,9 @@ export function SeoHead({ title, description, type = 'website', image, schema }:
 
     // Path logic for Canonical and Hreflang
     // 1. Determine the "Source of Truth" path (The Spanish Path)
+    // We normalize to the clean Spanish path (e.g. "/nosotros" instead of "/es/nosotros" or "/en/about")
     const currentPath = location.pathname;
-    const spanishPath = currentPath.startsWith('/en')
-        ? translatePathToSpanish(currentPath)
-        : currentPath;
+    const spanishPath = translatePathToSpanish(currentPath);
 
     // 2. Generate the English equivalent
     // We pass the clean Spanish path to translate it
@@ -36,7 +35,7 @@ export function SeoHead({ title, description, type = 'website', image, schema }:
     const baseUrl = 'https://guitarcurves.com';
 
     // 3. Construct Full URLs
-    const esUrl = `${baseUrl}${spanishPath === '/' ? '' : spanishPath}`;
+    const esUrl = `${baseUrl}/es${spanishPath === '/' ? '' : spanishPath}`;
     const enUrl = `${baseUrl}/en${englishPath === '/' ? '' : englishPath}`;
 
     // Canonical is the current page's definitive URL

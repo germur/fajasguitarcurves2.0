@@ -8,7 +8,7 @@ import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSculptProducts } from '../hooks/useSculptProducts';
 import { FilterSidebar } from '../components/FilterSidebar';
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -66,7 +66,7 @@ export default function HourglassPage() {
             <SeoHead
                 title={t('pages.hourglass.seo.title')}
                 description={t('pages.hourglass.seo.description')}
-                path="/colecciones/moldeo"
+
                 image="/assets/hourglass-hero-bg.jpg"
                 schema={{
                     type: 'collection',

@@ -107,12 +107,6 @@
                 "button": "FIND MY PERFECT FAJA"
             }
         },
-        "about": {
-            "seo": {
-                "title": "About Us | Guitar Curves Fajas",
-                "description": "Learn the story behind the leading Colombian shapewear brand. Textile engineering designed by women for women."
-            }
-        },
         "contact": {
             "seo": {
                 "title": "Contact Us | Guitar Curves",
@@ -907,6 +901,10 @@
             "objective": "Capture leads (Surgery Date + Email)"
         },
         "about": {
+            "seo": {
+                "title": "About Us | Guitar Curves Fajas",
+                "description": "Learn the story behind the leading Colombian shapewear brand. Textile engineering designed by women for women."
+            },
             "hero": {
                 "badge": "Our Manifesto",
                 "title_line1": "The Engineering",

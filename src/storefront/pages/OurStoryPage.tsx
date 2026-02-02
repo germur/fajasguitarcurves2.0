@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { useTranslation, Trans } from 'react-i18next';
 
 export default function OurStoryPage() {
@@ -11,7 +11,7 @@ export default function OurStoryPage() {
             <SeoHead
                 title={t('pages.our_story.seo.title')}
                 description={t('pages.our_story.seo.description')}
-                path="/pages/our-story"
+
                 schema={{
                     type: 'article',
                     data: {

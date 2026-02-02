@@ -416,8 +416,12 @@ export const router = createBrowserRouter([
     children: sharedRoutes
   },
   {
-    path: '/',
+    path: '/es',
     element: <LangWrapper lang="es"><StorefrontLayout /></LangWrapper>,
     children: sharedRoutes
   },
+  {
+    path: '/',
+    element: <Navigate to="/es" replace />
+  }
 ]);

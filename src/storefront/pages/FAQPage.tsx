@@ -1,7 +1,7 @@
 import { Search, Package, Ruler, Stethoscope, Shirt, ArrowRight } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
 import { Link } from 'react-router-dom';
-import { SeoHead } from '../../lib/seo/SeoHead';
+import { SeoHead } from '@/storefront/components/SeoHead';
 import { useTranslation } from 'react-i18next';
 
 export default function FAQPage() {
@@ -11,7 +11,7 @@ export default function FAQPage() {
             <SeoHead
                 title={t('pages.faq.seo.title')}
                 description={t('pages.faq.seo.description')}
-                path="/pages/faq"
+
                 schema={{
                     type: 'website',
                     data: {
