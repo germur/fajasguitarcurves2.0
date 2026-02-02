@@ -2,6 +2,8 @@ import { CheckCircle2, Factory, BarChart3, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 
+import { SeoHead } from './components/SeoHead';
+
 export default function AboutPage() {
     const { t } = useTranslation();
 
@@ -30,6 +32,10 @@ export default function AboutPage() {
 
     return (
         <div className="bg-white min-h-screen font-sans pb-20">
+            <SeoHead
+                title={t('pages.about.seo.title')}
+                description={t('pages.about.seo.description')}
+            />
             {/* Hero */}
             <div className="bg-[#2C2420] text-[#F5EDDF] py-24 px-6 text-center">
                 <span className="inline-block px-3 py-1 bg-[#D1AB66] text-[#2C2420] text-xs font-bold uppercase tracking-widest rounded-full mb-6">

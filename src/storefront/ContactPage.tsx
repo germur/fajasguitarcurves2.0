@@ -2,12 +2,18 @@ import { MessageSquare, Mail, Clock, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { SeoHead } from './components/SeoHead';
+
 export default function ContactPage() {
     const navigate = useNavigate();
     const { t } = useTranslation();
 
     return (
         <div className="bg-[#FAF9F6] min-h-screen font-sans pb-20">
+            <SeoHead
+                title={t('pages.contact.seo.title')}
+                description={t('pages.contact.seo.description')}
+            />
             {/* Header */}
             <div className="bg-[#2C2420] text-[#F5EDDF] pt-24 pb-32 px-6 relative overflow-hidden">
                 <div className="max-w-4xl mx-auto text-center relative z-10">

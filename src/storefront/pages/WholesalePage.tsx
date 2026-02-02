@@ -1,5 +1,6 @@
 import { TrendingUp, ShieldCheck, Camera, Truck, Users } from 'lucide-react';
 import { GlassNavbar } from '../components/GlassNavbar';
+import { SeoHead } from '../components/SeoHead';
 import { useTranslation } from 'react-i18next';
 
 export default function WholesalePage() {
@@ -7,6 +8,10 @@ export default function WholesalePage() {
 
     return (
         <div className="font-sans text-[#3E322C] bg-white">
+            <SeoHead
+                title={t('pages.wholesale.seo.title')}
+                description={t('pages.wholesale.seo.description')}
+            />
             <GlassNavbar />
 
             {/* 1. HERO SECTION */}
