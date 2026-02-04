@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from './hooks/useStoreContext';
 import { useProduct } from './hooks/useProduct';
 import { getProductById } from './data/store-data';
-import { generateMetaTags } from '../lib/seo/generators';
+import { generateMetaTags, generateProductSchema } from '../lib/seo/generators';
 import { SeoHead } from './components/SeoHead';
 import { Loader2, Star, Ruler, ShoppingBag, ChevronDown, ArrowUpRight, X, ShieldCheck, Truck, Check } from 'lucide-react';
 import GuitarRatioQuiz from './pages/tools/GuitarRatioQuiz';
@@ -234,6 +234,7 @@ export function ProductDetailView() {
 
     // --- SEO GENERATION (MAES Formula) ---
     const { title: seoTitle, description: seoDescription } = generateMetaTags(product, i18n?.language || 'es');
+    const productSchema = generateProductSchema(product, window.location.href);
 
 
     // 2. Helper Availability
@@ -274,9 +275,6 @@ export function ProductDetailView() {
         }
     };
 
-
-
-
     return (
         <div className="bg-[#FAF9F6] min-h-screen pb-24 animate-fade-in relative selection:bg-[#D4AF37] selection:text-white">
             {/* NEW SEO SYSTEM IMPLEMENTATION */}
@@ -285,8 +283,7 @@ export function ProductDetailView() {
                 description={seoDescription}
                 type="product"
                 image={typeof displayImage === 'string' ? displayImage : (displayImage as any).url}
-
-                schema={{ type: 'product', data: product }}
+                schema={productSchema}
             />
             {/* --- MOBILE STICKY BAR (New Feature) --- */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4 z-50 md:hidden flex items-center justify-between shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
