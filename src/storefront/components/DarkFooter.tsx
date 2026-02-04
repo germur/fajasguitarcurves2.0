@@ -3,6 +3,7 @@ import { LocalizedLink as Link } from './LocalizedLink';
 import { ArrowRight, Instagram, Globe, CreditCard, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PopularSearches } from './PopularSearches';
 
 export function DarkFooter() {
     const { t } = useTranslation();
@@ -135,8 +136,11 @@ export function DarkFooter() {
                         {t('footer.seo_title')}
                         <ChevronDown size={14} className={`transition-transform duration-300 ${isSeoOpen ? 'rotate-180' : ''}`} />
                     </button>
-                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isSeoOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-50'}`}>
-                        <p className="text-xs text-gray-500 text-justify leading-relaxed max-w-4xl">
+                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isSeoOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-50'}`}>
+                        {/* Internal Linking for Programmatic SEO */}
+                        <PopularSearches />
+
+                        <p className="text-xs text-gray-500 text-justify leading-relaxed max-w-4xl border-t border-gray-800 pt-6">
                             {t('footer.seo_text')}
                         </p>
                     </div>

@@ -11,6 +11,92 @@ import { TrustBanner } from './components/TrustBanner';
 import { FilterSidebar } from './components/FilterSidebar';
 import { useTranslation } from 'react-i18next';
 
+// --- PROGRAMMATIC SEO CONFIG ---
+// Dictionary to map URL keywords to Shopify Tags
+const INTENT_DICTIONARY: Record<string, string> = {
+    // Colors
+    'negras': 'Negro',
+    'negra': 'Negro',
+    'black': 'Black',
+    'beige': 'Beige',
+    'piel': 'Beige',
+    'cocoa': 'Cocoa',
+    'mocha': 'Mocha',
+    'chocolate': 'Mocha',
+
+    // Types
+    'reductoras': 'Reductora',
+    'reductora': 'Reductora',
+    'cinturilla': 'Cinturilla',
+    'cinturillas': 'Cinturilla',
+    'short': 'Short',
+    'shorts': 'Short',
+    'body': 'Body',
+    'enterizo': 'Body',
+    'strapless': 'Strapless',
+    'tirantes': 'Tirantes',
+    'mangas': 'Con Mangas',
+
+    // Uses
+    'postquirurgica': 'Post Quirúrgica',
+    'post-quirurgica': 'Post Quirúrgica',
+    'post-op': 'Post Surgery',
+    'diario': 'Uso Diario',
+    'daily': 'Daily Use',
+    'postparto': 'Post Parto',
+    'post-parto': 'Post Parto',
+    'maternidad': 'Maternidad',
+    'novia': 'Novia',
+    'boda': 'Novia',
+    'fiesta': 'Fiesta',
+    'gym': 'Deportiva',
+
+    // Stages
+    'etapa-1': 'Etapa 1',
+    'stage-1': 'Stage 1',
+    'etapa-2': 'Etapa 2',
+    'stage-2': 'Stage 2',
+    'etapa-3': 'Etapa 3',
+    'stage-3': 'Stage 3',
+
+    // Body Parts / Problems
+    'espalda': 'Espalda Alta',
+    'brazos': 'Mangas',
+    'pierna': 'Media Pierna',
+    'gluteos': 'Levanta Cola',
+    'cola': 'Levanta Cola',
+    'abdomen': 'Control Abdomen',
+};
+
+// Helper: Parse URL "fajas-negras-reductoras" -> ["Negro", "Reductora"]
+function parseProgrammaticIntent(slug: string): { tags: string[], titleParts: string[] } {
+    if (!slug) return { tags: [], titleParts: [] };
+
+    // 1. Clean slug (remove "fajas-", "para-", "de-")
+    const cleanSlug = slug.toLowerCase()
+        .replace(/^fajas-/, '')
+        .replace(/-para-/, '-')
+        .replace(/-de-/, '-');
+
+    const words = cleanSlug.split('-');
+    const foundTags: string[] = [];
+    const titleParts: string[] = [];
+
+    // 2. Map words to dictionary
+    words.forEach(word => {
+        const mappedTag = INTENT_DICTIONARY[word];
+        if (mappedTag) {
+            foundTags.push(mappedTag);
+            titleParts.push(word.charAt(0).toUpperCase() + word.slice(1));
+        } else {
+            // Keep word for title even if not a tag (e.g. "baratas")
+            titleParts.push(word.charAt(0).toUpperCase() + word.slice(1));
+        }
+    });
+
+    return { tags: [...new Set(foundTags)], titleParts };
+}
+
 interface CollectionPageProps {
     title?: string;
     handle?: string;
@@ -33,6 +119,11 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     const isGranular = (!!params.silo && !!params.filter) || !!seoParams;
     const isViewAll = rawHandle === 'all';
 
+    // PROGRAMMATIC MODE DETECTION
+    // If we have a handle (like 'fajas-negras-reductoras') and it's NOT a standard collection
+    // We assume it might be a programmatic intent
+    const isProgrammatic = !isViewAll && !isGranular && rawHandle && !seoParams;
+
     // Derived Granular Params
     const silo = params.silo || seoParams?.silo || '';
     const filter = params.filter || seoParams?.filter || '';
@@ -40,6 +131,10 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     // State
     const [products, setProducts] = useState<any[]>([]); // Unified Product List
     const [loading, setLoading] = useState(false);
+
+    // Programmatic State
+    const [programmaticTitle, setProgrammaticTitle] = useState('');
+    const [programmaticFallback, setProgrammaticFallback] = useState<false | 'partial' | 'bestsellers'>(false);
 
     // Filter State
     const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
@@ -100,6 +195,12 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             : `Compra las mejores opciones de ${filter.replace(/-/g, ' ')} de nuestra colección ${silo}. Alta compresión y soporte especializado para tu cuerpo.`;
     }
 
+    // PROGRAMMATIC TITLE & DESCRIPTION OVERRIDE
+    if (isProgrammatic && programmaticTitle) {
+        pageTitle = `Fajas ${programmaticTitle}`; // e.g. "Fajas Negras Reductoras"
+        seoDescription = `Descubre nuestra selección exclusiva de ${programmaticTitle}. Diseñadas para moldear tu figura con la máxima comodidad y tecnología colombiana.`;
+    }
+
     useEffect(() => {
         setLoading(true);
         let fetchPromise;
@@ -120,6 +221,53 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             } else {
                 fetchPromise = fetchProductsByTags([siloTag, filterTag].filter(t => t && t.length > 0));
             }
+        } else if (isProgrammatic) {
+            // --- NEW: PROGRAMMATIC FETCH LOGIC ---
+            const { tags, titleParts } = parseProgrammaticIntent(rawHandle);
+
+            if (tags.length > 0) {
+                // If we found valid mapped tags (e.g. Negro, Reductora)
+                setProgrammaticTitle(titleParts.join(' ')); // "Negras Reductoras"
+
+                // 1. Try Exact Intersection
+                // Note: We bypass the main fetchPromise here to handle chained logic locally
+                fetchProductsByTags(tags).then(exactMatches => {
+                    // Check if simple fetch returned empty
+                    if (exactMatches && exactMatches.length > 0) {
+                        const mapperMode = 'universal';
+                        setProducts(exactMatches.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode, i18n.language)));
+                        setProgrammaticFallback(false);
+                        setLoading(false);
+                    } else {
+                        // 2. Fallback: Partial Match (OR Logic)
+                        // "tag:'A' OR tag:'B'"
+                        const partialQuery = tags.map(t => `tag:'${t}'`).join(' OR ');
+                        fetchProductsByQuery(partialQuery).then(partialMatches => {
+                            if (partialMatches && partialMatches.length > 0) {
+                                const mapperMode = 'universal';
+                                setProducts(partialMatches.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode, i18n.language)));
+                                setProgrammaticFallback('partial');
+                                setLoading(false);
+                            } else {
+                                // 3. Ultimate Fallback: Best Sellers
+                                fetchProductsByTags(['Best Seller']).then(bestSellers => {
+                                    const mapperMode = 'universal';
+                                    setProducts(bestSellers.map((p: any) => ShopifyMapper.mapProduct(p, mapperMode, i18n.language)));
+                                    setProgrammaticFallback('bestsellers');
+                                    setLoading(false);
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Set fetchPromise to null/dummy so the main .then() chain doesn't overwrite our work
+                fetchPromise = Promise.resolve([]);
+            } else {
+                // Fallback: If no tags found, try collection handle normally
+                // This covers standard collections that aren't mapped yet
+                fetchPromise = fetchCollectionByHandle(realHandle);
+            }
         } else {
             // Standard Collection (e.g. /collections/recovery)
             fetchPromise = fetchCollectionByHandle(realHandle);
@@ -135,7 +283,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
             .catch(err => console.error("Error loading products:", err))
             .finally(() => setLoading(false));
 
-    }, [silo, filter, isGranular, isViewAll, rawHandle, i18n.language]); // Added i18n.language dep
+    }, [silo, filter, isGranular, isViewAll, isProgrammatic, rawHandle, i18n.language]); // Added deps
 
 
     // Filter Logic
@@ -195,7 +343,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                     <div className="space-y-6">
                         <div className="inline-flex items-center gap-2 bg-[#F5EDDF] text-[#A35944] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                             <Shield size={14} />
-                            {heroSubtitle}
+                            {isProgrammatic ? "Colección Especializada" : heroSubtitle}
                         </div>
 
                         <h1 className="text-4xl lg:text-6xl font-serif font-bold text-[#2C2420] leading-tight capitalize">
@@ -279,7 +427,37 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
 
                         {/* PRODUCT GRID */}
                         <div className="flex-1 w-full">
-                            <GranularProductGrid products={filteredProducts} loading={loading} />
+                            {/* FALLBACK BANNER */}
+                            {programmaticFallback && (
+                                <div className="mb-8 p-6 bg-stone-50 border border-[#D4AF37]/20 rounded-xl">
+                                    <h3 className="font-serif text-lg font-bold text-[#2C2420] mb-2">
+                                        {i18n.language === 'en'
+                                            ? `We couldn't find an exact match for "${programmaticTitle}", but...`
+                                            : `No encontramos una coincidencia exacta para "${programmaticTitle}", pero...`}
+                                    </h3>
+                                    <p className="text-stone-600 text-sm">
+                                        {programmaticFallback === 'partial'
+                                            ? (i18n.language === 'en' ? "Here are items matching some of your criteria:" : "Aquí tienes prendas que cumplen con algunas de tus características:")
+                                            : (i18n.language === 'en' ? "Here are our most popular best sellers:" : "Aquí tienes nuestros productos más populares:")}
+                                    </p>
+                                </div>
+                            )}
+
+                            {products.length === 0 && !loading && isProgrammatic ? (
+                                <div className="text-center py-20 bg-stone-50 rounded-lg">
+                                    <h3 className="font-serif text-2xl text-stone-400 mb-2">
+                                        {i18n.language === 'en' ? "Nothing found here." : "No encontramos resultados."}
+                                    </h3>
+                                    <p className="text-stone-500">{i18n.language === 'en' ? "Try broader search terms." : "Prueba términos más generales."}</p>
+                                    <div className="mt-8 flex justify-center gap-4">
+                                        <Link to="/colecciones/todo" className="px-6 py-3 bg-[#2C2420] text-white rounded-lg">
+                                            {i18n.language === 'en' ? "View All" : "Ver Todo"}
+                                        </Link>
+                                    </div>
+                                </div>
+                            ) : (
+                                <GranularProductGrid products={filteredProducts} loading={loading} />
+                            )}
                         </div>
                     </div>
                 </div>
