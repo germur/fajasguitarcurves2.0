@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 
 interface ProductHotspot {
     id: number;

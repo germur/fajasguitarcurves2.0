@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { ArrowLeftRight, CheckCircle2 } from 'lucide-react';
 
 export function SizingKiller() {

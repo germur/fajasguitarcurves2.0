@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { fetchAllProducts } from '@/lib/shopify-client';
 import { ShopifyMapper } from '@/lib/shopify-mapper';
 // Reuse existing ProductCard or modify

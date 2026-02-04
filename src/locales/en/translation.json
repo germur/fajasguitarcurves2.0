@@ -406,6 +406,11 @@
                 "title": "Wall of Curves",
                 "desc": "Join thousands of women showing their results on TikTok.",
                 "cta": "See more on TikTok"
+            },
+            "best_sellers": {
+                "title": "Our Guitar Girls' Favorites",
+                "subtitle": "The products that have sculpted over 10k hourglass figures.",
+                "cta": "View All"
             }
         },
         "checkout": {

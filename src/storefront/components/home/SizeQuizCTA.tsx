@@ -1,5 +1,5 @@
 import { Ruler, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 
 export function SizeQuizCTA() {
     return (

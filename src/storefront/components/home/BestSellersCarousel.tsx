@@ -1,11 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../LocalizedLink';
 import { fetchCollectionByHandle } from '@/lib/shopify-client';
 import { SculptProductCard } from '../silo-sculpt/SculptProductCard';
 import { useStore } from '@/storefront/hooks/useStoreContext';
+import { useTranslation } from 'react-i18next';
 
 export function BestSellersCarousel() {
+    const { t } = useTranslation();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -14,8 +16,10 @@ export function BestSellersCarousel() {
     useEffect(() => {
         async function loadBestSellers() {
             try {
+                // Etapa 2 is usually the best seller collection
                 const items = await fetchCollectionByHandle('etapa-2');
-                setProducts(items.slice(0, 8));
+                const mappedItems = items && Array.isArray(items) ? items.slice(0, 8) : [];
+                setProducts(mappedItems);
             } catch (error) {
                 console.error("Failed to load best sellers:", error);
             } finally {
@@ -45,14 +49,14 @@ export function BestSellersCarousel() {
                 <div className="flex items-end justify-between mb-8">
                     <div>
                         <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#2C2420]">
-                            Las Favoritas de nuestras Guitar Girls
+                            {t('pages.home.best_sellers.title')}
                         </h2>
                         <p className="text-stone-500 mt-2">
-                            Los productos que han moldeado más de 10k figuras de reloj de arena.
+                            {t('pages.home.best_sellers.subtitle')}
                         </p>
                     </div>
                     <Link to="/colecciones/todo" className="hidden md:flex items-center gap-2 font-bold text-[#A35944] hover:text-[#D1AB66] transition-colors">
-                        Ver Todo <ArrowRight size={16} />
+                        {t('pages.home.best_sellers.cta')} <ArrowRight size={16} />
                     </Link>
                 </div>
 
@@ -108,7 +112,7 @@ export function BestSellersCarousel() {
 
                 <div className="flex md:hidden justify-center mt-4">
                     <Link to="/colecciones/todo" className="flex items-center gap-2 font-bold text-[#A35944]">
-                        Ver Todo <ArrowRight size={16} />
+                        {t('pages.home.best_sellers.cta')} <ArrowRight size={16} />
                     </Link>
                 </div>
 

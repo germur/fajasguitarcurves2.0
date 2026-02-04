@@ -405,6 +405,11 @@
                 "title": "Muro de Curvas",
                 "desc": "Únete a miles de mujeres mostrando sus resultados en TikTok.",
                 "cta": "Ver más en TikTok"
+            },
+            "best_sellers": {
+                "title": "Las Favoritas de nuestras Guitar Girls",
+                "subtitle": "Los productos que han moldeado más de 10k figuras de reloj de arena.",
+                "cta": "Ver Todo"
             }
         },
         "checkout": {
