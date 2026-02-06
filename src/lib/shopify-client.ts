@@ -443,3 +443,345 @@ export async function fetchCollectionByHandle(handle: string, strict = true, lan
     return [];
   }
 }
+
+/**
+ * --- CART API HELPERS ---
+ * Replacing deprecated checkout API with new Cart API
+ */
+
+// Helper to fix checkout URL (headless domain -> myshopify domain)
+function normalizeCart(cart: any) {
+  if (!cart) return null;
+  if (cart.checkoutUrl && cart.checkoutUrl.includes('fajasguitarcurves.com')) {
+    cart.checkoutUrl = cart.checkoutUrl.replace('fajasguitarcurves.com', domain);
+  }
+  return cart;
+}
+
+export async function createCart() {
+  const query = `
+    mutation cartCreate {
+      cartCreate(input: {}) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 10) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    price {
+                      amount
+                    }
+                    image {
+                      url
+                    }
+                    product {
+                      id
+                      title
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({ query })
+    });
+
+    const json = await response.json();
+    if (json.data?.cartCreate?.cart) {
+      return normalizeCart(json.data.cartCreate.cart);
+    }
+    throw new Error(JSON.stringify(json.errors || json));
+  } catch (e) {
+    console.error('Error creating cart:', e);
+    throw e;
+  }
+}
+
+export async function fetchCart(cartId: string) {
+  const query = `
+    query getCart($cartId: ID!) {
+      cart(id: $cartId) {
+        id
+        checkoutUrl
+        lines(first: 50) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  price {
+                    amount
+                  }
+                  image {
+                    url
+                  }
+                  product {
+                    id
+                    title
+                  }
+                  selectedOptions {
+                      name
+                      value
+                  }
+                }
+              }
+              attributes {
+                key
+                value
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { cartId }
+      })
+    });
+
+    const json = await response.json();
+    return normalizeCart(json.data?.cart);
+  } catch (e) {
+    console.error('Error fetching cart:', e);
+    return null;
+  }
+}
+
+export async function addToCart(cartId: string, lines: { merchandiseId: string, quantity: number, attributes?: { key: string, value: string }[] }[]) {
+  const query = `
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 50) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    price {
+                      amount
+                    }
+                    image {
+                      url
+                    }
+                    product {
+                      id
+                      title
+                    }
+                    selectedOptions {
+                      name
+                      value
+                    }
+                  }
+                }
+                attributes {
+                  key
+                  value
+                }
+              }
+            }
+          }
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { cartId, lines }
+      })
+    });
+
+    const json = await response.json();
+    if (json.data?.cartLinesAdd?.cart) {
+      return normalizeCart(json.data.cartLinesAdd.cart);
+    }
+    throw new Error(JSON.stringify(json.data?.cartLinesAdd?.userErrors || json.errors));
+  } catch (e) {
+    console.error('Error adding to cart:', e);
+    throw e;
+  }
+}
+
+export async function removeFromCart(cartId: string, lineIds: string[]) {
+  const query = `
+    mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+      cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 50) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    price {
+                      amount
+                    }
+                    image {
+                      url
+                    }
+                    product {
+                      id
+                      title
+                    }
+                    selectedOptions {
+                      name
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { cartId, lineIds }
+      })
+    });
+
+    const json = await response.json();
+    if (json.data?.cartLinesRemove?.cart) {
+      return normalizeCart(json.data.cartLinesRemove.cart);
+    }
+    throw new Error(JSON.stringify(json.data?.cartLinesRemove?.userErrors || json.errors));
+  } catch (e) {
+    console.error('Error removing from cart:', e);
+    throw e;
+  }
+}
+
+export async function updateCartLines(cartId: string, lines: { id: string, quantity: number }[]) {
+  const query = `
+    mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+      cartLinesUpdate(cartId: $cartId, lines: $lines) {
+        cart {
+            id
+            checkoutUrl
+            lines(first: 50) {
+                edges {
+                node {
+                    id
+                    quantity
+                    merchandise {
+                    ... on ProductVariant {
+                        id
+                        title
+                        price {
+                        amount
+                        }
+                        image {
+                        url
+                        }
+                        product {
+                        id
+                        title
+                        }
+                        selectedOptions {
+                        name
+                        value
+                        }
+                    }
+                    }
+                }
+                }
+            }
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { cartId, lines }
+      })
+    });
+
+    const json = await response.json();
+    if (json.data?.cartLinesUpdate?.cart) {
+      return normalizeCart(json.data.cartLinesUpdate.cart);
+    }
+    throw new Error(JSON.stringify(json.data?.cartLinesUpdate?.userErrors || json.errors));
+  } catch (e) {
+    console.error('Error updating cart lines:', e);
+    throw e;
+  }
+}

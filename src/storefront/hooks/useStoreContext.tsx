@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { getAllProducts, type StoreProduct } from '../data/store-data';
-import { shopifyClient } from '../../lib/shopify-client';
+import { shopifyClient, createCart, fetchCart, addToCart as apiAddToCart, removeFromCart as apiRemoveFromCart, updateCartLines } from '../../lib/shopify-client';
 
 interface User {
     name: string;
@@ -19,6 +19,7 @@ interface CartItem {
     product: StoreProduct;
     quantity: number;
     selectedSize: string;
+    lineId?: string; // Added optional property for TS check
 }
 
 interface StoreContextType {
@@ -62,18 +63,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // Initialize Shopify Cart
     useEffect(() => {
         const initCart = async () => {
-            // If no token is present, we can't use Shopify features.
-            // In a real production app, we might fallback to a purely local cart.
-            // For this demo, we'll just log a warning and avoid crashing.
-            if (!shopifyClient.checkout) {
-                console.warn("Shopify Client not initialized correctly (missing token?). Cart will not function.");
-                return;
-            }
-
             if (shopifyCartId) {
                 try {
-                    const existingCart = await shopifyClient.checkout.fetch(shopifyCartId);
-                    if (!existingCart || existingCart.completedAt) {
+                    const existingCart = await fetchCart(shopifyCartId);
+                    if (!existingCart) {
                         createNewCart();
                     } else {
                         updateLocalCartState(existingCart);
@@ -94,43 +87,67 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }, [shopifyCartId]);
 
     const createNewCart = async () => {
-        if (!shopifyClient.checkout) return;
         try {
-            const newCart = await shopifyClient.checkout.create();
-            setShopifyCartId(newCart.id as string);
-            localStorage.setItem('shopify_cart_id', newCart.id as string);
-            updateLocalCartState(newCart);
+            const newCart = await createCart();
+            if (newCart) {
+                setShopifyCartId(newCart.id as string);
+                localStorage.setItem('shopify_cart_id', newCart.id as string);
+                updateLocalCartState(newCart);
+            }
         } catch (e) {
             console.error('Error creating Shopify cart:', e);
         }
     };
 
     const updateLocalCartState = (shopifyCart: any) => {
-        if (!shopifyCart) return;
-        const items = shopifyCart.lineItems.map((item: any) => ({
-            product: {
-                id: item.variableValues?.lineItems?.[0]?.variantId || item.id, // Storefront API mapping might vary
-                title: item.title,
-                price: parseFloat(item.variant.price.amount),
-                image: item.variant.image?.src || '',
-                category: 'Shopify Product'
-            } as StoreProduct,
-            quantity: item.quantity,
-            selectedSize: item.variant.title,
-            lineId: item.id // Important for updates/removes
-        }));
+        if (!shopifyCart || !shopifyCart.lines) return;
+
+        const edges = shopifyCart.lines.edges || [];
+
+        const items = edges.map((edge: any) => {
+            const item = edge.node;
+            const variant = item.merchandise;
+
+            // Handle potential missing data gracefully
+            if (!variant) return null;
+
+            return {
+                product: {
+                    id: variant.product?.id || variant.id,
+                    title: variant.product?.title || variant.title || 'Unknown Product',
+                    price: parseFloat(variant.price?.amount || '0'),
+                    image: variant.image?.url || '',
+                    category: 'Shopify Product'
+                } as StoreProduct,
+                quantity: item.quantity,
+                selectedSize: variant.title === 'Default Title' ? 'One Size' : variant.title,
+                lineId: item.id // Important for updates/removes
+            };
+        }).filter(Boolean) as CartItem[]; // Filter out nulls
+
         setCart(items);
     };
 
     const addToCart = async (product: StoreProduct, size: string) => {
-        if (!shopifyCartId) {
-            console.error("No active Shopify Cart ID. Cannot add item.");
-            // Try to recreate cart if missing
-            if (shopifyClient.checkout) createNewCart().then(() => addToCart(product, size));
-            return;
-        }
-
         setIsCartOpen(true);
+
+        let targetCartId = shopifyCartId;
+
+        if (!targetCartId) {
+            try {
+                const newCart = await createCart();
+                if (newCart) {
+                    targetCartId = newCart.id;
+                    setShopifyCartId(newCart.id);
+                    localStorage.setItem('shopify_cart_id', newCart.id);
+                } else {
+                    throw new Error("Failed to create initialized cart");
+                }
+            } catch (e) {
+                console.error("Cart creation failed on add", e);
+                return;
+            }
+        }
 
         try {
             let variantId: string | undefined = undefined;
@@ -185,13 +202,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
             const lineItemsToAdd = [
                 {
-                    variantId: variantId,
+                    merchandiseId: variantId,
                     quantity: 1,
-                    customAttributes: [{ key: "Size", value: size }]
+                    attributes: [{ key: "Size", value: size }]
                 }
             ];
 
-            const updatedCart = await shopifyClient.checkout.addLineItems(shopifyCartId, lineItemsToAdd);
+            const updatedCart = await apiAddToCart(targetCartId!, lineItemsToAdd);
             updateLocalCartState(updatedCart);
         } catch (e) {
             console.error('Error adding to Shopify cart:', e);
@@ -220,13 +237,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
 
     const removeFromCart = async (productId: string, size: string) => {
+        if (!shopifyCartId) return;
         // We need the lineItemId, stored in our local cart state mapping
         const item = cart.find(i => i.product.id === productId && i.selectedSize === size);
-        if (!item || !('lineId' in item)) return;
+        // @ts-ignore - lineId is added in custom mapping
+        if (!item || !item.lineId) return;
 
         try {
             // @ts-ignore
-            const updatedCart = await shopifyClient.checkout.removeLineItems(shopifyCartId, [item.lineId]);
+            const updatedCart = await apiRemoveFromCart(shopifyCartId, [item.lineId]);
             updateLocalCartState(updatedCart);
         } catch (e) {
             console.error('Error removing from Shopify cart:', e);
@@ -234,8 +253,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
 
     const updateQuantity = async (productId: string, size: string, delta: number) => {
+        if (!shopifyCartId) return;
         const item = cart.find(i => i.product.id === productId && i.selectedSize === size);
-        if (!item || !('lineId' in item)) return;
+        // @ts-ignore
+        if (!item || !item.lineId) return;
 
         const newQty = item.quantity + delta;
         if (newQty < 0) return;
@@ -248,7 +269,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                     quantity: newQty
                 }
             ];
-            const updatedCart = await shopifyClient.checkout.updateLineItems(shopifyCartId, lineItemsToUpdate);
+            const updatedCart = await updateCartLines(shopifyCartId, lineItemsToUpdate);
             updateLocalCartState(updatedCart);
         } catch (e) {
             console.error('Error updating quantity:', e);
@@ -258,9 +279,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const checkout = async () => {
         if (!shopifyCartId) return;
         try {
-            const currentCart = await shopifyClient.checkout.fetch(shopifyCartId);
-            if (currentCart && currentCart.webUrl) {
-                window.location.href = currentCart.webUrl;
+            const currentCart = await fetchCart(shopifyCartId);
+            if (currentCart && currentCart.checkoutUrl) {
+                window.location.href = currentCart.checkoutUrl;
+            } else {
+                console.error("No checkout URL found in cart");
+                alert("Error iniciando el pago. Por favor intenta de nuevo.");
             }
         } catch (e) {
             console.error('Error diverting to checkout:', e);
