@@ -418,6 +418,7 @@ const sharedRoutes = [
 function CheckoutRedirect() {
   const { id } = useParams();
   const location = useLocation();
+  const [isLooping, setIsLooping] = React.useState(false);
 
   useEffect(() => {
     // Construct the full Shopify Checkout URL
@@ -431,13 +432,48 @@ function CheckoutRedirect() {
       // We also add &logged_in=true to force a session check which sometimes bypasses the domain redirect
       const checkoutUrl = `https://92542c-b5.myshopify.com/cart/c/${id}?key=${key}&auto_redirect=false&edge_redirect=true&skip_shop_pay=true&logged_in=true`;
 
-      // Attempt redirect
-      window.location.replace(checkoutUrl);
+      // LOOP PROTECTION
+      const loopKey = `redirect_attempt_${id}`;
+      const attempts = parseInt(sessionStorage.getItem(loopKey) || '0');
+
+      if (attempts < 2) {
+        sessionStorage.setItem(loopKey, (attempts + 1).toString());
+        window.location.replace(checkoutUrl);
+      } else {
+        setIsLooping(true);
+        setTimeout(() => sessionStorage.removeItem(loopKey), 10000);
+      }
     } else {
       // If invalid, go back to cart
       window.location.href = '/carrito';
     }
   }, [id, location]);
+
+  if (isLooping) {
+    const searchParams = new URLSearchParams(location.search);
+    const key = searchParams.get('key');
+    const checkoutUrl = `https://92542c-b5.myshopify.com/cart/c/${id}?key=${key}`;
+
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFBF7] p-4 text-center">
+        <div className="max-w-md bg-white p-8 rounded-xl shadow-lg border border-[#D4AF37]/20">
+          <div className="mx-auto w-16 h-16 bg-[#FDFBF7] rounded-full flex items-center justify-center mb-6">
+            <span className="text-2xl">🛍️</span>
+          </div>
+          <h2 className="text-2xl font-serif text-[#1C1C1C] mb-4">Confirmar Redirección</h2>
+          <p className="text-gray-600 mb-8">
+            Para garantizar la seguridad de tu compra, haz clic en el botón para continuar a la pasarela de pagos de Shopify.
+          </p>
+          <a
+            href={checkoutUrl}
+            className="block w-full bg-[#1C1C1C] text-white font-bold py-4 rounded-lg hover:bg-[#333] transition-transform hover:scale-[1.02]"
+          >
+            CONTINUAR AL PAGO SEGURO
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFBF7] p-4 text-center">
