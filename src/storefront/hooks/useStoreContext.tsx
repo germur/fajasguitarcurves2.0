@@ -281,8 +281,24 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         try {
             const currentCart = await fetchCart(shopifyCartId);
             if (currentCart && currentCart.checkoutUrl) {
-                // Revert to original URL to let Netlify Proxy handle the domain
-                window.location.href = currentCart.checkoutUrl;
+                // NETLIFY PROXY STRATEGY (Status 200)
+                // We use the relative path so Netlify intercepts it via netlify.toml proxy rules.
+                // We MUST append auto_redirect=false to prevent Shopify from redirecting back to primary domain.
+                try {
+                    const url = new URL(currentCart.checkoutUrl);
+                    // Force relative path to trigger Netlify Proxy
+                    const relativePath = url.pathname + url.search;
+
+                    // Add params to inner URL
+                    const params = new URLSearchParams(url.search);
+                    params.set('auto_redirect', 'false');
+                    params.set('skip_shop_pay', 'true');
+
+                    window.location.href = `${url.pathname}?${params.toString()}`;
+                } catch (e) {
+                    console.error("Error constructing proxy URL, falling back to absolute", e);
+                    window.location.href = currentCart.checkoutUrl;
+                }
             } else {
                 console.error("No checkout URL found in cart");
                 alert("Error iniciando el pago. Por favor intenta de nuevo.");
