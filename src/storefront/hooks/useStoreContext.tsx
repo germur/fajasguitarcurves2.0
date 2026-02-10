@@ -290,7 +290,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                     url.searchParams.set('auto_redirect', 'false');
                     url.searchParams.set('edge_redirect', 'true');
                     url.searchParams.set('skip_shop_pay', 'true');
-                    url.searchParams.set('logged_in', 'true');
 
                     window.location.href = url.toString();
                 } catch (e) {
