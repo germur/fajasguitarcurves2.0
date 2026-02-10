@@ -19,16 +19,16 @@ const RelatedProducts = ({ category }: { category?: string }) => (
 
 export function ProductDetailView() {
     const { t, i18n } = useTranslation();
-    const { id } = useParams<{ id: string }>();
+    const { handle } = useParams<{ handle: string }>();
     const navigate = useNavigate();
 
     // 0. Redirect Legacy URLs immediately
     useEffect(() => {
-        if (id && LEGACY_REDIRECTS[id]) {
-            // console.log(`Redirecting legacy product: ${id} -> ${LEGACY_REDIRECTS[id]}`);
-            navigate(`/products/${LEGACY_REDIRECTS[id]}`, { replace: true });
+        if (handle && LEGACY_REDIRECTS[handle]) {
+            // console.log(`Redirecting legacy product: ${handle} -> ${LEGACY_REDIRECTS[handle]}`);
+            navigate(`/products/${LEGACY_REDIRECTS[handle]}`, { replace: true });
         }
-    }, [id, navigate]);
+    }, [handle, navigate]);
     const { addToCart } = useStore();
     const [selectedSize, setSelectedSize] = useState<string>('');
     const [selectedColor, setSelectedColor] = useState<string>(''); // Default empty, let effect handle it
@@ -38,8 +38,8 @@ export function ProductDetailView() {
     const [isCalculatorOpen, setCalculatorOpen] = useState(false);
 
     // 1. Data Fetching Logic
-    const { product: fetchedProduct, loading, error } = useProduct(id || '');
-    const localProduct = getProductById(id || '');
+    const { product: fetchedProduct, loading, error } = useProduct(handle || '');
+    const localProduct = getProductById(handle || '');
 
     // PRIORITY: Live Data -> Local Fallback
     const product = fetchedProduct || localProduct;
@@ -195,7 +195,7 @@ export function ProductDetailView() {
         window.scrollTo(0, 0);
         setSelectedSize('');
         // NOTE: We do NOT reset color here to empty, we let the auto-select logic handle it or keep it if navigating
-    }, [id]);
+    }, [handle]);
 
     // Scroll to top helper for sticky bar
     const scrollToTop = () => {

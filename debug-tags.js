@@ -1,50 +1,89 @@
 
-// import { shopifyClient } from './src/lib/shopify-client.ts';
+const domain = '92542c-b5.myshopify.com';
+const token = '04c58a7586c413051625b8a9aedd0416';
 
-async function fetchTags() {
-    const query = `
-    {
-        products(first: 50) {
-            edges {
-                node {
-                    title
-                    tags
-                    productType
-                }
-            }
+// 1. Test "Todo" (All Products)
+const queryAll = `
+{
+  products(first: 5) {
+    edges {
+      node {
+        title
+        handle
+      }
+    }
+  }
+}
+`;
+
+// 2. Test Tag "Stage 2"
+// Note: Shopify tags are strictly case sensitive usually.
+const queryTags = `
+{
+  products(first: 5, query: "tag:Stage 2") {
+    edges {
+      node {
+        title
+        tags
+      }
+    }
+  }
+}
+`;
+
+// 3. Test Collection "post-quirurgica" + Tag "Stage 2" validation
+// Does a product in this collection actually HAVE this tag?
+const queryCollection = `
+{
+  collectionByHandle(handle: "post-quirurgica") {
+    products(first: 50) {
+      edges {
+        node {
+          title
+          tags
         }
-    }`;
+      }
+    }
+  }
+}
+`;
 
+async function fetchShopify(label, q) {
+    console.log(`\n--- TESTING: ${label} ---`);
     try {
-        const payload = {
-            query: query
-        }
-
-        const response = await fetch('https://92542c-b5.myshopify.com/api/2024-01/graphql.json', {
+        const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Shopify-Storefront-Access-Token': '04c58a7586c413051625b8a9aedd0416'
+                'X-Shopify-Storefront-Access-Token': token
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({ query: q })
         });
-
         const json = await response.json();
-
         if (json.errors) {
-            console.error(json.errors);
-            return;
+            console.log("ERRORS:", JSON.stringify(json.errors, null, 2));
+        } else {
+            console.log("SUCCESS. First few results:");
+            // Deep log to see tags
+            const data = json.data.products || json.data.collectionByHandle?.products;
+            if (data && data.edges) {
+                data.edges.slice(0, 3).forEach(e => {
+                    console.log(JSON.stringify(e.node, null, 2));
+                });
+                console.log(`Total count in fetch: ${data.edges.length}`);
+            } else {
+                console.log("No Data Found");
+            }
         }
-
-        json.data.products.edges.forEach(edge => {
-            console.log(`\nProduct: ${edge.node.title}`);
-            console.log(`Tags: ${JSON.stringify(edge.node.tags)}`);
-            console.log(`ProductType: ${edge.node.productType}`); // Also check productType
-        });
-
     } catch (e) {
-        console.error(e);
+        console.error("Fetch Failed", e);
     }
 }
 
-fetchTags();
+async function run() {
+    await fetchShopify("ALL PRODUCTS (For 'todo' page)", queryAll);
+    await fetchShopify("TAG SEARCH: 'Stage 2'", queryTags);
+    await fetchShopify("COLLECTION CONTENT (Check tags)", queryCollection);
+}
+
+run();

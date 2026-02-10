@@ -281,27 +281,36 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         try {
             const currentCart = await fetchCart(shopifyCartId);
             if (currentCart && currentCart.checkoutUrl) {
-                // NETLIFY PROXY STRATEGY (CORRECTED)
+                // NETLIFY PROXY STRATEGY
                 // We MUST use a RELATIVE path (e.g., /cart/c/...) so the request hits Netlify first.
                 // Netlify then proxies it to Shopify (status 200) as defined in netlify.toml.
-                // Using an absolute URL bypasses the proxy and causes the 301 loop.
                 try {
                     const url = new URL(currentCart.checkoutUrl);
-                    // Use pathname + search to keep it relative
-                    // We keep auto_redirect=false as a safety measure for the proxy request
-                    const params = new URLSearchParams(url.search);
-                    params.set('auto_redirect', 'false');
 
-                    const relativePath = `${url.pathname}?${params.toString()}`;
-                    window.location.href = relativePath;
+                    // STRATEGY: DIRECT SHOPIFY CHECKOUT
+                    // We must avoid sending the user to the custom domain (fajasguitarcurves.com) for checkout
+                    // because it points to Netlify, and Netlify cannot handle the checkout logic locally.
+                    // Instead, we force the `myshopify.com` domain which handles checkout securely.
+
+                    const targetUrl = new URL(currentCart.checkoutUrl);
+                    targetUrl.hostname = '92542c-b5.myshopify.com';
+
+                    console.log("Redirecting to Checkout:", targetUrl.href);
+                    window.location.href = targetUrl.href;
+
                 } catch (e) {
-                    // Fallback: If parsing fails, try to just use the pathname if possible, or alert.
-                    console.error("Error constructing proxy URL", e);
-                    // Dangerous fallback, but better than crashing. 
-                    // Try to strip domain manually if URL parsing failed.
-                    const fallbackPath = currentCart.checkoutUrl.replace(/^https?:\/\/[^\/]+/, '');
-                    window.location.href = fallbackPath;
+                    console.error("Error constructing checkout URL", e);
+                    // Fallback: Just go where Shopify told us, but try to force hostname if possible
+                    try {
+                        const targetUrl = new URL(currentCart.checkoutUrl);
+                        targetUrl.hostname = '92542c-b5.myshopify.com';
+                        window.location.href = targetUrl.href;
+                    } catch (err) {
+                        window.location.href = currentCart.checkoutUrl;
+                    }
                 }
+
+
             } else {
                 console.error("No checkout URL found in cart");
                 alert("Error iniciando el pago. Por favor intenta de nuevo.");

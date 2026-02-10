@@ -8,64 +8,70 @@ export const esEnMap: Record<string, string> = {
     // Collections
     'colecciones': 'collections',
     'todo': 'all',
-    'recuperacion-postquirurgica': 'post-surgery-recovery',
+    'recuperacion-postquirurgica': 'post-surgery-recovery', // Legacy? Kept just in case
     'moldeo-y-estetica': 'sculpting-shapewear',
     'brasieres-y-postura': 'bras-and-posture',
-    'fajas-reloj-de-arena': 'hourglass-fajas',
+    'fajas-reloj-de-arena': 'hourglass-fajas', // Legacy?
 
-    // Pages
-    'nosotros': 'about',
-    'contacto': 'contact',
+    // Core Storefront
     'carrito': 'cart',
     'pago': 'checkout',
+
+    // Pages (Direct Matches)
+    'nosotros': 'about',
+    'contacto': 'contact',
     'envios': 'shipping',
+    'devoluciones': 'returns',
     'privacidad': 'privacy',
     'terminos': 'terms',
-    'devoluciones': 'returns',
     'cuenta': 'account',
-    'nuestra-historia': 'our-story',
-    'rastreo': 'tracking',
     'calculadora-de-tallas': 'fit-finder',
     'laboratorio': 'lab',
 
-    // Tools
+    // Landing / Marketing
+    'mayoristas': 'wholesale',
+    'esenciales': 'essentials',
+    'garantia-de-ajuste': 'fit-guarantee',
+    'nuestra-historia': 'our-story',
+    'post-quirurgico': 'post-surgery',
+    'moldeo-reloj-de-arena': 'hourglass-sculpting',
+    'kit-supervivencia-bbl': 'bbl-survival-kit',
+
+    // Tools & Resources segments
     'herramientas': 'tools',
-    'linea-de-tiempo-recuperacion': 'recovery-timeline',
-    'comparador-de-etapas': 'stage-comparator',
-    'calculadora-reloj-de-arena': 'hourglass-calculator',
+    'test-ratio': 'ratio-quiz',
+    'comparador': 'comparator',
+    'cronograma': 'timeline',
+    'recursos': 'resources',
+    'lista-bbl': 'bbl-checklist',
+    'glosario': 'glossary',
+    'vs-genericas': 'vs-generic',
+    'comunidad': 'community',
+    'diarios': 'diaries',
+    'estilo': 'lifestyle',
+    'novias': 'brides',
+
+    // Blog segments
+    'articulos': 'articles',
+    'anatomia-faja': 'anatomy-faja', // Assuming en slug is same or similar
+    'biblia-fibrosis': 'fibrosis-bible',
+    'prueba-ajuste': 'snatch-test',
+    'mitos-waist-training': 'waist-training-myths', // Check router
+    'mitos-cinturillas': 'waist-training-myths',
+    'postparto-vs-lipo': 'postpartum-vs-lipo',
+    'tallas-asimetricas': 'sizing-asymmetric',
+    'cronograma-inflamacion': 'inflammation-timeline',
+    'rutina-manana': 'morning-routine',
+    'lipo-brazos-espalda': 'arm-back-lipo',
 
     // Guides
     'guias': 'guides',
-    'manual-espuma-lipo': 'lipo-foam-manual',
     'solucion-problemas': 'troubleshooting',
+    'uso-espuma': 'lipo-foam',
 
-    // Articles/Blog
-    'articulos': 'articles',
-    'biblia-fibrosis': 'fibrosis-bible',
-    'anatomia-faja': 'anatomy-of-faja',
-    'linea-tiempo-inflamacion': 'inflammation-timeline',
-    'tallas-asimetricas': 'sizing-asymmetric',
-    'lipo-brazos-espalda': 'arm-back-lipo',
-    'rutina-manana': 'morning-routine',
-    'mitos-waist-training': 'waist-training-myths',
-    'postparto-vs-lipo': 'postpartum-vs-lipo',
-
-    // Gallery/Resources
-    'galeria': 'gallery',
-    'novias-curvas': 'curvy-brides',
-    'glosario': 'glossary',
-    'comparar': 'compare',
-    'vs-genericas': 'vs-generic',
-    'recursos': 'resources',
-    'checklist-bbl': 'bbl-checklist',
-    'historias': 'stories',
-    'diarios-recuperacion': 'recovery-diaries',
-
-    // Products
+    // General
     'producto': 'products',
-    'products': 'products', // Keep as-is
-
-    // Pages subpath
+    'products': 'products',
     'pages': 'pages',
 };
 

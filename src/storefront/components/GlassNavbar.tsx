@@ -130,10 +130,10 @@ export function GlassNavbar() {
                                     transform transition-all duration-300 origin-top
                                     ${activeDropdown === 'tools' ? 'opacity-100 visible scale-y-100' : 'opacity-0 invisible scale-y-95'}
                                 `}>
-                                    <Link to="/herramientas/calculadora-reloj-de-arena" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                    <Link to="/herramientas/test-ratio" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         {t('tools.ratio_test')}
                                     </Link>
-                                    <Link to="/herramientas/comparador-de-etapas" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
+                                    <Link to="/herramientas/comparador" className="block px-6 py-3 text-xs font-bold text-stone-600 hover:bg-stone-50 hover:text-[#A35944] uppercase tracking-wider">
                                         {t('tools.stage_compare')}
                                     </Link>
                                 </div>
@@ -398,10 +398,10 @@ export function GlassNavbar() {
                         <div>
                             <h4 className="font-serif text-2xl text-[#2C2420] mb-4">{t('nav.tools')}</h4>
                             <div className="space-y-3 pl-2 border-l-2 border-stone-100">
-                                <Link to="/herramientas/calculadora-reloj-de-arena" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/herramientas/test-ratio" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     {t('tools.ratio_test')}
                                 </Link>
-                                <Link to="/herramientas/comparador-de-etapas" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/herramientas/comparador" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     {t('tools.stage_compare')}
                                 </Link>
                             </div>
@@ -414,7 +414,7 @@ export function GlassNavbar() {
                                 <Link to="/nosotros" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     {t('nav.our_story')}
                                 </Link>
-                                <Link to="/pages/faq" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Link to="/faq" className="block text-sm font-medium text-stone-600 hover:text-[#D4AF37]" onClick={() => setIsMobileMenuOpen(false)}>
                                     {t('nav.faq')}
                                 </Link>
                             </div>

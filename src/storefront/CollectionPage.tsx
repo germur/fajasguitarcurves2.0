@@ -114,10 +114,14 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
     // SEO Slug Resolution (Reverse Map Logic)
     const seoParams = resolveSeoSlug(rawHandle);
 
+    // FIX: Parse Query Params for "?tag=" support
+    const searchParams = new URLSearchParams(location.search);
+    const queryTag = searchParams.get('tag');
+
     // If SEO match, clear handle so generic fetch doesn't run, and use the resolved params
     const handle = seoParams ? '' : rawHandle;
-    const isGranular = (!!params.silo && !!params.filter) || !!seoParams;
-    const isViewAll = rawHandle === 'all';
+    const isGranular = (!!params.silo && !!params.filter) || !!seoParams || !!queryTag;
+    const isViewAll = rawHandle === 'all' || rawHandle === 'todo' || rawHandle === 'catalogo';
 
     // PROGRAMMATIC MODE DETECTION
     // If we have a handle (like 'fajas-negras-reductoras') and it's NOT a standard collection
@@ -126,7 +130,7 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
 
     // Derived Granular Params
     const silo = params.silo || seoParams?.silo || '';
-    const filter = params.filter || seoParams?.filter || '';
+    const filter = params.filter || seoParams?.filter || queryTag || '';
 
     // State
     const [products, setProducts] = useState<any[]>([]); // Unified Product List
@@ -219,7 +223,13 @@ export function CollectionPage({ title: propTitle, handle: propHandle, descripti
                 const q = `tag:'Post Parto' OR title:Postparto OR title:Cesarea OR title:Maternidad`;
                 fetchPromise = fetchProductsByQuery(q);
             } else {
-                fetchPromise = fetchProductsByTags([siloTag, filterTag].filter(t => t && t.length > 0));
+                const tagsToFetch = [siloTag, filterTag].filter(t => t && t.length > 0);
+
+                // If URL has a collection handle that maps to a generic tag (like recovery -> Post Surgery)
+                if (realHandle === 'post-quirurgica' && !siloTag) tagsToFetch.push('Faja Postoperatoria');
+                if (realHandle === 'sculpt-studio' && !siloTag) tagsToFetch.push('Reloj de Arena');
+
+                fetchPromise = fetchProductsByTags([...new Set(tagsToFetch)]);
             }
         } else if (isProgrammatic) {
             // --- NEW: PROGRAMMATIC FETCH LOGIC ---
@@ -500,9 +510,9 @@ function mapSiloToTag(silo: string) {
     if (silo === 'sculpt') return '';
 
     // Spanish (New)
-    if (silo === 'recuperacion') return 'Post Surgery';
+    if (silo === 'recuperacion' || silo === 'recuperacion-postquirurgica') return 'Faja Postoperatoria';
     if (silo === 'brasieres') return 'Post-Op Bra';
-    if (silo === 'moldeo') return '';
+    if (silo === 'moldeo') return 'Reloj de Arena';
     return '';
 }
 
@@ -510,53 +520,37 @@ function mapFilterToTag(filter: string) {
     if (!filter) return '';
 
     // Spanish Mappings
-    if (filter === 'etapa-1') return 'Stage 1';
-    if (filter === 'etapa-2') return 'Stage 2';
-    if (filter === 'etapa-3') return 'Stage 3';
+    // Corrected Mappings based on API Audit
+    if (filter === 'etapa-1' || filter === 'stage-1' || filter === 'Stage 1') return 'Faja Etapa 1';
+    if (filter === 'etapa-2' || filter === 'stage-2' || filter === 'Stage 2') return 'Faja Etapa 2';
+    if (filter === 'etapa-3' || filter === 'stage-3' || filter === 'Stage 3') return 'Faja Etapa 3';
 
-    if (filter === 'cinturillas' || filter === 'cinturillas-reductoras') return 'Waist Trainer';
-    if (filter === 'cinturilla') return 'Waist Trainer';
+    if (filter === 'cinturillas' || filter === 'cinturillas-reductoras' || filter === 'waist') return 'Cinturilla';
 
-    if (filter === 'shorts') return 'Short';
-    if (filter === 'short') return 'Short';
+    if (filter === 'shorts' || filter === 'short') return 'Short';
 
-    if (filter === 'fajas-espalda-alta' || filter === 'espalda-alta') return 'High Back';
-    if (filter === 'fajas-media-pierna' || filter === 'media-pierna') return 'Knee Length';
+    if (filter === 'fajas-espalda-alta' || filter === 'espalda-alta' || filter === 'high-back') return 'Soporte de Espalda'; // Closest match
+    if (filter === 'fajas-media-pierna' || filter === 'media-pierna' || filter === 'knee-length') return 'Media Pierna';
+    if (filter === 'uso-diario' || filter === 'daily') return 'Uso Diario';
+    if (filter === 'corrector' || filter === 'posture') return 'Corrector de Postura';
 
-    if (filter === 'uso-diario') return 'Daily Use';
-    if (filter === 'corrector') return 'Corrector de Postura';
-
-    if (filter === 'post-lipo' || filter === 'lipo-360') return 'Post Lipo';
-    if (filter === 'brazos') return 'Arm Compression';
+    if (filter === 'post-lipo' || filter === 'lipo-360') return 'Lipo 360'; // or 'Post Quirúrgica'
+    if (filter === 'brazos' || filter === 'arm-compression' || filter === 'mangas') return 'Mangas'; // Inferred
 
     if (filter === 'invisible') return 'Invisible';
-    if (filter === 'levantacola') return 'Butt Lifter';
+    if (filter === 'levantacola' || filter === 'butt-lifter') return 'Levanta Cola';
 
     if (filter === 'post-parto' || filter === 'fajas-postparto') return 'Post Parto';
 
-    // English Mappings (Keep for aliases)
-    if (filter === 'stage-2') return 'Stage 2';
-    if (filter === 'stage-1') return 'Stage 1';
-    if (filter === 'stage-3') return 'Stage 3';
-
-    if (filter === 'strapless') return 'Strapless';
-    if (filter === 'high-back') return 'High Back';
-    if (filter === 'butt-lifter') return 'Butt Lifter';
-    if (filter === 'high-compression') return 'High Compression';
-    if (filter === 'arm-compression') return 'Arm Compression';
-    if (filter === 'bbl') return 'BBL';
-    if (filter === 'post-op-bra') return 'Post-Op Bra';
-
-    if (filter === 'waist') return 'Waist Trainer';
-    if (filter === 'daily') return 'Daily Use';
-
+    // Fallback for direct matches
     return capitalize(filter);
 }
 
 function resolveShopifyHandle(handle: string) {
-    if (handle === 'moldeo' || handle === 'sculpt' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena') return 'sculpt-studio';
-    if (handle === 'recuperacion' || handle === 'recovery' || handle === 'recuperacion-postquirurgica') return 'post-quirurgica';
-    if (handle === 'bras' || handle === 'brasieres' || handle === 'brasieres-y-postura') return 'essentials';
+    if (handle === 'moldeo' || handle === 'sculpt' || handle === 'moldeo-y-estetica' || handle === 'fajas-reloj-de-arena' || handle === 'sculpting-shapewear') return 'sculpt-studio';
+    if (handle === 'recuperacion' || handle === 'recovery' || handle === 'recuperacion-postquirurgica' || handle === 'post-surgery' || handle === 'post-surgery-recovery') return 'post-quirurgica';
+    if (handle === 'todo' || handle === 'all' || handle === 'catalogo' || handle === 'collections') return 'all';
+    if (handle === 'bras' || handle === 'brasieres' || handle === 'brasieres-y-postura' || handle === 'bras-and-posture') return 'essentials';
     return handle;
 }
 

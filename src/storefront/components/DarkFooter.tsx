@@ -65,12 +65,12 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li className="pt-2">
-                                <Link to="/pages/bbl-recovery-kit" className="text-[#D4AF37] hover:underline underline-offset-4 decoration-[#D4AF37]">
+                                <Link to="/kit-supervivencia-bbl" className="text-[#D4AF37] hover:underline underline-offset-4 decoration-[#D4AF37]">
                                     BBL Survival Kit ™
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/instituto" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/academia" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     Instituto (Educación)
                                 </Link>
                             </li>
@@ -94,7 +94,7 @@ export function DarkFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/pages/wholesale" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
+                                <Link to="/mayoristas" className="block text-gray-400 hover:text-white hover:translate-x-1 transition-all">
                                     {t('footer.links.wholesale')}
                                 </Link>
                             </li>

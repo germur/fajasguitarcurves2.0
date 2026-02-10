@@ -5,49 +5,71 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# -----------------------------------------------------------
-# 1. REGLAS DE PROXY PARA SHOPIFY (CRÍTICO PARA EL CHECKOUT)
-# Estas reglas evitan el bucle al conectar directamente con Shopify
-# -----------------------------------------------------------
+# --- REGLAS CRÍTICAS DE PROXY PARA SHOPIFY (EVITAN EL BUCLE) ---
+# Estas reglas fuerzan a Netlify a mostrar el contenido de Shopify
+# sin redirigir al navegador, evitando el bucle 301.
 
-# Permite que los enlaces de pago (/cart/c/...) funcionen en tu dominio
+# --- REGLAS CRÍTICAS DE PROXY PARA SHOPIFY (EVITAN EL BUCLE) ---
+# Estas reglas fuerzan a Netlify a mostrar el contenido de Shopify
+# sin redirigir al navegador, evitando el bucle 301.
+
 [[redirects]]
   from = "/cart/*"
   to = "https://92542c-b5.myshopify.com/cart/:splat"
   status = 200
   force = true
 
-# Permite que las páginas de checkout (/checkouts/...) funcionen en tu dominio
 [[redirects]]
   from = "/checkouts/*"
   to = "https://92542c-b5.myshopify.com/checkouts/:splat"
   status = 200
   force = true
 
-# Permite que las billeteras digitales y pagos funcionen
 [[redirects]]
   from = "/wc/*"
   to = "https://92542c-b5.myshopify.com/wc/:splat"
   status = 200
   force = true
 
-# -----------------------------------------------------------
-# 2. REDIRECCIONES DE LEGADO (Mantiene tus enlaces viejos)
-# -----------------------------------------------------------
+# --- REDIRECCIONES DE TU WEB ---
+
+[[redirects]]
+  from = "/about"
+  to = "/es/nosotros"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/es/contacto"
+  status = 301
+
+[[redirects]]
+  from = "/fit-finder"
+  to = "/es/calculadora-de-tallas"
+  status = 301
+
 [[redirects]]
   from = "/checkout"
   to = "/es/pago"
   status = 301
 
 [[redirects]]
-  from = "/pago"
-  to = "/es/pago"
+  from = "/shipping"
+  to = "/es/envios"
   status = 301
 
-# -----------------------------------------------------------
-# 3. REGLA FINAL SPA (CATCH-ALL)
-# Esto carga tu aplicación React para todo lo demás
-# -----------------------------------------------------------
+[[redirects]]
+  from = "/returns"
+  to = "/es/devoluciones"
+  status = 301
+
+[[redirects]]
+  from = "/account"
+  to = "/es/cuenta"
+  status = 301
+
+# --- REGLA FINAL: SPA CATCH-ALL ---
+# Cualquier ruta que no sea un archivo o una regla anterior, carga React.
 [[redirects]]
   from = "/*"
   to = "/index.html"

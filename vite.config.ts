@@ -24,5 +24,22 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      '/cart': {
+        target: 'https://92542c-b5.myshopify.com',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/checkouts': {
+        target: 'https://92542c-b5.myshopify.com',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/wc': {
+        target: 'https://92542c-b5.myshopify.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 })

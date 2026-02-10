@@ -323,6 +323,7 @@ export async function fetchAllProducts(lang: 'es' | 'en' = 'es') {
     }
 
     const rawProducts = json.data.products.edges.map((edge: any) => edge.node);
+    console.log(`[fetchAllProducts] Raw count: ${rawProducts.length}`);
 
     // Normalize for Mapper (flatten edges if needed, though raw fetch usually gives clean extractions)
     const normalized = rawProducts.map((p: any) => ({
@@ -332,7 +333,9 @@ export async function fetchAllProducts(lang: 'es' | 'en' = 'es') {
       variants: p.variants?.edges ? p.variants.edges.map((e: any) => e.node) : (p.variants || [])
     }));
 
-    return normalized.filter(validateProduct);
+    const validProducts = normalized.filter(validateProduct);
+    console.log(`[fetchAllProducts] Valid count: ${validProducts.length}`);
+    return validProducts;
 
   } catch (error) {
     console.error("Error fetching all products (Raw Fetch):", error);
