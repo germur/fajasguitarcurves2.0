@@ -1,7 +1,7 @@
 
 
 
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../../components/LocalizedLink';
 import { ArrowRight, Calculator, Ruler, Layers } from 'lucide-react';
 import { SeoHead } from '../../components/SeoHead';
 import { useTranslation } from 'react-i18next';

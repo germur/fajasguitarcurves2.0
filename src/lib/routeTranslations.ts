@@ -70,8 +70,7 @@ export const esEnMap: Record<string, string> = {
     'uso-espuma': 'lipo-foam',
 
     // General
-    'producto': 'products',
-    'products': 'products',
+    'productos': 'products',
     'pages': 'pages',
 };
 

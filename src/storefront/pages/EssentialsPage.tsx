@@ -1,5 +1,6 @@
 import { useEssentialsProducts } from '../hooks/useEssentialsProducts';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { LocalizedLink as Link } from '../components/LocalizedLink';
 import { ArrowRight, Box, Shield } from 'lucide-react';
 import { useMemo } from 'react';
 import { BraCard } from '../components/silo-essentials/BraCard';

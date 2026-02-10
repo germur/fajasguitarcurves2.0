@@ -5,7 +5,7 @@ import { SculptProductCard } from '../components/silo-sculpt/SculptProductCard';
 import { CurveCalculator } from '../components/silo-sculpt/CurveCalculator';
 import { WaistTrainingLab } from '../components/silo-sculpt/WaistTrainingLab';
 import { Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../components/LocalizedLink';
 import { useSculptProducts } from '../hooks/useSculptProducts';
 import { FilterSidebar } from '../components/FilterSidebar';
 import { SeoHead } from '@/storefront/components/SeoHead';

@@ -1,6 +1,6 @@
 import { GlassNavbar } from '../components/GlassNavbar';
 import { Clock, Calculator } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../components/LocalizedLink';
 import { useTranslation, Trans } from 'react-i18next';
 
 export default function BlogTemplate() {

@@ -1,6 +1,6 @@
 import { Search, Package, Ruler, Stethoscope, Shirt, ArrowRight } from 'lucide-react';
 import { FAQSection } from '../components/FAQSection';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../components/LocalizedLink';
 import { SeoHead } from '@/storefront/components/SeoHead';
 import { useTranslation } from 'react-i18next';
 

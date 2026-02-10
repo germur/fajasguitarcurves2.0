@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { LocalizedLink as Link } from './components/LocalizedLink';
 import { useTranslation } from 'react-i18next';
 import { useStore } from './hooks/useStoreContext';
 import { useProduct } from './hooks/useProduct';

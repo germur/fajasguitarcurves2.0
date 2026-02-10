@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { LocalizedLink as Link } from '../components/LocalizedLink';
 import { useTranslation, Trans } from 'react-i18next';
 import { useRecoveryProducts } from '../hooks/useRecoveryProducts';
 import { SurgeryTimelineFilter } from '../components/silo-recovery/SurgeryTimelineFilter';

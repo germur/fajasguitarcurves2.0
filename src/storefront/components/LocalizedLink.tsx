@@ -6,7 +6,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import type { LinkProps } from 'react-router-dom';
 import { forwardRef } from 'react';
-import { translatePathToEnglish } from '@/lib/routeTranslations';
+import { translatePathToEnglish, translatePathToSpanish } from '@/lib/routeTranslations';
 
 /**
  * Translates a Spanish path to English and adds the /en prefix.
@@ -38,7 +38,9 @@ function localizePathForSpanish(path: string): string {
     // Handle root carefully
     if (path === '/') return '/es';
 
-    return `/es${path.startsWith('/') ? '' : '/'}${path}`;
+    // Translate path segments (e.g. products -> productos)
+    const spanishPath = translatePathToSpanish(path);
+    return `/es${spanishPath === '/' ? '' : spanishPath}`;
 }
 
 export const LocalizedLink = forwardRef<HTMLAnchorElement, LinkProps>(

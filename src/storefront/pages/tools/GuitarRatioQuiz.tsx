@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { LocalizedLink as Link } from '../../components/LocalizedLink';
 import { ArrowRight, CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
 import { useTranslation, Trans } from 'react-i18next';
 
