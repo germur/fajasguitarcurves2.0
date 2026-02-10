@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guitar Curves | Fajas Colombianas Premium</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <meta name="description" content="Fajas Colombianas de alta compresión. Diseñadas para moldear tu figura reloj de arena." />
-  
+  <meta name="description"
+    content="Fajas Colombianas de alta compresión. Diseñadas para moldear tu figura reloj de arena." />
+
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="dh_hO9kGh3NfqgZ_8eXwGPWoCqPJDQgLMRNmKLY_Ye4" />
 
@@ -18,7 +19,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J9H5B18WV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-1J9H5B18WV');
@@ -32,6 +33,32 @@
     rel="stylesheet" />
   <link rel="preload" as="image" href="/assets/hourglass-hero-bg.jpg" fetchpriority="high" />
   <!-- Preload video if possible or crucial, but removing image preload is key -->
+  <!-- CHECKOUT REDIRECT FAILSAFE (Anti-Loop) -->
+  <script>
+    (function () {
+      var path = window.location.pathname;
+      // Check if we are on a checkout-related path
+      if (path === '/checkout' || path.startsWith('/checkouts') || path.startsWith('/cart/c/')) {
+        // Check if we are NOT on the myshopify domain (i.e., we are on custom domain)
+        if (window.location.hostname !== '92542c-b5.myshopify.com') {
+          // Construct Safe URL
+          var newUrl = 'https://92542c-b5.myshopify.com' + path + window.location.search;
+
+          // Append safety params if not present
+          if (newUrl.indexOf('?') === -1) {
+            newUrl += '?auto_redirect=false&edge_redirect=true&skip_shop_pay=true';
+          } else {
+            if (newUrl.indexOf('auto_redirect=') === -1) newUrl += '&auto_redirect=false';
+            if (newUrl.indexOf('edge_redirect=') === -1) newUrl += '&edge_redirect=true';
+            if (newUrl.indexOf('skip_shop_pay=') === -1) newUrl += '&skip_shop_pay=true';
+          }
+
+          // Force Redirect (Replace history to prevent back-button loops)
+          window.location.replace(newUrl);
+        }
+      }
+    })();
+  </script>
 </head>
 
 <body>
