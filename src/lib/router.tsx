@@ -452,7 +452,7 @@ function CheckoutRedirect() {
   if (isLooping) {
     const searchParams = new URLSearchParams(location.search);
     const key = searchParams.get('key');
-    const checkoutUrl = `https://92542c-b5.myshopify.com/cart/c/${id}?key=${key}`;
+    const checkoutUrl = `https://92542c-b5.myshopify.com/cart/c/${id}?key=${key}&auto_redirect=false&edge_redirect=true&skip_shop_pay=true&logged_in=true`;
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFBF7] p-4 text-center">
