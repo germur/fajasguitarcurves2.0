@@ -15,9 +15,7 @@
 /cart               /es/carrito         301
 /carrito            /es/carrito         301
 # --- SHOPIFY PROXY/REDIRECT CLEANUP ---
-# Removed hard 301s to prevent aggressive browser caching loops.
-# Client-side (React) will handle the specific URL construction.
-# We keep only essential path mapping.
+# Moved to netlify.toml for better priority handling.
 /pago               /es/pago            301
 /shipping           /es/envios             301
 /privacy            /privacidad         301

@@ -5,6 +5,49 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# -----------------------------------------------------------
+# 1. REGLAS DE PROXY PARA SHOPIFY (CRÍTICO PARA EL CHECKOUT)
+# Estas reglas evitan el bucle al conectar directamente con Shopify
+# -----------------------------------------------------------
+
+# Permite que los enlaces de pago (/cart/c/...) funcionen en tu dominio
+[[redirects]]
+  from = "/cart/*"
+  to = "https://92542c-b5.myshopify.com/cart/:splat"
+  status = 200
+  force = true
+
+# Permite que las páginas de checkout (/checkouts/...) funcionen en tu dominio
+[[redirects]]
+  from = "/checkouts/*"
+  to = "https://92542c-b5.myshopify.com/checkouts/:splat"
+  status = 200
+  force = true
+
+# Permite que las billeteras digitales y pagos funcionen
+[[redirects]]
+  from = "/wc/*"
+  to = "https://92542c-b5.myshopify.com/wc/:splat"
+  status = 200
+  force = true
+
+# -----------------------------------------------------------
+# 2. REDIRECCIONES DE LEGADO (Mantiene tus enlaces viejos)
+# -----------------------------------------------------------
+[[redirects]]
+  from = "/checkout"
+  to = "/es/pago"
+  status = 301
+
+[[redirects]]
+  from = "/pago"
+  to = "/es/pago"
+  status = 301
+
+# -----------------------------------------------------------
+# 3. REGLA FINAL SPA (CATCH-ALL)
+# Esto carga tu aplicación React para todo lo demás
+# -----------------------------------------------------------
 [[redirects]]
   from = "/*"
   to = "/index.html"
