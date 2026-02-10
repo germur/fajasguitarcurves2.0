@@ -63,29 +63,9 @@ export function CartDrawer() {
 
                             {/* BLOCK 1: HEADER "GAMIFICADO" (Free Shipping Bar) */}
                             <div className="p-6 border-b border-gray-100 bg-gray-50/50">
-                                <div className="flex justify-between items-center mb-4">
+                                <div className="flex justify-between items-center">
                                     <h2 className="font-serif text-2xl text-[#3E322C]">{t('components.cart.your_bag')} ({cart.length})</h2>
                                     <button onClick={toggleCart} className="text-gray-400 hover:text-black p-2">✕</button>
-                                </div>
-
-                                {/* Progress Bar */}
-                                <div className="space-y-2">
-                                    <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-[#3E322C]">
-                                        {isFreeShipping ? (
-                                            <span className="text-green-600 flex items-center gap-1">
-                                                <Check size={14} /> {t('components.cart.free_shipping_unlocked')}
-                                            </span>
-                                        ) : (
-                                            <span>{t('components.cart.remaining_for_free_shipping', { amount: remaining.toFixed(0) })}</span>
-                                        )}
-                                        {isFreeShipping && <span>✈️</span>}
-                                    </div>
-                                    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }} animate={{ width: `${progress}%` }}
-                                            className={`h-full transition-all duration-500 ${isFreeShipping ? 'bg-green-500' : 'bg-[#D4AF37]'}`}
-                                        />
-                                    </div>
                                 </div>
                             </div>
 
@@ -179,11 +159,7 @@ export function CartDrawer() {
                                         <span>${cartTotal.toFixed(2)}</span>
                                     </div>
 
-                                    {isFreeShipping && (
-                                        <p className="text-xs text-green-600 font-medium text-center bg-green-50 py-2 rounded-lg border border-green-100">
-                                            {t('components.cart.savings')}
-                                        </p>
-                                    )}
+
 
                                     <button
                                         onClick={checkout}
