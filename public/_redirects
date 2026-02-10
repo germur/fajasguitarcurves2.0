@@ -14,7 +14,12 @@
 /fit-finder         /es/calculadora-de-tallas  301
 /cart               /es/carrito         301
 /carrito            /es/carrito         301
-/checkout           /es/pago            301
+# --- SHOPIFY CHECKOUT PROXY (Fixes Redirect Loop) ---
+# Proxy these paths directly to Shopify so they don't hit the React App
+/cart/c/*      https://92542c-b5.myshopify.com/cart/c/:splat      200!
+/checkouts/*   https://92542c-b5.myshopify.com/checkouts/:splat   200!
+/orders/*      https://92542c-b5.myshopify.com/orders/:splat      200!
+/checkout      https://92542c-b5.myshopify.com/checkout           200!
 /pago               /es/pago            301
 /shipping           /es/envios             301
 /privacy            /privacidad         301
