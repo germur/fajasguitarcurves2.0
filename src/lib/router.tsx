@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom';
+import { createBrowserRouter, Navigate, useLocation, useParams } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
@@ -403,13 +403,66 @@ const sharedRoutes = [
   { path: 'historias/diarios-recuperacion', element: withSuspense(RecoveryDiaries) },
   { path: 'stories/recovery-diaries', element: <LocalizedNavigate to="/historias/diarios-recuperacion" /> },
 
+  /* --- CHECKOUT REDIRECT FAILSAFE --- */
+  {
+    path: 'cart/c/:id',
+    element: <CheckoutRedirect />,
+  },
   {
     path: '*',
     element: withSuspense(NotFoundPage),
   }
 ];
 
+// Component to handle the redirect logic
+function CheckoutRedirect() {
+  const { id } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Construct the full Shopify Checkout URL
+    // The key is usually in the query params
+    const searchParams = new URLSearchParams(location.search);
+    const key = searchParams.get('key');
+
+    if (id && key) {
+      // Force redirect to the correct myshopify domain
+      // We add auto_redirect=false and skip_shop_pay=true to prevent Shopify from serving the headless domain
+      // We also add &logged_in=true to force a session check which sometimes bypasses the domain redirect
+      const checkoutUrl = `https://92542c-b5.myshopify.com/cart/c/${id}?key=${key}&auto_redirect=false&edge_redirect=true&skip_shop_pay=true&logged_in=true`;
+
+      // Attempt redirect
+      window.location.replace(checkoutUrl);
+    } else {
+      // If invalid, go back to cart
+      window.location.href = '/carrito';
+    }
+  }, [id, location]);
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFBF7] p-4 text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#D4AF37] mb-4"></div>
+      <h2 className="text-xl font-serif text-[#1C1C1C] mb-2">Redirigiendo a Shopify...</h2>
+      <p className="text-gray-600 mb-6">Si no eres redirigido autom&aacute;ticamente, haz clic abajo:</p>
+      {id && (
+        <a
+          href={`https://92542c-b5.myshopify.com/cart/c/${id}?key=${new URLSearchParams(location.search).get('key')}&auto_redirect=false&edge_redirect=true&skip_shop_pay=true`}
+          className="bg-[#1C1C1C] text-white px-6 py-3 rounded hover:bg-[#333] transition-colors"
+        >
+          Ir a Pagar (Enlace Seguro)
+        </a>
+      )}
+    </div>
+  );
+}
+
 export const router = createBrowserRouter([
+  /* --- ROOT LEVEL CHECKOUT REDIRECT --- */
+  // Handles cases where Shopify redirects to root domain without language prefix
+  {
+    path: '/cart/c/:id',
+    element: <CheckoutRedirect />
+  },
   {
     path: '/en',
     element: <LangWrapper lang="en"><StorefrontLayout /></LangWrapper>,

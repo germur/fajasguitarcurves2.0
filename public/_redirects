@@ -11,25 +11,27 @@
 # --- MIGRACIÓN A ESPAÑOL V2 (SEO OPTIMIZED): REDIRECCIONES 301 ---
 /about              /nosotros           301
 /contact            /contacto           301
-/fit-finder         /calculadora-de-tallas  301
-/cart               /carrito            301
-/checkout           /pago               301
-/shipping           /envios             301
+/fit-finder         /es/calculadora-de-tallas  301
+/cart               /es/carrito         301
+/carrito            /es/carrito         301
+/checkout           /es/pago            301
+/pago               /es/pago            301
+/shipping           /es/envios             301
 /privacy            /privacidad         301
 /terms              /terminos           301
-/returns            /devoluciones       301
-/account            /cuenta             301
+/returns            /es/devoluciones       301
+/account            /es/cuenta             301
 /glossary           /glosario           301
 /lab                /laboratorio        301
 
 # Core Silos (English & Legacy Spanish -> New Spanish SEO)
 /collections/all            /colecciones/todo                      301
-/collections/recovery       /colecciones/recuperacion-postquirurgica 301
-/colecciones/recuperacion   /colecciones/recuperacion-postquirurgica 301
-/collections/sculpt         /colecciones/moldeo-y-estetica         301
-/colecciones/moldeo         /colecciones/moldeo-y-estetica         301
-/collections/bras           /colecciones/brasieres-y-postura       301
-/colecciones/brasieres      /colecciones/brasieres-y-postura       301
+/collections/recovery       /es/colecciones/recuperacion-postquirurgica 301
+/colecciones/recuperacion   /es/colecciones/recuperacion-postquirurgica 301
+/collections/sculpt         /es/colecciones/moldeo-y-estetica         301
+/colecciones/moldeo         /es/colecciones/moldeo-y-estetica         301
+/collections/bras           /es/colecciones/brasieres-y-postura       301
+/colecciones/brasieres      /es/colecciones/brasieres-y-postura       301
 
 # Tools & Apps
 /tools                     /herramientas                        301
