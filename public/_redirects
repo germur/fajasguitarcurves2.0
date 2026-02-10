@@ -14,13 +14,10 @@
 /fit-finder         /es/calculadora-de-tallas  301
 /cart               /es/carrito         301
 /carrito            /es/carrito         301
-# --- SHOPIFY CHECKOUT FIX (External Redirects) ---
-# Force browser to leave the domain and go to myshopify.com
-# This prevents the "Proxy Loop" where Shopify redirects back to primary domain.
-/cart/c/*      https://92542c-b5.myshopify.com/cart/c/:splat?auto_redirect=false&edge_redirect=true&skip_shop_pay=true   301!
-/checkouts/*   https://92542c-b5.myshopify.com/checkouts/:splat?auto_redirect=false&edge_redirect=true&skip_shop_pay=true   301!
-/orders/*      https://92542c-b5.myshopify.com/orders/:splat      301!
-/checkout      https://92542c-b5.myshopify.com/checkout?auto_redirect=false&edge_redirect=true&skip_shop_pay=true           301!
+# --- SHOPIFY PROXY/REDIRECT CLEANUP ---
+# Removed hard 301s to prevent aggressive browser caching loops.
+# Client-side (React) will handle the specific URL construction.
+# We keep only essential path mapping.
 /pago               /es/pago            301
 /shipping           /es/envios             301
 /privacy            /privacidad         301
