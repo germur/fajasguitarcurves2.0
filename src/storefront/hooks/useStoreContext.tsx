@@ -287,16 +287,26 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                 try {
                     const url = new URL(currentCart.checkoutUrl);
 
-                    // STRATEGY: DIRECT SHOPIFY CHECKOUT
-                    // We must avoid sending the user to the custom domain (fajasguitarcurves.com) for checkout
-                    // because it points to Netlify, and Netlify cannot handle the checkout logic locally.
-                    // Instead, we force the `myshopify.com` domain which handles checkout securely.
+                    // 1. DEVELOPMENT (Localhost): 
+                    // We cannot use the direct relative path because localhost doesn't have the proxy rules.
+                    // We attempt to force myshopify, but if it redirects, we can't do much without the user changing settings.
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.warn("Localhost Checkout: Proxy not available. Redirecting directly to myshopify.com (may loop if domain not primary).");
+                        const targetUrl = new URL(currentCart.checkoutUrl);
+                        targetUrl.hostname = '92542c-b5.myshopify.com';
+                        window.location.href = targetUrl.href;
+                        return;
+                    }
 
-                    const targetUrl = new URL(currentCart.checkoutUrl);
-                    targetUrl.hostname = '92542c-b5.myshopify.com';
+                    // 2. PRODUCTION (Netlify): 
+                    // Force Relative Path to trigger the Proxy Rule in netlify.toml.
+                    // This keeps the user on the custom domain (fajasguitarcurves.com/cart/...)
+                    // thus satisfying the Shop's Primary Domain setting (if set to custom domain) and avoiding loops.
+                    const params = new URLSearchParams(url.search);
+                    const relativePath = `${url.pathname}?${params.toString()}`;
 
-                    console.log("Redirecting to Checkout:", targetUrl.href);
-                    window.location.href = targetUrl.href;
+                    console.log("Redirecting to Proxy Checkout:", relativePath);
+                    window.location.href = relativePath;
 
                 } catch (e) {
                     console.error("Error constructing checkout URL", e);
