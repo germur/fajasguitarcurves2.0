@@ -281,22 +281,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         try {
             const currentCart = await fetchCart(shopifyCartId);
             if (currentCart && currentCart.checkoutUrl) {
-                // NETLIFY PROXY STRATEGY (Status 200)
-                // We use the relative path so Netlify intercepts it via netlify.toml proxy rules.
-                // We MUST append auto_redirect=false to prevent Shopify from redirecting back to primary domain.
+                // FORCE ABSOLUTE URL WITH SESSION PARAMS (The only working fix)
+                // Proxying fails because Shopify redirects unauthenticated requests to primary domain.
+                // Adding 'logged_in=true' forces Shopify to serve the page on myshopify.com (Status 200).
                 try {
                     const url = new URL(currentCart.checkoutUrl);
-                    // Force relative path to trigger Netlify Proxy
-                    const relativePath = url.pathname + url.search;
+                    url.hostname = '92542c-b5.myshopify.com';
 
-                    // Add params to inner URL
-                    const params = new URLSearchParams(url.search);
-                    params.set('auto_redirect', 'false');
-                    params.set('skip_shop_pay', 'true');
+                    // CRITICAL: These params prevent the 301 Redirect Loop
+                    url.searchParams.set('auto_redirect', 'false');
+                    url.searchParams.set('logged_in', 'true');
+                    url.searchParams.set('skip_shop_pay', 'true');
 
-                    window.location.href = `${url.pathname}?${params.toString()}`;
+                    window.location.href = url.toString();
                 } catch (e) {
-                    console.error("Error constructing proxy URL, falling back to absolute", e);
+                    console.error("Error constructing checkout URL", e);
                     window.location.href = currentCart.checkoutUrl;
                 }
             } else {
