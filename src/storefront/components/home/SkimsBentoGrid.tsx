@@ -38,7 +38,7 @@ export function SkimsBentoGrid() {
                     </Link>
 
                     {/* 2. CARD 2: Fajas Stage 2 */}
-                    <Link to="/colecciones/recuperacion?tag=Stage+2" className={cardBaseClass}>
+                    <Link to="/colecciones/recuperacion-postquirurgica?tag=Stage+2" className={cardBaseClass}>
                         <img
                             src="/assets/skims-grid-back.jpg"
                             alt="Fajas Stage 2"
@@ -64,7 +64,7 @@ export function SkimsBentoGrid() {
                     </Link>
 
                     {/* 3. CARD 3: Brasieres Post-Op */}
-                    <Link to="/colecciones/brasieres" className={cardBaseClass}>
+                    <Link to="/colecciones/brasieres-y-postura" className={cardBaseClass}>
                         <img
                             src="/assets/skims-grid-group.jpg"
                             alt="Brasieres Post-Op"

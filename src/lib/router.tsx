@@ -109,6 +109,7 @@ const sharedRoutes = [
   // Aliases: Redirect to Canonical
   { path: 'collections/recovery', element: <LocalizedNavigate to="/colecciones/recuperacion-postquirurgica" /> },
   { path: 'collections/post-surgery-fajas', element: <LocalizedNavigate to="/colecciones/recuperacion-postquirurgica" /> },
+  // CRITICAL FIX: Ensure 'colecciones/recuperacion' is handled by the router
   { path: 'colecciones/recuperacion', element: <LocalizedNavigate to="/colecciones/recuperacion-postquirurgica" /> },
 
   {
@@ -127,6 +128,7 @@ const sharedRoutes = [
   // Aliases: Redirect to Canonical
   { path: 'collections/sculpt', element: <LocalizedNavigate to="/colecciones/moldeo-y-estetica" /> },
   { path: 'collections/hourglass-shapewear', element: <LocalizedNavigate to="/colecciones/moldeo-y-estetica" /> },
+  // CRITICAL FIX: Ensure 'colecciones/moldeo' is handled by the router
   { path: 'colecciones/moldeo', element: <LocalizedNavigate to="/colecciones/moldeo-y-estetica" /> },
 
   {
@@ -141,6 +143,7 @@ const sharedRoutes = [
   // Aliases: Redirect to Canonical
   { path: 'collections/bras', element: <LocalizedNavigate to="/colecciones/brasieres-y-postura" /> },
   { path: 'collections/lipo-foams-boards', element: <LocalizedNavigate to="/colecciones/brasieres-y-postura" /> },
+  // CRITICAL FIX: Ensure 'colecciones/brasieres' is handled by the router
   { path: 'colecciones/brasieres', element: <LocalizedNavigate to="/colecciones/brasieres-y-postura" /> },
 
   // --- TODO EL CATÁLOGO ---

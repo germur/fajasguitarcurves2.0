@@ -39,7 +39,7 @@ export function SiloBentoGrid() {
                     </div>
 
                     {/* 2. Fajas Postquirúrgicas (Medium - Right Top - 2 Rows) */}
-                    <Link to="/colecciones/recuperacion" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
+                    <Link to="/colecciones/recuperacion-postquirurgica" className="group relative h-[300px] md:h-auto md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-[#B49286]">
                         <img
                             src="/assets/stage2-faja-bra.jpg"
                             alt="Fajas Stage 2 Post-Op"
