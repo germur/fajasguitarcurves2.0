@@ -281,7 +281,22 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         try {
             const currentCart = await fetchCart(shopifyCartId);
             if (currentCart && currentCart.checkoutUrl) {
-                window.location.href = currentCart.checkoutUrl;
+                // FORCE SAFE CHECKOUT URL
+                // We reconstruct the URL to point directly to myshopify.com and add safety params
+                // this bypasses the primary domain redirect loop entirely.
+                try {
+                    const url = new URL(currentCart.checkoutUrl);
+                    url.hostname = '92542c-b5.myshopify.com';
+                    url.searchParams.set('auto_redirect', 'false');
+                    url.searchParams.set('edge_redirect', 'true');
+                    url.searchParams.set('skip_shop_pay', 'true');
+                    url.searchParams.set('logged_in', 'true');
+
+                    window.location.href = url.toString();
+                } catch (e) {
+                    // Fallback if URL parsing fails
+                    window.location.href = currentCart.checkoutUrl;
+                }
             } else {
                 console.error("No checkout URL found in cart");
                 alert("Error iniciando el pago. Por favor intenta de nuevo.");
