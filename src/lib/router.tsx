@@ -463,6 +463,11 @@ export const router = createBrowserRouter([
     path: '/cart/c/:id',
     element: <CheckoutRedirect />
   },
+  // Also match with trailing slash just in case
+  {
+    path: '/cart/c/:id/',
+    element: <CheckoutRedirect />
+  },
   {
     path: '/en',
     element: <LangWrapper lang="en"><StorefrontLayout /></LangWrapper>,
@@ -476,5 +481,12 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Navigate to="/es" replace />
+  },
+  /* --- GLOBAL FAIL-SAFE (CATCH-ALL) --- */
+  // Catches any path that didn't match above (like /pago if Netlify missed it, or malformed URLs)
+  // Instead of crashing, we redirect to the Spanish 404 or Home
+  {
+    path: '*',
+    element: <Navigate to="/es/404" replace />
   }
 ]);

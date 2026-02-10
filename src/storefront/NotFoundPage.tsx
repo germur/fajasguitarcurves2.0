@@ -2,36 +2,26 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { SeoHead } from './components/SeoHead';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Trans } from 'react-i18next';
 
 export function NotFoundPage() {
     const { t } = useTranslation();
-    const navigate = useNavigate();
-
-    // EMERGENY FAIL-SAFE: If this 404 is actually a lost checkout, redirect IMMEDIATELY
-    useEffect(() => {
-        const path = window.location.pathname;
-        if (path.includes('/cart/c/')) {
-            // Extract parts manually to be safe
-            // Format: /cart/c/<id> or /es/cart/c/<id>
-            const parts = path.split('/cart/c/');
-            if (parts.length > 1) {
-                const cartId = parts[1].split('/')[0]; // Get ID before any trailing slash
-                const searchParams = new URLSearchParams(window.location.search);
-                const key = searchParams.get('key');
-
-                if (cartId && key) {
-                    const shopifyUrl = `https://92542c-b5.myshopify.com/cart/c/${cartId}?key=${key}&auto_redirect=false&edge_redirect=true&skip_shop_pay=true`;
-                    window.location.replace(shopifyUrl);
-                    return;
-                }
-            }
-        }
-    }, []);
 
     return (
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="min-h-[70vh] flex flex-col items-center justify-center bg-[#FAF9F6] px-6 text-center">
+            <SeoHead title={t('pages.404.seo_title')} />
+
+            <div className="mb-8 font-serif text-9xl font-bold text-[#D1AB66] opacity-20 select-none">
+                404
+            </div>
+
+            <h1 className="font-serif text-4xl font-bold text-[#2C2420] mb-4 -mt-20 relative z-10">
+                <Trans i18nKey="pages.404.title" components={{ br: <br /> }} />
+            </h1>
+
+            <p className="text-stone-500 max-w-md mx-auto mb-8 text-lg">
+                {t('pages.404.description')}
+            </p>
             <Link
                 to="/"
                 className="flex items-center justify-center gap-2 bg-[#2C2420] text-white px-8 py-3 rounded-full font-bold hover:bg-[#D1AB66] hover:text-[#2C2420] transition-colors"
@@ -45,6 +35,5 @@ export function NotFoundPage() {
                 🩺 {t('pages.404.cta_calc')}
             </Link>
         </div>
-        </div >
     );
 }
