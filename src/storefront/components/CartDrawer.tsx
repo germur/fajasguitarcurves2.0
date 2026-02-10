@@ -1,7 +1,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../hooks/useStoreContext';
-import { Trash2, Lock, ArrowRight, Check } from 'lucide-react';
+import { Trash2, Lock, ArrowRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LocalizedLink as Link } from './LocalizedLink';
@@ -22,12 +22,11 @@ export function CartDrawer() {
 
     const { t } = useTranslation();
     const [isAnimating, setIsAnimating] = useState(false);
-    const freeShippingThreshold = 150;
-
     // Cálculos en tiempo real
-    const progress = Math.min((cartTotal / freeShippingThreshold) * 100, 100);
-    const remaining = freeShippingThreshold - cartTotal;
-    const isFreeShipping = cartTotal >= freeShippingThreshold;
+    // const freeShippingThreshold = 150;
+    // const progress = Math.min((cartTotal / freeShippingThreshold) * 100, 100);
+    // const remaining = freeShippingThreshold - cartTotal;
+    // const isFreeShipping = cartTotal >= freeShippingThreshold;
 
     useEffect(() => {
         if (isCartOpen) {
