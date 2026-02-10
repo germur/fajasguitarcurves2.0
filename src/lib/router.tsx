@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate, useLocation, useParams } from 'react-router-dom';
-import { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
 import i18n from '@/i18n';
