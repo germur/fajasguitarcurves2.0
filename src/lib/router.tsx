@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter, Navigate, useParams, generatePath } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
 import { StorefrontLayout } from '@/storefront/StorefrontLayout';
 import { HomePage } from '@/storefront/HomePage';
@@ -83,8 +83,15 @@ const LangWrapper = ({ children, lang }: { children: React.ReactNode; lang: stri
 const commonRoutes = [
   { index: true, element: <HomePage /> },
   { path: 'local/:city', element: <Suspense fallback={<div className="h-screen" />}><CityLandingPage /></Suspense> },
+  { path: 'local/:city', element: <Suspense fallback={<div className="h-screen" />}><CityLandingPage /></Suspense> },
   { path: '*', element: <Suspense fallback={<div className="h-screen" />}><NotFoundPage /></Suspense> }
 ];
+
+// Helper to handle dynamic redirects (e.g. /es/products/:handle -> /es/productos/:handle)
+const RedirectWithParams = ({ to }: { to: string }) => {
+  const params = useParams();
+  return <Navigate to={generatePath(to, params)} replace />;
+};
 
 const enRoutes = [
   // Storefront
@@ -92,6 +99,10 @@ const enRoutes = [
   { path: 'collections/:handle', element: <Suspense fallback={<div className="h-screen" />}><CollectionPage /></Suspense> },
   { path: 'cart', element: <Suspense fallback={<div className="h-screen" />}><CartPage /></Suspense> },
   { path: 'checkout', element: <Suspense fallback={<div className="h-screen" />}><CheckoutPage /></Suspense> },
+
+  // Legacy Spanish paths in English Context (Redirect to English)
+  { path: 'productos/:handle', element: <RedirectWithParams to="/en/products/:handle" /> },
+  { path: 'colecciones/:handle', element: <RedirectWithParams to="/en/collections/:handle" /> },
 
   // Pages
   { path: 'about', element: <Suspense fallback={<div className="h-screen" />}><AboutPage /></Suspense> },
@@ -154,6 +165,12 @@ const esRoutes = [
   { path: 'colecciones/:handle', element: <Suspense fallback={<div className="h-screen" />}><CollectionPage /></Suspense> },
   { path: 'carrito', element: <Suspense fallback={<div className="h-screen" />}><CartPage /></Suspense> },
   { path: 'pago', element: <Suspense fallback={<div className="h-screen" />}><CheckoutPage /></Suspense> },
+
+  // Legacy English paths in Spanish Context (Redirect to Spanish)
+  { path: 'products/:handle', element: <RedirectWithParams to="/es/productos/:handle" /> },
+  { path: 'collections/:handle', element: <RedirectWithParams to="/es/colecciones/:handle" /> },
+  { path: 'pages/wholesale', element: <Navigate to="/es/mayoristas" replace /> },
+  { path: 'pages/bbl-recovery-kit', element: <Navigate to="/es/kit-supervivencia-bbl" replace /> },
 
   // Pages
   { path: 'nosotros', element: <Suspense fallback={<div className="h-screen" />}><AboutPage /></Suspense> },
